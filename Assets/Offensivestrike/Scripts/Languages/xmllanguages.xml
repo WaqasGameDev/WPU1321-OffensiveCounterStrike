@@ -1,0 +1,808 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<languages>
+
+	<language>
+	<Name>English</Name>
+	<button1>Play Now</button1>
+	<button2>Options</button2>
+	<button3>Profile</button3>
+	<button4>Credits</button4>
+	<button5>Random Room</button5>
+	<button6>Room Name Connect</button6>
+	<button7>Rooms List</button7>
+	<button8>Create Room</button8>
+	<button9>Back</button9>
+	<button10>Search Room, please wait...</button10>
+	<button11>Stop and Back</button11>
+	<button12>Room Name</button12>
+	<button13>**Note:It is case-sensitive.</button13>
+	<button14>Connect</button14>
+	<button15>Notification</button15>
+	<button16>Try Again</button16>
+	<button17>User Profile</button17>
+	<button18>Player Name</button18>
+	<button19>Save</button19>
+	<button20>Main Menu</button20>
+	<button21>Connecting, please wait...</button21>
+	<button22>No Rooms Found! try again.</button22>
+	<button23>The Room was found but full.</button23>
+	<button24>Room was not found by this name.</button24>
+	<button25>There is no room in the rooms.</button25>
+	<button26>Create New Room</button26>
+	<button27>Refresh</button27>
+	<button28>Game Mode</button28>
+	<button29>Players</button29>
+	<button30>Map</button30>
+	<button31>Browse Rooms</button31>
+	<button32>Room</button32>
+	<button33>No rooms created at the moment, be first one to create.</button33>
+	<button34>[  Private Room  ] </button34>
+	<button35>ROOM NAME</button35>
+	<button36>PLAYER LIMIT</button36>
+	<button37>Private ROOM</button37>
+	<button38>GAME MODE</button38>
+	<button39>Kill Limit</button39>
+	<button40>GAME MAP</button40>
+	<button41>Create</button41>
+	<button42>Refreshing...</button42>
+	<button43>Begin joining/creating new room</button43>
+	<button44>Unable to connect to Server, please try again</button44>
+	<button45>Done joining/creating new room</button45>
+	<button46>Unable to create / join new room, please try again</button46>
+	<button47>Connection problem, please try again</button47>
+	<button48>Languages</button48>
+	<button49>* Information</button49>
+	<button50>[ Private ROOM ]</button50>
+	<button51>If Private Room ( OPEN ) is selected, the room is not listed.</button51>
+	<button52>You can only enter the room with [Room Name Connect].</button52>
+	<button53>If Private Room ( CLOSE ) is selected, everyone in room will be open.</button53>
+	<button54>[ GAME MODE ]</button54>
+	<button55>TDM = Team Battle: The team that kills the most in 10 minutes wins.</button55>
+	<button56>FFA = Everyone is Free: Restarts can be in two zones.</button56>
+	<button57>Person who reached the specified Kill Limit win the $ 500 dolar prize.</button57>
+	<button58>Join Game</button58>
+	<button59>Spectator</button59>
+	<button60>Options</button60>
+	<button61>Leave Room</button61>
+	<button62>Player who first reach </button62>
+	<button63> kills wins.</button63>
+	<button64>Empty</button64>
+	<button65> joined room</button65>
+	<button66> left room</button66>
+	<button67>Shop</button67>
+	<button68>Buy</button68>
+	<button69>Ammo per clip: </button69>
+	<button70>Reserve ammo: </button70>
+	<button71>                             Equipped</button71>
+	<button72>Opens when dead.</button72>
+	<button73> joined</button73>
+	<button74>You will respawn in: </button74>
+	<button75> seconds</button75>
+	<button76>Tap here to Open Shop.</button76>
+	<button77> Seconds Left..</button77>
+	<button78>Tap here to refill Ammo.</button78>
+	<button79>Leaving Room, please wait...</button79>
+	<button80> Won</button80>
+	<button81>Draw</button81>
+	<button82>No winning player</button82>
+	<button83>Screen Resolution</button83>
+	<button84>Quality</button84>
+	<button85>Touch Sensitivity</button85>
+	<button86>( SHIELD ) End in </button86>
+	<button87>Check Your Internet Connection, Please Try Again.</button87>
+	<button88>Unable to Connect to Server. Please try again.</button88>
+	<button89>Update</button89>
+	<button90>You are using the Old Version.</button90>
+	<button91>Please Install New Version.</button91>
+	<button92>Start Money</button92>
+	<button93>Weekly</button93>
+	<button94>Best Player</button94>
+	<button95>Loading...</button95>
+	<button96>   Country</button96>
+	<button97>*Note: You can not change the name.</button97>
+	<button98>This name was previously taken.</button98>
+	<button99>Saving name, please wait ...</button99>
+	<button100>        Pistol</button100>
+	<button101> Light-Machine</button101>
+	<button102>Heavy-Machine</button102>
+	<button103>      Shotgun</button103>
+	<button104>       Sniper</button104>
+	<button105>    Ammunition</button105>
+	<button106>YOU HAVE A BOMB, PLANT IT ON A OR B</button106>
+	<button107>Teams Changed Location.</button107>
+	<button108>THE BOMB WAS DEFUSED</button108>
+	<button109>SET UP ON A OR B</button109>
+	<button110>THE BOMB WAS PLANTED</button110>
+	</language>
+
+	<language>
+	<Name>Turkish</Name>
+	<button1>Simdi Oyna</button1>
+	<button2>Ayarlar</button2>
+	<button3>Profil</button3>
+	<button4>Hazırlayan</button4>
+	<button5>Rastgele Oda</button5>
+	<button6>Oda Ismine Baglan</button6>
+	<button7>Odaların Listesi</button7>
+	<button8>Oda Kur</button8>
+	<button9>Geri</button9>
+	<button10>Oda Aranıyor, lütfen bekleyin...</button10>
+	<button11>Dur ve Geri</button11>
+	<button12>Oda Ismi</button12>
+	<button13>**Not: Büyük ve küçük duyarlıdır.</button13>
+	<button14>Baglan</button14>
+	<button15>Bildirim</button15>
+	<button16>Tekrar Dene</button16>
+	<button17>Kullanıcı Profili</button17>
+	<button18>Oyuncu Ismi</button18>
+	<button19>Kaydet</button19>
+	<button20>Ana Menu</button20>
+	<button21>Baglanıyor, lütfen bekleyin...</button21>
+	<button22>Mevcut Oda Yok.</button22>
+	<button23>Oda bulundu.Fakat Dolu.</button23>
+	<button24>Bu isimde Oda Bulunamadı.</button24>
+	<button25>Odalarda Yer Yok.</button25>
+	<button26>Yeni Oda Kur</button26>
+	<button27>Yenile</button27>
+	<button28>Oyun Modu</button28>
+	<button29>Oyuncu</button29>
+	<button30>Harita</button30>
+	<button31>Odaları Incele</button31>
+	<button32>Oda -</button32>
+	<button33>Suanda mevcut oda yok. Siz olusturun.</button33>
+	<button34>    [  Ozel Oda  ] </button34>
+	<button35>   ODA ISMI</button35>
+	<button36>OYUNCU SINIRI</button36>
+	<button37>    Ozel ODA</button37>
+	<button38>OYUN MODU</button38>
+	<button39>Kill Sınır</button39>
+	<button40>   HARITA</button40>
+	<button41>Kur</button41>
+	<button42>Yenileniyor...</button42>
+	<button43>Katılmaya/Yeni Oda olusturmaya baslayın.</button43>
+	<button44>Sunucuya baglanılamadı, lütfen tekrar deneyin.</button44>
+	<button45>Katılma/Yeni Oda oluşturma işlemi tamamlandı.</button45>
+	<button46>Yeni Oda olusturmak/katılmak mümkün degil, lütfen tekrar deneyin</button46>
+	<button47>Baglantı Sorunu, lütfen tekrar deneyin.</button47>
+	<button48>     Diller</button48>
+	<button49>* Bilgilendirme</button49>
+	<button50>[ Ozel Oda ]</button50>
+	<button51>Eger Ozel Oda ( OPEN ) secilirse oda listede gözükmez.</button51>
+	<button52>Sadece [Oda Ismine Baglan] ile odaya girilebilir.</button52>
+	<button53>Eger Ozel Oda ( CLOSE ) secilirse oda herkeze açık olur.</button53>
+	<button54>[ OYUN MODU ]</button54>
+	<button55>TDM = Takım Savası : 10 dakikada en çok ölüm yapan takım kazanır.</button55>
+	<button56>FFA = Herkes Serbest : Yeniden dogmalar iki bölgedende olabilir.</button56>
+	<button57>Belirlenmis Kill Sınır'ına ulasan kisi kazanır, $500 dolar ödül alır.</button57>
+	<button58>Oyuna Katıl</button58>
+	<button59>Seyirci</button59>
+	<button60>Ayarlar</button60>
+	<button61>Odayı Terket</button61>
+	<button62>Kill </button62>
+	<button63> ilk erisen oyuncu kazanır.</button63>
+	<button64>Bos</button64>
+	<button65> Odaya Katıldı.</button65>
+	<button66> Odadan Ayrıldı.</button66>
+	<button67>Dükkan</button67>
+	<button68>Satın Al</button68>
+	<button69>Sarjor Kapasite: </button69>
+	<button70>Hazır Cephane: </button70>
+	<button71>                            Mevcut</button71>
+	<button72>Oldügünde Acılır.</button72>
+	<button73> Katıldı</button73>
+	<button74>Yeniden Dogmana: </button74>
+	<button75> saniye kaldı.</button75>
+	<button76>Dükkanı Acmak icin buraya Dokun.</button76>
+	<button77> Saniye Kaldı..</button77>
+	<button78>Cephaneligi doldurmak icin Dokun.</button78>
+	<button79>Odadan Ayrılınıyor, lütfen bekleyin...</button79>
+	<button80> Kazandı</button80>
+	<button81>Berabere</button81>
+	<button82>Kazanan Oyuncu Yok.</button82>
+	<button83>Ekran Görüntüsü</button83>
+	<button84>Kalite</button84>
+	<button85>Dokunmatik Hızı</button85>
+	<button86>( KALKAN ) bitmesine </button86>
+	<button87>İnternet Bağlantınızı Kontrol Edip,Lütfen Tekrar Deneyin.</button87>
+	<button88>Sunucuya Bağlanılamıyor.Lütfen Tekrar Deneyin.</button88>
+	<button89>Güncelle</button89>
+	<button90>Eski Sürüm kullanıyorsunuz.</button90>
+	<button91>Lütfen Yeni Sürümü yükleyin.</button91>
+	<button92>Baslangıç Parası</button92>
+	<button93>Haftalık</button93>
+	<button94>En Iyi Oyuncu</button94>
+	<button95>Yükleniyor...</button95>
+	<button96>      Ulke</button96>
+	<button97>*Not: Ismi Birdaha Degistiremezsiniz.</button97>
+	<button98>Bu Isim Daha Once Alınmıs.</button98>
+	<button99>Isim Kaydediliyor,Lütfen bekleyin...</button99>
+	<button100>     Tabanca</button100>
+	<button101>  Hafif-Makinalı</button101>
+	<button102>  Agır-Makinalı</button102>
+	<button103>      Pompalı</button103>
+	<button104> Keskin Nisancı</button104>
+	<button105>     Cephane</button105>
+	<button106>Bombaya Sahipsiniz..</button106>
+	<button107>Takımlar Yer Degistirdi.</button107>
+	<button108>Bomba Imha Edildi...</button108>
+	<button109>A veya B Kurun.</button109>
+	<button110>Bomba Kuruldu..</button110>
+	</language>
+
+
+	<language>
+	<Name>Deutsch</Name>
+	<button1>Jetzt Spielen</button1>
+	<button2>Einstellungen</button2>
+	<button3>Profil</button3>
+	<button4>Vorbereitet</button4>
+	<button5>Zufalls Zimmer</button5>
+	<button6>Zimmer Name Connect</button6>
+	<button7>Liste der Zimmer</button7>
+	<button8>Zim. Schaffen</button8>
+	<button9>Zurück</button9>
+	<button10>Zimmer Gesucht, warten sie...</button10>
+	<button11>Stop und Zurück</button11>
+	<button12>Zimmer Name</button12>
+	<button13>**Note:It is case-sensitive.</button13>
+	<button14>Connect</button14>
+	<button15>Erklarung</button15>
+	<button16>Wieder</button16>
+	<button17>Benutzer Profil</button17>
+	<button18>Spieler Name</button18>
+	<button19>Speichern</button19>
+	<button20>Hauptmenü</button20>
+	<button21>Verbinden, warten sie....</button21>
+	<button22>Zimmer nicht.</button22>
+	<button23>Zimmer gefunden.Aber voll.</button23>
+	<button24>Diese Zimmer name nicht.</button24>
+	<button25>Zimmer voll.</button25>
+	<button26>Neu Zim. Schaffen</button26>
+	<button27>Refresh</button27>
+	<button28>SpielModus</button28>
+	<button29>Spieler</button29>
+	<button30>Landkarte</button30>
+	<button31>Zimmer Prüfen</button31>
+	<button32>Zimmer -</button32>
+	<button33>Keine Zimmer frei waren. Zimmer Begin.</button33>
+	<button34>[  PrivatZimmer  ] </button34>
+	<button35>Zimmer NAME</button35>
+	<button36>  Spieler Limit</button36>
+	<button37> PrivatZimmer</button37>
+	<button38>   Spiel MOD</button38>
+	<button39>Kill Limit</button39>
+	<button40> Landkarte</button40>
+	<button41>Schaffen</button41>
+	<button42>Refreshing...</button42>
+	<button43>Begin joining/creating new room</button43>
+	<button44>Die Verbindung zum Server kann nicht hergestellt werden, Bitte versuche es erneut.</button44>
+	<button45>Done joining/creating new room</button45>
+	<button46>Neuer Raum kann nicht erstellt / hinzugefügt werden, Bitte versuche es erneut.</button46>
+	<button47>Verbindungs Problem, Bitte versuche es erneut.</button47>
+	<button48> Sprachen</button48>
+	<button49>* Information</button49>
+	<button50>[ PrivatZimmer ]</button50>
+	<button51>Privatzimmer ( OPEN ) ausgewählt, wird der Raum nicht aufgelistet.</button51>
+	<button52>Sie können den Raum nur mit [Zimmer Name Connect] eingeben.</button52>
+	<button53>Privatzimmer ( CLOSE ) ausgewählt, jeder im Raum geöffnet.</button53>
+	<button54>[ Spiel MOD ]</button54>
+	<button55>TDM = Das Team, das in 10 Minuten die meisten tötet, gewinnt.</button55>
+	<button56>FFA = Jeder ist frei: Neustarts können in zwei Zonen erfolgen.</button56>
+	<button57>Wer angegebenen Kill Limit erreicht, gewinnt den $ 500 dollar.</button57>
+	<button58>Spiel Beitreten</button58>
+	<button59>Zuschauer</button59>
+	<button60>Einstellungen</button60>
+	<button61>Zim. Verlassen</button61>
+	<button62>Spieler, die zuerst erreichen </button62>
+	<button63> kills gewinnt.</button63>
+	<button64>Leer</button64>
+	<button65> Verbundenes Zimmer.</button65>
+	<button66> Zimmer Linken.</button66>
+	<button67>Geschaft</button67>
+	<button68>Kaufen</button68>
+	<button69>Munition Pro Clip: </button69>
+	<button70>Reserve Munition: </button70>
+	<button71>                          Ausgestattet</button71>
+	<button72>Öffnet wenn tot.</button72>
+	<button73> Beigetreten</button73>
+	<button74>Wiedergeboren: </button74>
+	<button75> sekunden links.</button75>
+	<button76>Tippen Sie hier um Shop zu öffnen.</button76>
+	<button77> Sekunden Links..</button77>
+	<button78>Tippen Sie hier, um Ammo zu füllen.</button78>
+	<button79>Zimmer Verlassen, warten sie...</button79>
+	<button80> Gewonnen</button80>
+	<button81>Zeichnen</button81>
+	<button82>Kein Sieger.</button82>
+	<button83>Bildschirmauflösung</button83>
+	<button84>Qualität</button84>
+	<button85>Berührungsempfindlichkeit</button85>
+	<button86>( Schildes ) Ende </button86>
+	<button87>Überprüfen Sie Ihre Internetverbindung, versuchen Sie es erneut.</button87>
+	<button88>Die Verbindung zum Server kann nicht hergestellt werden. Bitte versuche es erneut.</button88>
+	<button89>Aktualisieren</button89>
+	<button90>Sie verwenden die alte Version.</button90>
+	<button91>Bitte installieren Sie eine neue Version.</button91>
+	<button92>Starten Sie Geld</button92>
+	<button93>Wöchentlich</button93>
+	<button94>Bester Spieler</button94>
+	<button95>Laden....</button95>
+	<button96>     Land</button96>
+	<button97>* Hinweis: eine Änderung mehr.</button97>
+	<button98>Dieser Name wurde zuvor übernommen.</button98>
+	<button99>Name speichern,Warten Sie mal ...</button99>
+	<button100>       Pistole</button100>
+	<button101> LichtMaschine</button101>
+	<button102>HeavyMaschine</button102>
+	<button103>   Schrotflinte</button103>
+	<button104> Scharfschütze</button104>
+	<button105>      Munition</button105>
+	<button106>Du hast eine bombe.</button106>
+	<button107>Teams Geänderter Standort.</button107>
+	<button108>Die Bombe wurde entschärft.</button108>
+	<button109>Einrichten von A oder B.</button109>
+	<button110>Die Bombe wurde gepflanzt.</button110>
+	</language>
+
+
+	<language>
+	<Name>Russian</Name>
+	<button1>Играть сейчас</button1>
+	<button2>Опции</button2>
+	<button3>Профиль</button3>
+	<button4>кредиты</button4>
+	<button5>Случайный номер</button5>
+	<button6>Номер Имя Connect</button6>
+	<button7>Список Комнаты</button7>
+	<button8>Создать комнату</button8>
+	<button9>назад</button9>
+	<button10>Поиск номера, пожалуйста, подождите ...</button10>
+	<button11>Стоп и Назад</button11>
+	<button12>Название комнаты</button12>
+	<button13>**Note:It is case-sensitive.</button13>
+	<button14>подключать</button14>
+	<button15>уведомление</button15>
+	<button16>Попробуй еще раз</button16>
+	<button17>Профиль пользователя</button17>
+	<button18>Имя игрока</button18>
+	<button19>Сохранить</button19>
+	<button20>Главное меню</button20>
+	<button21>Подключение Подождите, пожалуйста ...</button21>
+	<button22>В настоящее время не имеется номеров.</button22>
+	<button23>Комната была найдена, но полностью.</button23>
+	<button24>Номер не был найден под этим именем.</button24>
+	<button25>Там нет места в номерах.</button25>
+	<button26>Создать новую комнату</button26>
+	<button27>обновление</button27>
+	<button28>Игровой режим</button28>
+	<button29>игроки</button29>
+	<button30>карта</button30>
+	<button31>Поиск номера</button31>
+	<button32>Комната</button32>
+	<button33>Нет номеров, созданных на данный момент, не быть первым, чтобы создать.</button33>
+	<button34>[ Приватная комната ] </button34>
+	<button35>    НАЗВАНИЕ</button35>
+	<button36> ИГРОК ПРЕДЕЛ</button36>
+	<button37>Приватная комната</button37>
+	<button38>     РЕЖИМ</button38>
+	<button39>убитьLimit</button39>
+	<button40>GAME MAP</button40>
+	<button41>Создайте</button41>
+	<button42>Освежающий ...</button42>
+	<button43>Начало присоединения / создание новой комнаты</button43>
+	<button44>Невозможно подключиться к серверу, пожалуйста, попробуйте еще раз</button44>
+	<button45>Совершено присоединение / создание новой комнаты</button45>
+	<button46>Невозможно создать / присоединиться к новой комнате, пожалуйста, попробуйте еще раз</button46>
+	<button47>Проблема с соединением, пожалуйста, попробуйте еще раз</button47>
+	<button48>     Языки</button48>
+	<button49>* Информация</button49>
+	<button50>[ Приватная комната ]</button50>
+	<button51>Если выбран Отдельный номер (OPEN), в комнате нет в списке.</button51>
+	<button52>Вы можете ввести только номер с [Номер Имя Connect].</button52>
+	<button53>Если Отдельный номер (CLOSE) выбран, все в комнате будет открыт.</button53>
+	<button54>[ ИГРОВОЙ РЕЖИМ ]</button54>
+	<button55>TDM TeamBattle:Команда,которая убивает больше всего в 10 минут выигрывает.</button55>
+	<button56>FFA = Каждый свободен: Перезапуск может находиться в двух зонах.</button56>
+	<button57>Человек, который достиг указанного убийство Limit выиграть приз $ 500 доларов.</button57>
+	<button58>Присоединиться к игре</button58>
+	<button59>зритель</button59>
+	<button60>Опции</button60>
+	<button61>Покинуть комнату</button61>
+	<button62>Игрок, который первым достигнет </button62>
+	<button63> убийств побеждает.</button63>
+	<button64>пустой</button64>
+	<button65> присоединился номер</button65>
+	<button66> левая комната</button66>
+	<button67>Магазин</button67>
+	<button68>купить</button68>
+	<button69>Боеприпасы за клип: </button69>
+	<button70>Предельная боезапас: </button70>
+	<button71>                          оборудованный</button71>
+	<button72>Открывается, когда умер.</button72>
+	<button73> присоединился</button73>
+	<button74>Вы возродится в: </button74>
+	<button75> секунд</button75>
+	<button76>Нажмите здесь, чтобы открыть магазин.</button76>
+	<button77> Секунды левый ..</button77>
+	<button78>Нажмите здесь, чтобы пополнить боеприпасы.</button78>
+	<button79>Оставляя номер, пожалуйста, подождите ...</button79>
+	<button80> Выиграл</button80>
+	<button81>Привлечь</button81>
+	<button82>Нет победы игрок</button82>
+	<button83>Разрешение экрана</button83>
+	<button84>Качественный</button84>
+	<button85>Чувствительность к силе нажатия</button85>
+	<button86>(SHIELD) Конец </button86>
+	<button87>Проверьте подключение к Интернету, пожалуйста, попробуйте еще раз.</button87>
+	<button88>Невозможно подключиться к серверу. Пожалуйста, попробуйте еще раз.</button88>
+	<button89>Обновить</button89>
+	<button90>Вы используете старую версию.</button90>
+	<button91>Пожалуйста, установите новую версию.</button91>
+	<button92>Начало деньги</button92>
+	<button93>еженедельно</button93>
+	<button94>Лучший игрок</button94>
+	<button95>Loading....</button95>
+	<button96>    Страна</button96>
+	<button97>* Примечание: изменение более.</button97>
+	<button98>Это название было принято ранее.</button98>
+	<button99>Сохранение имени, пожалуйста, подождите ...</button99>
+	<button100>       Пистолет</button100>
+	<button101>  Светло-машина</button101>
+	<button102> Тяжелые машины</button102>
+	<button103>       Дробовик</button103>
+	<button104>       снайпер</button104>
+	<button105>      амуниция</button105>
+	<button106>У тебя бомба.</button106>
+	<button107>Команды изменили местоположение.</button107>
+	<button108>Бомба была обезврежена.</button108>
+	<button109>Настройте A или B.</button109>
+	<button110>Бомба была посажена.</button110>
+	</language>
+
+
+	<language>
+	<Name>French</Name>
+	<button1>joue maintenant</button1>
+	<button2>Options</button2>
+	<button3>Profil</button3>
+	<button4>Crédits</button4>
+	<button5>Chambre aléatoire</button5>
+	<button6>Nom chambre Connect</button6>
+	<button7>Liste des chambres</button7>
+	<button8>Créer chambre</button8>
+	<button9>Arrière</button9>
+	<button10>Chercher une chambre, veuillez patienter ...</button10>
+	<button11>Arrêt et retour</button11>
+	<button12>Nom de la salle</button12>
+	<button13>**Note:It is case-sensitive.</button13>
+	<button14>Relier</button14>
+	<button15>Notification</button15>
+	<button16>Réessayer</button16>
+	<button17>Profil de l'utilisateur</button17>
+	<button18>Nom de joueur</button18>
+	<button19>sauvegarder</button19>
+	<button20>Menu principal</button20>
+	<button21>Connexion, veuillez patienter ...</button21>
+	<button22>Aucune chambre disponible.</button22>
+	<button23>La chambre a été trouvée mais pleine.</button23>
+	<button24>Chambre n'a pas été trouvé par ce nom.</button24>
+	<button25>Il n'y a pas de place dans les chambres.</button25>
+	<button26>Créer Chambre</button26>
+	<button27>Rafraîchir</button27>
+	<button28>Mode de jeu</button28>
+	<button29>Joueurs</button29>
+	<button30>Carte</button30>
+	<button31>Parcourir les chambres</button31>
+	<button32>Chambre</button32>
+	<button33>Aucune chambre créée pour le moment, soyez la première à créer.</button33>
+	<button34>[ Chambre privée ] </button34>
+	<button35>  NOM SALLE</button35>
+	<button36>LISTE JOUEURS</button36>
+	<button37>Chambre privée</button37>
+	<button38>MODE DE JEU</button38>
+	<button39>Kill Limit</button39>
+	<button40>PLAN JEU</button40>
+	<button41>Créer</button41>
+	<button42>Rafraîchissant...</button42>
+	<button43>Commencer à joindre / créer une nouvelle salle</button43>
+	<button44>Impossible de se connecter au serveur, veuillez réessayer.</button44>
+	<button45>Fait de rejoindre / créer une nouvelle salle</button45>
+	<button46>Impossible de créer / joindre une nouvelle salle, veuillez réessayer.</button46>
+	<button47>Problème de connexion, veuillez réessayer</button47>
+	<button48>  Langues</button48>
+	<button49>* Information</button49>
+	<button50>[ Chambre privée ]</button50>
+	<button51>Si la salle privée (OPEN) est sélectionnée,salle n'est pas répertoriée.</button51>
+	<button52>Vous ne pouvez entrer dans la pièce que [Nom de la chambre].</button52>
+	<button53>Si salle privée (CLOSE) sélectionnée, tout le monde pièce sera ouvert.</button53>
+	<button54>[ MODE DE JEU ]</button54>
+	<button55>TDM = Team Battle: L'équipe qui tue le plus en 10 minutes gagne.</button55>
+	<button56>FFA :Tout le monde est libre:Les redémarrages peuvent deux zones.</button56>
+	<button57>Personne qui a atteint limite de mortalité spécifiée gagne prix 500 $.</button57>
+	<button58>Rejoins une partie</button58>
+	<button59>Spectateur</button59>
+	<button60>Options</button60>
+	<button61>Quitter la pièce</button61>
+	<button62>Le joueur qui atteint </button62>
+	<button63> Tue des victoires.</button63>
+	<button64>Vide</button64>
+	<button65> Chambre jointe</button65>
+	<button66> À gauche</button66>
+	<button67>Boutique</button67>
+	<button68>Acheter</button68>
+	<button69>Munitions par clip: </button69>
+	<button70>Munitions de réserve: </button70>
+	<button71>                            Équipé</button71>
+	<button72>S'ouvre lorsqu'il est mort.</button72>
+	<button73> A rejoint</button73>
+	<button74>Vous respawn dans: </button74>
+	<button75> Secondes</button75>
+	<button76>Appuyez ici pour ouvrir la boutique.</button76>
+	<button77> Secondes à gauche ..</button77>
+	<button78>Appuyez ici pour recharger Ammo.</button78>
+	<button79>Leaving Room, veuillez patienter ...</button79>
+	<button80> A gagné</button80>
+	<button81>Dessiner</button81>
+	<button82>Aucun joueur gagnant</button82>
+	<button83>Résolution d'écran</button83>
+	<button84>Qualité</button84>
+	<button85>Sensibilité au toucher</button85>
+	<button86>(SHIELD) Fin </button86>
+	<button87>Vérifiez votre connexion Internet, veuillez réessayer.</button87>
+	<button88>Incapable de se connecter au serveur. Veuillez réessayer.</button88>
+	<button89>Mettre à jour</button89>
+	<button90>Vous utilisez la version ancienne.</button90>
+	<button91>Veuillez installer la nouvelle version.</button91>
+	<button92>Démarrer l'argent</button92>
+	<button93>Hebdomadaire</button93>
+	<button94>Meilleur joueur</button94>
+	<button95>Chargement....</button95>
+	<button96>     Pays</button96>
+	<button97>* Note: un changement à plus.</button97>
+	<button98>Ce nom a été précédemment pris.</button98>
+	<button99>Enregistrer le nom, veuillez patienter ...</button99>
+	<button100>      Pistolet</button100>
+	<button101> Light-Machine</button101>
+	<button102>Machine-Lourde</button102>
+	<button103> Fusil à pompe</button103>
+	<button104>  Tireur d'élite</button104>
+	<button105>      Munition</button105>
+	<button106>Vous avez une bombe.</button106>
+	<button107>Changement d'emplacement des équipes.</button107>
+	<button108>La bombe a été désamorcée.</button108>
+	<button109>Configurer A ou B.</button109>
+	<button110>La bombe a été planté.</button110>
+	</language>
+
+
+	<language>
+	<Name>Swedish</Name>
+	<button1>Spela Nu</button1>
+	<button2>Alternativ</button2>
+	<button3>Profil</button3>
+	<button4>Krediter</button4>
+	<button5>slumpmässig Room</button5>
+	<button6>Room Namn Connect</button6>
+	<button7>Rum Lista</button7>
+	<button8>Skapa Room</button8>
+	<button9>Tillbaka</button9>
+	<button10>Sök rum, var god vänta ...</button10>
+	<button11>Stanna och tillbaka</button11>
+	<button12>Rums Namn</button12>
+	<button13>**Note:It is case-sensitive.</button13>
+	<button14>Ansluta</button14>
+	<button15>Underrättelse</button15>
+	<button16>Försök igen</button16>
+	<button17>Användarprofil</button17>
+	<button18>Spelarnamn</button18>
+	<button19>Spara</button19>
+	<button20>Huvudmeny</button20>
+	<button21>Anslutning, var god vänta ...</button21>
+	<button22>Inga rum tillgängliga.</button22>
+	<button23>Rummet konstaterades men full.</button23>
+	<button24>Rummet var inte hittas med detta namn.</button24>
+	<button25>Det finns inget utrymme i rummen.</button25>
+	<button26>Skapa nya rum</button26>
+	<button27>Refresh</button27>
+	<button28>Spelläge</button28>
+	<button29>spelare</button29>
+	<button30>Karta</button30>
+	<button31>Bläddra Rum</button31>
+	<button32>Rum</button32>
+	<button33>Inga rum skapas just nu, vara första att skapa.</button33>
+	<button34>     [ Privatrum ] </button34>
+	<button35>  RUM NAMN</button35>
+	<button36>SPELARE GRÄNS</button36>
+	<button37>    Privatrum</button37>
+	<button38>  SPELLÄGE</button38>
+	<button39>Kill Limit</button39>
+	<button40>GAME MAP</button40>
+	<button41>Skapa</button41>
+	<button42>Uppfriskande...</button42>
+	<button43>Börja ansluta / skapa nya rum</button43>
+	<button44>Det går inte att ansluta till servern, försök igen</button44>
+	<button45>Klar att gå / skapa nya rum</button45>
+	<button46>Det går inte att skapa / join nytt rum, försök igen</button46>
+	<button47>Anslutningsproblem , försök igen</button47>
+	<button48>    Språk</button48>
+	<button49>* Information</button49>
+	<button50>[ Privatrum ]</button50>
+	<button51>Om Private Room (OPEN) väljs rummet inte nämns.</button51>
+	<button52>Du kan bara komma in i rummet med [Rums Namn Connect].</button52>
+	<button53>Om Private Room (CLOSE) väljs, kommer alla i rummet vara öppen.</button53>
+	<button54>[ SPELLÄGE ]</button54>
+	<button55>TDM = Team Battle: Laget som dödar mest i 10 minuter vinner.</button55>
+	<button56>FFA = Alla är gratis: omstarter som kan vara i två zoner.</button56>
+	<button57>Person som nådde den angivna Kill Limit vinna $ 500 dolar pris.</button57>
+	<button58>Gå med i spel</button58>
+	<button59>Åskådare</button59>
+	<button60>Alternativ</button60>
+	<button61>lämna rummet</button61>
+	<button62>Spelare som först når </button62>
+	<button63> fiender vinner.</button63>
+	<button64>Tömma</button64>
+	<button65> fogade room</button65>
+	<button66> vänstra rum</button66>
+	<button67>Affär</button67>
+	<button68>köpa</button68>
+	<button69>Ammo per klipp: </button69>
+	<button70>Reserv ammo: </button70>
+	<button71>                           Utrustade</button71>
+	<button72>Öppnas när död.</button72>
+	<button73> fogade</button73>
+	<button74>Du kommer respawn på: </button74>
+	<button75> sekunder</button75>
+	<button76>Tryck här för att öppna butik.</button76>
+	<button77> Sekunder kvar ..</button77>
+	<button78>Tryck här för att fylla på ammunition.</button78>
+	<button79>Lämnar rummet, var god vänta ...</button79>
+	<button80> Vann</button80>
+	<button81>Dra</button81>
+	<button82>Ingen vinnande spelare</button82>
+	<button83>Skärmupplösning</button83>
+	<button84>Kvalitet</button84>
+	<button85>Anslagskänslighet</button85>
+	<button86>( SHIELD ) End </button86>
+	<button87>Kontrollera din Internet-anslutning, försök igen.</button87>
+	<button88>Det går inte att ansluta till servern. Var god försök igen.</button88>
+	<button89>Uppdatering</button89>
+	<button90>Du använder den gamla versionen.</button90>
+	<button91>Installera ny version.</button91>
+	<button92>Start Pengar</button92>
+	<button93>Varje vecka</button93>
+	<button94>Bästa spelare</button94>
+	<button95>Läser in....</button95>
+	<button96>     Land</button96>
+	<button97>* OBS: en förändring till mer.</button97>
+	<button98>Detta namn har tidigare tagit.</button98>
+	<button99>Spara namn, var god vänta ...</button99>
+	<button100>        Pistol</button100>
+	<button101>   Ljus-Maskin</button101>
+	<button102> Heavy-Maskin</button102>
+	<button103>   Hagelgevär</button103>
+	<button104>    Prickskytt</button104>
+	<button105>   Ammunition</button105>
+	<button106>Du har en bomb.</button106>
+	<button107>Lag bytt plats.</button107>
+	<button108>Bomben desarmeras.</button108>
+	<button109>Ställ in A eller B.</button109>
+	<button110>Bomben planterades.</button110>
+	</language>
+
+
+	<language>
+	<Name>Arabic</Name>
+	<button1>العب الان</button1>
+	<button2>خيارات</button2>
+	<button3>الملف الشخصي</button3>
+	<button4>الاعتمادات</button4>
+	<button5>غرفة عشوائية</button5>
+	<button6>غرفة اسم الاتصال</button6>
+	<button7>قائمة الغرف</button7>
+	<button8>إنشاء غرفة</button8>
+	<button9>الى الخلف</button9>
+	<button10>...البحث الغرفة، يرجى الانتظار</button10>
+	<button11>وقف والعودة</button11>
+	<button12>اسم الغرفة</button12>
+	<button13>**Note:It is case-sensitive.</button13>
+	<button14>الاتصال</button14>
+	<button15>إعلام</button15>
+	<button16>حاول ثانية</button16>
+	<button17>ملف تعريفي للمستخدم</button17>
+	<button18>اسم اللاعب</button18>
+	<button19>حفظ</button19>
+	<button20>القائمة الرئيسية</button20>
+	<button21>...الاتصال، يرجى الانتظار</button21>
+	<button22>.لا الغرف المتاحة</button22>
+	<button23>.تم العثور على غرفة ولكن كامل</button23>
+	<button24>.لم يتم العثور على غرفة بهذا الاسم</button24>
+	<button25>.ليس هناك مجال في الغرف</button25>
+	<button26>إنشاء غرفة جديدة</button26>
+	<button27>تحديث</button27>
+	<button28>نوع اللعبة</button28>
+	<button29>لاعبين</button29>
+	<button30>خريطة</button30>
+	<button31>تصفح غرف</button31>
+	<button32>مجال</button32>
+	<button33>.لا الغرف التي تم إنشاؤها في هذه اللحظة، أن يكون أول من خلق</button33>
+	<button34>      [ غرفة خاصة ] </button34>
+	<button35>    اسم الغرفة</button35>
+	<button36>     LIMIT لاعب</button36>
+	<button37>      غرفة خاصة</button37>
+	<button38>    نوع اللعبة</button38>
+	<button39>قتل الحد</button39>
+	<button40>  MAP لعبة</button40>
+	<button41>خلق</button41>
+	<button42>منعش...</button42>
+	<button43>تبدأ انضمامه / خلق غرفة جديدة</button43>
+	<button44>غير قادر على الاتصال بخادم، يرجى المحاولة مرة أخرى</button44>
+	<button45>فعلت انضمامه / خلق غرفة جديدة</button45>
+	<button46>غير قادر على إنشاء / انضمام غرفة جديدة، يرجى المحاولة مرة أخرى</button46>
+	<button47>مشكلة الاتصال، يرجى المحاولة مرة أخرى</button47>
+	<button48>     اللغات</button48>
+	<button49>* معلومات</button49>
+	<button50>[ غرفة خاصة ]</button50>
+	<button51>.إذا تم تحديد غرفة خاصة (فتح)، لم يتم سرد الغرفة</button51>
+	<button52>.يمكنك إدخال فقط غرفة مع [اسم غرفة الاتصال]</button52>
+	<button53>.إذا تم تحديد غرفة خاصة (وثيقة)، وسيكون الجميع في غرفة مفتوحة</button53>
+	<button54>[ نوع اللعبة ]</button54>
+	<button55>.TDM = فريق المعركة: الفريق الذي يقتل أكثر في 10 دقيقة يفوز</button55>
+	<button56>.FFA = كل واحد حر: إعادة تشغيل يمكن أن يكون في منطقتين</button56>
+	<button57>.الشخص الذي وصل إلى قتل الحد المحدد الفوز بالجائزة DOLAR 500 $</button57>
+	<button58>انضم للعبة</button58>
+	<button59>المشاهد</button59>
+	<button60>خيارات</button60>
+	<button61>غادر الغرفة</button61>
+	<button62> لاعب الذين يصلون أولا</button62>
+	<button63> .يقتل يفوز</button63>
+	<button64>فارغة</button64>
+	<button65> غرفة انضم</button65>
+	<button66> غرفة اليسرى</button66>
+	<button67>متجر</button67>
+	<button68>يشترى</button68>
+	<button69>ذخيرة لكل مقطع: </button69>
+	<button70>احتياطي الذخيرة: </button70>
+	<button71>                             مسلح</button71>
+	<button72>يفتح عند قتيلا.</button72>
+	<button73> انضم</button73>
+	<button74>سوف بيضة في: </button74>
+	<button75> ثواني</button75>
+	<button76>.اضغط هنا لفتح متجر</button76>
+	<button77> ..اليسار الثانية</button77>
+	<button78>.اضغط هنا لإعادة ملء الذخيرة</button78>
+	<button79>...مغادرة الغرفة، يرجى الانتظار</button79>
+	<button80> وون</button80>
+	<button81>رسم</button81>
+	<button82>لا يوجد لاعب الفوز</button82>
+	<button83>دقة الشاشة</button83>
+	<button84>جودة</button84>
+	<button85>حساسية اللمس</button85>
+	<button86>( SHIELD ) End </button86>
+	<button87>.تحقق من اتصالك بالإنترنت، الرجاء حاول مرة أخرى</button87>
+	<button88>غير قادر على الإتصال بالسيرفر. حاول مرة اخرى.</button88>
+	<button89>تحديث</button89>
+	<button90>.كنت تستخدم النسخة القديمة</button90>
+	<button91>.الرجاء تثبيت النسخة الجديدة</button91>
+	<button92>بدء تشغيل أموال</button92>
+	<button93>أسبوعي</button93>
+	<button94>أفضل لاعب</button94>
+	<button95>...جار التحميل</button95>
+	<button96>       بلد</button96>
+	<button97>.ملاحظة: تغيير إلى أكثر من ذلك*</button97>
+	<button98>.وقد اتخذ هذا الاسم من قبل</button98>
+	<button99>...توفير اسم، يرجى الانتظار</button99>
+	<button100>         مسدس</button100>
+	<button101>        ضوء آلة</button101>
+	<button102>    والآلة الثقيلة</button102>
+	<button103>    بندقية الصيد</button103>
+	<button104>         قناص</button104>
+	<button105>         ذخيرة</button105>
+	<button106>لديك قنبلة</button106>
+	<button107>تغيرت فرق الموقع</button107>
+	<button108>وتم نزع فتيل القنبلة</button108>
+	<button109>إعداد A أو B</button109>
+	<button110>تم زرع القنبلة</button110>
+	</language>
+
+</languages>
+

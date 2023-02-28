@@ -1,0 +1,1167 @@
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+public class BuyMenu : MonoBehaviour
+{
+
+	//This script is enabled/disabled from RoomController.cs
+	//Here player select weapons to buy
+
+	[HideInInspector]
+	public int lastSelectedWeapon;
+
+	public enum BuySection { Primary, Secondary, Special, Sniper, ShotGuns, HalfPrimary}
+	[HideInInspector]
+	public BuySection buySection = BuySection.Secondary;
+
+	public AudioClip ClickSong;
+	AudioSource scoreAudioSource;
+	RoomController rc;
+	xmlReader xml;
+	string languagesPrefsName = "SelectedLanguages";
+
+	//Temporarily store player wepaon list
+	List<PlayerWeapons.WeaponSet> primaryWeaponsTmp = new List<PlayerWeapons.WeaponSet>();
+	List<PlayerWeapons.WeaponSet> secondaryWeaponsTmp = new List<PlayerWeapons.WeaponSet>();
+	List<PlayerWeapons.WeaponSet> specialWeaponsTmp = new List<PlayerWeapons.WeaponSet>();
+	List<PlayerWeapons.WeaponSet> grenadeTmp = new List<PlayerWeapons.WeaponSet>();
+	List<PlayerWeapons.WeaponSet> flashTmp = new List<PlayerWeapons.WeaponSet>();
+	
+	int selectedPrimary;
+	int selectedSecondary;
+	int selectedSpecial;
+	int selectedGrenade;
+	int selectedFlash;
+	int selectedC4;
+
+	//Sort weapons by their cost
+
+	// Use this for initialization
+	public void Weapons ()
+    {
+		scoreAudioSource = GetComponent<AudioSource>();
+		xml = GetComponent<xmlReader>();
+		rc = GetComponent<RoomController>();
+		xml.currentLanguage = PlayerPrefs.GetInt(languagesPrefsName);
+
+		primaryWeaponsTmp.Clear();
+		secondaryWeaponsTmp.Clear();
+		specialWeaponsTmp.Clear();
+		grenadeTmp.Clear();
+		flashTmp.Clear();
+
+		//Here we get all available weapons, sort them, obfusctae price and making them ready to use in game
+		if(rc.ourPlayer)
+        {
+			PlayerWeapons pwTmp = rc.ourPlayer.GetComponent<PlayerNetwork>().playerWeapons;
+			
+			selectedPrimary = pwTmp.selectedPrimary;
+			selectedSecondary = pwTmp.selectedSecondary;
+			selectedSpecial = pwTmp.selectedSpecial;
+			selectedGrenade = pwTmp.selectedGrenade;
+			selectedFlash = pwTmp.selectedFlash;
+			
+			primaryWeaponsTmp.InsertRange(0, pwTmp.primaryWeapons);
+			secondaryWeaponsTmp.InsertRange(0, pwTmp.secondaryWeapons);
+			specialWeaponsTmp.InsertRange(0, pwTmp.specialWeapons);
+			grenadeTmp.InsertRange(0, pwTmp.Grenade);
+			flashTmp.InsertRange(0, pwTmp.Flash);
+			
+			//print (primaryWeaponsTmp.Count);
+			
+			if(selectedPrimary < 0 || selectedPrimary > primaryWeaponsTmp.Count - 1)
+            {
+				selectedPrimary = 0;
+			}
+			if(selectedSecondary < 0 || selectedSecondary > secondaryWeaponsTmp.Count - 1)
+            {
+				selectedSecondary = 0;
+			}
+			if(selectedSpecial < 0 || selectedSpecial > specialWeaponsTmp.Count - 1)
+            {
+				selectedSpecial = 0;
+			}
+			if(selectedGrenade < 0 || selectedGrenade > grenadeTmp.Count - 1)
+			{
+				selectedGrenade = 0;
+			}
+			if(selectedFlash < 0 || selectedFlash > flashTmp.Count - 1)
+			{
+				selectedFlash = 0;
+			}
+			
+			//Set initially selected weapon to be first in the list
+			PlayerWeapons.WeaponSet tmpPrimary = primaryWeaponsTmp[selectedPrimary];
+			primaryWeaponsTmp.RemoveAt(selectedPrimary);
+			
+			PlayerWeapons.WeaponSet  tmpSecondary = secondaryWeaponsTmp[selectedSecondary];
+			secondaryWeaponsTmp.RemoveAt(selectedSecondary);
+			
+			PlayerWeapons.WeaponSet tmpSpecial = specialWeaponsTmp[selectedSpecial];
+			specialWeaponsTmp.RemoveAt(selectedSpecial);
+
+			PlayerWeapons.WeaponSet tmpGrenade = grenadeTmp[selectedGrenade];
+			grenadeTmp.RemoveAt(selectedGrenade);
+
+			PlayerWeapons.WeaponSet tmpFlash = flashTmp[selectedFlash];
+			flashTmp.RemoveAt(selectedFlash);
+			
+			//Sort remaining weapons by price
+
+			
+			//Add selected weapons back
+			primaryWeaponsTmp.Insert(0, tmpPrimary);
+			secondaryWeaponsTmp.Insert(0, tmpSecondary);
+			specialWeaponsTmp.Insert(0, tmpSpecial);
+			grenadeTmp.Insert(0, tmpGrenade);
+			flashTmp.Insert(0, tmpFlash);
+			
+			selectedPrimary = 0;
+			selectedSecondary = 0;
+			selectedSpecial = 0;
+			selectedGrenade = 0;
+			selectedFlash = 0;
+			
+			//Obfuscate each weapon cost
+			ObfuscateWeaponCost(primaryWeaponsTmp, selectedPrimary);
+			ObfuscateWeaponCost(secondaryWeaponsTmp, selectedSecondary);
+			ObfuscateWeaponCost(specialWeaponsTmp, selectedSpecial);
+			ObfuscateWeaponCost(grenadeTmp, selectedGrenade);
+			ObfuscateWeaponCost(flashTmp, selectedFlash);
+		}
+
+		this.enabled = false;
+	}
+		
+
+
+
+
+	void ObfuscateWeaponCost (List<PlayerWeapons.WeaponSet> wpmList, int selectedIndex)
+    {
+		for(int i = 0; i < wpmList.Count; i++)
+        {
+			if(i == selectedIndex || wpmList[i].weaponCost < 1)
+            {
+				wpmList[i].obfuscatedPrice = GameSettings.cnst;
+			}
+            else
+            {
+				wpmList[i].obfuscatedPrice = GameSettings.cnst - wpmList[i].weaponCost;
+			}
+		}
+	}
+
+	public void  ApplySelectedWeapons ()
+    {
+		//Check what weapons we have selected and apply them to newly spawned player
+		if(rc.ourPlayer)
+        {
+			for(int i = 0; i < rc.ourPlayer.playerWeapons.primaryWeapons.Count; i++)
+            {
+				if(rc.ourPlayer.playerWeapons.primaryWeapons[i].firstPersonWeapon.name == primaryWeaponsTmp[selectedPrimary].firstPersonWeapon.name)
+                {
+					rc.ourPlayer.playerWeapons.selectedPrimary = i;
+				}
+			}
+			
+			for(int i = 0; i < rc.ourPlayer.playerWeapons.secondaryWeapons.Count; i++)
+            {
+				if(rc.ourPlayer.playerWeapons.secondaryWeapons[i].firstPersonWeapon.name == secondaryWeaponsTmp[selectedSecondary].firstPersonWeapon.name)
+                {
+					rc.ourPlayer.playerWeapons.selectedSecondary = i;
+				}
+			}
+			
+			for(int i = 0; i < rc.ourPlayer.playerWeapons.specialWeapons.Count; i++)
+            {
+				if(rc.ourPlayer.playerWeapons.specialWeapons[i].firstPersonWeapon.name == specialWeaponsTmp[selectedSpecial].firstPersonWeapon.name)
+                {
+					rc.ourPlayer.playerWeapons.selectedSpecial =  i;
+				}
+			}
+
+			for(int i = 0; i < rc.ourPlayer.playerWeapons.Grenade.Count; i++)
+			{
+				if(rc.ourPlayer.playerWeapons.Grenade[i].firstPersonWeapon.name == grenadeTmp[selectedGrenade].firstPersonWeapon.name)
+				{
+					rc.ourPlayer.playerWeapons.selectedGrenade =  i;
+				}
+			}
+
+			for(int i = 0; i < rc.ourPlayer.playerWeapons.Flash.Count; i++)
+			{
+				if(rc.ourPlayer.playerWeapons.Flash[i].firstPersonWeapon.name == flashTmp[selectedFlash].firstPersonWeapon.name)
+				{
+					rc.ourPlayer.playerWeapons.selectedFlash =  i;
+				}
+			}
+			
+			rc.ourPlayer.playerWeapons.GetWeaponToSelect(lastSelectedWeapon);
+		}
+	}
+
+	public void  ApplySelectedWeaponsGrenades ()
+	{
+		//Check what weapons we have selected and apply them to newly spawned player
+		if(rc.ourPlayer)
+		{
+
+			for(int i = 0; i < rc.ourPlayer.playerWeapons.Grenade.Count; i++)
+			{
+				if(rc.ourPlayer.playerWeapons.Grenade[i].firstPersonWeapon.name == grenadeTmp[selectedGrenade].firstPersonWeapon.name)
+				{
+					rc.ourPlayer.playerWeapons.selectedGrenade =  i;
+				}
+			}
+
+			for(int i = 0; i < rc.ourPlayer.playerWeapons.Flash.Count; i++)
+			{
+				if(rc.ourPlayer.playerWeapons.Flash[i].firstPersonWeapon.name == flashTmp[selectedFlash].firstPersonWeapon.name)
+				{
+					rc.ourPlayer.playerWeapons.selectedFlash =  i;
+				}
+			}
+				
+		}
+	}
+
+	//This is called from RoomController.cs when our player was killed
+	public void ResetSelectedWeapons ()
+    {
+		selectedPrimary = 0;
+		selectedSecondary = 0;
+		selectedSpecial = 0;
+		selectedGrenade = 0;
+		selectedFlash = 0;
+
+#if UNITY_ANDROID || UNITY_IOS || UNITY_WP8 || UNITY_WP8_1
+        GameSettings.switchWeaponIndex = 1;
+#endif
+
+    }
+
+	//This is called from RoomController.cs when buying new weapon
+	public int GetWeaponCost (int type)
+    {
+		if(type == 1)
+        {
+			return GameSettings.cnst - primaryWeaponsTmp[selectedPrimary].obfuscatedPrice;
+		}
+
+		if(type == 2)
+        {
+			return GameSettings.cnst - secondaryWeaponsTmp[selectedSecondary].obfuscatedPrice;
+		}
+
+		if(type == 3)
+        {
+			return GameSettings.cnst - specialWeaponsTmp[selectedSpecial].obfuscatedPrice;
+		}
+
+		if(type == 4)
+		{
+			return GameSettings.cnst - grenadeTmp[selectedGrenade].obfuscatedPrice;
+		}
+
+		if(type == 5)
+		{
+			return GameSettings.cnst - flashTmp[selectedFlash].obfuscatedPrice;
+		}
+
+		return -1;
+	}
+	
+	// Update is called once per frame
+	void OnGUI ()
+    {
+		GUI.skin = GameSettings.guiSkin;
+
+		GUI.Window (0, new Rect(Screen.width/2 - 220, Screen.height/2 - 210,  440, 420), BuyMenuWindow, "");
+	}
+
+	void Update(){
+		if (rc.ourPlayer) {
+			selectedSpecial = rc.ourPlayer.playerWeapons.selectedSpecial;
+		}
+
+
+	}
+
+	void BuyMenuWindow (int windowID)
+    {
+		GUI.Label(new Rect(15, 0, 300, 35), xml.button67);
+
+		if(GUI.Button(new Rect(440 - 28, 1, 28, 29), "", GameSettings.closeButtonStyle))
+        {
+			rc.showBuyMenu = false;
+		}
+
+		GUI.enabled = buySection != BuySection.Secondary;
+
+		if(GUI.Button(new Rect(15, 40, 140, 38), xml.button100, GameSettings.buyMenuButtonStyle))
+        {
+			scoreAudioSource.clip = ClickSong;
+			scoreAudioSource.Play ();
+			buySection = BuySection.Secondary;
+		}
+
+		GUI.enabled = buySection != BuySection.HalfPrimary;
+
+		if(GUI.Button(new Rect(15, 102, 140, 38), xml.button101, GameSettings.buyMenuButtonStyle))
+		{
+			scoreAudioSource.clip = ClickSong;
+			scoreAudioSource.Play ();
+			buySection = BuySection.HalfPrimary;
+		}
+
+		GUI.enabled = buySection != BuySection.Primary;
+
+		if(GUI.Button(new Rect(15, 164, 140, 38), xml.button102, GameSettings.buyMenuButtonStyle))
+        {
+			scoreAudioSource.clip = ClickSong;
+			scoreAudioSource.Play ();
+			buySection = BuySection.Primary;
+		}
+
+		GUI.enabled = buySection != BuySection.ShotGuns;
+
+		if(GUI.Button(new Rect(15, 226, 140, 38), xml.button103, GameSettings.buyMenuButtonStyle))
+		{
+			scoreAudioSource.clip = ClickSong;
+			scoreAudioSource.Play ();
+			buySection = BuySection.ShotGuns;
+		}
+
+		GUI.enabled = buySection != BuySection.Sniper;
+
+		if(GUI.Button(new Rect(15, 288, 140, 38), xml.button104, GameSettings.buyMenuButtonStyle))
+        {
+			scoreAudioSource.clip = ClickSong;
+			scoreAudioSource.Play ();
+			buySection = BuySection.Sniper;
+		}
+
+		GUI.enabled = buySection != BuySection.Special;
+
+		if(GUI.Button(new Rect(15, 350, 140, 38), xml.button105, GameSettings.buyMenuButtonStyle))
+		{
+			scoreAudioSource.clip = ClickSong;
+			scoreAudioSource.Play ();
+			buySection = BuySection.Special;
+		}
+
+		GUI.enabled = true;
+		
+		if(buySection == BuySection.Secondary)
+        {
+			ShowWeaponItems(secondaryWeaponsTmp, selectedSecondary, 2);
+		}
+
+		if(buySection == BuySection.HalfPrimary)
+		{
+			ShowWeaponItems(primaryWeaponsTmp, selectedPrimary, 1);
+		}
+
+		if(buySection == BuySection.Primary)
+        {
+			ShowWeaponItems(primaryWeaponsTmp, selectedPrimary, 1);
+		}
+
+		if(buySection == BuySection.ShotGuns)
+		{
+			ShowWeaponItems(primaryWeaponsTmp, selectedPrimary, 1);
+		}
+
+		if(buySection == BuySection.Sniper)
+		{
+			ShowWeaponItems(primaryWeaponsTmp, selectedPrimary, 1);
+		}
+
+		if(buySection == BuySection.Special)
+        {
+			ShowWeaponItems(specialWeaponsTmp, selectedSpecial, 3);
+			ShowWeaponItems(grenadeTmp, selectedGrenade, 4);
+			ShowWeaponItems(flashTmp, selectedFlash, 5);
+		}
+	}
+
+	private GUIStyle guiStyle = new GUIStyle ();
+	void ShowWeaponItems (List<PlayerWeapons.WeaponSet> weaponListTmp, int selectedIndex, int type)
+	{
+		if (weaponListTmp != null) {
+			if (weaponListTmp == primaryWeaponsTmp && buySection == BuySection.Sniper) {
+				GUILayout.Space (30);
+				GUI.Box (new Rect (170, 39, 255, 350), "");
+				for (int i = 0; i < weaponListTmp.Count; i++) {
+					GUI.enabled = true;
+
+					GUILayout.Space (10);
+
+					GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
+
+					if (i == 12) {
+						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 1) {
+									selectedPrimary = i;
+									rc.SubstractCash (1);
+								}
+								if (rc.ourPlayer) {
+									lastSelectedWeapon = type;
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+					if (i == 13) {
+						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 1) {
+									selectedPrimary = i;
+									rc.SubstractCash (1);
+								}
+								if (rc.ourPlayer) {
+									lastSelectedWeapon = type;
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+
+
+					GUI.enabled = true;
+
+					guiStyle.fontSize = 22;
+					guiStyle.alignment = TextAnchor.UpperCenter;
+					guiStyle.normal.textColor = weaponListTmp [i].obfuscatedPrice >= rc.totalCash ? GameSettings.drawColor : GameSettings.customRedColor;
+					if (i == 12) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 66, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					} else if (i == 13) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 134, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					}
+
+
+
+					if (i == 12) {
+						GUI.DrawTexture (new Rect (175, 34, 150, 75), primaryWeaponsTmp [12].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (170, 89, 70, 70), primaryWeaponsTmp [12].firstPersonWeapon.name, guiStyle);
+					}
+					if (i == 13) {
+						GUI.DrawTexture (new Rect (175, 104, 150, 75), primaryWeaponsTmp [13].gunPreview);
+						guiStyle.fontSize = 11;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (173, 158, 70, 70), primaryWeaponsTmp [13].firstPersonWeapon.name, guiStyle);
+					}
+
+				}
+			} else if (weaponListTmp == primaryWeaponsTmp && buySection == BuySection.ShotGuns) {
+				GUILayout.Space (30);
+				GUI.Box (new Rect (170, 39, 255, 350), "");
+				for (int i = 0; i < weaponListTmp.Count; i++) {
+					GUI.enabled = true;
+
+					GUILayout.Space (10);
+
+					GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
+					if (i == 9) {
+						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 1) {
+									selectedPrimary = i;
+									rc.SubstractCash (1);
+								}
+								if (rc.ourPlayer) {
+									lastSelectedWeapon = type;
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+					if (i == 10) {
+						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 1) {
+									selectedPrimary = i;
+									rc.SubstractCash (1);
+								}
+								if (rc.ourPlayer) {
+									lastSelectedWeapon = type;
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+
+
+					GUI.enabled = true;
+
+					guiStyle.fontSize = 22;
+					guiStyle.alignment = TextAnchor.UpperCenter;
+					guiStyle.normal.textColor = weaponListTmp [i].obfuscatedPrice >= rc.totalCash ? GameSettings.drawColor : GameSettings.customRedColor;
+					if (i == 9) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 66, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					} else if (i == 10) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 134, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					}
+
+
+					if (i == 9) {
+						GUI.DrawTexture (new Rect (175, 34, 150, 75), primaryWeaponsTmp [9].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (155, 89, 70, 70), primaryWeaponsTmp [9].firstPersonWeapon.name, guiStyle);
+					}
+					if (i == 10) {
+						GUI.DrawTexture (new Rect (175, 104, 150, 75), primaryWeaponsTmp [10].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (173, 158, 70, 70), primaryWeaponsTmp [10].firstPersonWeapon.name, guiStyle);
+					}
+
+				}
+			} else if (weaponListTmp == primaryWeaponsTmp && buySection == BuySection.HalfPrimary) {
+				GUILayout.Space (30);
+				GUI.Box (new Rect (170, 39, 255, 350), "");
+				for (int i = 0; i < weaponListTmp.Count; i++) {
+					GUI.enabled = true;
+
+					GUILayout.Space (10);
+
+					GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
+					if (i == 2) {
+						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 1) {
+									selectedPrimary = i;
+									rc.SubstractCash (1);
+								}
+								if (rc.ourPlayer) {
+									lastSelectedWeapon = type;
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+					if (i == 4) {
+						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 1) {
+									selectedPrimary = i;
+									rc.SubstractCash (1);
+								}
+								if (rc.ourPlayer) {
+									lastSelectedWeapon = type;
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+					if (i == 3) {
+						if (GUI.Button (new Rect (169, 179, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 1) {
+									selectedPrimary = i;
+									rc.SubstractCash (1);
+								}
+								if (rc.ourPlayer) {
+									lastSelectedWeapon = type;
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+					if (i == 15) {
+						if (GUI.Button (new Rect (169, 249, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 1) {
+									selectedPrimary = i;
+									rc.SubstractCash (1);
+								}
+								if (rc.ourPlayer) {
+									lastSelectedWeapon = type;
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+					if (i == 11) {
+						if (GUI.Button (new Rect (169, 319, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 1) {
+									selectedPrimary = i;
+									rc.SubstractCash (1);
+								}
+								if (rc.ourPlayer) {
+									lastSelectedWeapon = type;
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+
+					GUI.enabled = true;
+
+					guiStyle.fontSize = 22;
+					guiStyle.alignment = TextAnchor.UpperCenter;
+					guiStyle.normal.textColor = weaponListTmp [i].obfuscatedPrice >= rc.totalCash ? GameSettings.drawColor : GameSettings.customRedColor;
+					if (i == 2) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 66, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					} else if (i == 4) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 134, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					} else if (i == 3) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 206, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					} else if (i == 15) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 275, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					}
+					else if (i == 11) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 344, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					}
+
+
+					if (i == 2) {
+						GUI.DrawTexture (new Rect (200, 34, 150, 75), primaryWeaponsTmp [2].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (170, 89, 70, 70), primaryWeaponsTmp [2].firstPersonWeapon.name, guiStyle);
+					}
+					if (i == 4) {
+						GUI.DrawTexture (new Rect (190, 104, 150, 75), primaryWeaponsTmp [4].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (160, 158, 70, 70), primaryWeaponsTmp [4].firstPersonWeapon.name, guiStyle);
+					}
+					if (i == 3) {
+						GUI.DrawTexture (new Rect (191, 174, 150, 75), primaryWeaponsTmp [3].gunPreview);
+						guiStyle.fontSize = 11;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (160, 229, 70, 70), primaryWeaponsTmp [3].firstPersonWeapon.name, guiStyle);
+					}
+					if (i == 15) {
+						GUI.DrawTexture (new Rect (178, 246, 150, 75), primaryWeaponsTmp [15].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (165, 297, 70, 70), primaryWeaponsTmp [15].firstPersonWeapon.name, guiStyle);
+					}
+					if (i == 11) {
+						GUI.DrawTexture (new Rect (175, 316, 150, 75), primaryWeaponsTmp [11].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (161, 365, 70, 70), primaryWeaponsTmp [11].firstPersonWeapon.name, guiStyle);
+					}
+
+				}
+			} else if (weaponListTmp == primaryWeaponsTmp) {
+				GUILayout.Space (30);
+				GUI.Box (new Rect (170, 39, 255, 350), "");
+				for (int i = 0; i < weaponListTmp.Count; i++) {
+					GUI.enabled = true;
+
+					GUILayout.Space (10);
+
+					GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
+					if (i == 5) {
+						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 1) {
+									selectedPrimary = i;
+									rc.SubstractCash (1);
+								}
+								if (rc.ourPlayer) {
+									lastSelectedWeapon = type;
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+					if (i == 6) {
+						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 1) {
+									selectedPrimary = i;
+									rc.SubstractCash (1);
+								}
+								if (rc.ourPlayer) {
+									lastSelectedWeapon = type;
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+					if (i == 7) {
+						if (GUI.Button (new Rect (169, 179, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 1) {
+									selectedPrimary = i;
+									rc.SubstractCash (1);
+								}
+								if (rc.ourPlayer) {
+									lastSelectedWeapon = type;
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+					if (i == 8) {
+						if (GUI.Button (new Rect (169, 249, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 1) {
+									selectedPrimary = i;
+									rc.SubstractCash (1);
+								}
+								if (rc.ourPlayer) {
+									lastSelectedWeapon = type;
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+
+
+
+					GUI.enabled = true;
+
+					guiStyle.fontSize = 22;
+					guiStyle.alignment = TextAnchor.UpperCenter;
+					guiStyle.normal.textColor = weaponListTmp [i].obfuscatedPrice >= rc.totalCash ? GameSettings.drawColor : GameSettings.customRedColor;
+					if (i == 5) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 66, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					} else if (i == 6) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 134, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					} else if (i == 7) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 206, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					} else if (i == 8) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 275, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					} 
+
+
+					if (i == 5) {
+						GUI.DrawTexture (new Rect (180, 34, 150, 75), primaryWeaponsTmp [5].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (160, 89, 70, 70), primaryWeaponsTmp [5].firstPersonWeapon.name, guiStyle);
+					}
+					if (i == 6) {
+						GUI.DrawTexture (new Rect (180, 104, 150, 75), primaryWeaponsTmp [6].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (160, 158, 70, 70), primaryWeaponsTmp [6].firstPersonWeapon.name, guiStyle);
+					}
+					if (i == 7) {
+						GUI.DrawTexture (new Rect (180, 178, 150, 75), primaryWeaponsTmp [7].gunPreview);
+						guiStyle.fontSize = 11;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (158, 229, 70, 70), "552", guiStyle);
+					}
+					if (i == 8) {
+						GUI.DrawTexture (new Rect (175, 246, 150, 75), primaryWeaponsTmp [8].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (158, 297, 70, 70), "AUG", guiStyle);
+					}
+
+
+				}
+			} else if (weaponListTmp == specialWeaponsTmp || weaponListTmp == grenadeTmp) {
+				GUILayout.Space (30);
+				GUI.Box (new Rect (170, 39, 255, 350), "");
+				for (int i = 0; i < weaponListTmp.Count; i++) {
+					GUI.enabled = true;
+
+					GUILayout.Space (10);
+
+					GUI.enabled = false;
+					if (i == 0) {
+						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? xml.button71 : xml.button71)) {
+						}
+					}
+					GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
+					if (i == 1) {
+						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 4) {
+									selectedGrenade = i;
+									rc.SubstractCash (4);
+								}
+								Invoke ("ApplySelectedWeaponsGrenades", 0.035f);
+							}
+						}
+					}
+					GUI.enabled = true;
+
+
+					guiStyle.fontSize = 22;
+					guiStyle.alignment = TextAnchor.UpperCenter;
+					guiStyle.normal.textColor = weaponListTmp [i].obfuscatedPrice >= rc.totalCash ? GameSettings.drawColor : GameSettings.customRedColor;
+					if (i == 1) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 134, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					}
+
+
+					if (i == 0) {
+						GUI.DrawTexture (new Rect (180, 32, 150, 75), specialWeaponsTmp [0].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (163, 89, 70, 70), specialWeaponsTmp [0].firstPersonWeapon.name, guiStyle);
+					}
+					if (i == 1) {
+						GUI.DrawTexture (new Rect (205, 107, 150, 75), grenadeTmp [1].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (175, 158, 70, 70), grenadeTmp [1].firstPersonWeapon.name, guiStyle);
+					}
+
+				}
+
+			} 
+			else if (weaponListTmp == flashTmp) {
+				for (int i = 0; i < weaponListTmp.Count; i++) {
+					GUI.enabled = true;
+					GUILayout.Space (10);
+					GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
+					if (i == 2) {
+						if (GUI.Button (new Rect (169, 179, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 5) {
+									selectedFlash = i;
+									rc.SubstractCash (5);
+								}
+								Invoke ("ApplySelectedWeaponsGrenades", 0.035f);
+							}
+						}
+					}
+					GUI.enabled = true;
+					guiStyle.fontSize = 22;
+					guiStyle.alignment = TextAnchor.UpperCenter;
+					guiStyle.normal.textColor = weaponListTmp [i].obfuscatedPrice >= rc.totalCash ? GameSettings.drawColor : GameSettings.customRedColor;
+					if (i == 2) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 205, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					}
+
+					if (i == 2) {
+						GUI.DrawTexture (new Rect (205, 177, 150, 75), flashTmp [2].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (167, 229, 70, 70), flashTmp [2].firstPersonWeapon.name, guiStyle);
+					}
+
+				}
+			}
+			else {
+				GUILayout.Space (30);
+				GUI.Box (new Rect(170, 39, 255, 350),"");
+				for (int i = 0; i < weaponListTmp.Count; i++) {
+					GUI.enabled = true;
+
+					GUILayout.Space (10);
+
+					GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
+					if (i == 0){
+					if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+							if (type == 2) {
+								selectedSecondary = i;
+								rc.SubstractCash (2);
+							}
+							if (rc.ourPlayer) {
+								if (rc.ourPlayer.playerWeapons.selectedPrimary > 1) {
+									lastSelectedWeapon = type;
+									GameSettings.switchWeaponIndex = type;
+								} else {
+									if (type == 2) {
+										lastSelectedWeapon = 1;
+										GameSettings.switchWeaponIndex = 1;
+									}
+								}
+								Invoke ("ApplySelectedWeapons", 0.035f);
+							}
+
+							rc.showBuyMenu = false;
+						}
+					}
+				}
+					if (i == 1) {
+						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 2) {
+									selectedSecondary = i;
+									rc.SubstractCash (2);
+								}
+								if (rc.ourPlayer) {
+									if (rc.ourPlayer.playerWeapons.selectedPrimary > 1) {
+										lastSelectedWeapon = type;
+										GameSettings.switchWeaponIndex = type;
+									} else {
+										if (type == 2) {
+											lastSelectedWeapon = 1;
+											GameSettings.switchWeaponIndex = 1;
+										}
+									}
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+					if (i == 2) {
+						if (GUI.Button (new Rect (169, 179, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 2) {
+									selectedSecondary = i;
+									rc.SubstractCash (2);
+								}
+								if (rc.ourPlayer) {
+									if (rc.ourPlayer.playerWeapons.selectedPrimary > 1) {
+										lastSelectedWeapon = type;
+										GameSettings.switchWeaponIndex = type;
+									} else {
+										if (type == 2) {
+											lastSelectedWeapon = 1;
+											GameSettings.switchWeaponIndex = 1;
+										}
+									}
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+					if (i == 4) {
+						if (GUI.Button (new Rect (169, 249, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 2) {
+									selectedSecondary = i;
+									rc.SubstractCash (2);
+								}
+								if (rc.ourPlayer) {
+									if (rc.ourPlayer.playerWeapons.selectedPrimary > 1) {
+										lastSelectedWeapon = type;
+										GameSettings.switchWeaponIndex = type;
+									} else {
+										if (type == 2) {
+											lastSelectedWeapon = 1;
+											GameSettings.switchWeaponIndex = 1;
+										}
+									}
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+					if (i == 3) {
+						if (GUI.Button (new Rect (169, 319, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
+								if (type == 2) {
+									selectedSecondary = i;
+									rc.SubstractCash (2);
+								}
+								if (rc.ourPlayer) {
+									if (rc.ourPlayer.playerWeapons.selectedPrimary > 1) {
+										lastSelectedWeapon = type;
+										GameSettings.switchWeaponIndex = type;
+									} else {
+										if (type == 2) {
+											lastSelectedWeapon = 1;
+											GameSettings.switchWeaponIndex = 1;
+										}
+									}
+									Invoke ("ApplySelectedWeapons", 0.035f);
+								}
+
+								rc.showBuyMenu = false;
+							}
+						}
+					}
+
+
+					GUI.enabled = true;
+
+					guiStyle.fontSize = 22;
+					guiStyle.alignment = TextAnchor.UpperCenter;
+					guiStyle.normal.textColor = weaponListTmp [i].obfuscatedPrice >= rc.totalCash ? GameSettings.drawColor : GameSettings.customRedColor;
+					if (i == 0) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 66, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					} 
+					else if (i == 1) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 134, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					}
+					else if (i == 2) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 206, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					}
+					else if (i == 4) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 275, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					}
+					else if (i == 3) {
+						if (i != selectedIndex) {
+							GUI.Label (new Rect (330, 344, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
+							guiStyle.normal.textColor = Color.white;
+						} else {
+							GUILayout.Label ("", guiStyle);
+						}
+					}
+						
+
+					if (i == 0) {
+						GUI.DrawTexture (new Rect (167, 34, 150, 75), secondaryWeaponsTmp [0].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (170, 89, 70, 70), secondaryWeaponsTmp [0].firstPersonWeapon.name, guiStyle);
+					}
+					if (i == 1) {
+						GUI.DrawTexture (new Rect (192, 104, 150, 75), secondaryWeaponsTmp [1].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (165, 158, 70, 70), secondaryWeaponsTmp [1].firstPersonWeapon.name, guiStyle);
+					}
+					if (i == 2) {
+						GUI.DrawTexture (new Rect (192, 174, 150, 75), secondaryWeaponsTmp [2].gunPreview);
+						guiStyle.fontSize = 11;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (180, 229, 70, 70), secondaryWeaponsTmp [2].firstPersonWeapon.name, guiStyle);
+					}
+					if (i == 4) {
+						GUI.DrawTexture (new Rect (180, 247, 150, 75), secondaryWeaponsTmp [4].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (162, 297, 70, 70), secondaryWeaponsTmp [4].firstPersonWeapon.name, guiStyle);
+					}
+					if (i == 3) {
+						GUI.DrawTexture (new Rect (190, 314, 150, 75), secondaryWeaponsTmp [3].gunPreview);
+						guiStyle.fontSize = 12;
+						guiStyle.normal.textColor = Color.white;
+						GUI.Label (new Rect (172, 367, 70, 70), secondaryWeaponsTmp [3].firstPersonWeapon.name, guiStyle);
+					}
+
+				}
+			}
+	  }
+	}
+}
