@@ -33,6 +33,10 @@ public class bl_DataBase : bl_LoginProBase
     /// </summary>
     private void Awake()
     {
+        if (_Instance == null)
+        {
+            _Instance = FindObjectOfType<bl_DataBase>();
+        }
         gameObject.name = "Database";
         DontDestroyOnLoad(gameObject);
         Data = bl_LoginProDataBase.Instance;
@@ -450,10 +454,7 @@ public class bl_DataBase : bl_LoginProBase
     {
         get
         {
-            if (_Instance == null)
-            {
-                _Instance = FindObjectOfType<bl_DataBase>();
-            }
+            
             return _Instance;
         }
     }
