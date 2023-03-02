@@ -10,7 +10,7 @@ const HOST_NAME = 'HOST_NAME_HERE';
 const DATA_BASE_NAME = 'DATABASE_NAME_HERE';
 const DATA_BASE_USER = 'DATABASE_USERNAME_HERE';
 const DATA_BASE_PASSWORLD = 'DATABASE_PASSWORD_HERE';
-const SECRET_KEY = '123456'; //IMPORTANT! has to match with the SecretKey in the game client build.
+const SECRET_KEY = '12345655'; //IMPORTANT! has to match with the SecretKey in the game client build.
 
 const PER_TO_PER_ENCRYPTION = true;
 const ADMIN_EMAIL = 'email@example.com';

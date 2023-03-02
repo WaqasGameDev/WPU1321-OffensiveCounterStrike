@@ -19,6 +19,7 @@ public class ThirdPersonCamera : MonoBehaviour
     [Header("Camera-Collision")]
     Vector3 cameraDirection;
     float camDistance;
+    private float smooth = 10f;
     Vector2 cameraDistanceMinMax = new Vector2(0.5f, 5f);
     public Transform cam;
 
@@ -60,6 +61,8 @@ public class ThirdPersonCamera : MonoBehaviour
                 if (Physics.Linecast(transform.position, desiredCameraPosition, out hit))
                 {
                     camDistance = Mathf.Clamp(hit.distance, cameraDistanceMinMax.x, cameraDistanceMinMax.y);
+                    desiredCameraPosition = Vector3.Lerp(cam.localPosition, Vector3.back * camDistance, smooth * Time.deltaTime);
+                    cam.localPosition = desiredCameraPosition;
 
                 }
                 else
