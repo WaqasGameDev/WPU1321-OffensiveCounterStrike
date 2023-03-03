@@ -915,7 +915,7 @@ public class RoomUI : Photon.MonoBehaviour
 		crouchButton.background.rectTransform.anchorMax = new Vector2(1, 0);
 		crouchButton.background.rectTransform.sizeDelta = new Vector2(75, 75);
 		crouchButton.background.sprite = navigationButton;
-		crouchButton.background.rectTransform.pivot = new Vector2(1, 0);
+		crouchButton.background.rectTransform.pivot = new Vector2(10, 0);
 		crouchButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 0.86f + smallSwapButtonSize + marginRight,
 			fireButton.background.rectTransform.position.y * 0.01f - 90 + buttonSize + marginRight - smallSwapButtonSize/2, 0);
 
