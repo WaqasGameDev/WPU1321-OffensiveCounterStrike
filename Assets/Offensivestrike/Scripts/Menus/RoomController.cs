@@ -1473,11 +1473,23 @@ public class RoomController : Photon.MonoBehaviour
 				}
 
 				welcomeCamera.gameObject.SetActive(true);
+				Debug.LogError("OUR PLAYER IS DIED");
+				Debug.LogError("Our Player position is : " + ourPlayer.transform.position);
 				cameraMouseLook.AssignTarget(targetTmp);
+
+				var cameraPosition = welcomeCamera.transform.position;
+				var offSet = ourPlayer.transform.position - cameraPosition;
+				var targetPosition = ourPlayer.transform.position;
+				cameraPosition = Vector3.Lerp(welcomeCamera.transform.position, targetPosition, 10f * Time.deltaTime);
+				Debug.LogError($"Value of Vector3.Lerp is: { cameraPosition} " );
+
+				welcomeCamera.transform.position = cameraPosition;
 			}
 			else
 			{
 				welcomeCamera.gameObject.SetActive(true);
+
+				Debug.LogError("OUR PLAYER IS DEAD 2");
 			}
 		}
 		else
