@@ -757,7 +757,7 @@ public class RoomUI : Photon.MonoBehaviour
         fireButton.background = cntrlTmpObj.AddComponent<Image>();
         fireButton.background.rectTransform.anchorMin = new Vector2(1, 0);
         fireButton.background.rectTransform.anchorMax = new Vector2(1, 0);
-        fireButton.background.rectTransform.sizeDelta = new Vector2(110, 110);
+        fireButton.background.rectTransform.sizeDelta = new Vector2(75, 75);
         fireButton.background.sprite = navigationButton;
         fireButton.background.rectTransform.pivot = new Vector2(1, 0);
 		fireButton.background.rectTransform.position = new Vector3(mainCanvas.pixelRect.width - marginLeft - ((circleSize - buttonSize) / 2), marginBottom * 0.675f + (circleSize - buttonSize) / 2, 0);
@@ -770,7 +770,7 @@ public class RoomUI : Photon.MonoBehaviour
         fireButton.icon = cntrlTmpObj.AddComponent<Image>();
         fireButton.icon.rectTransform.anchorMin = new Vector2(1, 0);
         fireButton.icon.rectTransform.anchorMax = new Vector2(1, 0);
-        fireButton.icon.rectTransform.sizeDelta = new Vector2(110, 110);
+        fireButton.icon.rectTransform.sizeDelta = new Vector2(75, 75);
         fireButton.icon.sprite = gunFireIcon;
         fireButton.icon.rectTransform.pivot = new Vector2(1, 0);
         fireButton.icon.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x - (buttonSize - iconSize) / 2,
@@ -856,7 +856,7 @@ public class RoomUI : Photon.MonoBehaviour
 		LookWeaponButton.background = cntrlTmpObj.AddComponent<Image>();
 		LookWeaponButton.background.rectTransform.anchorMin = new Vector2(1, 0);
 		LookWeaponButton.background.rectTransform.anchorMax = new Vector2(1, 0);
-		LookWeaponButton.background.rectTransform.sizeDelta = new Vector2(50, 50);
+		LookWeaponButton.background.rectTransform.sizeDelta = new Vector2(30, 30);
 		LookWeaponButton.background.sprite = navigationButton;
 		LookWeaponButton.background.rectTransform.pivot = new Vector2(1, 0);
 		LookWeaponButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.2f - buttonSize - marginRight,
@@ -868,7 +868,7 @@ public class RoomUI : Photon.MonoBehaviour
 		LookWeaponButton.icon = cntrlTmpObj.AddComponent<Image>();
 		LookWeaponButton.icon.rectTransform.anchorMin = new Vector2(1, 0);
 		LookWeaponButton.icon.rectTransform.anchorMax = new Vector2(1, 0);
-		LookWeaponButton.icon.rectTransform.sizeDelta = new Vector2(50, 50);
+		LookWeaponButton.icon.rectTransform.sizeDelta = new Vector2(30, 30);
 		LookWeaponButton.icon.sprite = Lookicon;
 		LookWeaponButton.icon.rectTransform.pivot = new Vector2(1, 0);
 		LookWeaponButton.icon.rectTransform.position = LookWeaponButton.background.rectTransform.position;
