@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 20120
+  controlID: 40888
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 354
-    y: 288.6667
+    y: 557.3334
     width: 626.6667
-    height: 350.33337
+    height: 81.66672
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -85,9 +85,9 @@ MonoBehaviour:
     m_VAllowExceedBaseRangeMax: 1
     m_ScaleWithWindow: 0
     m_HSlider: 0
-    m_VSlider: 1
+    m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -97,9 +97,9 @@ MonoBehaviour:
       x: 0
       y: 21
       width: 626.6667
-      height: 329.33337
+      height: 60.666718
     m_Scale: {x: 1.1074152, y: 1.1074152}
-    m_Translation: {x: 313.33334, y: 152.4183}
+    m_Translation: {x: 313.33334, y: 30.333355}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
@@ -107,12 +107,12 @@ MonoBehaviour:
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
       x: -282.94116
-      y: -137.6343
+      y: -27.39113
       width: 565.8823
-      height: 297.38925
+      height: 54.78227
     m_MinimalGUI: 1
-  m_defaultScale: 0.82333344
-  m_LastWindowPixelSize: {x: 940, y: 525.50006}
+  m_defaultScale: 0.15166679
+  m_LastWindowPixelSize: {x: 940, y: 122.50008}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 0
-  controlID: 20121
+  controlID: 40889
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 20122
+  controlID: 40900
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -225,10 +225,10 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 439.3333}
-      m_SelectedIDs: 
+      scrollPos: {x: 0, y: 1091.2677}
+      m_SelectedIDs: 441d0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 4c23feff1024feffdee1feffa2e2feffe408ffffa809ffffda35ffff9e36ffff025dffff5e80ffffde82ffff8c85ffff46a4ffff4cd0ffff82d2ffff56f5ffff22fbfffff4ffffffc07400004a7a00006e82000076820000788200007a820000841001009e1001004a520100c85a0100f4630100f6630100f8630100fa630100b88f0100c88f010008900100b0900100aa910100ca910100de9201007a93010084930100ba930100e2930100569501006e960100d8960100e896010022970100e4c10100d4c201000cc4010066c70100d8ca010090ce010058cf0100e6cf010092d3010094d3010082f701006a2c020014ca0200
+      m_ExpandedIDs: 7a99fdff8c99fdffc89afdff8c9bfdff4c23feff1024feffdee1feffa2e2feffe408ffffa809ffffda35ffff9e36ffff025dffff5e80ffffc082ffffde82ffff8c85ffff46a4ffff4cd0ffff82d2ffff56f5ffff22fbfffff4ffffffc07400004a7a00006e82000076820000788200007a820000841001009e1001004a520100c85a0100f4630100f6630100f8630100fa630100d48e0100f28e0100b88f0100c88f0100089001001a90010056900100b090010086910100aa910100ca9101007e920100ba920100de920100429301007a93010084930100ba930100e2930100c294010056950100329601006e960100d8960100e89601002297010072970100a0970100e4c10100d4c201000cc4010066c70100d8ca010090ce010058cf0100e6cf010092d3010094d3010082f701006a2c020014ca02006e0c0300
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -271,8 +271,8 @@ MonoBehaviour:
     y: 254.66667
     width: 354
     height: 332.6667
-  m_MinSize: {x: 230, y: 250}
-  m_MaxSize: {x: 10000, y: 10000}
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
   m_ActualView: {fileID: 8}
   m_Panes:
   - {fileID: 8}
@@ -320,22 +320,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Addons/LoginSystem/Content/Art/Font
+    - Assets/Offensivestrike/Assets/Textures/GUISkin/Fonts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Addons/LoginSystem/Content/Art/Font
+  - Assets/Offensivestrike/Assets/Textures/GUISkin/Fonts
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\Unity\Task\WPU1321-OffensiveCounterStrike
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 195.23077}
-    m_SelectedIDs: 5a6c0000
-    m_LastClickedID: 27738
-    m_ExpandedIDs: 000000004e6b0000506b0000526b0000546b0000566b0000586b00005a6b00005c6b00005e6b0000606b0000626b0000646b0000666b0000686b00006a6b00006c6b00006e6b0000706b0000726b0000746b0000766b0000786b00007a6b00007c6b00007e6b0000806b0000826b0000846b0000866b0000d26b00005c6c000000ca9a3b
+    scrollPos: {x: 0, y: 460.3333}
+    m_SelectedIDs: 643a0300
+    m_LastClickedID: 211556
+    m_ExpandedIDs: 000000004e6b0000506b0000526b0000546b0000566b0000586b00005a6b00005c6b00005e6b0000606b0000626b0000646b0000666b0000686b00006a6b00006c6b00006e6b0000706b0000726b0000746b0000766b0000786b00007a6b00007c6b00007e6b0000806b0000826b0000846b0000866b0000d26b0000fe6b00005c6c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -388,8 +388,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 62930100
-    m_LastClickedInstanceID: 103266
+    m_SelectedInstanceIDs: 441d0000
+    m_LastClickedInstanceID: 7492
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c62300003a1901003ec80000eec500005ac8000006c8000044c80000f2c7000056c8000054c80000
     m_RenameOverlay:
@@ -443,7 +443,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 19898
+  controlID: 40890
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -462,9 +462,9 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 628.6667
-    height: 216
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+    height: 484.66666
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 11}
   m_Panes:
   - {fileID: 11}
@@ -495,7 +495,7 @@ MonoBehaviour:
     x: 354
     y: 72.66667
     width: 626.6667
-    height: 195
+    height: 463.66666
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -572,7 +572,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 1
       snapOffset: {x: 0, y: -168.66667}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: -0.000015258789}
       snapCorner: 2
       id: unity-transform-toolbar
       index: 0
@@ -719,9 +719,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 2.0639944, y: 16.855827, z: 91.382385}
+    m_Target: {x: 384.89343, y: 290.2757, z: 125.60373}
     speed: 2
-    m_Value: {x: 2.0639944, y: 16.855827, z: 91.382385}
+    m_Value: {x: 384.89343, y: 290.2757, z: 125.60373}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -770,11 +770,11 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.050976474, y: -0.007490179, z: 0.00038233108, w: 0.9986718}
     speed: 2
-    m_Value: {x: 0.050976466, y: -0.007490178, z: 0.00038233103, w: 0.9986717}
+    m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 57.685406
+    m_Target: 319.9223
     speed: 2
-    m_Value: 57.685406
+    m_Value: 306.14575
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -844,11 +844,11 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 216
+    y: 484.66666
     width: 628.6667
-    height: 371.33337
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+    height: 102.66672
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 2}
@@ -916,8 +916,8 @@ MonoBehaviour:
     m_CachedPref: 228
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 103266
-  m_LastVerticalScrollValue: 216
+  m_LastInspectedObjectInstanceID: -1
+  m_LastVerticalScrollValue: 270
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
