@@ -398,11 +398,11 @@ public class RoomUI : Photon.MonoBehaviour
 		RoundCounterText.fontSize = 18;
 		RoundCounterText.color = GameSettings.teamARoundColor;
 		RoundCounterText.text = "COUNTER TERRORISTS";
-		RoundCounterText.rectTransform.sizeDelta = new Vector2(203, 35);
+		RoundCounterText.rectTransform.sizeDelta = new Vector2(250, 35);
 		RoundCounterText.rectTransform.anchorMin = new Vector2(0.5f, 1);
 		RoundCounterText.rectTransform.anchorMax = new Vector2(0.5f, 1);
 		RoundCounterText.rectTransform.pivot = new Vector2(0.5f, 1);
-		RoundCounterText.rectTransform.position = new Vector3(Screen.width / 2 - 157, Screen.height - 3.3f, 0);
+		RoundCounterText.rectTransform.position = new Vector3(Screen.width / 2 - 166, Screen.height - 3.3f, 0);
 		RoundCounterText.alignment = TextAnchor.UpperCenter;
 
 
