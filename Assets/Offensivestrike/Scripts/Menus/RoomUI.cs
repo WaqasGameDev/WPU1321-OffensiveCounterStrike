@@ -830,7 +830,7 @@ public class RoomUI : Photon.MonoBehaviour
 		aimButton.background.rectTransform.sizeDelta = new Vector2(75, 75);
         aimButton.background.sprite = navigationButton;
         aimButton.background.rectTransform.pivot = new Vector2(1, 0);
-		aimButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.254f - buttonSize - marginRight,
+		aimButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.154f - buttonSize - marginRight,
            fireButton.background.rectTransform.position.y * 1.4f + buttonSize + marginRight, 0);
 
         cntrlTmpObj = new GameObject("Aim button icon");
