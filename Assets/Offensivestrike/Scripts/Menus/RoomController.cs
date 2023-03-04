@@ -1478,9 +1478,9 @@ public class RoomController : Photon.MonoBehaviour
 				cameraMouseLook.AssignTarget(targetTmp);
 
 				var cameraPosition = welcomeCamera.transform.position;
-				var offSet = ourPlayer.transform.position - cameraPosition;
+				Debug.LogError("Camera position before Lerp: " + cameraPosition);
 				var targetPosition = ourPlayer.transform.position;
-				cameraPosition = Vector3.Lerp(welcomeCamera.transform.position, targetPosition, 10f * Time.deltaTime);
+				cameraPosition = Vector3.Lerp(cameraPosition, targetPosition, 10f * Time.deltaTime);
 				Debug.LogError($"Value of Vector3.Lerp is: { cameraPosition} " );
 
 				welcomeCamera.transform.position = cameraPosition;
