@@ -200,11 +200,11 @@ public class RoomController : Photon.MonoBehaviour
 			if (i == 0)
 			{
 				i++;
-				return 3;
+				return 5;
 			}
 			else
 			{
-				return 3000;
+				return 5;
 			}
 		} //How much seconds player need to wait before respawn again
 	}
