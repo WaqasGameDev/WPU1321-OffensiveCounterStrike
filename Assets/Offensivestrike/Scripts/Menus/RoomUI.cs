@@ -1687,7 +1687,7 @@ public class RoomUI : Photon.MonoBehaviour
 
 
 
-        //Check UI interaction
+		//Check UI interaction
 
 #if UNITY_ANDROID || UNITY_IOS || UNITY_WP8 || UNITY_WP8_1
 
@@ -1721,10 +1721,11 @@ public class RoomUI : Photon.MonoBehaviour
             }
         }
 #else
-        //Test mobile controls in editor, use mouse instead of touch controls
+		//Test mobile controls in editor, use mouse instead of touch controls
+		
         if (Input.GetMouseButtonDown(0))
         {
-            MobileButtonsCheck(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y), -1);
+           MobileButtonsCheck(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y), -1);
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -1919,16 +1920,9 @@ public class RoomUI : Photon.MonoBehaviour
         }
 
         //Fire button press
-        if ((new Rect(Screen.width - fireButton.mainArea.x - fireButton.mainArea.width, Screen.height - fireButton.mainArea.y - fireButton.mainArea.height,
-            fireButton.mainArea.width, fireButton.mainArea.height)).Contains(touchPos))
-        {
-			if (rc.ourPlayer.playerWeapons.currentSelectedWeapon.wSettings.fireType != PlayerWeapons.FireType.C4) {
-				fireButton.isActive = true;
-				GameSettings.mobileFiring = true;
-				fireButton.touchID = touchID;
-			}
-
-        }
+        //if ((new Rect(Screen.width - fireButton.mainArea.x - fireButton.mainArea.width, Screen.height - fireButton.mainArea.y - fireButton.mainArea.height,
+        //fireButton.mainArea.width, fireButton.mainArea.height)).Contains(touchPos)) 
+        
 
         //Reload button press
         if ((new Rect(Screen.width - reloadButton.mainArea.x - reloadButton.mainArea.width, Screen.height - reloadButton.mainArea.y - reloadButton.mainArea.height,
@@ -2105,6 +2099,39 @@ public class RoomUI : Photon.MonoBehaviour
             {
                 rc.OpenBuyMenu();
             }
+        }
+    }
+
+	bool Mobilefire = false;
+
+    private void FixedUpdate()
+    {
+		ProcessAutoFire();
+	}
+
+	private void ProcessAutoFire()
+    {
+		if (!rc.ourPlayer)
+			return;
+
+		var rayPointTransform = rc.ourPlayer.playerWeapons.currentSelectedWeapon.casingSpawnPoints[0];
+		bool hit = Physics.Raycast(new Ray(rayPointTransform.position, rayPointTransform.forward), out RaycastHit hitInfo, Mathf.Infinity);
+		var hitbox = hit ? hitInfo.transform.GetComponent<HitBox>() : null;
+		
+		Debug.DrawRay(rayPointTransform.position, rayPointTransform.forward * 100, Color.green);
+
+		if (!hitbox || hitbox.playerNetwork.playerTeam == rc.ourTeam)
+        {
+			fireButton.isActive = false;
+			GameSettings.mobileFiring = false;
+			return;
+		}
+
+        if (rc.ourPlayer.playerWeapons.currentSelectedWeapon.wSettings.fireType != PlayerWeapons.FireType.C4)
+        {
+            Debug.DrawRay(rayPointTransform.position, rayPointTransform.forward * 100, Color.red);
+            fireButton.isActive = true;
+            GameSettings.mobileFiring = true;
         }
     }
 

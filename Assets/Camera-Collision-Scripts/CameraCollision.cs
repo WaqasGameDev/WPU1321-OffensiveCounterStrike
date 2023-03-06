@@ -8,37 +8,29 @@ public class CameraCollision : MonoBehaviour
     public float maxDistance = 4f;
     public float smooth = 10f;
     private float distanceBetweenPointOfCollisionAndCameraPivot;
-    private Transform cameraPivot;
-    Vector3 cameraNewPosition;
 
-    void Awake()
+
+    public void UpdateCameraPosition(Transform target)
     {
-        cameraPivot = transform.parent;
-    }
-
-    void Update()
-    {
-        cameraNewPosition = cameraPivot.TransformPoint(Vector3.back * maxDistance);
-
-        Debug.DrawLine(cameraPivot.position, cameraNewPosition, Color.green);
+        Debug.DrawLine(target.position, transform.position, Color.green);
 
         RaycastHit hit;
-     
-        if (Physics.Linecast(cameraPivot.position, cameraNewPosition, out hit))
+
+        if (Physics.Linecast(target.position, transform.position, out hit))
         {
-            Debug.DrawLine(cameraPivot.position, cameraNewPosition, Color.red);
-            
+            Debug.DrawLine(target.position, transform.position, Color.red);
+
             distanceBetweenPointOfCollisionAndCameraPivot = Mathf.Clamp(hit.distance, minDistance, maxDistance);
-           
-            cameraNewPosition = Vector3.Lerp(transform.localPosition, Vector3.back * distanceBetweenPointOfCollisionAndCameraPivot, smooth * Time.deltaTime);
+            Debug.LogError("DIFF : " + distanceBetweenPointOfCollisionAndCameraPivot + "Local pos :" + transform.localPosition);
 
-            transform.localPosition =  cameraNewPosition;
+            //var XdistanceBetweenCameraAndPlayer = target.position.x - cameraCurrentPosition.x;
+            //var ZdistanceBetweenCameraAndPlayer = target.position.z - cameraCurrentPosition.z;
+
+            //var angle = Mathf.Rad2Deg * (Mathf.Atan(ZdistanceBetweenCameraAndPlayer / XdistanceBetweenCameraAndPlayer));
+
+            //var xMovementOfCamera = distanceBetweenPointOfCollisionAndCameraPivot * Mathf.Cos(angle);
+            //var zMovementOfCamera = distanceBetweenPointOfCollisionAndCameraPivot * Mathf.Sin(angle);
+            //transform.localPosition = Vector3.Lerp(transform.localPosition,)
         }
-        else
-        {
-            transform.position = cameraNewPosition;
-        }
-
-
     }
 }

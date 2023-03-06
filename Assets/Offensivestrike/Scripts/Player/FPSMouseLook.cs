@@ -6,9 +6,11 @@ public class FPSMouseLook : MonoBehaviour
 
 	public enum RotationAxes { MouseX, MouseY, MouseOrbit}
 	public RotationAxes axes = RotationAxes.MouseX;
+	private CameraCollision cameraCollisionDetector;
 
-	[HideInInspector]
-	public Transform target; //This needed to be assigned in case of MouseOrbit option selected
+
+	//[HideInInspector]
+	private Transform target; //This needed to be assigned in case of MouseOrbit option selected
 
 	float currentSensitivityX = 1.5F;
 	float currentSensitivityY = 1.5F;
@@ -43,9 +45,12 @@ public class FPSMouseLook : MonoBehaviour
 		}
 
 		originalRotation = transform.localRotation;
+		cameraCollisionDetector = transform.GetComponent<CameraCollision>();
+
+
 	}
-	
-	void LateUpdate ()
+
+	void Update ()
     {
 		if(GameSettings.menuOpened)
 			return;
@@ -106,10 +111,16 @@ public class FPSMouseLook : MonoBehaviour
 			Vector3 position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.position;
 	
 			transform.rotation = rotation;
-			transform.position =  position;
+			//transform.position = position;
+			cameraCollisionDetector.UpdateCameraPosition(target);
 		}
 	}
-	
+
+ //   private void LateUpdate()
+ //   {
+
+	//}
+
 	public static float ClampAngle (float angle, float min, float max)
     {
 		if (angle < -360F)

@@ -18,6 +18,8 @@ public class RoomController : Photon.MonoBehaviour
 	public GameObject botAiTr;
 	public Camera welcomeCamera;
 
+
+
 	public int HowPlayerBot = 0;
 
 	public AudioClip buySound;
@@ -190,8 +192,24 @@ public class RoomController : Photon.MonoBehaviour
 
 	int previousGameStatus = 0;
 	bool doneSetup = false;
-	 int waitBeforeRespawn = 8; //How much seconds player need to wait before respawn again
-	Color addingColor = new Color(0, 1, 0, 0.75f);
+	int i = 0;
+    int waitBeforeRespawn
+	{
+		get
+		{
+			if (i == 0)
+			{
+				i++;
+				return 3;
+			}
+			else
+			{
+				return 3000;
+			}
+		} //How much seconds player need to wait before respawn again
+	}
+
+        Color addingColor = new Color(0, 1, 0, 0.75f);
 	Color substractingColor = new Color(1, 0.71f, 0.109f, 0.75f);
 	Color KillingSpreeColor = new Color(72 / 255.0f, 72 / 255.0f, 72 / 255.0f, 1);
 	Color HeadShotOut = new Color(196 / 255.0f, 0 / 255.0f, 0 / 255.0f, 1);
@@ -266,6 +284,7 @@ public class RoomController : Photon.MonoBehaviour
 	// Use this for initialization
 	IEnumerator Start()
 	{
+
 		WFollowCam = 0;
 		HowPlayerBot = 0;
 		PhotonNetwork.isMessageQueueRunning = true;
@@ -1474,16 +1493,11 @@ public class RoomController : Photon.MonoBehaviour
 
 				welcomeCamera.gameObject.SetActive(true);
 				Debug.LogError("OUR PLAYER IS DIED");
-				Debug.LogError("Our Player position is : " + ourPlayer.transform.position);
 				cameraMouseLook.AssignTarget(targetTmp);
 
-				var cameraPosition = welcomeCamera.transform.position;
-				Debug.LogError("Camera position before Lerp: " + cameraPosition);
-				var targetPosition = ourPlayer.transform.position;
-				cameraPosition = Vector3.Lerp(cameraPosition, targetPosition, 10f * Time.deltaTime);
-				Debug.LogError($"Value of Vector3.Lerp is: { cameraPosition} " );
 
-				welcomeCamera.transform.position = cameraPosition;
+
+
 			}
 			else
 			{
