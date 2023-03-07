@@ -381,7 +381,7 @@ public class RoomUI : Photon.MonoBehaviour
 		RoundTerorText.fontSize = 18;
 		RoundTerorText.color = GameSettings.teamBColor;
 		RoundTerorText.text = "TERRORISTS";
-		RoundTerorText.rectTransform.sizeDelta = new Vector2(121, 35);
+		RoundTerorText.rectTransform.sizeDelta = new Vector2(105, 35);
 		RoundTerorText.rectTransform.anchorMin = new Vector2(0.5f, 1);
 		RoundTerorText.rectTransform.anchorMax = new Vector2(0.5f, 1);
 		RoundTerorText.rectTransform.pivot = new Vector2(0.5f, 1);
