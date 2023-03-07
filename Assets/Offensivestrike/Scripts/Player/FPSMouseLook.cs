@@ -36,6 +36,9 @@ public class FPSMouseLook : MonoBehaviour
 	float distance = 3.2f;
 	bool reachedTarget = false;
 
+
+	Renderer[] enemySMRs;
+
 	void Start ()
     {
 		// Make the rigid body not change rotation
@@ -111,15 +114,14 @@ public class FPSMouseLook : MonoBehaviour
 			Vector3 position = rotation * new Vector3(0.0f, 0.0f, -distance) + target.position;
 	
 			transform.rotation = rotation;
-			//transform.position = position;
-			cameraCollisionDetector.UpdateCameraPosition(target);
+
+			if (!cameraCollisionDetector)
+
+				return;
+
+			cameraCollisionDetector.UpdateCameraPosition(target, position, enemySMRs);
 		}
 	}
-
- //   private void LateUpdate()
- //   {
-
-	//}
 
 	public static float ClampAngle (float angle, float min, float max)
     {
@@ -173,13 +175,14 @@ public class FPSMouseLook : MonoBehaviour
 		doingRecoil = false;
 	}
 
-	public void AssignTarget(Transform t1)
+	public void AssignTarget(Transform t1, Renderer[] skinnedMeshRenderers = null)
     {
 		if(t1)
         {
 			rotationX = t1.eulerAngles.y;
 			rotationY = 25;
 			target = t1;
+			this.enemySMRs = skinnedMeshRenderers;
 			reachedTarget = false;
 		}
         else

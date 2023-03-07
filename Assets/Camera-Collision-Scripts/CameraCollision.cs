@@ -5,32 +5,35 @@ using UnityEngine;
 public class CameraCollision : MonoBehaviour
 {
     public float minDistance = 1f;
-    public float maxDistance = 4f;
-    public float smooth = 10f;
-    private float distanceBetweenPointOfCollisionAndCameraPivot;
+    private bool hit;
+    float distanceBetweenTargetAndCollisionPoint;
 
-
-    public void UpdateCameraPosition(Transform target)
+    public void UpdateCameraPosition(Transform target, Vector3 cameraCurrentPosition, Renderer[] enemySMRs)
     {
-        Debug.DrawLine(target.position, transform.position, Color.green);
 
-        RaycastHit hit;
+        hit = Physics.Linecast(target.position, cameraCurrentPosition, out RaycastHit hitInfo);
 
-        if (Physics.Linecast(target.position, transform.position, out hit))
+        distanceBetweenTargetAndCollisionPoint = Vector3.Distance(target.position, hitInfo.point);
+
+        transform.position = hit ? hitInfo.point : cameraCurrentPosition;
+
+        Debug.DrawLine(target.position, cameraCurrentPosition, hit ? Color.red : Color.green);
+
+        SetSMRsState(enemySMRs, distanceBetweenTargetAndCollisionPoint > minDistance);
+    }
+
+    bool allActive = true;
+
+    private void SetSMRsState(Renderer[] enemySMRs, bool active)
+    {
+        if (allActive == active)
+            return;
+
+        allActive = active;
+
+        foreach (var smr in enemySMRs)
         {
-            Debug.DrawLine(target.position, transform.position, Color.red);
-
-            distanceBetweenPointOfCollisionAndCameraPivot = Mathf.Clamp(hit.distance, minDistance, maxDistance);
-            Debug.LogError("DIFF : " + distanceBetweenPointOfCollisionAndCameraPivot + "Local pos :" + transform.localPosition);
-
-            //var XdistanceBetweenCameraAndPlayer = target.position.x - cameraCurrentPosition.x;
-            //var ZdistanceBetweenCameraAndPlayer = target.position.z - cameraCurrentPosition.z;
-
-            //var angle = Mathf.Rad2Deg * (Mathf.Atan(ZdistanceBetweenCameraAndPlayer / XdistanceBetweenCameraAndPlayer));
-
-            //var xMovementOfCamera = distanceBetweenPointOfCollisionAndCameraPivot * Mathf.Cos(angle);
-            //var zMovementOfCamera = distanceBetweenPointOfCollisionAndCameraPivot * Mathf.Sin(angle);
-            //transform.localPosition = Vector3.Lerp(transform.localPosition,)
+            smr.enabled = active;
         }
     }
 }

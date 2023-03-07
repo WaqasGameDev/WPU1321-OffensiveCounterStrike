@@ -1456,6 +1456,8 @@ public class RoomController : Photon.MonoBehaviour
             bm.ResetSelectedWeapons();
         }
 
+		Renderer[] enemySMRs = null;
+		
         if (team < 0)
 		{
 			if (currentGameMode != "NORMAL")
@@ -1478,6 +1480,7 @@ public class RoomController : Photon.MonoBehaviour
 						{
 							targetTmp = otherPlayers[i].playerAudio.transform;
 							//print ("Target player ID: " + otherPlayers[i].playerID.ToString());
+							enemySMRs = otherPlayers[i].GetComponentsInChildren<Renderer>(true);
 						}
 					}
 				}
@@ -1492,8 +1495,8 @@ public class RoomController : Photon.MonoBehaviour
 				}
 
 				welcomeCamera.gameObject.SetActive(true);
-				Debug.LogError("OUR PLAYER IS DIED");
-				cameraMouseLook.AssignTarget(targetTmp);
+				
+				cameraMouseLook.AssignTarget(targetTmp, enemySMRs);
 
 
 
@@ -1502,8 +1505,6 @@ public class RoomController : Photon.MonoBehaviour
 			else
 			{
 				welcomeCamera.gameObject.SetActive(true);
-
-				Debug.LogError("OUR PLAYER IS DEAD 2");
 			}
 		}
 		else
