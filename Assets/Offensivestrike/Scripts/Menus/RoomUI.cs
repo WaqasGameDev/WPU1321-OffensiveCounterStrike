@@ -2117,13 +2117,12 @@ public class RoomUI : Photon.MonoBehaviour
 		var isKinfe = rc.ourPlayer.playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Knife;
 
 		int rayLength = isKinfe ? 5 : 100;
-
-		var rayPointTransform = isKinfe ? rc.ourPlayer.playerWeapons.currentSelectedWeapon.transform : rc.ourPlayer.playerWeapons.currentSelectedWeapon.casingSpawnPoints[0];
-		
-		bool hit = Physics.Raycast(new Ray(rayPointTransform.position, rayPointTransform.forward), out RaycastHit hitInfo, rayLength);
+		//var ray = rc.ourPlayer.playerWeapons.currentSelectedWeapon.casingSpawnPoints.Length > 0 ? rc.ourPlayer.playerWeapons.currentSelectedWeapon.casingSpawnPoints[0] : rc.ourPlayer.playerWeapons.currentSelectedWeapon.transform;
+		var ray = rc.ourPlayer.playerWeapons.playerCamera.GetComponent<Camera>().ScreenPointToRay(new Vector3(Screen.width/2,Screen.height/2,0));
+		bool hit = Physics.Raycast(ray, out RaycastHit hitInfo, rayLength);
 		var hitbox = hit ? hitInfo.transform.GetComponent<HitBox>() : null;
 		
-		Debug.DrawRay(rayPointTransform.position, rayPointTransform.forward * rayLength, Color.green);
+		Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.green);
 
 		if (!hitbox || hitbox.playerNetwork.playerTeam == rc.ourTeam)
         {
@@ -2134,7 +2133,7 @@ public class RoomUI : Photon.MonoBehaviour
 
         if (rc.ourPlayer.playerWeapons.currentSelectedWeapon.wSettings.fireType != PlayerWeapons.FireType.C4)
         {
-            Debug.DrawRay(rayPointTransform.position, rayPointTransform.forward * rayLength, Color.red);
+			Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.red);
             fireButton.isActive = true;
             GameSettings.mobileFiring = true;
         }
