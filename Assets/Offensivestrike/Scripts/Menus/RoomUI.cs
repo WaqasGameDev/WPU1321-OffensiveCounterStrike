@@ -402,7 +402,7 @@ public class RoomUI : Photon.MonoBehaviour
 		RoundCounterText.rectTransform.anchorMin = new Vector2(0.5f, 1);
 		RoundCounterText.rectTransform.anchorMax = new Vector2(0.5f, 1);
 		RoundCounterText.rectTransform.pivot = new Vector2(0.5f, 1);
-		RoundCounterText.rectTransform.position = new Vector3(Screen.width / 2 - 166, Screen.height - 3.3f, 0);
+		RoundCounterText.rectTransform.position = new Vector3(Screen.width / 2 - 170, Screen.height - 3.3f, 0);
 		RoundCounterText.alignment = TextAnchor.UpperCenter;
 
 
