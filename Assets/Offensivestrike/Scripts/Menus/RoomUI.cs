@@ -760,7 +760,7 @@ public class RoomUI : Photon.MonoBehaviour
         fireButton.background.rectTransform.sizeDelta = new Vector2(75, 75);
         fireButton.background.sprite = navigationButton;
         fireButton.background.rectTransform.pivot = new Vector2(1, 0);
-		fireButton.background.rectTransform.position = new Vector3(mainCanvas.pixelRect.width - marginLeft - ((circleSize - buttonSize) / 2), marginBottom * 0.675f + (circleSize - buttonSize) / 2, 0);
+		fireButton.background.rectTransform.position = new Vector3(mainCanvas.pixelRect.width - marginLeft - ((circleSize - buttonSize) / 2), marginBottom * 0.375f + (circleSize - buttonSize) / 2, 0);
 
         int iconSize = 105;
 
@@ -830,8 +830,8 @@ public class RoomUI : Photon.MonoBehaviour
 		aimButton.background.rectTransform.sizeDelta = new Vector2(75, 75);
         aimButton.background.sprite = navigationButton;
         aimButton.background.rectTransform.pivot = new Vector2(1, 0);
-		aimButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.154f - buttonSize - marginRight,
-           fireButton.background.rectTransform.position.y * 1.4f + buttonSize + marginRight, 0);
+		aimButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.075f - buttonSize - marginRight,
+           fireButton.background.rectTransform.position.y * 1.8f + buttonSize + marginRight, 0);
 
         cntrlTmpObj = new GameObject("Aim button icon");
         cntrlTmpObj.transform.position = Vector3.zero;
@@ -859,8 +859,8 @@ public class RoomUI : Photon.MonoBehaviour
 		LookWeaponButton.background.rectTransform.sizeDelta = new Vector2(30, 30);
 		LookWeaponButton.background.sprite = navigationButton;
 		LookWeaponButton.background.rectTransform.pivot = new Vector2(1, 0);
-		LookWeaponButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.2f - buttonSize - marginRight,
-			fireButton.background.rectTransform.position.y * 2.4f + buttonSize + marginRight, 0);
+		LookWeaponButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.1f - buttonSize - marginRight,
+			fireButton.background.rectTransform.position.y * 3.2f + buttonSize + marginRight, 0);
 
 		cntrlTmpObj = new GameObject("look button icon");
 		cntrlTmpObj.transform.position = Vector3.zero;
@@ -888,7 +888,7 @@ public class RoomUI : Photon.MonoBehaviour
         jumpButton.background.sprite = navigationButton;
         jumpButton.background.rectTransform.pivot = new Vector2(1, 0);
 		jumpButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.254f - buttonSize - marginRight,
-			fireButton.background.rectTransform.position.y * 0.5f + buttonSize + marginRight, 0);
+			fireButton.background.rectTransform.position.y * -0.0f + buttonSize + marginRight, 0);
 		
         cntrlTmpObj = new GameObject("Jump button icon");
         cntrlTmpObj.transform.position = Vector3.zero;
@@ -916,8 +916,8 @@ public class RoomUI : Photon.MonoBehaviour
 		crouchButton.background.rectTransform.sizeDelta = new Vector2(75, 75);
 		crouchButton.background.sprite = navigationButton;
 		crouchButton.background.rectTransform.pivot = new Vector2(10, 0);
-		crouchButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 0.86f + smallSwapButtonSize + marginRight,
-			fireButton.background.rectTransform.position.y * 0.01f - 90 + buttonSize + marginRight - smallSwapButtonSize/2, 0);
+		crouchButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 0.93f + smallSwapButtonSize + marginRight,
+			fireButton.background.rectTransform.position.y * 3.0f - 90 + buttonSize + marginRight - smallSwapButtonSize/2, 0);
 
 		cntrlTmpObj = new GameObject("Crounch button icon");
 		cntrlTmpObj.transform.position = Vector3.zero;
