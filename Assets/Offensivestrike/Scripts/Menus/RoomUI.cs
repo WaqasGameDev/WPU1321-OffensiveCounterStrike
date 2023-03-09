@@ -385,8 +385,8 @@ public class RoomUI : Photon.MonoBehaviour
 		RoundTerorText.rectTransform.anchorMin = new Vector2(0.5f, 1);
 		RoundTerorText.rectTransform.anchorMax = new Vector2(0.5f, 1);
 		RoundTerorText.rectTransform.pivot = new Vector2(0.5f, 1);
-		RoundTerorText.rectTransform.position = new Vector3(Screen.width / 2 + 96f, Screen.height - 3.3f, 0);
-		RoundTerorText.alignment = TextAnchor.UpperCenter;
+		RoundTerorText.rectTransform.position = new Vector3(Screen.width / 2 + 96f, Screen.height - 0.0f, 0);
+		RoundTerorText.alignment = TextAnchor.MiddleCenter;
 
 
 
@@ -402,8 +402,8 @@ public class RoomUI : Photon.MonoBehaviour
 		RoundCounterText.rectTransform.anchorMin = new Vector2(0.5f, 1);
 		RoundCounterText.rectTransform.anchorMax = new Vector2(0.5f, 1);
 		RoundCounterText.rectTransform.pivot = new Vector2(0.5f, 1);
-		RoundCounterText.rectTransform.position = new Vector3(Screen.width / 2 - 170, Screen.height - 3.3f, 0);
-		RoundCounterText.alignment = TextAnchor.UpperCenter;
+		RoundCounterText.rectTransform.position = new Vector3(Screen.width / 2 - 170, Screen.height - 0.0f, 0);
+		RoundCounterText.alignment = TextAnchor.MiddleCenter;
 
 
 
