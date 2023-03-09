@@ -887,7 +887,7 @@ public class RoomUI : Photon.MonoBehaviour
 		jumpButton.background.rectTransform.sizeDelta = new Vector2(75, 75);
         jumpButton.background.sprite = navigationButton;
         jumpButton.background.rectTransform.pivot = new Vector2(1, 0);
-		jumpButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.254f - buttonSize - marginRight,
+		jumpButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.194f - buttonSize - marginRight,
 			fireButton.background.rectTransform.position.y * -0.0f + buttonSize + marginRight, 0);
 		
         cntrlTmpObj = new GameObject("Jump button icon");
