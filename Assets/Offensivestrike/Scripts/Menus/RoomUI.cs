@@ -760,7 +760,7 @@ public class RoomUI : Photon.MonoBehaviour
         fireButton.background.rectTransform.sizeDelta = new Vector2(75, 75);
         fireButton.background.sprite = navigationButton;
         fireButton.background.rectTransform.pivot = new Vector2(1, 0);
-		fireButton.background.rectTransform.position = new Vector3(mainCanvas.pixelRect.width - marginLeft - ((circleSize - buttonSize) / 2), marginBottom * 0.375f + (circleSize - buttonSize) / 2, 0);
+		fireButton.background.rectTransform.position = new Vector3(mainCanvas.pixelRect.width - marginLeft - ((circleSize - buttonSize) / 2), marginBottom * 0f + (circleSize - buttonSize) / 2, 0);
 
         int iconSize = 105;
 
