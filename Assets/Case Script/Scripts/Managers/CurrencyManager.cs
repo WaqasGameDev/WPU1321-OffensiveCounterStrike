@@ -2,10 +2,10 @@
 //Copyright © 2016-2018 Polygon Planet. All rights reserved. https://polygonplanet.com/privacy-policy/
 //This source file is subject to Unity Technologies Asset Store Terms of Service. https://unity3d.com/legal/as_terms
 
-#pragma warning disable 0168 //Variable declared, but not used.
-#pragma warning disable 0219 //Variable assigned, but not used.
-#pragma warning disable 0414 //Private field assigned, but not used.
-#pragma warning disable 0649 //Variable asisgned to, and will always have default value.
+//#pragma warning disable 0168 //Variable declared, but not used.
+//#pragma warning disable 0219 //Variable assigned, but not used.
+//#pragma warning disable 0414 //Private field assigned, but not used.
+/*#pragma warning disable 0649*/ //Variable asisgned to, and will always have default value.
 
 using System;
 using UnityEngine;
@@ -26,12 +26,20 @@ public class CurrencyManager : MonoBehaviour
     [HideInInspector]
     public float normalCurrency;
 
+    
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
         }
+    }
+
+    public void AddMoreCurrencyToAccount(UnityEngine.Purchasing.Product product)
+    {
+        normalCurrency += int.Parse(product.metadata.localizedTitle);
+        SaveLoadManager.instance.Save();
     }
 
     #region Save Data
@@ -43,6 +51,7 @@ public class CurrencyManager : MonoBehaviour
 
     public ClassSaveData DefaultSaveData()
     {
+        Debug.LogError("CALLED DEFAULT");
         ClassSaveData saveData = new ClassSaveData
         {
             normalCurrency = defaultNormalCurrency
@@ -52,13 +61,17 @@ public class CurrencyManager : MonoBehaviour
 
     public ClassSaveData GetSaveData()
     {
+       // Debug.LogError("Value in GetSaveData"+ normalCurrency);
         classSaveData.normalCurrency = normalCurrency;
         return classSaveData;
+        
     }
 
     public void LoadSaveData(SaveData saveData)
     {
+      //  Debug.LogError("CALLED Load Data");
         classSaveData = saveData.currencyManagerSaveData;
+      //  Debug.LogError("Loaded value is"+classSaveData.normalCurrency);
         normalCurrency = classSaveData.normalCurrency;
     }
     #endregion

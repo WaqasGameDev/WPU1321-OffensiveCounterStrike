@@ -129,8 +129,6 @@ public class SaveLoadManager : MonoBehaviour
 
         try
         {
-
-
             //Get save data from file.
             BinaryFormatter binaryFormatter = new BinaryFormatter();
             FileStream fileStream = File.Open(savePath, FileMode.Open);
@@ -242,6 +240,7 @@ public class SaveLoadManager : MonoBehaviour
 
     public void Save()
     {
+        Debug.LogError("===== CurrencyManager ID "+CurrencyManager.instance.GetInstanceID());
         try
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -279,6 +278,4 @@ public class SaveData
     public AudioManager.ClassSaveData audioManagerSaveData;
     public CaseManager.ClassSaveData caseManagerSaveData;
     public CurrencyManager.ClassSaveData currencyManagerSaveData;
-
-
 }
