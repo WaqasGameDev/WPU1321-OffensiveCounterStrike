@@ -859,8 +859,8 @@ public class RoomUI : Photon.MonoBehaviour
 		LookWeaponButton.background.rectTransform.sizeDelta = new Vector2(30, 30);
 		LookWeaponButton.background.sprite = navigationButton;
 		LookWeaponButton.background.rectTransform.pivot = new Vector2(1, 0);
-		LookWeaponButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.1f - buttonSize - marginRight,
-			fireButton.background.rectTransform.position.y * 9.0f + buttonSize + marginRight, 0);
+		LookWeaponButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.18f - buttonSize - marginRight,
+			fireButton.background.rectTransform.position.y * 13.0f + buttonSize + marginRight, 0);
 
 		cntrlTmpObj = new GameObject("look button icon");
 		cntrlTmpObj.transform.position = Vector3.zero;
