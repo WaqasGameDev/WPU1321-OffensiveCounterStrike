@@ -830,8 +830,8 @@ public class RoomUI : Photon.MonoBehaviour
 		aimButton.background.rectTransform.sizeDelta = new Vector2(75, 75);
         aimButton.background.sprite = navigationButton;
         aimButton.background.rectTransform.pivot = new Vector2(1, 0);
-		aimButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.075f - buttonSize - marginRight,
-           fireButton.background.rectTransform.position.y * 1.8f + buttonSize + marginRight, 0);
+		aimButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.050f - buttonSize - marginRight,
+           fireButton.background.rectTransform.position.y * 3.0f + buttonSize + marginRight, 0);
 
         cntrlTmpObj = new GameObject("Aim button icon");
         cntrlTmpObj.transform.position = Vector3.zero;
@@ -860,7 +860,7 @@ public class RoomUI : Photon.MonoBehaviour
 		LookWeaponButton.background.sprite = navigationButton;
 		LookWeaponButton.background.rectTransform.pivot = new Vector2(1, 0);
 		LookWeaponButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.1f - buttonSize - marginRight,
-			fireButton.background.rectTransform.position.y * 3.2f + buttonSize + marginRight, 0);
+			fireButton.background.rectTransform.position.y * 9.0f + buttonSize + marginRight, 0);
 
 		cntrlTmpObj = new GameObject("look button icon");
 		cntrlTmpObj.transform.position = Vector3.zero;
@@ -888,7 +888,7 @@ public class RoomUI : Photon.MonoBehaviour
         jumpButton.background.sprite = navigationButton;
         jumpButton.background.rectTransform.pivot = new Vector2(1, 0);
 		jumpButton.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 1.194f - buttonSize - marginRight,
-			fireButton.background.rectTransform.position.y * -0.0f + buttonSize + marginRight, 0);
+			fireButton.background.rectTransform.position.y * 1.0f + buttonSize + marginRight, 0);
 		
         cntrlTmpObj = new GameObject("Jump button icon");
         cntrlTmpObj.transform.position = Vector3.zero;
