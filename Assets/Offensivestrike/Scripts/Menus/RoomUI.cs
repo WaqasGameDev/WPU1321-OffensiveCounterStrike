@@ -2121,10 +2121,6 @@ public class RoomUI : Photon.MonoBehaviour
 			case PlayerWeapons.FireType.Knife:
 				rayLength = 5;
 				break;
-			case PlayerWeapons.FireType.GRENADE_LAUNCHER:
-			case PlayerWeapons.FireType.FlashBang:
-				rayLength = 30;
-				break;
 			default:
 				rayLength = 100;
 				break;

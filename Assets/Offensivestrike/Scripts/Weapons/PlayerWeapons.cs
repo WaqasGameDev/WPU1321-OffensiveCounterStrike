@@ -398,16 +398,15 @@ public class PlayerWeapons : MonoBehaviour
 			}
 			else if(currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.C4)
 			{
-				//Automatic fire
-				if(GameSettings.C4Fire){
-					if (GameSettings.mobileFiring)
-					{
-					currentSelectedWeapon.Fire();
-					}
-					isFiring = false;
-					Invoke ("BombAfter", 0.25f);
-				}
-				if(GameSettings.C4CreateUI && fpsController.C4tg && !GameSettings.AnimOn){
+                //Automatic fire
+                if (GameSettings.C4Fire)
+                {
+
+                    currentSelectedWeapon.Fire();
+                    isFiring = false;
+                    Invoke("BombAfter", 0.25f);
+                }
+                if (GameSettings.C4CreateUI && fpsController.C4tg && !GameSettings.AnimOn){
 					GameSettings.AnimOn = true;
 					currentSelectedWeapon.C4Fire2();
 				}
