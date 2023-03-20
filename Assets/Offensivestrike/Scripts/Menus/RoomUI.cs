@@ -1774,7 +1774,6 @@ public class RoomUI : Photon.MonoBehaviour
         else
         {
 			shopBuyT.enabled = false;
-			ToggleFire.icon.rectTransform.sizeDelta = new Vector2(0, 0);
 
 			buyMenuText.mainText.text = "";
             buyMenuText.textShadow.text = "";
@@ -1931,28 +1930,25 @@ public class RoomUI : Photon.MonoBehaviour
 #endif
     }
 
-	public void switchBulletToggle()
-	{
-		if (rc.timeToPurchase > 0) 
-		{ 
-			toggleFire = !toggleFire;
-			if (toggleFire)
-			{
-				ToggleFire.icon.sprite = fireToggleOnTexture;
-				PlayerPrefs.SetInt("autofire", 1);
-				fireButton.icon.rectTransform.sizeDelta = new Vector2(0, 0);
-			}
+    public void switchBulletToggle()
+    {
+        toggleFire = !toggleFire;
+        if (toggleFire)
+        {
+            ToggleFire.icon.sprite = fireToggleOnTexture;
+            PlayerPrefs.SetInt("autofire", 1);
+            fireButton.icon.rectTransform.sizeDelta = new Vector2(0, 0);
+        }
 
-			else
-			{
-				ToggleFire.icon.sprite = fireToggleOffTexture;
-				PlayerPrefs.SetInt("autofire", 0);
-				fireButton.icon.rectTransform.sizeDelta = new Vector2(80, 80);
-			}
-		}
-	}
+        else
+        {
+            ToggleFire.icon.sprite = fireToggleOffTexture;
+            PlayerPrefs.SetInt("autofire", 0);
+            fireButton.icon.rectTransform.sizeDelta = new Vector2(80, 80);
+        }
+    }
 
-	IEnumerator OnOff40(){
+    IEnumerator OnOff40(){
 		roundBombIcon.color = Color.white;
 		yield return new WaitForSeconds(2);
 		roundBombIcon.color = Color.red;
