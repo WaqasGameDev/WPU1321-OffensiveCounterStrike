@@ -9,6 +9,8 @@ public class RoomUI : Photon.MonoBehaviour
     public Sprite hitDetectorTexture;
 	public Sprite hpTexture;
 	public Sprite buyTexture;
+	public Sprite fireToggleOnTexture;
+	public Sprite fireToggleOffTexture;
 	public Sprite bombTexture;
 	public Sprite timeTexture;
 	public Sprite shieldTexture;
@@ -48,16 +50,18 @@ public class RoomUI : Photon.MonoBehaviour
 	public Sprite ChatSp;
 	public Sprite Lookicon;
 
-
+	bool toggleFire;
 #endif
 
-    //Crosshair
-    GameObject crosshairRoot;
+	//Crosshair
+	GameObject crosshairRoot;
     Image[] crosshairSet = new Image[4];
     Image redScreen;
 
 
 	Image shopBuyT;
+	Image fireToggle;
+
 	Image roundHow;
 	Image RoundMiddle;
 	
@@ -76,8 +80,9 @@ public class RoomUI : Photon.MonoBehaviour
 
     //General HUD - this will include general graphics like Round Time, Ammo, HP, Buy Menu buttons etc.
     Canvas mainCanvas;
+	Canvas unDisputedCanvas;
 
-    Text roundTimeText;
+	Text roundTimeText;
 
 	Text roundCounterScoreText;
 
@@ -152,6 +157,7 @@ public class RoomUI : Photon.MonoBehaviour
 	ActionButton Gun1Button = new ActionButton();
 	ActionButton Gun2Button = new ActionButton();
 	ActionButton Gun3Button = new ActionButton();
+	ActionButton ToggleFire = new ActionButton();
 	ActionButton ChatButton = new ActionButton();
 	ActionButton LookWeaponButton = new ActionButton();
 
@@ -175,8 +181,15 @@ public class RoomUI : Photon.MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		if (PlayerPrefs.GetInt("autofire", 0) == 0)
+		{
+			toggleFire = false;
+		}
+		else 
+		{ 
+			toggleFire = true;
+		}
 
-	
 		aColor = Color.yellow;
 		diffuseSound = false;
 		xml = GetComponent<xmlReader>();
@@ -621,8 +634,18 @@ public class RoomUI : Photon.MonoBehaviour
 		shopBuyT.rectTransform.position = new Vector3(mainCanvas.pixelRect.width / 2, 130, 0);
 		//###
 
-        //Setup respawn time text
-        hpTmpObj = new GameObject("RrespawnTimeText");
+		/*//Create new undisputed Canvas
+		hpTmpObj = new GameObject("UndisputedCanvas");
+		unDisputedCanvas = hpTmpObj.AddComponent<Canvas>();
+		unDisputedCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+		unDisputedCanvas.gameObject.AddComponent<GraphicRaycaster>();
+		unDisputedCanvas.gameObject.AddComponent<CanvasScaler>();
+		unDisputedCanvas.gameObject.layer = 2;*/
+
+
+
+		//Setup respawn time text
+		hpTmpObj = new GameObject("RrespawnTimeText");
         hpTmpObj.transform.position = Vector3.zero;
         hpTmpObj.transform.parent = tmpObj.transform;
         respawnTimeText.mainText = hpTmpObj.AddComponent<Text>();
@@ -757,10 +780,12 @@ public class RoomUI : Photon.MonoBehaviour
         fireButton.background = cntrlTmpObj.AddComponent<Image>();
         fireButton.background.rectTransform.anchorMin = new Vector2(1, 0);
         fireButton.background.rectTransform.anchorMax = new Vector2(1, 0);
-        fireButton.background.rectTransform.sizeDelta = new Vector2(0, 0);
+
+
+		//fireButton.background.rectTransform.sizeDelta = new Vector2(0, 0);
         fireButton.background.sprite = navigationButton;
         fireButton.background.rectTransform.pivot = new Vector2(1, 0);
-		fireButton.background.rectTransform.position = new Vector3(mainCanvas.pixelRect.width - marginLeft - ((circleSize - buttonSize) / 2), marginBottom * 0f + (circleSize - buttonSize) / 2, 0);
+		fireButton.background.rectTransform.position = new Vector3(mainCanvas.pixelRect.width - ((circleSize - buttonSize) / 2), marginBottom * 0f + (circleSize - buttonSize) / 2, 0);
 
         int iconSize = 105;
 
@@ -770,8 +795,16 @@ public class RoomUI : Photon.MonoBehaviour
         fireButton.icon = cntrlTmpObj.AddComponent<Image>();
         fireButton.icon.rectTransform.anchorMin = new Vector2(1, 0);
         fireButton.icon.rectTransform.anchorMax = new Vector2(1, 0);
-        fireButton.icon.rectTransform.sizeDelta = new Vector2(0, 0);
-        fireButton.icon.sprite = gunFireIcon;
+		//fireButton.icon.rectTransform.sizeDelta = new Vector2(80,80);
+		if (toggleFire)
+		{
+			fireButton.icon.rectTransform.sizeDelta = new Vector2(0, 0);
+		}
+		else
+		{
+			fireButton.icon.rectTransform.sizeDelta = new Vector2(80, 80);
+		}
+		fireButton.icon.sprite = gunFireIcon;
         fireButton.icon.rectTransform.pivot = new Vector2(1, 0);
         fireButton.icon.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x - (buttonSize - iconSize) / 2,
         fireButton.background.rectTransform.position.y + (buttonSize - iconSize) / 2, 0);
@@ -779,9 +812,11 @@ public class RoomUI : Photon.MonoBehaviour
         fireButton.mainArea = new Rect(Screen.width - fireButton.background.rectTransform.position.x, 
             fireButton.background.rectTransform.position.y, buttonSize, buttonSize);
 
-        //print(fireButton.mainArea.x);
+		
 
-        int smallButtonSize = 90;
+		//print(fireButton.mainArea.x);
+
+		int smallButtonSize = 90;
         int smallIconSize = 85;
 		int smallSwapButtonSize = 85;
 		int smallSwapIconSize = 80;
@@ -818,10 +853,69 @@ public class RoomUI : Photon.MonoBehaviour
 
         reloadButton.mainArea = new Rect(Screen.width - reloadButton.background.rectTransform.position.x,
             reloadButton.background.rectTransform.position.y, smallButtonSize, smallButtonSize);
-        //###
+		//###
 
-        //Aim button ###
-        cntrlTmpObj = new GameObject("Aim button background");
+		//Toggle fire type
+		/*hpTmpObj = new GameObject("FireToggle");
+		hpTmpObj.transform.position = Vector3.zero;
+		hpTmpObj.transform.parent = tmpObj.transform;
+		fireToggle = hpTmpObj.AddComponent<Image>();
+		fireToggle.gameObject.AddComponent<Button>();
+		//fireToggle.GetComponent<Button>().onClick.AddListener(switchBulletToggle);
+		if (toggleFire)
+		{
+			fireToggle.sprite = fireToggleOnTexture;
+		}
+		else 
+		{
+			fireToggle.sprite = fireToggleOffTexture;
+		}
+
+		//fireToggle.color = GameSettings.buyColor;
+		fireToggle.rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
+		fireToggle.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
+		fireToggle.rectTransform.sizeDelta = new Vector2(60, 60);
+		fireToggle.rectTransform.pivot = new Vector2(0.5f, 0.5f);
+		fireToggle.rectTransform.localPosition = new Vector3(500f, 138f, 0);*/
+
+
+		cntrlTmpObj = new GameObject("FireToggle");
+		cntrlTmpObj.transform.position = Vector3.zero;
+		cntrlTmpObj.transform.parent = tmpObj.transform;
+		ToggleFire.background = cntrlTmpObj.AddComponent<Image>();
+		ToggleFire.background.rectTransform.anchorMin = new Vector2(1, 0);
+		ToggleFire.background.rectTransform.anchorMax = new Vector2(1, 0);
+		ToggleFire.background.rectTransform.sizeDelta = new Vector2(75, 75);
+		ToggleFire.background.sprite = navigationButton;
+		ToggleFire.background.rectTransform.pivot = new Vector2(1, 0);
+		ToggleFire.background.rectTransform.localPosition = new Vector3(500f, 138f, 0);
+
+		cntrlTmpObj = new GameObject("FireToggle icon");
+		cntrlTmpObj.transform.position = Vector3.zero;
+		cntrlTmpObj.transform.parent = tmpObj.transform;
+		ToggleFire.icon = cntrlTmpObj.AddComponent<Image>();
+		ToggleFire.icon.rectTransform.anchorMin = new Vector2(1, 0);
+		ToggleFire.icon.rectTransform.anchorMax = new Vector2(1, 0);
+		ToggleFire.icon.rectTransform.sizeDelta = new Vector2(75, 75);
+
+		if (toggleFire)
+		{
+			ToggleFire.icon.sprite = fireToggleOnTexture;
+		}
+		else
+		{
+			ToggleFire.icon.sprite = fireToggleOffTexture;
+		}
+
+		ToggleFire.icon.rectTransform.pivot = new Vector2(1, 0);
+		ToggleFire.icon.rectTransform.position = ToggleFire.background.rectTransform.position;
+
+		ToggleFire.mainArea = new Rect(Screen.width - ToggleFire.background.rectTransform.position.x,
+			ToggleFire.background.rectTransform.position.y, 75, 75);
+		//###
+
+		//Aim button ###
+		cntrlTmpObj = new GameObject("Aim button background");
         cntrlTmpObj.transform.position = Vector3.zero;
         cntrlTmpObj.transform.parent = tmpObj.transform;
         aimButton.background = cntrlTmpObj.AddComponent<Image>();
@@ -1660,6 +1754,7 @@ public class RoomUI : Photon.MonoBehaviour
         if (!rc.ourPlayer || rc.timeToPurchase > 0)
         {
 			shopBuyT.enabled = true;
+			ToggleFire.icon.rectTransform.sizeDelta = new Vector2(80, 80);
 
 			string textShd = "";
 			string textTmp = xml.button76 + "\n\n";
@@ -1679,7 +1774,9 @@ public class RoomUI : Photon.MonoBehaviour
         else
         {
 			shopBuyT.enabled = false;
-            buyMenuText.mainText.text = "";
+			ToggleFire.icon.rectTransform.sizeDelta = new Vector2(0, 0);
+
+			buyMenuText.mainText.text = "";
             buyMenuText.textShadow.text = "";
 			shieldText.mainText.text = "";
 			shieldText.textShadow.text = "";
@@ -1834,6 +1931,27 @@ public class RoomUI : Photon.MonoBehaviour
 #endif
     }
 
+	public void switchBulletToggle()
+	{
+		if (rc.timeToPurchase > 0) 
+		{ 
+			toggleFire = !toggleFire;
+			if (toggleFire)
+			{
+				ToggleFire.icon.sprite = fireToggleOnTexture;
+				PlayerPrefs.SetInt("autofire", 1);
+				fireButton.icon.rectTransform.sizeDelta = new Vector2(0, 0);
+			}
+
+			else
+			{
+				ToggleFire.icon.sprite = fireToggleOffTexture;
+				PlayerPrefs.SetInt("autofire", 0);
+				fireButton.icon.rectTransform.sizeDelta = new Vector2(80, 80);
+			}
+		}
+	}
+
 	IEnumerator OnOff40(){
 		roundBombIcon.color = Color.white;
 		yield return new WaitForSeconds(2);
@@ -1919,18 +2037,38 @@ public class RoomUI : Photon.MonoBehaviour
 					fpsLookTouch.currentTouchPos = initialTouchPos;
         }
 
-        //Fire button press
-        //if ((new Rect(Screen.width - fireButton.mainArea.x - fireButton.mainArea.width, Screen.height - fireButton.mainArea.y - fireButton.mainArea.height,
-        //fireButton.mainArea.width, fireButton.mainArea.height)).Contains(touchPos)) 
-        
+		//Fire button press
+		if ((new Rect(Screen.width - fireButton.mainArea.x - fireButton.mainArea.width, Screen.height - fireButton.mainArea.y - fireButton.mainArea.height,
+			fireButton.mainArea.width, fireButton.mainArea.height)).Contains(touchPos))
+		{
+			if (rc.ourPlayer.playerWeapons.currentSelectedWeapon.wSettings.fireType != PlayerWeapons.FireType.C4 && !toggleFire)
+			{
+				fireButton.isActive = true;
+				GameSettings.mobileFiring = true;
+				fireButton.touchID = touchID;
+			}
+		}
+		else 
+		{
+			fireButton.isActive = false;
+			GameSettings.mobileFiring = false;
+			fireButton.touchID = touchID;
+		}
 
-        //Reload button press
-        if ((new Rect(Screen.width - reloadButton.mainArea.x - reloadButton.mainArea.width, Screen.height - reloadButton.mainArea.y - reloadButton.mainArea.height,
+		//Reload button press
+		if ((new Rect(Screen.width - reloadButton.mainArea.x - reloadButton.mainArea.width, Screen.height - reloadButton.mainArea.y - reloadButton.mainArea.height,
             reloadButton.mainArea.width, reloadButton.mainArea.height)).Contains(touchPos))
         {
             //reloadButton.isActive = true;
             GameSettings.mobileReloading = true;
         }
+
+		//FireToggle button press
+		if ((new Rect(Screen.width - ToggleFire.mainArea.x - ToggleFire.mainArea.width, Screen.height - ToggleFire.mainArea.y - ToggleFire.mainArea.height,
+			ToggleFire.mainArea.width, ToggleFire.mainArea.height)).Contains(touchPos))
+		{
+			switchBulletToggle();
+		}
 
 		//look button press
 		if ((new Rect(Screen.width - LookWeaponButton.mainArea.x - LookWeaponButton.mainArea.width, Screen.height - LookWeaponButton.mainArea.y - LookWeaponButton.mainArea.height,
@@ -1958,13 +2096,12 @@ public class RoomUI : Photon.MonoBehaviour
 
         }
 
-		//Crounch button press
+		//Crouch button press
 		if ((new Rect(Screen.width - crouchButton.mainArea.x - crouchButton.mainArea.width, Screen.height - crouchButton.mainArea.y - crouchButton.mainArea.height,
 			crouchButton.mainArea.width, crouchButton.mainArea.height)).Contains(touchPos))
 		{
 			//reloadButton.isActive = true;
 			GameSettings.mobileCrounch = true;
-
 		}
 
 		//Grenade button press
@@ -2104,15 +2241,23 @@ public class RoomUI : Photon.MonoBehaviour
 
 	bool Mobilefire = false;
 
-    private void FixedUpdate()
-    {
-		ProcessAutoFire();
+	private void FixedUpdate()
+	{
+		if (toggleFire) 
+		{
+			ProcessAutoFire();
+		}
 	}
 
 	private void ProcessAutoFire()
     {
-		if (!rc.ourPlayer)
+		if (!rc.ourPlayer) 
+		{
 			return;
+			Debug.Log("IN3");
+
+		}
+		Debug.Log("IN2");
 
 		int rayLength;
 
@@ -2167,7 +2312,26 @@ public class RoomUI : Photon.MonoBehaviour
             moveTouch.touchID = -1;
         }
 
-        if (fpsLookTouch.isActive && fpsLookTouch.touchID == touchID)
+		if (fireButton.isActive && fireButton.touchID == touchID)
+		{
+			if (rc.ourPlayer.playerWeapons.selectedGrenade == 1 && rc.ourPlayer.playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.GRENADE_LAUNCHER)
+			{
+				fireButton.isActive = false;
+				GameSettings.grenadeShoot = true;
+			}
+			else if (rc.ourPlayer.playerWeapons.selectedFlash == 2 && rc.ourPlayer.playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.FlashBang)
+			{
+				fireButton.isActive = false;
+				GameSettings.flashShoot = true;
+			}
+			else
+			{
+				fireButton.isActive = false;
+				GameSettings.mobileFiring = false;
+			}
+		}
+
+		if (fpsLookTouch.isActive && fpsLookTouch.touchID == touchID)
         {
             fpsLookTouch.isActive = false;
             fpsLookTouch.touchOffset = Vector2.zero;
