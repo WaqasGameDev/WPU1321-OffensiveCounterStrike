@@ -1,3 +1,202 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a3398c67f960a0604bf855788f98a7cd17109fbb589e290929a5b1933b3edd5a
-size 12269
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 069ca3a99db43aa45854722da91468dd, type: 3}
+  m_Name: 1
+  m_EditorClassIdentifier: 
+  caseName: AK47
+  iconSprite: {fileID: 21300000, guid: 2e7e98778153df94bb2cd82bb4ab1f8f, type: 3}
+  mainColor: {r: 0.9176471, g: 0.57254905, b: 0.2627451, a: 1}
+  free: 0
+  normalCurrencyOpenCost: 140
+  skins:
+    array:
+    - skinName: AK47 - Aesthetic bruh
+      normalCurrencyWorth: 20
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: 60f14e7c91e37c9498534a3434bc89d2, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: bb18f61014b913547b0b28d5a6139302, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIEFlc3RoZXRpYyBicnVo
+    - skinName: AK47 - Amethyst Disintegration
+      normalCurrencyWorth: 15
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: 28258e44e7ba3dc42a2099fbafab47db, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 4aa34e3e77a549043b6b3ecb098f5bfa, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIEFtZXRoeXN0IERpc2ludGVncmF0aW9u
+    - skinName: AK47 - morbit
+      normalCurrencyWorth: 15
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: 599569e6a8ac37b4fa86358570c1b333, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: ed8adfe5ce29bd841abbe219d0b571f4, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIG1vcmJpdA==
+    - skinName: aAK47 - Inarm
+      normalCurrencyWorth: 25
+      rarityIndex: 1
+      iconSprite: {fileID: 21300000, guid: a1a263d385905234c958d8b0368e88f7, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 8a78c796f218fb74e83655cbb1416e8e, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: YUFLNDcgLSBJbmFybQ==
+    - skinName: AK47 - danstel
+      normalCurrencyWorth: 25
+      rarityIndex: 1
+      iconSprite: {fileID: 21300000, guid: ca8d1890e954e6845951818bac890475, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: a8822da3e06628e43a35c708d2c54006, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIGRhbnN0ZWw=
+    - skinName: AK47 - Dream Defender
+      normalCurrencyWorth: 30
+      rarityIndex: 1
+      iconSprite: {fileID: 21300000, guid: 91fad021987c4864bb9c310b5a05bac5, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 0a4658bf06f090c46b75ac5a28d58aa9, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIERyZWFtIERlZmVuZGVy
+    - skinName: AK47 - Fire Fight
+      normalCurrencyWorth: 15
+      rarityIndex: 1
+      iconSprite: {fileID: 21300000, guid: 16eafe167b178cf42be6d9000e2f18e5, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 9909bc07a2a869c488f4aee62a162699, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIEZpcmUgRmlnaHQ=
+    - skinName: AK47 - Golden
+      normalCurrencyWorth: 20
+      rarityIndex: 1
+      iconSprite: {fileID: 21300000, guid: 221e7aaf2f9c6894e8e1e8eeacc676ec, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 30d611416ef3d8b4990482ca7b095e97, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIEdvbGRlbg==
+    - skinName: AK47 - Jormungandr
+      normalCurrencyWorth: 35
+      rarityIndex: 1
+      iconSprite: {fileID: 21300000, guid: f22b5d195c109124bb0ff8a9ccdc44cd, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: e1f012291d1e9474db510b4ac47d7190, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIEpvcm11bmdhbmRy
+    - skinName: AK47 - Colorisempty
+      normalCurrencyWorth: 35
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: eca7653a984ff6f419ec7e7a807d6c96, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: c70dd4432fe534e499e5a99b7b567c83, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIENvbG9yaXNlbXB0eQ==
+    - skinName: AK47 - Nebula
+      normalCurrencyWorth: 30
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: d259ad425e65adc40ac87c7ddd126203, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: a8da25c171995814d9dbe99c844185ee, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIE5lYnVsYQ==
+    - skinName: AK47 - Nophobia
+      normalCurrencyWorth: 20
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: cb1e6217797a74e4ebce8c55c3422f8b, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: ab6f4c239f11fcd48bedbcd870cd7cc6, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIE5vcGhvYmlh
+    - skinName: AK47 - Galos
+      normalCurrencyWorth: 20
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: 83ab17510cc934f4eb17673f93ffc5f9, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 19760745b20ab5f4cac1481f0c78c69e, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIEdhbG9z
+    - skinName: AK47 - Game
+      normalCurrencyWorth: 30
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: ed328c0c72d143d4d833474c48f15a71, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 3dcacaefb2fb13f43a0f44d524530f4c, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIEdhbWU=
+    - skinName: AK47 - Indless
+      normalCurrencyWorth: 45
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: 99ceb6108f4b41f46b94e7b3cf9b024c, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 954a252e2b30ca449a5c70df4d518da5, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIEluZGxlc3M=
+    - skinName: AK47 - Mind Control
+      normalCurrencyWorth: 35
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: 62a63b76f28793346ac140c1ed73d6b7, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: d70c579860342b04aadf41f7a953838b, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIE1pbmQgQ29udHJvbA==
+    - skinName: AK47 - Plasmak
+      normalCurrencyWorth: 40
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: 3d1791fa1f513184ca83c825cc39e45b, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: e5d69f5c7a2165346b9d6d7201b26e97, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIFBsYXNtYWs=
+    - skinName: AK47 - Yarnbombed
+      normalCurrencyWorth: 25
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: 339e003cd14feac4cb22afcd550bfe15, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: f532f46baefb7374b85d344cfd6c8bce, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUs0NyAtIFlhcm5ib21iZWQ=
+  uniqueID: QUs0Nw==

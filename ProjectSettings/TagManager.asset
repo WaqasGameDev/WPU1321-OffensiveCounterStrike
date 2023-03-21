@@ -1,3 +1,70 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:99bf7a620dcaa56042c3385a9616b660cb875232ce52f8cf577516631abe5067
-size 676
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Body
+  - Wood
+  - Metal
+  - Fire
+  - Ladder
+  - Sea
+  - Walo
+  - A
+  - B
+  - CT
+  - T
+  - C4
+  - C4Box
+  - Teror
+  - Counter
+  - Null
+  - C4Take
+  - C4Null
+  - Dust2
+  - car
+  - c4bip
+  - Ai
+  - AiTr
+  - Selector
+  - PlayerAI
+  - GasTank
+  - ExplosiveBarrel
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Casing
+  - Flash
+  - Grenade
+  - Walo
+  - Weapon
+  - 
+  - Playerlight
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

@@ -1,3 +1,252 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:60027e0e6e8db764a39c170e871b194e3b2f819e244ff0fd17621e4dfd30afe2
-size 15542
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 069ca3a99db43aa45854722da91468dd, type: 3}
+  m_Name: 5
+  m_EditorClassIdentifier: 
+  caseName: KINGSHOTS
+  iconSprite: {fileID: 21300000, guid: 824331ce537db034a9b1fb1e7e119091, type: 3}
+  mainColor: {r: 0.6415094, g: 0.033285867, b: 0.055119425, a: 1}
+  free: 0
+  normalCurrencyOpenCost: 500
+  skins:
+    array:
+    - skinName: FIVESEVEN - Norton
+      normalCurrencyWorth: 30
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: ca0e4463033b8cf47817d31d76b1e637, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 63aa2bd7e7b57514dae05a8f8f85a578, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 63aa2bd7e7b57514dae05a8f8f85a578, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 5fae49c56c1787147a1a09d053a19357, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: b9f1b2cff6af2eb4b82cd1cc2a6e1dbf, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: b9f1b2cff6af2eb4b82cd1cc2a6e1dbf, type: 3}
+      uniqueID: RklWRVNFVkVOIC0gTm9ydG9u
+    - skinName: P228 - Blyatsimov
+      normalCurrencyWorth: 40
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: a72a5a3c10eb2744fbcca2bf0fc169f1, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 67467b910eba59e47b5c347d43e34086, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 67467b910eba59e47b5c347d43e34086, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: a8ff03da24541ea49b80696f97df10f7, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 122cefb722608764d92c2423ef0a1fe4, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 122cefb722608764d92c2423ef0a1fe4, type: 3}
+      uniqueID: UDIyOCAtIEJseWF0c2ltb3Y=
+    - skinName: P90 - Blyatsimov
+      normalCurrencyWorth: 30
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: 280ec249bcac02846adb3f693bd50ac9, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 0e58de5e757a97f4ab87b793658c0696, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 0e58de5e757a97f4ab87b793658c0696, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 75f0e7d2081a61f48bb9dcbbec8d6f4d, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 5a3125d0d092b3e47a3dbfb0a39de72c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 5a3125d0d092b3e47a3dbfb0a39de72c, type: 3}
+      uniqueID: UDkwIC0gQmx5YXRzaW1vdg==
+    - skinName: P90 - Chrome
+      normalCurrencyWorth: 40
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: 39d2bfee793c15f45bda15257fb37531, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 0e58de5e757a97f4ab87b793658c0696, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 0e58de5e757a97f4ab87b793658c0696, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 73ed58556184a594284270cf1e92977d, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 5a3125d0d092b3e47a3dbfb0a39de72c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 5a3125d0d092b3e47a3dbfb0a39de72c, type: 3}
+      uniqueID: UDkwIC0gQ2hyb21l
+    - skinName: Aug - Plasm
+      normalCurrencyWorth: 40
+      rarityIndex: 1
+      iconSprite: {fileID: 21300000, guid: 00853ca1b628b5145b51d447cfaee2bd, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 6c62439f19618d044825df834b8f1bc6, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 6c62439f19618d044825df834b8f1bc6, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: f45b5ae3620884a469c9c81e49530042, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 0ab8c13d7515ae8418d6552f07c99dbf, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 0ab8c13d7515ae8418d6552f07c99dbf, type: 3}
+      uniqueID: QXVnIC0gUGxhc20=
+    - skinName: M4A4 - Blyatsimov
+      normalCurrencyWorth: 45
+      rarityIndex: 1
+      iconSprite: {fileID: 21300000, guid: 27e63e1953d6e6142846a5e8c81054f5, type: 3}
+      weaponSabit: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 749c41d0e74e29642b514c58a9a17bb3, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      uniqueID: TTRBNCAtIEJseWF0c2ltb3Y=
+    - skinName: TEC9 - Blyatsimov
+      normalCurrencyWorth: 30
+      rarityIndex: 1
+      iconSprite: {fileID: 21300000, guid: 67c4af2b209cfcf4cb774fad7afb6f72, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 0b5e5727557a8ae4eb862218dd8a3346, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 0b5e5727557a8ae4eb862218dd8a3346, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: e7d48223a3bfe634ba8d20568fe5687d, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 91e0f4ddd3b919b4c8849226a29b198c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 91e0f4ddd3b919b4c8849226a29b198c, type: 3}
+      uniqueID: VEVDOSAtIEJseWF0c2ltb3Y=
+    - skinName: ' Awp - Blyatsimov'
+      normalCurrencyWorth: 50
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: cd441590b76b4d04c99356770df10c2e, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 24e396a812dce474ba2d870d63ae7d4f, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      uniqueID: IEF3cCAtIEJseWF0c2ltb3Y=
+    - skinName: AK 47 - Ratfort
+      normalCurrencyWorth: 50
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: 033a36fc739e619478ad2232dcf53feb, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: f2e1d0e984a2bd54da830017578ede3e, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUsgNDcgLSBSYXRmb3J0
+    - skinName: AK 47 -Indless
+      normalCurrencyWorth: 60
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: 99ceb6108f4b41f46b94e7b3cf9b024c, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 954a252e2b30ca449a5c70df4d518da5, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUsgNDcgLUluZGxlc3M=
+    - skinName: DEAGLE - Norton
+      normalCurrencyWorth: 30
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: 17f878f7c857e2847a44293c1ef2cf44, type: 3}
+      weaponSabit: {fileID: 2100000, guid: b04298017b7be334e9ae2f95eb59a451, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: b04298017b7be334e9ae2f95eb59a451, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 2933fc34e5f60254882996f591a0aac9, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 2a0c72afc6ed20d458287880c6365d01, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 2a0c72afc6ed20d458287880c6365d01, type: 3}
+      uniqueID: REVBR0xFIC0gTm9ydG9u
+    - skinName: FAMAS - Plasmas
+      normalCurrencyWorth: 35
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: 0b2b176a12020ce448007b279bbfcda9, type: 3}
+      weaponSabit: {fileID: 2100000, guid: e168c32fc2dd04d4fbf72427eacc7cf2, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: e168c32fc2dd04d4fbf72427eacc7cf2, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 5d698cafcf533e942ae4f8fa2e728b7f, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: e229e6049bff4c74ba930e250e34f781, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: e229e6049bff4c74ba930e250e34f781, type: 3}
+      uniqueID: RkFNQVMgLSBQbGFzbWFz
+    - skinName: FIVESEVEN - Toxic
+      normalCurrencyWorth: 30
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: 233b75ee63042da448a075fbe7fd78d3, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 63aa2bd7e7b57514dae05a8f8f85a578, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 63aa2bd7e7b57514dae05a8f8f85a578, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 6bc7e0acc782b0144b53797c6f14b178, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: b9f1b2cff6af2eb4b82cd1cc2a6e1dbf, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: b9f1b2cff6af2eb4b82cd1cc2a6e1dbf, type: 3}
+      uniqueID: RklWRVNFVkVOIC0gVG94aWM=
+    - skinName: M4A1 - Angry
+      normalCurrencyWorth: 50
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: 9b4f73d17e03099498250aa753a51022, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: bc8840c5378a3fd4aaf61f2c10c14a8e, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      uniqueID: TTRBMSAtIEFuZ3J5
+    - skinName: M4A4 - Glass Queen
+      normalCurrencyWorth: 30
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: 8dab07cab39eb6842bb504fd6d31ad2b, type: 3}
+      weaponSabit: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 1f0f0e620f15e7947a5e11a62e2d8638, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      uniqueID: TTRBNCAtIEdsYXNzIFF1ZWVu
+    - skinName: 'USP - Dreams Nightmares '
+      normalCurrencyWorth: 35
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: 4b2f6189c62d7f044aebd803e8e33ecc, type: 3}
+      weaponSabit: {fileID: 2100000, guid: a0e201a21d1a8134eba34680cde5d630, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: a0e201a21d1a8134eba34680cde5d630, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 70be0a68a8ca1fb4b85c30f1512f8244, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 62caceef795df83469a250c3b4f39536, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 62caceef795df83469a250c3b4f39536, type: 3}
+      uniqueID: VVNQIC0gRHJlYW1zIE5pZ2h0bWFyZXMg
+    - skinName: ' Awp - Goldstair'
+      normalCurrencyWorth: 60
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: 54be6fb3d75eba54ba6db81636f19f68, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: f46d498964cdd9f4ea2587d4951cd488, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      uniqueID: IEF3cCAtIEdvbGRzdGFpcg==
+    - skinName: AK 47 - blyatsimov
+      normalCurrencyWorth: 50
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: 1bc6511fba3ae994e92d8bde60790808, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 940cf217edce256499cf6b7223f44f1d, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUsgNDcgLSBibHlhdHNpbW92
+    - skinName: AK 47 - Chromatic Aberration
+      normalCurrencyWorth: 60
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: 49222907c9e7eb944b314a9ea600c83e, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 93c5ea98e7a97044ca91a1a23fe5b9f5, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 3e2a7edf72ff0fd4bbca8b51bca0ca3c, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: f0e1e5ea14f3ae041a72bb8cf690394c, type: 3}
+      uniqueID: QUsgNDcgLSBDaHJvbWF0aWMgQWJlcnJhdGlvbg==
+    - skinName: FAMAS - underlined
+      normalCurrencyWorth: 50
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: a9963d0a35db7db41815444ce6d95d50, type: 3}
+      weaponSabit: {fileID: 2100000, guid: e168c32fc2dd04d4fbf72427eacc7cf2, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: e168c32fc2dd04d4fbf72427eacc7cf2, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 8041e5f5b9e6fc24aaf7e262f24a5f7b, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: e229e6049bff4c74ba930e250e34f781, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: e229e6049bff4c74ba930e250e34f781, type: 3}
+      uniqueID: RkFNQVMgLSB1bmRlcmxpbmVk
+    - skinName: MAC10 - Chromatic Aberration
+      normalCurrencyWorth: 40
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: 15af86f926b210d4e900b3fac24c7791, type: 3}
+      weaponSabit: {fileID: 2100000, guid: b2677cb022638c841811334fce99ff35, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: b2677cb022638c841811334fce99ff35, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 9a5d4ab94c1eb8f4aa7d637424b5fa3d, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 9498d33ea670f3f4792a211782871fdf, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 9498d33ea670f3f4792a211782871fdf, type: 3}
+      uniqueID: TUFDMTAgLSBDaHJvbWF0aWMgQWJlcnJhdGlvbg==
+    - skinName: MAC10 - Pharaoh
+      normalCurrencyWorth: 40
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: 1521748bd9d486b41941fa70897b638c, type: 3}
+      weaponSabit: {fileID: 2100000, guid: b2677cb022638c841811334fce99ff35, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: b2677cb022638c841811334fce99ff35, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 5f61d298de2664449b1f9f83cd3dcb7e, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 9498d33ea670f3f4792a211782871fdf, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 9498d33ea670f3f4792a211782871fdf, type: 3}
+      uniqueID: TUFDMTAgLSBQaGFyYW9o
+    - skinName: USP - Norton
+      normalCurrencyWorth: 35
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: a619d22b3231db04d983818e9263e372, type: 3}
+      weaponSabit: {fileID: 2100000, guid: a0e201a21d1a8134eba34680cde5d630, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: a0e201a21d1a8134eba34680cde5d630, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 8fb35cbe069b67e43bc4d46d129a5bcc, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 62caceef795df83469a250c3b4f39536, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 62caceef795df83469a250c3b4f39536, type: 3}
+      uniqueID: VVNQIC0gTm9ydG9u
+  uniqueID: S0lOR1NIT1RT

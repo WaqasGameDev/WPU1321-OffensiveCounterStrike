@@ -1,3 +1,182 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b8fa133119105e4cb862580f41f6a440c557f9c789b5aac5aad27c946e944307
-size 10963
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 069ca3a99db43aa45854722da91468dd, type: 3}
+  m_Name: 2
+  m_EditorClassIdentifier: 
+  caseName: M4A1 + M4A4
+  iconSprite: {fileID: 21300000, guid: 8a7c5865e60d34f4286056b042ea909e, type: 3}
+  mainColor: {r: 0.2627451, g: 0.654902, b: 0.6431373, a: 1}
+  free: 0
+  normalCurrencyOpenCost: 120
+  skins:
+    array:
+    - skinName: M4A1 - Neodab
+      normalCurrencyWorth: 20
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: 10d05a0eda5a1ee498801da01074e578, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: fd05358b7338ae9499243693979405e0, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      uniqueID: TTRBMSAtIE5lb2RhYg==
+    - skinName: M4A1 - Slit
+      normalCurrencyWorth: 15
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: a311a9eed52dfbf4caabbc65e9509a35, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 10e8ce722484d8f4aabd3c680622960c, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      uniqueID: TTRBMSAtIFNsaXQ=
+    - skinName: M4A1 - Toris
+      normalCurrencyWorth: 20
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: 574042b61844d1843b32fbcda6874609, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 34fdf70ebe0b9b7479a74a8b27cb29ad, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      uniqueID: TTRBMSAtIFRvcmlz
+    - skinName: M4A4 - Lion Atack
+      normalCurrencyWorth: 10
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: 533e7cee78655c841b92ced9ae31ea35, type: 3}
+      weaponSabit: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: ca79efafcb764214d923931b7d447259, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      uniqueID: TTRBNCAtIExpb24gQXRhY2s=
+    - skinName: M4A4 - Zombie Attack
+      normalCurrencyWorth: 5
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: 76413e0b46763cb418913eed44d75e14, type: 3}
+      weaponSabit: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 839f407997763ba4797d43a43850b8ff, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      uniqueID: TTRBNCAtIFpvbWJpZSBBdHRhY2s=
+    - skinName: M4A4 -Disguise
+      normalCurrencyWorth: 30
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: 126e1c6b16f453e4d8013ff667e9d33c, type: 3}
+      weaponSabit: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 8905b84b85ac3ab4593d2a6981162dd9, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      uniqueID: TTRBNCAtRGlzZ3Vpc2U=
+    - skinName: M4A1 - Black Sea
+      normalCurrencyWorth: 5
+      rarityIndex: 1
+      iconSprite: {fileID: 21300000, guid: 6f47175c221f43e44885c7805682c884, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 2ab90cffde0242242b41247cadc4fa10, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      uniqueID: TTRBMSAtIEJsYWNrIFNlYQ==
+    - skinName: M4A1 - Construct
+      normalCurrencyWorth: 10
+      rarityIndex: 1
+      iconSprite: {fileID: 21300000, guid: 9ec1386ae8996474abc2bcfa7ebf53fd, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 54d1285485bdad445803be0c89e86bfa, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      uniqueID: TTRBMSAtIENvbnN0cnVjdA==
+    - skinName: M4A4 - Fire Smash
+      normalCurrencyWorth: 30
+      rarityIndex: 1
+      iconSprite: {fileID: 21300000, guid: 47d684970edd96b4d82d077844ea5eb7, type: 3}
+      weaponSabit: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 06572c60f53d80342bc0ae50b3db2936, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      uniqueID: TTRBNCAtIEZpcmUgU21hc2g=
+    - skinName: M4A4 -Cvbcround
+      normalCurrencyWorth: 30
+      rarityIndex: 1
+      iconSprite: {fileID: 21300000, guid: d63559fabd8b39046b793a4a3384c4ff, type: 3}
+      weaponSabit: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 9a5e5aab34566e444975811b77876b53, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      uniqueID: TTRBNCAtQ3ZiY3JvdW5k
+    - skinName: M4A1 - Coulrophobia
+      normalCurrencyWorth: 30
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: 1c61e95a5d9b36841be6d57b7f8dfb4f, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 3fb95bb2b630ef144bcd754d4430d3b5, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      uniqueID: TTRBMSAtIENvdWxyb3Bob2JpYQ==
+    - skinName: M4A4 - Black-Night
+      normalCurrencyWorth: 30
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: a41c26f056ee9fe408a1918676cd439e, type: 3}
+      weaponSabit: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 27bc3becbee170546b3aadc3498d340e, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      uniqueID: TTRBNCAtIEJsYWNrLU5pZ2h0
+    - skinName: M4A4 - Plasm
+      normalCurrencyWorth: 35
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: 3d93d6ccc061254469973841ef9cd538, type: 3}
+      weaponSabit: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 1bc29ba93770f4d4ba503e8188fd7387, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      uniqueID: TTRBNCAtIFBsYXNt
+    - skinName: M4A1 - Dream Catcher
+      normalCurrencyWorth: 40
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: f61f6cfefa23f974cbdd7f75d7eba8b5, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 74d48a3d3d26a6140a07e461b6cbae0e, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 42668908791d37f458dc3690ddc8369a, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: 74f1dff2a708c8149b6efa868bb811d9, type: 3}
+      uniqueID: TTRBMSAtIERyZWFtIENhdGNoZXI=
+    - skinName: M4A4 - Demon Attack
+      normalCurrencyWorth: 50
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: 2d4e155e989807a43a50e219cda266af, type: 3}
+      weaponSabit: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 0742af7a5dfd094499aec4e5b10007bc, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      uniqueID: TTRBNCAtIERlbW9uIEF0dGFjaw==
+    - skinName: M4A4 - Plasm
+      normalCurrencyWorth: 40
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: 95201fb1d214fbd41b271fe9a62a3800, type: 3}
+      weaponSabit: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: fb9f69c7a66e54d4e8e2f027cbe641d7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 1038418e854d2e84ebd6fed8b4cd9bef, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: fe9962fbb291a1943af34503b5d1d839, type: 3}
+      uniqueID: TTRBNCAtIFBsYXNt
+  uniqueID: TTRBMSArIE00QTQ=

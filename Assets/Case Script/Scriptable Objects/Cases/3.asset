@@ -1,3 +1,122 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1363a5b8f8e9b5b60cbc8236ac48e67bc7bfba3fd4b42f831e26c3389c0cd15e
-size 7058
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 069ca3a99db43aa45854722da91468dd, type: 3}
+  m_Name: 3
+  m_EditorClassIdentifier: 
+  caseName: AWP
+  iconSprite: {fileID: 21300000, guid: f0ca1f59831a61f4b88974ebfecfe426, type: 3}
+  mainColor: {r: 0.34117648, g: 0.3803922, b: 0.29411766, a: 1}
+  free: 0
+  normalCurrencyOpenCost: 150
+  skins:
+    array:
+    - skinName: AWP - Fire Smash
+      normalCurrencyWorth: 30
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: 4017b228546e6124788c5662227fcd1d, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 708f7126faef5d749887ffbf2701e4e4, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      uniqueID: QVdQIC0gRmlyZSBTbWFzaA==
+    - skinName: AWP - Ice
+      normalCurrencyWorth: 20
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: 4bfb23a183047cb4fba60a8b25bdf39d, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: a1350208f8d335243919ad4fa188e829, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      uniqueID: QVdQIC0gSWNl
+    - skinName: AWP - Slit
+      normalCurrencyWorth: 25
+      rarityIndex: 0
+      iconSprite: {fileID: 21300000, guid: deb17c048eede774e9b81e5cac910638, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 6e391c308443ea34ab7539562d946c60, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      uniqueID: QVdQIC0gU2xpdA==
+    - skinName: AWP - Colorful
+      normalCurrencyWorth: 35
+      rarityIndex: 1
+      iconSprite: {fileID: 21300000, guid: 3f5f7567a306f7d4a95606014dcb4a36, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 2ceb4cee32e7fee4f8c25e058b42c61c, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      uniqueID: QVdQIC0gQ29sb3JmdWw=
+    - skinName: AWP - Plasmare
+      normalCurrencyWorth: 50
+      rarityIndex: 1
+      iconSprite: {fileID: 21300000, guid: ea9cc9fbba466c542934fdd27783e0ab, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 01f1f9e2087f78d4aa8f69e89c136270, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      uniqueID: QVdQIC0gUGxhc21hcmU=
+    - skinName: AWP - Africawp
+      normalCurrencyWorth: 25
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: aa06a6407c7fe6944aafd0de6b7c8f4a, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 98164d078eb79c245a33d3a9fa8b62bc, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      uniqueID: QVdQIC0gQWZyaWNhd3A=
+    - skinName: AWP - Green Lightning
+      normalCurrencyWorth: 40
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: 4650197613e91fd49a6d8c2c006ef14f, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 412b7192499a36e4ca5b1a2f7d49af1c, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      uniqueID: QVdQIC0gR3JlZW4gTGlnaHRuaW5n
+    - skinName: AWP - Liroy Jenkens
+      normalCurrencyWorth: 30
+      rarityIndex: 2
+      iconSprite: {fileID: 21300000, guid: ab66791e59f6f6341b1a76db992359d4, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 526822b0de6062848b4fc707b0314675, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      uniqueID: QVdQIC0gTGlyb3kgSmVua2Vucw==
+    - skinName: AWP - 200IQ
+      normalCurrencyWorth: 35
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: cc0a0eb19296c0f468df4805337304ac, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 7253a623322a53548bbd271b729c558a, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      uniqueID: QVdQIC0gMjAwSVE=
+    - skinName: AWP - Gamma Doppler
+      normalCurrencyWorth: 40
+      rarityIndex: 3
+      iconSprite: {fileID: 21300000, guid: ef0356a0db243844e8ff8e72b45cbe10, type: 3}
+      weaponSabit: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponSabitTR: {fileID: 2100000, guid: 2c36891c38f177e40af0526350614ac7, type: 2}
+      weaponDeisen: {fileID: 2800000, guid: 039618f4d6b033d40a018a1e6670dc29, type: 3}
+      weaponDeisenTR: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      weaponOrjin: {fileID: 2800000, guid: ef9cb7af43534694990951e89bf5eadc, type: 3}
+      uniqueID: QVdQIC0gR2FtbWEgRG9wcGxlcg==
+  uniqueID: QVdQ

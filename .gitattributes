@@ -64,4 +64,4 @@
 *.bundle filter=lfs diff=lfs merge=lfs -text
 *.otf filter=lfs diff=lfs merge=lfs -text
 *.jar filter=lfs diff=lfs merge=lfs -text
-
+Assets/Offensivestrike/Scenes/Ofstrikemaps/Env/6/NavMesh-GameObject[[:space:]]1.asset filter=lfs diff=lfs merge=lfs -text
