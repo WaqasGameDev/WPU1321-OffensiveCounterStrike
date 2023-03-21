@@ -888,7 +888,7 @@ public class RoomUI : Photon.MonoBehaviour
 		ToggleFire.background.rectTransform.sizeDelta = new Vector2(75, 75);
 		ToggleFire.background.sprite = navigationButton;
 		ToggleFire.background.rectTransform.pivot = new Vector2(1, 0);
-		ToggleFire.background.rectTransform.localPosition = new Vector3(500f, 138f, 0);
+		ToggleFire.background.rectTransform.localPosition = new Vector3(500f, 100f, 0);
 
 		cntrlTmpObj = new GameObject("FireToggle icon");
 		cntrlTmpObj.transform.position = Vector3.zero;
@@ -1932,7 +1932,7 @@ public class RoomUI : Photon.MonoBehaviour
 
     public void switchBulletToggle()
     {
-        toggleFire = !toggleFire;
+       toggleFire = !toggleFire;
         if (toggleFire)
         {
             ToggleFire.icon.sprite = fireToggleOnTexture;
