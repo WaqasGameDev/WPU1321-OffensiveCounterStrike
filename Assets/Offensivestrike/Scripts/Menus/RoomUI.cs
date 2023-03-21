@@ -1532,7 +1532,6 @@ public class RoomUI : Photon.MonoBehaviour
             }
             else
             {
-
                 weaponAndAmmoText.text = "";
 				sniperScope.gameObject.SetActive(false);
 				jumpButton.icon.gameObject.SetActive (false);
