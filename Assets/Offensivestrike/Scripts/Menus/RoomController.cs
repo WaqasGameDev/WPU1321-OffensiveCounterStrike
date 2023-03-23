@@ -17,6 +17,7 @@ public class RoomController : Photon.MonoBehaviour
 	public GameObject botAi;
 	public GameObject botAiTr;
 	public Camera welcomeCamera;
+	public bool offlineMode;
 
 
 
@@ -276,8 +277,20 @@ public class RoomController : Photon.MonoBehaviour
 
 	public int WFollowCam = 0;
 
-	//Compare players by kills (sort by list)
-	private static int SortPlayers(PhotonPlayer A, PhotonPlayer B)
+    private void Awake()
+    {
+		if (PlayerPrefs.GetInt("OfflineMode", 0) == 1) 
+		{
+			offlineMode = true;
+		}
+		else 
+		{
+			offlineMode = false;
+		}
+	}
+
+    //Compare players by kills (sort by list)
+    private static int SortPlayers(PhotonPlayer A, PhotonPlayer B)
 	{
 		return (int)B.CustomProperties["Kills"] - (int)A.CustomProperties["Kills"];
 	}
@@ -372,9 +385,12 @@ public class RoomController : Photon.MonoBehaviour
 		setPlayerProperties.Add("Ping", (int)PhotonNetwork.GetPing());
 		setPlayerProperties.Add("Team", (int)0); //0 = Spectators, 1 = teamA, 2 = teamB, 3 = Draw
 		setPlayerProperties.Add("PlayerHP", (int)-1);
-		PhotonNetwork.player.SetCustomProperties(setPlayerProperties);
 
-		RefreshPlayerList();
+		if (!offlineMode)
+		{
+			PhotonNetwork.player.SetCustomProperties(setPlayerProperties);
+			RefreshPlayerList();
+		}
 
 		welcomeCameraTransform = welcomeCamera.transform;
 		defaultCamPos = welcomeCameraTransform.position;
@@ -390,7 +406,12 @@ public class RoomController : Photon.MonoBehaviour
 			GameSettings.TimeOff = false;
 			GameSettings.C4on = false;
 			GameSettings.C4Who = "";
-			referenceTime = (float)PhotonNetwork.time;
+
+			if (!offlineMode)
+			{
+				referenceTime = (float)PhotonNetwork.time;
+			}
+
 			currentGameStatus = 0;
 			if (teamBPlayers.Count > 0)
 			{
@@ -403,32 +424,48 @@ public class RoomController : Photon.MonoBehaviour
 			}
 			C4WHO = GameSettings.C4Who;
 			howPlayer = teamAPlayers.Count + teamBPlayers.Count;
-			Hashtable setRoomProperties = new Hashtable();
-			setRoomProperties.Add("ReferenceTime", (float)PhotonNetwork.time);
-			setRoomProperties.Add("GameStatus", (int)0); //0 = Play, 1 = team A won, 2 = team B won
-			setRoomProperties.Add("TeamAScore", (int)0);
-			setRoomProperties.Add("TeamBScore", (int)0);
-			setRoomProperties.Add("TeamANormalScore", (int)0);
-			setRoomProperties.Add("TeamBNormalScore", (int)0);
-			setRoomProperties.Add("C4Who", (string)C4WHO);
-			setRoomProperties.Add("HowPlayer", (int)howPlayer);
-			PhotonNetwork.room.SetCustomProperties(setRoomProperties);
+			if (!offlineMode)
+			{
+				Hashtable setRoomProperties = new Hashtable();
+				setRoomProperties.Add("ReferenceTime", (float)PhotonNetwork.time);
+				setRoomProperties.Add("GameStatus", (int)0); //0 = Play, 1 = team A won, 2 = team B won
+				setRoomProperties.Add("TeamAScore", (int)0);
+				setRoomProperties.Add("TeamBScore", (int)0);
+				setRoomProperties.Add("TeamANormalScore", (int)0);
+				setRoomProperties.Add("TeamBNormalScore", (int)0);
+				setRoomProperties.Add("C4Who", (string)C4WHO);
+				setRoomProperties.Add("HowPlayer", (int)howPlayer);
+				PhotonNetwork.room.SetCustomProperties(setRoomProperties);
+			}
 
 		}
 		else
 		{
-			referenceTime = (float)PhotonNetwork.room.CustomProperties["ReferenceTime"];
-			currentGameStatus = (int)PhotonNetwork.room.CustomProperties["GameStatus"];
-			C4WHO = (string)PhotonNetwork.room.CustomProperties["C4Who"];
-			howPlayer = (int)PhotonNetwork.room.CustomProperties["HowPlayer"];
-			GameSettings.C4Who = C4WHO;
+			if (!offlineMode)
+			{
+				referenceTime = (float)PhotonNetwork.room.CustomProperties["ReferenceTime"];
+				currentGameStatus = (int)PhotonNetwork.room.CustomProperties["GameStatus"];
+				C4WHO = (string)PhotonNetwork.room.CustomProperties["C4Who"];
+				howPlayer = (int)PhotonNetwork.room.CustomProperties["HowPlayer"];
+				GameSettings.C4Who = C4WHO;
+			}
 		}
 
 		yield return new WaitForEndOfFrame();
 
-		currentGameMode = (string)PhotonNetwork.room.CustomProperties["GameMode"];
-		roundDuration = (float)PhotonNetwork.room.CustomProperties["RoundDuration"];
-		GetTeamScores();
+		if (!offlineMode)
+		{
+			Debug.Log("Test1");
+			currentGameMode = (string)PhotonNetwork.room.CustomProperties["GameMode"];
+			roundDuration = (float)PhotonNetwork.room.CustomProperties["RoundDuration"];
+			GetTeamScores();
+		}
+		else 
+		{
+			Debug.Log("Test2");
+			/*currentGameMode = ;
+			roundDuration =*/
+		}
 
 		previousGameStatus = currentGameStatus;
 

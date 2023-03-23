@@ -253,9 +253,7 @@ PlayerSettings:
   AndroidTargetDevices: 1
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: C:/Users/aqiln/Wyrtual/Upwork/Projects/01- Ahmad-OffensiveStrike/Received
-    From Ahmad/01-Ahmad-OffensiveStrikeGame/01-Ahmad-OffensiveStrikeGame/keystore
-    and passwords/offensive.keystore
+  AndroidKeystoreName: '{inproject}: keystore/offensive.keystore'
   AndroidKeyaliasName: offensivestrike
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0

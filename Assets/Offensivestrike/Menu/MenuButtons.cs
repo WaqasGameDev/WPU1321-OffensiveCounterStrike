@@ -48,8 +48,14 @@ public class MenuButtons : MonoBehaviour {
 	[Header("[ Create Room Object]")]
 	public GameObject CrObject;
 
+	[Header("[ Create Offline Room Object]")]
+	public GameObject CrOfflineObject;
+
 	[Header("[ Create Game Room Object]")]
 	public GameObject CrGameObject;
+
+	[Header("[ Create Offline Game Room Object]")]
+	public GameObject CrOfflineGameObject;
 
 	[Header("[ Lobby Object]")]
 	public GameObject LobyObject;
@@ -87,12 +93,22 @@ public class MenuButtons : MonoBehaviour {
 		CrObject.gameObject.SetActive(true);
 	}
 
+	public void CreateOfflineRoomEnabled()
+	{
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		MainObject.gameObject.SetActive(false);
+		//CrObject.gameObject.SetActive(true);
+		CrOfflineObject.gameObject.SetActive(true);
+	}
+
 	public void MainMenuEnabled()
 	{
 		thisAudioSource.clip = ClickSong;
 		thisAudioSource.Play();
 		MainObject.gameObject.SetActive(true);
 		CrObject.gameObject.SetActive(false);
+		CrOfflineObject.gameObject.SetActive(false);
 		LobyObject.gameObject.SetActive(false);
 	}
 
@@ -102,6 +118,14 @@ public class MenuButtons : MonoBehaviour {
 		thisAudioSource.Play();
 		CrObject.gameObject.SetActive(true);
 		CrGameObject.gameObject.SetActive(false);
+	}
+
+	public void CreateOfflineGameRoomEnabled()
+	{
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		CrOfflineObject.gameObject.SetActive(true);
+		CrOfflineGameObject.gameObject.SetActive(false);
 	}
 
 	public void LoobyEnabled()
@@ -174,6 +198,31 @@ public class MenuButtons : MonoBehaviour {
 		thisAudioSource.clip = ClickSong;
 		thisAudioSource.Play ();
 		StartCoroutine ("CreateRommOnOne");
+	}
+
+
+
+
+
+	public void CreaterBombModeOffline()
+	{
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		StartCoroutine("CreateOfflineRommOnBomb");
+	}
+
+	public void CreaterTeamModeOffline()
+	{
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		StartCoroutine("CreateOfflineRommOnTeam");
+	}
+
+	public void CreaterOnlyOneOffline()
+	{
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		StartCoroutine("CreateOfflineRommOnOne");
 	}
 
 	public void İnfoOn(){
@@ -298,6 +347,36 @@ public class MenuButtons : MonoBehaviour {
 		thisAudioSource.Play();
 		CrObject.gameObject.SetActive(false);
 		CrGameObject.gameObject.SetActive(true);
+	}
+
+	public void CreateOfflineRommOnBomb()
+	{
+		Mode = "BOMB";
+		ModeTex.text = Mode;
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		CrOfflineObject.gameObject.SetActive(false);
+		CrOfflineGameObject.gameObject.SetActive(true);
+	}
+
+	public void CreateOfflineRommOnTeam()
+	{
+		Mode = "TDM";
+		ModeTex.text = Mode;
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		CrOfflineObject.gameObject.SetActive(false);
+		CrOfflineGameObject.gameObject.SetActive(true);
+	}
+
+	public void CreateOfflineRommOnOne()
+	{
+		Mode = "FFA";
+		ModeTex.text = Mode;
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		CrOfflineObject.gameObject.SetActive(false);
+		CrOfflineGameObject.gameObject.SetActive(true);
 	}
 
 	IEnumerator BackLobys()

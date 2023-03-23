@@ -39,8 +39,8 @@ public class BFX_MouseOrbit : MonoBehaviour
 
             if (pos.x < 380*dpiScale && Screen.height - pos.y < 250*dpiScale) return;
 
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.visible = false;
+            //Cursor.lockState = CursorLockMode.Locked;
 
             x += Input.GetAxis("Mouse X")*xSpeed*0.02f;
             y -= Input.GetAxis("Mouse Y")*ySpeed*0.02f;
