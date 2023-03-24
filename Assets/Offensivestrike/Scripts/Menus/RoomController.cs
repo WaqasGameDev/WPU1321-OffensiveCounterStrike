@@ -456,7 +456,6 @@ public class RoomController : Photon.MonoBehaviour
 
 		if (!offlineMode)
 		{
-			Debug.Log("Test1");
 			currentGameMode = (string)PhotonNetwork.room.CustomProperties["GameMode"];
 			roundDuration = (float)PhotonNetwork.room.CustomProperties["RoundDuration"];
 			GetTeamScores();
