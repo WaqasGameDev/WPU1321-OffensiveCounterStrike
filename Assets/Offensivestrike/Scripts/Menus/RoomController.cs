@@ -282,6 +282,7 @@ public class RoomController : Photon.MonoBehaviour
 		if (PlayerPrefs.GetInt("OfflineMode", 0) == 1) 
 		{
 			offlineMode = true;
+			currentGameMode = "FFA";
 		}
 		else 
 		{
@@ -462,41 +463,54 @@ public class RoomController : Photon.MonoBehaviour
 		}
 		else 
 		{
-			Debug.Log("Test2");
-			/*currentGameMode = ;
-			roundDuration =*/
-		}
+            currentGameMode = "FFA";
+			roundDuration = 30;
+
+        }
 
 		previousGameStatus = currentGameStatus;
 
-		//Used only for FFA mode
-		if (PhotonNetwork.room.CustomProperties["KillLimit"] != null)
+		if (offlineMode)
 		{
-			currentKillLimit = (int)PhotonNetwork.room.CustomProperties["KillLimit"];
+			//Offline mode for only FFA
+			currentKillLimit = 30;
 		}
 		else
 		{
-			currentKillLimit = -1;
+			//Used only for FFA mode
+			if (PhotonNetwork.room.CustomProperties["KillLimit"] != null)
+			{
+				currentKillLimit = (int)PhotonNetwork.room.CustomProperties["KillLimit"];
+			}
+			else
+			{
+				currentKillLimit = -1;
+			}
+
+			if (PhotonNetwork.room.CustomProperties["WinningPlayer"] != null)
+			{
+				winningPlayer = (PhotonPlayer)PhotonNetwork.room.CustomProperties["WinningPlayer"];
+			}
+			else
+			{
+				winningPlayer = null;
+			}
+
+			//Display notification that we joined room (locally)
+			PostActivityRemote("", PhotonNetwork.player.NickName + xml.button65, "", 0, 0);
+			InvokeRepeating("RefreshPing", 3.5f, 3.5f);
+
+			GameSettings.currentGameMode = currentGameMode;
+
+			yield return new WaitForEndOfFrame();
+
+			doneSetup = true;
 		}
 
-		if (PhotonNetwork.room.CustomProperties["WinningPlayer"] != null)
+		if (offlineMode) 
 		{
-			winningPlayer = (PhotonPlayer)PhotonNetwork.room.CustomProperties["WinningPlayer"];
+			SpawnPlayer(1);
 		}
-		else
-		{
-			winningPlayer = null;
-		}
-
-		//Display notification that we joined room (locally)
-		PostActivityRemote("", PhotonNetwork.player.NickName + xml.button65, "", 0, 0);
-		InvokeRepeating("RefreshPing", 3.5f, 3.5f);
-
-		GameSettings.currentGameMode = currentGameMode;
-
-		yield return new WaitForEndOfFrame();
-
-		doneSetup = true;
 	}
 
 	void GetTeamScores()
@@ -1756,8 +1770,17 @@ public class RoomController : Photon.MonoBehaviour
 				}
 			}
 
-			GameObject ourPlayerTmp = PhotonNetwork.Instantiate(playerPrefab.name, spawnPontTmp.position, spawnPontTmp.rotation, 0);
-			ourPlayer = ourPlayerTmp.GetComponent<PlayerNetwork>();
+			if (!offlineMode)
+			{
+				GameObject ourPlayerTmp = PhotonNetwork.Instantiate(playerPrefab.name, spawnPontTmp.position, spawnPontTmp.rotation, 0);
+				ourPlayer = ourPlayerTmp.GetComponent<PlayerNetwork>();
+			}
+			else 
+			{
+				GameObject ourPlayerTmp = Instantiate(playerPrefab, spawnPontTmp.position, spawnPontTmp.rotation);
+				ourPlayer = ourPlayerTmp.GetComponent<PlayerNetwork>();
+			}
+			
 			
             bm.lastSelectedWeapon = 1;
 

@@ -1331,7 +1331,7 @@ public class RoomUI : Photon.MonoBehaviour
         }
         else
         {
-			if (rc.ourPlayer && !rc.ourPlayer.playerKilled && rc.ourPlayer.playerWeapons != null)
+			if (rc.ourPlayer && !rc.ourPlayer.playerKilled && rc.ourPlayer.playerWeapons != null/* || rc.offlineMode*/)
             {
 				HpI.gameObject.SetActive (true);
 				HpBack.gameObject.SetActive (true);
@@ -2249,10 +2249,7 @@ public class RoomUI : Photon.MonoBehaviour
 		if (!rc.ourPlayer) 
 		{
 			return;
-			Debug.Log("IN3");
-
 		}
-		Debug.Log("IN2");
 
 		int rayLength;
 

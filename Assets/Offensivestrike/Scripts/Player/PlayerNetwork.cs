@@ -131,9 +131,25 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			playerWeapons.fpsController = fpsController;
 			playerWeapons.QuickSetup (photonView.isMine);
 
-		gameObject.name = photonView.owner.NickName;
+		if (!GameSettings.rc.offlineMode)
+		{
+			gameObject.name = photonView.owner.NickName;
+		}
+		else 
+		{
+			gameObject.name = "OfflinePlayer";
+		}
+
 		thisT = transform;
-		MeName = photonView.owner.NickName;
+
+		if (!GameSettings.rc.offlineMode)
+		{
+			MeName = photonView.owner.NickName;
+		}
+		else 
+		{
+			MeName = "OfflinePlayer";
+		}
 
 		playerKilled = false;
 		KillSay = 1;
@@ -174,9 +190,19 @@ public class PlayerNetwork : Photon.MonoBehaviour
 				cameraMouseLook = playerWeapons.playerCamera.GetComponent<FPSMouseLook> ();
 				nameLabelTransform.gameObject.SetActive (true);
 		}
-			
 
-		GameSettings.MoveOn = false;
+		if (!GameSettings.rc.offlineMode)
+		{
+			firstPersonView.SetActive(true);
+			rs.enabled = true;
+			//fbes.enabled = true;
+			soldierAnimation.gameObject.SetActive(false);
+			cameraMouseLook = playerWeapons.playerCamera.GetComponent<FPSMouseLook>();
+			nameLabelTransform.gameObject.SetActive(true);
+		}
+
+
+			GameSettings.MoveOn = false;
 		this.StopCoroutine("MoveON");
 		this.StartCoroutine("MoveON");
 
@@ -189,8 +215,17 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			photonView.owner.SetCustomProperties(setPlayerData);
 		}
 
-		playerTeam = (int)photonView.owner.CustomProperties["Team"];
-		playerID = photonView.owner.ID;
+		if (!GameSettings.rc.offlineMode)
+		{
+			playerTeam = (int)photonView.owner.CustomProperties["Team"];
+			playerID = photonView.owner.ID;
+		}
+		else 
+		{
+			playerTeam = 1;
+			playerID = 11223344;
+		}
+		
 
 		if(playerTeam == 1 || playerTeam == 2)
         {
@@ -218,7 +253,6 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			if(photonView.isMine)
             {
 				nameLabelTransform.gameObject.SetActive(true);
-
 			}
             else
             {
@@ -386,7 +420,15 @@ public class PlayerNetwork : Photon.MonoBehaviour
 		}
 		RoomCk = GameObject.Find("_RoomController(Clone)");
 		bm = RoomCk.GetComponent<BuyMenu> ();
-		playerTeam = (int)photonView.owner.CustomProperties["Team"];
+		if (!GameSettings.rc.offlineMode)
+		{
+			playerTeam = (int)photonView.owner.CustomProperties["Team"];
+		}
+		else 
+		{
+			playerTeam = 1;
+		}
+
 		if (playerTeam == 1 || playerTeam == 2) {
 			if (playerTeam == 1) {
 				if (soldierAnimation == null) {
@@ -425,11 +467,13 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			} 
 			else {
 				if (soldierAnimation == null) {
+					Debug.Log("CAT1");
 					PlayerC.SetActive (false);
 					PlayerT.SetActive (true);
 					soldierAnimation = PlayerT.GetComponent<SoldierAnimation> ();
 				}
 				if (firstPersonView == null) {
+					Debug.Log("CAT2");
 					WeaponC.SetActive (false);
 					WeaponT.SetActive (true);
 					playerWeapons = WeaponT.GetComponent<PlayerWeapons> ();
