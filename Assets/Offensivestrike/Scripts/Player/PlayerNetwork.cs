@@ -191,7 +191,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 				nameLabelTransform.gameObject.SetActive (true);
 		}
 
-		if (!GameSettings.rc.offlineMode)
+		if (GameSettings.rc.offlineMode)
 		{
 			firstPersonView.SetActive(true);
 			rs.enabled = true;
