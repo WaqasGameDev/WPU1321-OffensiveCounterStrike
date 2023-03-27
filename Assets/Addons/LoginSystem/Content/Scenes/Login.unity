@@ -6748,7 +6748,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 141, y: 0}
+  m_AnchoredPosition: {x: 141.00003, y: 0}
   m_SizeDelta: {x: 141, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &453759997
@@ -9898,6 +9898,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Change Pass Button
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011718304010, guid: b8a1960c0b2cf874d881edc4a46c0ffc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1000012044407550, guid: b8a1960c0b2cf874d881edc4a46c0ffc, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -10498,6 +10502,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000013068824656, guid: b8a1960c0b2cf874d881edc4a46c0ffc,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 104.281
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000013068824656, guid: b8a1960c0b2cf874d881edc4a46c0ffc,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.42819178
       objectReference: {fileID: 0}
     - target: {fileID: 224000013843028038, guid: b8a1960c0b2cf874d881edc4a46c0ffc,
         type: 3}
@@ -30384,7 +30398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9632353, g: 0.9632353, b: 0.9632353, a: 1}
+  m_Color: {r: 0.627451, g: 0.8666667, b: 0.20784314, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -31605,7 +31619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9632353, g: 0.9632353, b: 0.9632353, a: 1}
+  m_Color: {r: 0.627451, g: 0.8666667, b: 0.20784314, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
