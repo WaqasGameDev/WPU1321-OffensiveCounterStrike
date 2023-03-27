@@ -157,7 +157,12 @@ public class PlayerWeapons : MonoBehaviour
 
 	}
 
-	void PrepareWepaons(List<WeaponSet> tmpWeapons)
+    private void Start()
+    {
+		Debug.Log("currentSelectedWeapon = " + currentSelectedWeapon);
+    }
+
+    void PrepareWepaons(List<WeaponSet> tmpWeapons)
     {
 		for(int i = 0; i < tmpWeapons.Count; i++)
         {

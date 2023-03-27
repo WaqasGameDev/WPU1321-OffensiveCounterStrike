@@ -103,7 +103,7 @@ public class RoomController : Photon.MonoBehaviour
 	[HideInInspector]
 	public bool CashOn = false;
 
-	[HideInInspector]
+	//[HideInInspector]
 	public PlayerNetwork ourPlayer;
 	[HideInInspector]
 	public List<PlayerNetwork> otherPlayers = new List<PlayerNetwork>(); //Keep references of other spawned players
@@ -609,8 +609,6 @@ public class RoomController : Photon.MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
-
         //GameObject C4Box4 = GameObject.Find("C4Box1(Clone)");
         //if (C4Box4 != null)
         //{
@@ -1629,7 +1627,10 @@ public class RoomController : Photon.MonoBehaviour
 			yield return new WaitForSeconds(1);
 		}
 
-		SpawnPlayer((int)PhotonNetwork.player.CustomProperties["Team"]);
+		if (!offlineMode)
+		{
+			SpawnPlayer((int)PhotonNetwork.player.CustomProperties["Team"]);
+		}
 		//yield break;
 	}
 

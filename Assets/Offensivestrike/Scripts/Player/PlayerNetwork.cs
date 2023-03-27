@@ -65,7 +65,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 
 	[HideInInspector]
 	public int playerID;
-	[HideInInspector]
+	//[HideInInspector]
 	public bool playerKilled = false;
 	[HideInInspector]
 	public int KillSay = 1;
@@ -198,11 +198,21 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			//fbes.enabled = true;
 			soldierAnimation.gameObject.SetActive(false);
 			cameraMouseLook = playerWeapons.playerCamera.GetComponent<FPSMouseLook>();
+
+			//currentWeaponIndex = 2;
+			soldierAnimation.playerWeapons = playerWeapons;
+			rc = FindObjectOfType<RoomController>();
+			GetComponent<FPSController>().enabled = true;
+			GetComponent<FPSMouseLook>().enabled = true;
 			nameLabelTransform.gameObject.SetActive(true);
+			playerWeapons.enabled = true;
+			GameSettings.rc.currentHP = 100;
+			GameSettings.MoveOn = true;
+			//GameSettings.rc.ourPlayer.playerWeapons.currentSelectedWeapon = ;
 		}
 
 
-			GameSettings.MoveOn = false;
+		GameSettings.MoveOn = false;
 		this.StopCoroutine("MoveON");
 		this.StartCoroutine("MoveON");
 
