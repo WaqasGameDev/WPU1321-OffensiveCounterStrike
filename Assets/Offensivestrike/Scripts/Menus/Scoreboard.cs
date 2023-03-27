@@ -152,6 +152,7 @@ public class Scoreboard : MonoBehaviour
 			if (rc.offlineMode) 
 			{
 				rc.sb.enabled = false;
+				GameSettings.menuOpened = false;
 			}
 		}
 

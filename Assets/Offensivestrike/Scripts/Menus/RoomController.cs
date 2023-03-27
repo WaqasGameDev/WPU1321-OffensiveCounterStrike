@@ -255,7 +255,7 @@ public class RoomController : Photon.MonoBehaviour
 	FPSMouseLook cameraMouseLook;
 	public Scoreboard sb;
 
-	BuyMenu bm;
+	public BuyMenu bm;
 	MultiplayerChat mtp;
 	RoomUI ru;
 	public AudioSource audioSource;
@@ -720,9 +720,8 @@ public class RoomController : Photon.MonoBehaviour
 
 		if (offlineMode) 
 		{
-			Debug.Log("ZAKON");
 			sb.enabled = true;
-			sb.gameObject.SetActive(true);
+			GameSettings.menuOpened = true;
 		}
 	}
 
@@ -746,6 +745,7 @@ public class RoomController : Photon.MonoBehaviour
 			bm.buySection = BuyMenu.BuySection.Secondary;
 			GameSettings.updateActionReports = false;
 			bm.enabled = !showBuyMenu;
+			GameSettings.menuOpened = true;
 		}
 	}
 

@@ -296,6 +296,11 @@ public class BuyMenu : MonoBehaviour
 		if(GUI.Button(new Rect(440 - 28, 1, 28, 29), "", GameSettings.closeButtonStyle))
         {
 			rc.showBuyMenu = false;
+			if (rc.offlineMode)
+			{
+				rc.bm.enabled = false;
+				GameSettings.menuOpened = false;
+			}
 		}
 
 		GUI.enabled = buySection != BuySection.Secondary;
