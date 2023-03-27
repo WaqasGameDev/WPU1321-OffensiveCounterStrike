@@ -26,8 +26,8 @@ public class Scoreboard : MonoBehaviour
 	public static Scoreboard Instance;
 
 	// Use this for initialization
-	void Start ()
-    {
+	void Start()
+	{
 		leaving = false;
 		adOpen = false;
 		tryToLeaveNum = 0;
@@ -47,28 +47,28 @@ public class Scoreboard : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void OnGUI ()
-    {
+	void OnGUI()
+	{
 		GUI.skin = GameSettings.guiSkin;
 		if (rc.currentGameMode == "TDM" || rc.currentGameMode == "NORMAL") {
 			if (ShowFirst == 1) {
-				if (PhotonNetwork.room != null) {
-					GUI.Window (0, new Rect (Screen.width / 2 - 425, Screen.height / 2 - 225, 850, 450), ScoreboardWindow, "");
+				if (PhotonNetwork.room != null || rc.offlineMode) {
+					GUI.Window(0, new Rect(Screen.width / 2 - 425, Screen.height / 2 - 225, 850, 450), ScoreboardWindow, "");
 				}
 			}
 			if (ShowFirst == 0) {
-				GUI.Window (0, new Rect (Screen.width / 2 - 255, Screen.height / 2 - 133.5f, 503, 272), ShowTeamSelected, "");
+				GUI.Window(0, new Rect(Screen.width / 2 - 255, Screen.height / 2 - 133.5f, 503, 272), ShowTeamSelected, "");
 			}
-		} 
+		}
 		else {
-			if (PhotonNetwork.room != null) {
-				GUI.Window (0, new Rect (Screen.width / 2 - 425, Screen.height / 2 - 225, 850, 450), ScoreboardWindow, "");
+			if (PhotonNetwork.room != null || rc.offlineMode) {
+				GUI.Window(0, new Rect(Screen.width / 2 - 425, Screen.height / 2 - 225, 850, 450), ScoreboardWindow, "");
 			}
 		}
 
 		if (rc.leavingRoom) {
 			if (currentWindow == CurrentWindow.LeaveRoom) {
-				GUI.Window (0, new Rect (0, 0, Screen.width, Screen.height), LeaveRoomNow, "");
+				GUI.Window(0, new Rect(0, 0, Screen.width, Screen.height), LeaveRoomNow, "");
 			}
 		}
 
@@ -93,36 +93,39 @@ public class Scoreboard : MonoBehaviour
 	private void ShowAdBeforeLeave()
 	{
 		Debug.Log("Show ad");
-        AdmobAds.singleton.ShowVideoRewardAd();
+		AdmobAds.singleton.ShowVideoRewardAd();
 
-    }
+	}
 
 	void LeaveRoomNow(int windowID)
 	{
 		GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), background);
-		GUI.Box (new Rect (Screen.width / 2 - 150, Screen.height / 2 - 15, 375, 30), xml.button79);
+		GUI.Box(new Rect(Screen.width / 2 - 150, Screen.height / 2 - 15, 375, 30), xml.button79);
 	}
 
 	public void ShowTeamSelected(int windowID)
 	{
 
-		if (rc.currentGameMode == "TDM" || rc.currentGameMode == "NORMAL") {
+		if (rc.currentGameMode == "TDM" || rc.currentGameMode == "NORMAL")
+		{
 			GUI.enabled = ((rc.ourTeam != 1 && rc.teamBPlayers.Count > rc.teamAPlayers.Count) || (rc.ourTeam == 0 && rc.teamBPlayers.Count == rc.teamAPlayers.Count)) && rc.currentRespawnTime == -1;
 
-			if (GUI.Button (new Rect (0.5f, 0, 253, 272), CounterText)) {
+			if (GUI.Button(new Rect(0.5f, 0, 253, 272), CounterText))
+			{
 				scoreAudioSource.clip = ClickSong;
-				scoreAudioSource.Play ();
-				rc.PrepareRespawn(1, true,false);
+				scoreAudioSource.Play();
+				rc.PrepareRespawn(1, true, false);
 				ShowFirst = 1;
 				rc.showScoreBoard = false;
 			}
 
 			GUI.enabled = ((rc.ourTeam != 2 && rc.teamAPlayers.Count > rc.teamBPlayers.Count) || (rc.ourTeam == 0 && rc.teamBPlayers.Count == rc.teamAPlayers.Count)) && rc.currentRespawnTime == -1;
 
-			if (GUI.Button (new Rect (253, 0, 250, 272), TerorText)) {
+			if (GUI.Button(new Rect(253, 0, 250, 272), TerorText))
+			{
 				scoreAudioSource.clip = ClickSong;
-				scoreAudioSource.Play ();
-				rc.PrepareRespawn(2, true,false);
+				scoreAudioSource.Play();
+				rc.PrepareRespawn(2, true, false);
 				ShowFirst = 1;
 				rc.showScoreBoard = false;
 			}
@@ -132,13 +135,24 @@ public class Scoreboard : MonoBehaviour
 
 	void ScoreboardWindow (int windowID)
     {
-		GUI.Label(new Rect(15, 0, 750, 35), PhotonNetwork.room.Name + " - " + PhotonNetwork.room.PlayerCount.ToString() + "/" + PhotonNetwork.room.MaxPlayers.ToString() + " - " + rc.currentGameMode);
+		if (!rc.offlineMode)
+		{
+			GUI.Label(new Rect(15, 0, 750, 35), PhotonNetwork.room.Name + " - " + PhotonNetwork.room.PlayerCount.ToString() + "/" + PhotonNetwork.room.MaxPlayers.ToString() + " - " + rc.currentGameMode);
+		}
+		else 
+		{
+			GUI.Label(new Rect(15, 0, 750, 35), "Offline Mode" + " - " + 1 + "/" + 4 + " - " + rc.currentGameMode);
+		}
 
-		if(GUI.Button(new Rect(850 - 28, 1, 28, 29), "", GameSettings.closeButtonStyle))
+		if (GUI.Button(new Rect(850 - 28, 1, 28, 29), "", GameSettings.closeButtonStyle))
         {
 			scoreAudioSource.clip = ClickSong;
 			scoreAudioSource.Play ();
 			rc.showScoreBoard = false;
+			if (rc.offlineMode) 
+			{
+				rc.sb.enabled = false;
+			}
 		}
 
 		if(rc.currentGameMode == "TDM" || rc.currentGameMode == "NORMAL")
@@ -287,38 +301,41 @@ public class Scoreboard : MonoBehaviour
             else
             {
 				GUI.color = Color.white;
-				for(int i = 0; i < teamTmp.Count; i ++)
-                {
-					GUI.color = teamTmp[i] == PhotonNetwork.player ? Color.white : GameSettings.otherPlayerGUIBoxColor;
-					GUILayout.BeginVertical(GUI.skin.customStyles[1], GUILayout.Width(fieldWidth));
-					
-					//Display player name
-					GUILayout.BeginHorizontal();
-						if(teamTmp[i].CustomProperties["PlayerHP"] == null || (int)teamTmp[i].CustomProperties["PlayerHP"] < 1)
-                        {
-							GUI.color = GameSettings.customRedColor;
-							GUILayout.Label("X");
-							GUILayout.Space(5);
-						}
-						
-					GUI.color = (int)teamTmp[i].CustomProperties["Team"] == 1 ? GameSettings.teamAColor : GameSettings.teamBColor;
+			for (int i = 0; i < teamTmp.Count; i++)
+			{
+				GUI.color = teamTmp[i] == PhotonNetwork.player ? Color.white : GameSettings.otherPlayerGUIBoxColor;
+				GUILayout.BeginVertical(GUI.skin.customStyles[1], GUILayout.Width(fieldWidth));
 
-				GUILayout.Label (teamTmp [i].NickName);
-
-					GUILayout.EndHorizontal();
-					
+				//Display player name
+				GUILayout.BeginHorizontal();
+				if (teamTmp[i].CustomProperties["PlayerHP"] == null || (int)teamTmp[i].CustomProperties["PlayerHP"] < 1)
+				{
+					GUI.color = GameSettings.customRedColor;
+					GUILayout.Label("X");
 					GUILayout.Space(5);
-					
-					GUI.color = Color.white;
-					
-					GUILayout.BeginHorizontal();
-					GUILayout.Label("Ping: " + ((int)teamTmp[i].CustomProperties["Ping"]).ToString(), GUILayout.Width(125));
-					GUILayout.FlexibleSpace();
-					GUILayout.Label(((int)teamTmp[i].CustomProperties["Kills"]).ToString(), GUILayout.Width(75));
-					GUILayout.Label(((int)teamTmp[i].CustomProperties["Deaths"]).ToString(), GUILayout.Width(75));
-					GUILayout.EndHorizontal();
-					GUILayout.EndVertical();
 				}
+
+				GUI.color = (int)teamTmp[i].CustomProperties["Team"] == 1 ? GameSettings.teamAColor : GameSettings.teamBColor;
+
+				GUILayout.Label(teamTmp[i].NickName);
+
+				GUILayout.EndHorizontal();
+
+				GUILayout.Space(5);
+
+				GUI.color = Color.white;
+
+				GUILayout.BeginHorizontal();
+				if (!rc.offlineMode)
+				{
+					GUILayout.Label("Ping: " + ((int)teamTmp[i].CustomProperties["Ping"]).ToString(), GUILayout.Width(125));
+				}
+				GUILayout.FlexibleSpace();
+				GUILayout.Label(((int)teamTmp[i].CustomProperties["Kills"]).ToString(), GUILayout.Width(75));
+				GUILayout.Label(((int)teamTmp[i].CustomProperties["Deaths"]).ToString(), GUILayout.Width(75));
+				GUILayout.EndHorizontal();
+				GUILayout.EndVertical();
+			}
 
 			//if (team == 1)
 			//{

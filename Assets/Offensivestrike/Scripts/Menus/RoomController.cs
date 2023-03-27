@@ -53,7 +53,7 @@ public class RoomController : Photon.MonoBehaviour
 	[HideInInspector]
 	public List<Transform> teamBSpawnPoints = new List<Transform>();
 
-	[HideInInspector]
+	//[HideInInspector]
 	public List<PhotonPlayer> teamAPlayers = new List<PhotonPlayer>();
 	[HideInInspector]
 	public List<PhotonPlayer> teamBPlayers = new List<PhotonPlayer>();
@@ -249,11 +249,11 @@ public class RoomController : Photon.MonoBehaviour
 
 	[HideInInspector]
 	public MultiplayerChat mc;
-	[HideInInspector]
+	//[HideInInspector]
 	public OptionsSettings os;
 
 	FPSMouseLook cameraMouseLook;
-	Scoreboard sb;
+	public Scoreboard sb;
 
 	BuyMenu bm;
 	MultiplayerChat mtp;
@@ -283,6 +283,7 @@ public class RoomController : Photon.MonoBehaviour
 		{
 			offlineMode = true;
 			currentGameMode = "FFA";
+			PhotonNetwork.offlineMode = true;
 		}
 		else 
 		{
@@ -716,6 +717,13 @@ public class RoomController : Photon.MonoBehaviour
 		{
 			RefreshPlayerList();
 		}
+
+		if (offlineMode) 
+		{
+			Debug.Log("ZAKON");
+			sb.enabled = true;
+			sb.gameObject.SetActive(true);
+		}
 	}
 
 	public void OpenBuyMenu()
@@ -728,9 +736,16 @@ public class RoomController : Photon.MonoBehaviour
 			showOptions = false;
 			bm.buySection = BuyMenu.BuySection.Secondary;
 			GameSettings.updateActionReports = false;
-
-
-
+		}
+		if (offlineMode && timeToPurchase > 0) 
+		{
+			Debug.Log("ZAK98");
+			showBuyMenu = !showBuyMenu;
+			showScoreBoard = false;
+			showOptions = false;
+			bm.buySection = BuyMenu.BuySection.Secondary;
+			GameSettings.updateActionReports = false;
+			bm.enabled = !showBuyMenu;
 		}
 	}
 
@@ -1869,6 +1884,12 @@ public class RoomController : Photon.MonoBehaviour
 			timeToPurchase--;
 			yield return new WaitForSeconds(1);
 		}
+
+		//Turn off buy menu on purchase time over
+		if (offlineMode) 
+		{
+			bm.enabled = false;
+		}
 	}
 
 	IEnumerator ShieldTimer()
@@ -1908,7 +1929,7 @@ public class RoomController : Photon.MonoBehaviour
 
 		//print ("Round is already at: " + ((float)PhotonNetwork.time - referenceTime).ToString() + " seconds");
 
-		if (currentGameMode == "FFA" && PhotonNetwork.isMasterClient && currentGameStatus == 0)
+		if (currentGameMode == "FFA" && PhotonNetwork.isMasterClient && currentGameStatus == 0 && !offlineMode)
 		{
 			if (teamAPlayers.Count > 0 && (float)PhotonNetwork.time - referenceTime > 15)
 			{

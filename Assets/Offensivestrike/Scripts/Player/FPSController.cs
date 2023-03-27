@@ -27,7 +27,7 @@ public class FPSController : MonoBehaviour
 	public int movementState = 0; //0 - walking, 1 - sprinting, 2 - crouch, 3 - in air, 4 - on ladder
 	[HideInInspector]
 	public bool isMoving = false;
-	[HideInInspector]
+	//[HideInInspector]
 	public bool isGrounded = false;
 	[HideInInspector]
 	public bool isCrouching = false;

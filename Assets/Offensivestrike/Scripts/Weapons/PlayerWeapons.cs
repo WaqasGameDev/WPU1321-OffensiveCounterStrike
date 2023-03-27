@@ -195,6 +195,7 @@ public class PlayerWeapons : MonoBehaviour
 		} 
 		else {
 			SwitchWeapon (secondaryWeapons [selectedSecondary].firstPersonWeapon, true);
+			Debug.Log("ZAK0");
 		}
 	}
 		
@@ -235,24 +236,26 @@ public class PlayerWeapons : MonoBehaviour
 		    }
 #else
 		//Switch weapons mobile
-		if(previousWeaponIndex != GameSettings.switchWeaponIndex)
+		if (previousWeaponIndex != GameSettings.switchWeaponIndex)
 		{
-		if(selectedPrimary>1){
-		if(GameSettings.switchWeaponIndex > 3 || GameSettings.switchWeaponIndex < 1)
-		{
-		GameSettings.switchWeaponIndex = 1;
-		}
-		}
-		else{
-		if(GameSettings.switchWeaponIndex > 2 || GameSettings.switchWeaponIndex < 1)
-		{
-		GameSettings.switchWeaponIndex = 1;
-		}
-		}
+			if (selectedPrimary > 1)
+			{
+				if (GameSettings.switchWeaponIndex > 3 || GameSettings.switchWeaponIndex < 1)
+				{
+					GameSettings.switchWeaponIndex = 1;
+				}
+			}
+			else
+			{
+				if (GameSettings.switchWeaponIndex > 2 || GameSettings.switchWeaponIndex < 1)
+				{
+					GameSettings.switchWeaponIndex = 1;
+				}
+			}
 
-		previousWeaponIndex = GameSettings.switchWeaponIndex;
-
-		GetWeaponToSelect(previousWeaponIndex);
+			previousWeaponIndex = GameSettings.switchWeaponIndex;
+			Debug.Log("ZAK-5");
+			GetWeaponToSelect(previousWeaponIndex);
 		}
 
 		if(playerNetwork.MeName == GameSettings.C4Who && playerNetwork.playerTeam == 2 && GameSettings.currentGameMode == "NORMAL"){
@@ -517,7 +520,10 @@ public class PlayerWeapons : MonoBehaviour
 
 	public void GetWeaponToSelect (int type)
 	{
+		Debug.Log("ZAK-1");
 		if (selectedPrimary > 1) {
+			Debug.Log("ZAK-6");
+
 			if (type == 1) {
 				SwitchWeapon (primaryWeapons [selectedPrimary].firstPersonWeapon, true);
 			}
@@ -531,8 +537,11 @@ public class PlayerWeapons : MonoBehaviour
 			}
 		}
 		else {
+			Debug.Log("ZAK-8");
+
 			if (type == 1) {
-				SwitchWeapon (secondaryWeapons [selectedSecondary].firstPersonWeapon, true);
+				Debug.Log("ZAK-7");
+				SwitchWeapon(secondaryWeapons [selectedSecondary].firstPersonWeapon, true);
 			}
 
 			if (type == 2) {
@@ -548,6 +557,7 @@ public class PlayerWeapons : MonoBehaviour
 
 	void SwitchWeapon(FPSWeapon tmpWeapon,  bool firstPerson)
     {
+		Debug.Log("ZAK");
 		if(tmpWeapon != null && tmpWeapon != currentSelectedWeapon )
         {
 			if(currentSelectedWeapon)

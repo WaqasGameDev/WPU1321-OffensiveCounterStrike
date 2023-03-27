@@ -1331,7 +1331,7 @@ public class RoomUI : Photon.MonoBehaviour
         }
         else
         {
-			if (rc.ourPlayer && !rc.ourPlayer.playerKilled && rc.ourPlayer.playerWeapons != null || rc.offlineMode)
+			if (rc.ourPlayer && !rc.ourPlayer.playerKilled && rc.ourPlayer.playerWeapons != null)
             {
 				HpI.gameObject.SetActive (true);
 				HpBack.gameObject.SetActive (true);

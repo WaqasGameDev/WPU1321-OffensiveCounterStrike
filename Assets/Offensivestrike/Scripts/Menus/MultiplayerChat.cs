@@ -179,9 +179,6 @@ public class MultiplayerChat : Photon.MonoBehaviour
 		}
 		if (!rc.ourPlayer)
 		{
-
-
-
 			if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height * 0.9f, 200, 35), "< SPECTATING >"))
 			{
 				if (rc.WFollowCam >= rc.FollowCamAll.Count - 1)
@@ -963,7 +960,6 @@ public class MultiplayerChat : Photon.MonoBehaviour
 				if (GUI.Button(new Rect(Screen.width / 2 * 1.9f, 10, 30, 25), Pause, GUI.skin.customStyles[2]))
 				{
 					rc.ShowScoreboard();
-
 				}
 
 			}

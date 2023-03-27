@@ -199,7 +199,9 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			soldierAnimation.gameObject.SetActive(false);
 			cameraMouseLook = playerWeapons.playerCamera.GetComponent<FPSMouseLook>();
 
-			//currentWeaponIndex = 2;
+			playerWeapons.GetWeaponToSelect(1);
+			GameSettings.menuOpened = false;
+			GetComponent<FPSController>().startWhoTeam();
 			soldierAnimation.playerWeapons = playerWeapons;
 			rc = FindObjectOfType<RoomController>();
 			GetComponent<FPSController>().enabled = true;
@@ -217,7 +219,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 		this.StartCoroutine("MoveON");
 
 
-		if(PhotonNetwork.isMasterClient)
+		if(PhotonNetwork.isMasterClient && !rc.offlineMode)
         {
 			//Set player HP
 			Hashtable setPlayerData = new Hashtable();

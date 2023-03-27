@@ -158,7 +158,7 @@ public class BuyMenu : MonoBehaviour
 		//Check what weapons we have selected and apply them to newly spawned player
 		if(rc.ourPlayer)
         {
-			for(int i = 0; i < rc.ourPlayer.playerWeapons.primaryWeapons.Count; i++)
+			for (int i = 0; i < rc.ourPlayer.playerWeapons.primaryWeapons.Count; i++)
             {
 				if(rc.ourPlayer.playerWeapons.primaryWeapons[i].firstPersonWeapon.name == primaryWeaponsTmp[selectedPrimary].firstPersonWeapon.name)
                 {
@@ -979,7 +979,6 @@ public class BuyMenu : MonoBehaviour
 								}
 								Invoke ("ApplySelectedWeapons", 0.035f);
 							}
-
 							rc.showBuyMenu = false;
 						}
 					}
@@ -1003,7 +1002,6 @@ public class BuyMenu : MonoBehaviour
 									}
 									Invoke ("ApplySelectedWeapons", 0.035f);
 								}
-
 								rc.showBuyMenu = false;
 							}
 						}
@@ -1027,7 +1025,6 @@ public class BuyMenu : MonoBehaviour
 									}
 									Invoke ("ApplySelectedWeapons", 0.035f);
 								}
-
 								rc.showBuyMenu = false;
 							}
 						}
