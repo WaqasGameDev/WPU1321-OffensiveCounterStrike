@@ -956,7 +956,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <color=#447c98>OFFENSIVE STRIKE</color>
+  m_Text: <color=#a0dd35>OFFENSIVE STRIKE</color>
 --- !u!222 &1088835852
 CanvasRenderer:
   m_ObjectHideFlags: 0
