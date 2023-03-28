@@ -394,12 +394,12 @@ public class RoomUI : Photon.MonoBehaviour
 		RoundTerorText.fontSize = 18;
 		RoundTerorText.color = GameSettings.teamBColor;
 		RoundTerorText.text = "TERRORISTS";
-		RoundTerorText.rectTransform.sizeDelta = new Vector2(121, 35);
+		RoundTerorText.rectTransform.sizeDelta = new Vector2(105, 35);
 		RoundTerorText.rectTransform.anchorMin = new Vector2(0.5f, 1);
 		RoundTerorText.rectTransform.anchorMax = new Vector2(0.5f, 1);
 		RoundTerorText.rectTransform.pivot = new Vector2(0.5f, 1);
-		RoundTerorText.rectTransform.position = new Vector3(Screen.width / 2 + 96f, Screen.height - 3.3f, 0);
-		RoundTerorText.alignment = TextAnchor.UpperCenter;
+		RoundTerorText.rectTransform.position = new Vector3(Screen.width / 2 + 96f, Screen.height - 0.0f, 0);
+		RoundTerorText.alignment = TextAnchor.MiddleCenter;
 
 
 
@@ -411,12 +411,12 @@ public class RoomUI : Photon.MonoBehaviour
 		RoundCounterText.fontSize = 18;
 		RoundCounterText.color = GameSettings.teamARoundColor;
 		RoundCounterText.text = "COUNTER TERRORISTS";
-		RoundCounterText.rectTransform.sizeDelta = new Vector2(203, 35);
+		RoundCounterText.rectTransform.sizeDelta = new Vector2(250, 35);
 		RoundCounterText.rectTransform.anchorMin = new Vector2(0.5f, 1);
 		RoundCounterText.rectTransform.anchorMax = new Vector2(0.5f, 1);
 		RoundCounterText.rectTransform.pivot = new Vector2(0.5f, 1);
-		RoundCounterText.rectTransform.position = new Vector3(Screen.width / 2 - 157, Screen.height - 3.3f, 0);
-		RoundCounterText.alignment = TextAnchor.UpperCenter;
+		RoundCounterText.rectTransform.position = new Vector3(Screen.width / 2 - 170, Screen.height - 0.0f, 0);
+		RoundCounterText.alignment = TextAnchor.MiddleCenter;
 
 
 
