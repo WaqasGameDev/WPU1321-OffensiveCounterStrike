@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class SoldierAnimation : MonoBehaviour
 {
-
 	public Transform spine1;
 	public Transform spine2;
 
@@ -38,10 +38,11 @@ public class SoldierAnimation : MonoBehaviour
 	public AnimationSet standingSet;
 	public AnimationSet crouchSet;
 
-	public AnimationClip reload;
+	/*public AnimationClip reload;
 	public AnimationClip jumpPose;
 	public AnimationClip[] killedFalls;
 	public AnimationClip HeadFalls;
+	*/
 	public AnimationClip TPose;
 
 	public WeaponAnimationSet currentWeaponAnimationSet;
@@ -55,13 +56,13 @@ public class SoldierAnimation : MonoBehaviour
 	float speed;
 	Vector3 lastPosition;
 
-	[HideInInspector]
-	Animation soldierAnimationComponent;
+	//[HideInInspector]
+	Animator soldierAnimationComponent;
 	[HideInInspector]
 	public PlayerWeapons playerWeapons;
 	[HideInInspector]
 	public PlayerNetwork playerNetwork;
-	
+
 	public int movementState = 0; //1 - grounded, 2 - crouch, 3 - in air
 	[HideInInspector]
 	public bool isMoving = false;
@@ -87,12 +88,12 @@ public class SoldierAnimation : MonoBehaviour
 	//Called from PlayerNetwork.cs upon initialization
 	public void Setup()
 	{
-		soldierAnimationComponent = GetComponent<Animation>();
+		soldierAnimationComponent = GetComponent<Animator>();
 		//playerWeapons = GetComponent<PlayerWeapons>();
-		soldierAnimationComponent.playAutomatically = false;
+		//soldierAnimationComponent.playAutomatically = false;
 
 		//Prepare animations
-
+		/*
 		SetMixedTransforms(ShotGunSet);
 		SetMixedTransforms(pistolSet);
 		SetMixedTransforms(knifeSet);
@@ -142,7 +143,7 @@ public class SoldierAnimation : MonoBehaviour
 
 		standingSet.idle.SampleAnimation(gameObject, 0);
 		Invoke("RecalculateBoneRotations", 0.15f);
-
+		*/
 		//Keep track of player speed
 		InvokeRepeating("CalculatePlayerSpeed", 0, 0.15f);
 
@@ -153,13 +154,10 @@ public class SoldierAnimation : MonoBehaviour
 	{
 		if (anmset.idle != null && anmset.fire != null)
 		{
-			soldierAnimationComponent[anmset.idle.name].wrapMode = WrapMode.Loop;
-			soldierAnimationComponent[anmset.idle.name].AddMixingTransform(spine2);
-			soldierAnimationComponent[anmset.idle.name].layer = 3;
-
+			/*
 			soldierAnimationComponent[anmset.fire.name].wrapMode = WrapMode.Once;
 			soldierAnimationComponent[anmset.fire.name].AddMixingTransform(spine2);
-			soldierAnimationComponent[anmset.fire.name].layer = 5;
+			soldierAnimationComponent[anmset.fire.name].layer = 5;*/
 			//soldierAnimationComponent[anmset.fire.name].speed = 1.25f;
 
 		}
@@ -167,7 +165,7 @@ public class SoldierAnimation : MonoBehaviour
 
 	void SetWalkAnimations(AnimationSet anmset)
 	{
-		soldierAnimationComponent[anmset.idle.name].wrapMode = WrapMode.Loop;
+		/*soldierAnimationComponent[anmset.idle.name].wrapMode = WrapMode.Loop;
 		soldierAnimationComponent[anmset.walk_front.name].wrapMode = WrapMode.Loop;
 
 		if (anmset.walk_front_left != null)
@@ -177,7 +175,7 @@ public class SoldierAnimation : MonoBehaviour
 		if (anmset.walk_front_right != null)
 		{
 			soldierAnimationComponent[anmset.walk_front_right.name].wrapMode = WrapMode.Loop;
-		}
+		}*/
 	}
 
 	// Update is called once per frame
@@ -188,16 +186,15 @@ public class SoldierAnimation : MonoBehaviour
 
 		if (playerWeapons.currentSelectedWeapon != null && previousSelectedWeapon != playerWeapons.currentSelectedWeapon)
 		{
-
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Knife)
 			{
 				currentWeaponAnimationSet = knifeSet;
-				soldierAnimationComponent[knifeSet.idle.name].speed = 0.2f;
+				soldierAnimationComponent.speed = 0.2f;
 			}
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.GRENADE_LAUNCHER || playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.FlashBang)
 			{
 				currentWeaponAnimationSet = bombSet;
-				soldierAnimationComponent[bombSet.idle.name].speed = 0.2f;
+				soldierAnimationComponent.speed = 0.2f;
 			}
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.C4)
 			{
@@ -227,24 +224,24 @@ public class SoldierAnimation : MonoBehaviour
 			}
 
 
-			soldierAnimationComponent.Play(currentWeaponAnimationSet.idle.name);
+			/*soldierAnimationComponent.Play(currentWeaponAnimationSet.idle.name);*/
 			//Debug.LogFormat("<color=green>Playing idle: {0}</color>", currentWeaponAnimationSet.idle.name);
 
 			//RecalculateBoneRotations();
 
-			if (currentWeaponAnimationSet.idle == null)
+			/*if (currentWeaponAnimationSet.idle == null)
 			{
 				currentWeaponAnimationSet = normalSet;
 			}
 
-			previousSelectedWeapon = playerWeapons.currentSelectedWeapon;
+			previousSelectedWeapon = playerWeapons.currentSelectedWeapon;*/
 		}
 
 		if (movementState == 3)
 		{
 			//In Air
 			//soldierAnimationComponent.CrossFade(jumpPose.name);
-			currentAnimationToPlay = jumpPose;
+			/*currentAnimationToPlay = jumpPose;*/
 		}
 		else
 		{
@@ -266,23 +263,27 @@ public class SoldierAnimation : MonoBehaviour
 
 			if (isMoving && (forwardSpeed > 0.2f || forwardSpeed < -0.2f))
 			{
-				if ((currentAnimationSet.walk_front_left != null && currentAnimationSet.walk_front_right != null) && (strafeSpeed > 0.3f || strafeSpeed < -0.3f))
+				//CHECKPOINT
+				soldierAnimationComponent.SetFloat("Forward",forwardSpeed);
+				/*if ((currentAnimationSet.walk_front_left != null && currentAnimationSet.walk_front_right != null) && (strafeSpeed > 0.3f || strafeSpeed < -0.3f))
 				{
-					currentWalkAnimation = strafeSpeed > 0.3f ? currentAnimationSet.walk_front_left : currentAnimationSet.walk_front_right;
+					currentWalkAnimation = strafeSpeed > 0.3f ? currentAnimationSet.setf;
 				}
 				else
 				{
 					currentWalkAnimation = currentAnimationSet.walk_front;
 				}
 
-				if (soldierAnimationComponent[currentWalkAnimation.name].speed != forwardSpeed + 0.2f)
+				if (soldierAnimationComponent.speed != forwardSpeed + 0.2f)
 				{
-					soldierAnimationComponent[currentWalkAnimation.name].speed = forwardSpeed + 0.2f;
-				}
+					soldierAnimationComponent.speed = forwardSpeed + 0.2f;
+				}*/
 
 				//soldierAnimationComponent.CrossFade(currentWalkAnimation.name);
 				currentAnimationToPlay = currentWalkAnimation;
 			}
+
+			
 			else
 			{
 				currentWalkAnimation = movementState == 2 ? crouchSet.idle : standingSet.idle;
@@ -290,12 +291,17 @@ public class SoldierAnimation : MonoBehaviour
 				//soldierAnimationComponent.CrossFade(currentAnimationSet.idle.name);
 
 			}
+
+			if (isMoving && (strafeSpeed > 0.2f || strafeSpeed < -0.2f))
+			{
+				soldierAnimationComponent.SetFloat("Strafe", strafeSpeed);
+			}
 		}
 
 		if (previousAnimationPlayed != currentAnimationToPlay)
 		{
-			previousAnimationPlayed = currentAnimationToPlay;
-			soldierAnimationComponent.CrossFade(currentAnimationToPlay.name);
+			/*previousAnimationPlayed = currentAnimationToPlay;
+			soldierAnimationComponent.CrossFade(currentAnimationToPlay.name);*/
 
 			//Debug.LogFormat("<color=green>"+ previousAnimationPlayed.name + " " + soldierAnimationComponent[previousAnimationPlayed.name].wrapMode.ToString() + "</color>");
 			//print (previousAnimationPlayed.name + " " + soldierAnimationComponent[previousAnimationPlayed.name].wrapMode.ToString());
@@ -337,10 +343,10 @@ public class SoldierAnimation : MonoBehaviour
 				forwardSpeed = playerNetwork.thisT.InverseTransformDirection(velocity).z * Time.deltaTime * 2.0f;
 				strafeSpeed = -(playerNetwork.thisT.InverseTransformDirection(velocity).x * Time.deltaTime) * 2.0f;
 
-				if ((strafeSpeed > 0.3f || strafeSpeed < -0.3f) && forwardSpeed > -0.2f && forwardSpeed < 0.2f)
+				/*if ((strafeSpeed > 0.3f || strafeSpeed < -0.3f) && forwardSpeed > -0.2f && forwardSpeed < 0.2f)
 				{
 					forwardSpeed = Mathf.Abs(strafeSpeed);
-				}
+				}*/
 			}
 		}
 		else
@@ -370,30 +376,30 @@ public class SoldierAnimation : MonoBehaviour
 
 	public void PlayFireAnimation()
 	{
-		soldierAnimationComponent.Rewind(currentWeaponAnimationSet.fire.name);
+		//soldierAnimationComponent.Rewind(currentWeaponAnimationSet.fire.name);
 		soldierAnimationComponent.Play(currentWeaponAnimationSet.fire.name);
 		//print ("Play fire animation remote!");
 	}
 
 	public void PlayFireAnimationC4()
 	{
-		soldierAnimationComponent.Stop(C4Set.fire.name);
+		/*soldierAnimationComponent.Stop(C4Set.fire.name);
 		soldierAnimationComponent.Rewind(C4Set.idle.name);
 		soldierAnimationComponent[C4Set.fire.name].speed = 1.2275f;
-		soldierAnimationComponent.Play(C4Set.fire.name);
+		soldierAnimationComponent.Play(C4Set.fire.name);*/
 		//print ("Play fire animation remote!");
 	}
 
 	public void PlayFireC4Stop()
 	{
-		soldierAnimationComponent.Stop(C4Set.fire.name);
+		//soldierAnimationComponent.Stop(C4Set.fire.name);
 	}
 
 	public void PlayİdleC4()
 	{
-		soldierAnimationComponent.Stop(C4Set.fire.name);
+		/*soldierAnimationComponent.Stop(C4Set.fire.name);
 		soldierAnimationComponent.Rewind(C4Set.idle.name);
-		soldierAnimationComponent.Play(C4Set.idle.name);
+		soldierAnimationComponent.Play(C4Set.idle.name);*/
 		//print ("Play fire animation remote!");
 	}
 
@@ -403,46 +409,46 @@ public class SoldierAnimation : MonoBehaviour
 		{
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Shotgun)
 			{
-				soldierAnimationComponent.Rewind(ShotGunSet.ReloadT.name);
+				/*soldierAnimationComponent.Rewind(ShotGunSet.ReloadT.name);
 				soldierAnimationComponent[ShotGunSet.ReloadT.name].speed = soldierAnimationComponent[ShotGunSet.ReloadT.name].length / duration;
-				soldierAnimationComponent.Play(ShotGunSet.ReloadT.name);
+				soldierAnimationComponent.Play(ShotGunSet.ReloadT.name);*/
 			}
 			else if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.MachinePistol)
 			{
-				soldierAnimationComponent.Rewind(pistolSet.ReloadT.name);
+				/*soldierAnimationComponent.Rewind(pistolSet.ReloadT.name);
 				soldierAnimationComponent[pistolSet.ReloadT.name].speed = soldierAnimationComponent[pistolSet.ReloadT.name].length / duration;
-				soldierAnimationComponent.Play(pistolSet.ReloadT.name);
+				soldierAnimationComponent.Play(pistolSet.ReloadT.name);*/
 			}
 			else if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.MachineGun)
 			{
-				soldierAnimationComponent.Rewind(normalSet.ReloadT.name);
+				/*soldierAnimationComponent.Rewind(normalSet.ReloadT.name);
 				soldierAnimationComponent[normalSet.ReloadT.name].speed = soldierAnimationComponent[normalSet.ReloadT.name].length / duration;
-				soldierAnimationComponent.Play(normalSet.ReloadT.name);
+				soldierAnimationComponent.Play(normalSet.ReloadT.name);*/
 			}
 			else if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Dual)
 			{
-				soldierAnimationComponent.Rewind(eliteSet.ReloadT.name);
+				/*soldierAnimationComponent.Rewind(eliteSet.ReloadT.name);
 				soldierAnimationComponent[eliteSet.ReloadT.name].speed = soldierAnimationComponent[eliteSet.ReloadT.name].length / duration;
-				soldierAnimationComponent.Play(eliteSet.ReloadT.name);
+				soldierAnimationComponent.Play(eliteSet.ReloadT.name);*/
 			}
 			else if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.m246)
 			{
-				soldierAnimationComponent.Rewind(m246Set.ReloadT.name);
+				/*soldierAnimationComponent.Rewind(m246Set.ReloadT.name);
 				soldierAnimationComponent[m246Set.ReloadT.name].speed = soldierAnimationComponent[m246Set.ReloadT.name].length / duration;
-				soldierAnimationComponent.Play(m246Set.ReloadT.name);
+				soldierAnimationComponent.Play(m246Set.ReloadT.name);*/
 			}
 			else
 			{
-				soldierAnimationComponent.Rewind(pistolSet.ReloadT.name);
+				/*soldierAnimationComponent.Rewind(pistolSet.ReloadT.name);
 				soldierAnimationComponent[pistolSet.ReloadT.name].speed = soldierAnimationComponent[pistolSet.ReloadT.name].length / duration;
-				soldierAnimationComponent.Play(pistolSet.ReloadT.name);
+				soldierAnimationComponent.Play(pistolSet.ReloadT.name);*/
 			}
 		}
 		else
 		{
-			soldierAnimationComponent.Rewind(reload.name);
+			/*soldierAnimationComponent.Rewind(reload.name);
 			soldierAnimationComponent[reload.name].speed = soldierAnimationComponent[reload.name].length / duration;
-			soldierAnimationComponent.Play(reload.name);
+			soldierAnimationComponent.Play(reload.name);*/
 		}
 	}
 
@@ -450,19 +456,19 @@ public class SoldierAnimation : MonoBehaviour
 	{
 		if (!doneSetup)
 		{
-			soldierAnimationComponent = GetComponent<Animation>();
-			soldierAnimationComponent[HeadFalls.name].wrapMode = WrapMode.Once;
+			/*soldierAnimationComponent = GetComponent<Animation>();
+			soldierAnimationComponent[HeadFalls.name].wrapMode = WrapMode.Once;*/
 		}
 
 		isKilled = true;
-		soldierAnimationComponent.Stop();
+		/*soldierAnimationComponent.Stop();*/
 		if (movementState == 2)
 		{
-			soldierAnimationComponent.Play(crouchSet.crouchDie.name);
+			/*soldierAnimationComponent.Play(crouchSet.crouchDie.name);*/
 		}
 		else
 		{
-			soldierAnimationComponent.Play(HeadFalls.name);
+			/*soldierAnimationComponent.Play(HeadFalls.name);*/
 		}
 	}
 
@@ -470,26 +476,26 @@ public class SoldierAnimation : MonoBehaviour
 	{
 		if (!doneSetup)
 		{
-			soldierAnimationComponent = GetComponent<Animation>();
-			for (int i = 0; i < killedFalls.Length; i++)
+			soldierAnimationComponent = GetComponent<Animator>();
+			/*for (int i = 0; i < killedFalls.Length; i++)
 			{
 				soldierAnimationComponent[killedFalls[i].name].wrapMode = WrapMode.Once;
-			}
+			}*/
 		}
 
 		isKilled = true;
-		soldierAnimationComponent.Stop();
+		/*soldierAnimationComponent.Stop();*/
 		if (movementState == 2)
 		{
-			soldierAnimationComponent.Play(crouchSet.crouchDie.name);
+			/*soldierAnimationComponent.Play(crouchSet.crouchDie.name);*/
 		}
 		else
 		{
-			if (killedFalls.Length > 0)
+			/*if (killedFalls.Length > 0)
 			{
 				int rnd = Random.Range(0, killedFalls.Length - 1);
 				soldierAnimationComponent.Play(killedFalls[rnd].name);
-			}
+		}*/
 		}
 	}
 
