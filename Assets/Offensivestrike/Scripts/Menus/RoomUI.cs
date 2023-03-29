@@ -246,7 +246,7 @@ public class RoomUI : Photon.MonoBehaviour
 		roundHow.rectTransform.anchorMax = new Vector2(0.5f, 1);
 		roundHow.rectTransform.sizeDelta = new Vector2(662, 32);
 		roundHow.rectTransform.pivot = new Vector2(0.5f, 1);
-		roundHow.rectTransform.position = new Vector3(Screen.width / 2 - 15f, Screen.height + 2.4f, 0);
+		roundHow.rectTransform.position = new Vector3(Screen.width / 2 - 15f, Screen.height + 0.0f, 0);
 		//###
 
 
