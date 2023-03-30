@@ -188,46 +188,86 @@ public class SoldierAnimation : MonoBehaviour
 		{
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Knife)
 			{
-				currentWeaponAnimationSet = knifeSet;
-				soldierAnimationComponent.speed = 0.2f;
+				soldierAnimationComponent.SetBool("KnifeIdle", true);
+				/*currentWeaponAnimationSet = knifeSet;
+				soldierAnimationComponent.speed = 0.2f;*/
+			}
+			else 
+			{
+				soldierAnimationComponent.SetBool("KnifeIdle", false);
 			}
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.GRENADE_LAUNCHER || playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.FlashBang)
 			{
-				currentWeaponAnimationSet = bombSet;
-				soldierAnimationComponent.speed = 0.2f;
+				soldierAnimationComponent.SetBool("RifleIdle", true);
+				/*currentWeaponAnimationSet = bombSet;
+				soldierAnimationComponent.speed = 0.2f;*/
+			}
+			else
+			{
+				soldierAnimationComponent.SetBool("RifleIdle", false);
 			}
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.C4)
 			{
-				currentWeaponAnimationSet = C4Set;
+				soldierAnimationComponent.SetBool("C4Idle", true);
+				/*currentWeaponAnimationSet = C4Set;*/
+			}
+			else
+			{
+				soldierAnimationComponent.SetBool("C4Idle", false);
 			}
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Dual)
 			{
-				currentWeaponAnimationSet = eliteSet;
+				soldierAnimationComponent.SetBool("RifleIdle", true);
+				/*currentWeaponAnimationSet = eliteSet;*/
+			}
+			else
+			{
+				soldierAnimationComponent.SetBool("RifleIdle", false);
 			}
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.m246)
 			{
-				currentWeaponAnimationSet = m246Set;
+				soldierAnimationComponent.SetBool("RifleIdle", true);
+				/*currentWeaponAnimationSet = m246Set;*/
+			}
+			else
+			{
+				soldierAnimationComponent.SetBool("RifleIdle", false);
 			}
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Shotgun)
 			{
-				SetMixedTransforms(ShotGunSet);
-				currentWeaponAnimationSet = ShotGunSet;
+				soldierAnimationComponent.SetBool("RifleIdle", true);
+				/*SetMixedTransforms(ShotGunSet);
+				currentWeaponAnimationSet = ShotGunSet;*/
+			}
+			else
+			{
+				soldierAnimationComponent.SetBool("RifleIdle", false);
 			}
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.MachinePistol || playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Pistol)
 			{
-				SetMixedTransforms(pistolSet);
-				currentWeaponAnimationSet = pistolSet;
+				soldierAnimationComponent.SetBool("PistolIdle", true);
+				/*SetMixedTransforms(pistolSet);
+				currentWeaponAnimationSet = pistolSet;*/
+			}
+			else
+			{
+				soldierAnimationComponent.SetBool("PistolIdle", false);
 			}
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.MachineGun || playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.SniperRifle || playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.SniperRifleAuto)
 			{
-				currentWeaponAnimationSet = normalSet;
+				soldierAnimationComponent.SetBool("RifleIdle", true);
+				/*currentWeaponAnimationSet = normalSet;*/
+			}
+			else
+			{
+				soldierAnimationComponent.SetBool("RifleIdle", false);
 			}
 
 
 			/*soldierAnimationComponent.Play(currentWeaponAnimationSet.idle.name);*/
 			//Debug.LogFormat("<color=green>Playing idle: {0}</color>", currentWeaponAnimationSet.idle.name);
 
-			//RecalculateBoneRotations();
+			RecalculateBoneRotations();
 
 			/*if (currentWeaponAnimationSet.idle == null)
 			{
@@ -240,6 +280,7 @@ public class SoldierAnimation : MonoBehaviour
 		if (movementState == 3)
 		{
 			//In Air
+			soldierAnimationComponent.SetBool("IsJumping", true);
 			//soldierAnimationComponent.CrossFade(jumpPose.name);
 			/*currentAnimationToPlay = jumpPose;*/
 		}
@@ -249,16 +290,19 @@ public class SoldierAnimation : MonoBehaviour
 			{
 				if (currentAnimationSet != standingSet)
 				{
+					soldierAnimationComponent.SetBool("IsJumping", false);
 					currentAnimationSet = standingSet;
 				}
 			}
 
 			if (movementState == 2)
 			{
-				if (currentAnimationSet != crouchSet)
-				{
-					currentAnimationSet = crouchSet;
-				}
+				soldierAnimationComponent.SetBool("IsCrouch", true);
+			}
+
+			else 
+			{
+				soldierAnimationComponent.SetBool("IsCrouch", false);
 			}
 
 			if (isMoving && (forwardSpeed > 0.2f || forwardSpeed < -0.2f))
@@ -280,21 +324,26 @@ public class SoldierAnimation : MonoBehaviour
 				}*/
 
 				//soldierAnimationComponent.CrossFade(currentWalkAnimation.name);
-				currentAnimationToPlay = currentWalkAnimation;
+				//currentAnimationToPlay = currentWalkAnimation;
 			}
 
 			
 			else
 			{
-				currentWalkAnimation = movementState == 2 ? crouchSet.idle : standingSet.idle;
-				currentAnimationToPlay = currentWalkAnimation;
+				soldierAnimationComponent.SetFloat("Forward", 0);
+				/*currentWalkAnimation = movementState == 2 ? crouchSet.idle : standingSet.idle;
+				currentAnimationToPlay = currentWalkAnimation;*/
 				//soldierAnimationComponent.CrossFade(currentAnimationSet.idle.name);
 
 			}
 
-			if (isMoving && (strafeSpeed > 0.2f || strafeSpeed < -0.2f))
+			if (isMoving && (strafeSpeed > 0.3f || strafeSpeed < -0.3f))
 			{
 				soldierAnimationComponent.SetFloat("Strafe", strafeSpeed);
+			}
+			else 
+			{
+				soldierAnimationComponent.SetFloat("Strafe", 0);
 			}
 		}
 
@@ -343,11 +392,11 @@ public class SoldierAnimation : MonoBehaviour
 				forwardSpeed = playerNetwork.thisT.InverseTransformDirection(velocity).z * Time.deltaTime * 2.0f;
 				strafeSpeed = -(playerNetwork.thisT.InverseTransformDirection(velocity).x * Time.deltaTime) * 2.0f;
 
-				/*if ((strafeSpeed > 0.3f || strafeSpeed < -0.3f) && forwardSpeed > -0.2f && forwardSpeed < 0.2f)
-				{
-					forwardSpeed = Mathf.Abs(strafeSpeed);
-				}*/
-			}
+                if ((strafeSpeed > 0.3f || strafeSpeed < -0.3f) && forwardSpeed > -0.2f && forwardSpeed < 0.2f)
+                {
+                    forwardSpeed = Mathf.Abs(strafeSpeed);
+                }
+            }
 		}
 		else
 		{
@@ -413,6 +462,12 @@ public class SoldierAnimation : MonoBehaviour
 				soldierAnimationComponent[ShotGunSet.ReloadT.name].speed = soldierAnimationComponent[ShotGunSet.ReloadT.name].length / duration;
 				soldierAnimationComponent.Play(ShotGunSet.ReloadT.name);*/
 			}
+			else if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Pistol)
+			{
+				/*soldierAnimationComponent.Rewind(ShotGunSet.ReloadT.name);
+				soldierAnimationComponent[ShotGunSet.ReloadT.name].speed = soldierAnimationComponent[ShotGunSet.ReloadT.name].length / duration;
+				soldierAnimationComponent.Play(ShotGunSet.ReloadT.name);*/
+			}
 			else if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.MachinePistol)
 			{
 				/*soldierAnimationComponent.Rewind(pistolSet.ReloadT.name);
@@ -465,10 +520,12 @@ public class SoldierAnimation : MonoBehaviour
 		if (movementState == 2)
 		{
 			/*soldierAnimationComponent.Play(crouchSet.crouchDie.name);*/
+			soldierAnimationComponent.SetTrigger("CrouchDie");
 		}
 		else
 		{
 			/*soldierAnimationComponent.Play(HeadFalls.name);*/
+			soldierAnimationComponent.SetTrigger("Died");
 		}
 	}
 
@@ -477,6 +534,7 @@ public class SoldierAnimation : MonoBehaviour
 		if (!doneSetup)
 		{
 			soldierAnimationComponent = GetComponent<Animator>();
+			soldierAnimationComponent.SetTrigger("Died");
 			/*for (int i = 0; i < killedFalls.Length; i++)
 			{
 				soldierAnimationComponent[killedFalls[i].name].wrapMode = WrapMode.Once;
@@ -488,9 +546,11 @@ public class SoldierAnimation : MonoBehaviour
 		if (movementState == 2)
 		{
 			/*soldierAnimationComponent.Play(crouchSet.crouchDie.name);*/
+			soldierAnimationComponent.SetTrigger("CrouchDie");
 		}
 		else
 		{
+			soldierAnimationComponent.SetTrigger("Died");
 			/*if (killedFalls.Length > 0)
 			{
 				int rnd = Random.Range(0, killedFalls.Length - 1);

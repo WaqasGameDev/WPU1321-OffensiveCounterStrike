@@ -2269,7 +2269,13 @@ public class RoomUI : Photon.MonoBehaviour
 		
 		Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.green);
 
-		if (!hitbox || hitbox.playerNetwork.playerTeam == rc.ourTeam)
+		if (rc.currentGameMode == "FFA" && hitbox)
+		{
+			fireButton.isActive = true;
+			GameSettings.mobileFiring = true;
+		}
+
+		else if (!hitbox || hitbox.playerNetwork.playerTeam == rc.ourTeam)
         {
 			fireButton.isActive = false;
 			GameSettings.mobileFiring = false;
