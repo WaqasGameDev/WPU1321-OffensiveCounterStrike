@@ -1191,7 +1191,7 @@ public class RoomUI : Photon.MonoBehaviour
 		Gun1Button.background.rectTransform.sizeDelta = new Vector2(75, 50);
 		Gun1Button.background.sprite = Gun1;
 		Gun1Button.background.rectTransform.pivot = new Vector2(1, 0);
-		Gun1Button.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 0.6f + smallSwapButtonSize + marginRight,
+		Gun1Button.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 0.56f + smallSwapButtonSize + marginRight,
 			fireButton.background.rectTransform.position.y * 0.01f - 50 + buttonSize + marginRight - smallSwapButtonSize/2, 0);
 
 		cntrlTmpObj = new GameObject("Gun1 Weapon icon");
@@ -1221,7 +1221,7 @@ public class RoomUI : Photon.MonoBehaviour
 		Gun2Button.background.rectTransform.sizeDelta = new Vector2(125, 50);
 		Gun2Button.background.sprite = Gun2;
 		Gun2Button.background.rectTransform.pivot = new Vector2(1, 0);
-		Gun2Button.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 0.4f + smallSwapButtonSize + marginRight,
+		Gun2Button.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 0.36f + smallSwapButtonSize + marginRight,
 			fireButton.background.rectTransform.position.y * 0.01f - 50 + buttonSize + marginRight - smallSwapButtonSize/2, 0);
 
 		cntrlTmpObj = new GameObject("Gun2 Weapon icon");
@@ -1251,7 +1251,7 @@ public class RoomUI : Photon.MonoBehaviour
 		Gun3Button.background.rectTransform.sizeDelta = new Vector2(75, 50);
 		Gun3Button.background.sprite = Gun3;
 		Gun3Button.background.rectTransform.pivot = new Vector2(1, 0);
-		Gun3Button.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 0.5f + smallSwapButtonSize + marginRight,
+		Gun3Button.background.rectTransform.position = new Vector3(fireButton.background.rectTransform.position.x * 0.46f + smallSwapButtonSize + marginRight,
 			fireButton.background.rectTransform.position.y * 0.01f - 50 + buttonSize + marginRight - smallSwapButtonSize/2, 0);
 
 		cntrlTmpObj = new GameObject("Gun3 Weapon icon");
