@@ -1008,7 +1008,7 @@ public class RoomUI : Photon.MonoBehaviour
 		crouchButton.background.rectTransform.sizeDelta = new Vector2(75, 75);
 		crouchButton.background.sprite = navigationButton;
 		crouchButton.background.rectTransform.pivot = new Vector2(1, 0);
-		crouchButton.background.rectTransform.position = new Vector3((fireButton.background.rectTransform.position.x * 1.254f - buttonSize - marginRight) - 30f,
+		crouchButton.background.rectTransform.position = new Vector3((fireButton.background.rectTransform.position.x * 1.254f - buttonSize - marginRight) - 20f,
 			fireButton.background.rectTransform.position.y * 0.5f + buttonSize + marginRight, 0);
 
 		cntrlTmpObj = new GameObject("Crounch button icon");
