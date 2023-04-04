@@ -2221,11 +2221,11 @@ public class RoomUI : Photon.MonoBehaviour
         {
             if (!rc.ourPlayer || rc.timeToPurchase > 0)
             {
-                rc.OpenBuyMenu();
+				rc.OpenBuyMenu();
             }
         }
     }
-
+	
 	bool Mobilefire = false;
 
 	private void FixedUpdate()

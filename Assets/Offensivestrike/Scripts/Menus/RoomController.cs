@@ -669,7 +669,7 @@ public class RoomController : Photon.MonoBehaviour
 			RefreshPlayerList();
 		}
 	}
-
+	[SerializeField] private GameObject buyWeaponPanel;
 	public void OpenBuyMenu()
 	{
 		if (!ourPlayer || timeToPurchase > 0)
@@ -678,6 +678,7 @@ public class RoomController : Photon.MonoBehaviour
 			showBuyMenu = !showBuyMenu;
 			showScoreBoard = false;
 			showOptions = false;
+			buyWeaponPanel.SetActive(true);
 			bm.buySection = BuyMenu.BuySection.Secondary;
 			GameSettings.updateActionReports = false;
 
