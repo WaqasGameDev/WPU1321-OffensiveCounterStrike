@@ -674,7 +674,7 @@ public class RoomController : Photon.MonoBehaviour
 	{
 		if (!ourPlayer || timeToPurchase > 0)
 		{
-			//print ("Buy menu key pressed");
+			print ("Buy menu key pressed");
 			showBuyMenu = !showBuyMenu;
 			showScoreBoard = false;
 			showOptions = false;
