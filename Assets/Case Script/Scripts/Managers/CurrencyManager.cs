@@ -51,7 +51,6 @@ public class CurrencyManager : MonoBehaviour
 
     public ClassSaveData DefaultSaveData()
     {
-        Debug.LogError("CALLED DEFAULT");
         ClassSaveData saveData = new ClassSaveData
         {
             normalCurrency = defaultNormalCurrency
