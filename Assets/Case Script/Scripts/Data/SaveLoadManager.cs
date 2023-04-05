@@ -240,7 +240,6 @@ public class SaveLoadManager : MonoBehaviour
 
     public void Save()
     {
-        Debug.LogError("===== CurrencyManager ID "+CurrencyManager.instance.GetInstanceID());
         try
         {
             BinaryFormatter binaryFormatter = new BinaryFormatter();

@@ -24,6 +24,8 @@ public class ThisCaseUI : MonoBehaviour
     public void InspectCase()
     {
         CaseUI.instance.selectedCaseIndex = caseIndex;
-        CaseUI.instance.InspectCaseUI();
+        GameLogic.instance.SetCurrentCaseIndex(caseIndex);
+        //CaseUI.instance.InspectCaseUI();
+        CaseUI.instance.LoadPreviewSkinsUI();
     }
 }

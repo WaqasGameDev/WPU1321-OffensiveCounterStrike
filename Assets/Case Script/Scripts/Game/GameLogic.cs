@@ -166,10 +166,24 @@ public class GameLogic : MonoBehaviour
         CaseUI.instance.InspectCaseUI();
     }
 
+    int selectedCaseIndex;
+    public void SetCurrentCaseIndex(int selectedCaseIndex)
+    {
+        this.selectedCaseIndex = selectedCaseIndex;
+    }
+
+    int selectedSkinIndex;
+    public void SetCurrentSkinIndex(int selectedSkinIndex)
+    {
+        this.selectedSkinIndex = selectedSkinIndex;
+    }
+
     public void SaveSkin()
     {
+        Debug.LogError("Case : " +selectedCaseIndex+"==== Skin : "+selectedSkinIndex);
+        CurrencyManager.instance.normalCurrency -= CaseManager.instance.casesData[selectedCaseIndex].skins[selectedSkinIndex].normalCurrencyWorth;
         CaseManager.instance.casesSaveData[currentCaseIndex].skins[endingSkinIndex].amountOwned++;
         SaveLoadManager.instance.Save();
-        CaseUI.instance.InspectCaseUI();
+        CaseUI.instance.LoadPreviewSkinsUI();
     }
 }

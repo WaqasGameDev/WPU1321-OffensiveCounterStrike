@@ -23,6 +23,7 @@ public class ThisPreviewSkinUI : MonoBehaviour
 
     public void PreviewSkin()
     {
+        GameLogic.instance.SetCurrentSkinIndex(skinIndex);
         CaseUI.instance.InspectPreviewSkinUI(skinIndex);
     }
 }
