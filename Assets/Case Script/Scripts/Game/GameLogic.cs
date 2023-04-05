@@ -180,9 +180,8 @@ public class GameLogic : MonoBehaviour
 
     public void SaveSkin()
     {
-        Debug.LogError("Case : " +selectedCaseIndex+"==== Skin : "+selectedSkinIndex);
         CurrencyManager.instance.normalCurrency -= CaseManager.instance.casesData[selectedCaseIndex].skins[selectedSkinIndex].normalCurrencyWorth;
-        CaseManager.instance.casesSaveData[currentCaseIndex].skins[endingSkinIndex].amountOwned++;
+        CaseManager.instance.casesSaveData[selectedCaseIndex].skins[selectedSkinIndex].amountOwned++;
         SaveLoadManager.instance.Save();
         CaseUI.instance.LoadPreviewSkinsUI();
     }
