@@ -134,7 +134,7 @@ public class CaseUI : MonoBehaviour
     public void InspectCaseUI()
     {
         //Set ui.
-        ic_NameText.text = "Inspecting " + "<i>"+ CaseManager.instance.casesData[selectedCaseIndex].caseName + "</i>" + " Case";
+        ic_NameText.text ="<i>"+ CaseManager.instance.casesData[selectedCaseIndex].caseName + "</i>" + " Case";
         if (CaseManager.instance.casesData[selectedCaseIndex].free == true)
         {
             ic_CostText.text = "Free";
@@ -252,7 +252,7 @@ public class CaseUI : MonoBehaviour
     public void InspectPreviewSkinUI(int skinIndex)
     {
         //Set ui.
-        is_NameText.text = "Inspecting " + "<i>" + CaseManager.instance.casesData[selectedCaseIndex].skins[skinIndex].skinName + "</i>" + " Skin";
+        is_NameText.text ="<i>" + CaseManager.instance.casesData[selectedCaseIndex].skins[skinIndex].skinName + "</i>" + " Skin";
         is_RarityGradient.color1 = RarityManager.instance.GetRarityColor(CaseManager.instance.casesData[selectedCaseIndex].skins[skinIndex].rarityIndex);
         is_RarityOutline.effectColor = RarityManager.instance.GetRarityColor(CaseManager.instance.casesData[selectedCaseIndex].skins[skinIndex].rarityIndex);
         is_IconImage.sprite = CaseManager.instance.casesData[selectedCaseIndex].skins[skinIndex].iconSprite;

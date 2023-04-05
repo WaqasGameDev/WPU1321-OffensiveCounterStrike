@@ -215,7 +215,7 @@ public class InventoryUI : Photon.MonoBehaviour
         currentSellAmount = 0;
 
         //Set ui.
-        is_NameText.text = "Inspecting " + "<i>" + CaseManager.instance.casesData[caseIndex].skins[skinIndex].skinName + "</i>" + " Skin";
+        is_NameText.text =  "<i>" + CaseManager.instance.casesData[caseIndex].skins[skinIndex].skinName + "</i>" + " Skin";
         is_SkinRarityText.text = RarityManager.instance.GetRarityName(CaseManager.instance.casesData[caseIndex].skins[skinIndex].rarityIndex);
         is_SkinWorthText.text = "$" + CaseManager.instance.casesData[caseIndex].skins[skinIndex].normalCurrencyWorth.ToString("F2");
         is_SkinAmountText.text = CaseManager.instance.casesSaveData[caseIndex].skins[skinIndex].amountOwned.ToString();
