@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TestButton : MonoBehaviour
+public class ThisBuyWeaponPanel : MonoBehaviour
 {
     [SerializeField] Button pistolButton;
     [SerializeField] Button heavyMachineButton;
@@ -11,6 +11,7 @@ public class TestButton : MonoBehaviour
     [SerializeField] Button shotgunButton;
     [SerializeField] Button sniperButton;
     [SerializeField] Button ammunitionButton;
+    [SerializeField] Button backButton;
 
     public GameObject[] weaponPanels;
 
@@ -19,11 +20,13 @@ public class TestButton : MonoBehaviour
     public Image sector;
     void Start()
     {
-        SetListener(lightMachineButton, new Vector4(112f, 0, 0, 0));
-        SetListener(ammunitionButton, new Vector4(56f, -97f, 0f, -60f));
-        SetListener(pistolButton, new Vector4(56f, 97f, 0f, 60f));
-        SetListener(shotgunButton, new Vector4(-56f, 96.3f, 0f, -240f));
-        SetListener(sniperButton, new Vector4(-56f, -97, 0f, -120));
+        backButton.onClick.AddListener(() => {gameObject.SetActive(false); });
+        SetListener(lightMachineButton, new Vector4(112f, 0, 0, 0), 1);
+        SetListener(ammunitionButton, new Vector4(56f, -97f, 0f, -60f), 5);
+        SetListener(pistolButton, new Vector4(56f, 97f, 0f, 60f), 0);
+        SetListener(shotgunButton, new Vector4(-56f, 96.3f, 0f, -240f), 3);
+        SetListener(sniperButton, new Vector4(-56f, -97, 0f, -120), 4);
+        SetListener(heavyMachineButton, new Vector4(-112f, 0f, 0f, 180f), 2);
         //lightMachineButton.onClick.AddListener(() => { WeaponButtonPressed(112f, 0, 0, 0); });
         //ammunitionButton.onClick.AddListener(() => { WeaponButtonPressed(56f, -97f, 0, -60f); });
         //pistolButton.onClick.AddListener(() => { WeaponButtonPressed(56f, 97f, 0f, 60f); });
@@ -32,9 +35,12 @@ public class TestButton : MonoBehaviour
         //sniperButton.onClick.AddListener(() => { WeaponButtonPressed(-56f, -97f, 0f, -120f); });
     }
 
-    private void SetListener(Button button, Vector4 values)
+    private void SetListener(Button button, Vector4 values, int index)
     {
-        button.onClick.AddListener(() => { WeaponButtonPressed(values.x,values.y,values.z,values.w); });
+        button.onClick.AddListener(() => { 
+            WeaponButtonPressed(values.x,values.y,values.z,values.w);
+            SelectWeaponPanel(index);
+        });
 
     }
 
@@ -56,7 +62,6 @@ public class TestButton : MonoBehaviour
         {
             panel.transform.gameObject.SetActive(false);
         }
-
         weaponPanels[index].transform.gameObject.SetActive(true);
     }
 }
