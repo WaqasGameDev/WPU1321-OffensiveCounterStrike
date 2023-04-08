@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Scoreboard : MonoBehaviour
 {
+	[SerializeField] GUISkin scoreBoardGuiSkin;
 	public enum CurrentWindow { LeaveRoom }
 	[HideInInspector]
 	CurrentWindow currentWindow = CurrentWindow.LeaveRoom;
@@ -49,7 +50,7 @@ public class Scoreboard : MonoBehaviour
 	// Update is called once per frame
 	void OnGUI ()
     {
-		GUI.skin = GameSettings.guiSkin;
+		GUI.skin = scoreBoardGuiSkin;
 		if (rc.currentGameMode == "TDM" || rc.currentGameMode == "NORMAL") {
 			if (ShowFirst == 1) {
 				if (PhotonNetwork.room != null) {

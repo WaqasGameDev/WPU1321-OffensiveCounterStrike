@@ -137,11 +137,18 @@ public class GameSettings : MonoBehaviour
 	//Here we store GUISkin and custom styles to be used from different scripts, this is assigned at SetupGUIStyles.cs
 	public static Font KillFont;
 	public static GUISkin guiSkin;
+	public static GUISkin theRawGuiSkin;
 
 	public static GUIStyle headerStyle = new GUIStyle();
 	public static GUIStyle closeButtonStyle = new GUIStyle();
 	public static GUIStyle roomBrowserHeadersStyle = new GUIStyle();
 	public static GUIStyle createRoomOptionsStyle = new GUIStyle();
+	public static GUIStyle minimizeButtonStyle = new GUIStyle();
+	public static GUIStyle leftArrowButtonStyle = new GUIStyle();
+	public static GUIStyle rightArrowButtonStyle = new GUIStyle();
+	public static GUIStyle saveButtonStyle = new GUIStyle();
+	public static GUIStyle sliderFillStyle = new GUIStyle();
+	public static GUIStyle sliderTransparentBackgroundStyle = new GUIStyle();
 
 	public static GUIStyle timeStyle = new GUIStyle();
 	public static GUIStyle finalScreenStyle = new GUIStyle();

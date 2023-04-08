@@ -11,7 +11,13 @@ public class SetupGUIStyles : MonoBehaviour
 	public Font KillFont;
 	public Texture2D closeIcon;
 	public Texture2D closeIconHover;
-
+	[SerializeField] GUISkin theRawGuiSkin;
+	[SerializeField] Texture2D minimizeButtonImage;
+	[SerializeField] Texture2D leftButtonImage;
+	[SerializeField] Texture2D rightButtonImage;
+	[SerializeField] Texture2D saveButtonImage;
+	[SerializeField] Texture2D sliderFillTexture;
+	[SerializeField] Texture2D transaprentSlider;
 	// Use this for initialization
 	void Awake ()
     {
@@ -67,5 +73,14 @@ public class SetupGUIStyles : MonoBehaviour
 		
 		GameSettings.actionReportStyle = new GUIStyle(guiSkin.label);
 		GameSettings.actionReportStyle.alignment = TextAnchor.UpperRight;
+
+		GameSettings.theRawGuiSkin = theRawGuiSkin;
+		GameSettings.minimizeButtonStyle.normal.background = minimizeButtonImage;
+		GameSettings.leftArrowButtonStyle.normal.background = leftButtonImage;
+		GameSettings.rightArrowButtonStyle.normal.background = rightButtonImage;
+		GameSettings.saveButtonStyle.normal.background = saveButtonImage;
+		GameSettings.sliderFillStyle.normal.background = sliderFillTexture;
+		GameSettings.sliderTransparentBackgroundStyle.normal.background = transaprentSlider;
+
 	}
 }
