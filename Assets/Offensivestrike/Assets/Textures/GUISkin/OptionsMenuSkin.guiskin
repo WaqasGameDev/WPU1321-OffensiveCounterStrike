@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 12001, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: OptionsMenuSkin
   m_EditorClassIdentifier: 
-  m_Font: {fileID: 12800000, guid: 7312ce0b7c7c2ed4d8b990c3539a51cb, type: 3}
+  m_Font: {fileID: 12800000, guid: 0aaf7a61faa58f043a33cfab7f3eceb9, type: 3}
   m_box:
     m_Name: box
     m_Normal:
@@ -223,7 +223,7 @@ MonoBehaviour:
     m_Hover:
       m_Background: {fileID: 0}
       m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+      m_TextColor: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
     m_Active:
       m_Background: {fileID: 0}
       m_ScaledBackgrounds: []
@@ -418,7 +418,7 @@ MonoBehaviour:
   m_window:
     m_Name: window
     m_Normal:
-      m_Background: {fileID: 2800000, guid: 19ff657592b719d4e88c95a65c135b74, type: 3}
+      m_Background: {fileID: 2800000, guid: 8ad91f2bb3fd7a64f90e828dafcff19a, type: 3}
       m_ScaledBackgrounds: []
       m_TextColor: {r: 1, g: 1, b: 1, a: 1}
     m_Hover:
@@ -487,7 +487,7 @@ MonoBehaviour:
     m_Normal:
       m_Background: {fileID: 2800000, guid: cb480702fce39e143b016c42332bd36d, type: 3}
       m_ScaledBackgrounds: []
-      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+      m_TextColor: {r: 1, g: 1, b: 1, a: 1}
     m_Hover:
       m_Background: {fileID: 0}
       m_ScaledBackgrounds: []

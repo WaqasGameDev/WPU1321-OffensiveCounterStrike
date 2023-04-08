@@ -5,8 +5,17 @@ using UnityEngine.UI;
 
 public class Test : MonoBehaviour
 {
-    public GameObject buyMenu;
-    public GameObject Pistol;
+    void OnGUI()
+    {
+        GUI.depth = 0;
+        // Draw GUI style 1
+        GUI.Label(new Rect(0, 0, 200, 30), "GUI Style 1");
+
+
+        GUI.depth = 1;
+        // Draw GUI style 2
+        GUI.Label(new Rect(0, 0, 200, 30), "+++++++++++++");
+    }
 
 
 

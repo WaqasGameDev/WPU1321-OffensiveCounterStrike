@@ -8,6 +8,9 @@ public class OptionsSettings : MonoBehaviour
 	[SerializeField] Texture2D leftButtonImage;
 	[SerializeField] Texture2D rightButtonImage;
 	[SerializeField] Texture2D saveButtonImage;
+	[SerializeField] Texture2D sliderFillTexture;
+	[SerializeField] Texture2D transaprentSlider;
+
 
 	Resolution[] screenReolsutions = new Resolution[0];
 	string[] availableQualities = new string[0];
@@ -173,7 +176,17 @@ public class OptionsSettings : MonoBehaviour
 		if (rc) {
 			GUI.Label (new Rect (15, 160, 300, 30), rc.xml.button85);
 		}
-		mouseSensitivity = GUI.HorizontalSlider(new Rect(15, 195, 175, 25), mouseSensitivity, 0.1f, 7);
+
+		Rect sliderRect = new Rect(15, 195, 175, 25);
+
+		// Draw slider fill
+		Rect fillRect = new Rect(sliderRect.x, sliderRect.y, sliderRect.width * mouseSensitivity/7, 12);
+		GUI.DrawTexture(fillRect, sliderFillTexture);
+
+		var guiStyleForSliderBg = new GUIStyle();
+		guiStyleForSliderBg.normal.background = transaprentSlider;
+		mouseSensitivity = GUI.HorizontalSlider(sliderRect, mouseSensitivity, 0.1f, 7, guiStyleForSliderBg, guiStyleForSliderBg);
+
 		GameSettings.mouseSensitivity = mouseSensitivity;
 		GUI.Label(new Rect(210, 187, 300, 25), mouseSensitivity.ToString("f2"));
 
