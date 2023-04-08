@@ -198,7 +198,7 @@ public class Scoreboard : MonoBehaviour
 			rc.showBuyMenu = false;
 		}
 
-		if (GUI.Button(new Rect(655, 50, 150, 30), "<color=#FF0000>"  + xml.button61 + " X" + "</color>"))
+		if (GUI.Button(new Rect(655, 50, 150, 30), "<color=#000000>"  + xml.button61 + " X" + "</color>"))
 		{
 			scoreAudioSource.clip = ClickSong;
 			scoreAudioSource.Play();
@@ -253,7 +253,7 @@ public class Scoreboard : MonoBehaviour
 		if(rc.currentGameMode == "TDM" || rc.currentGameMode == "NORMAL")
                 {
 					//Team A
-					DisplayTeamPlayers(rc.teamAPlayers, 400,1);
+					DisplayTeamPlayers(rc.teamAPlayers, 400,1, true);
 					//Team B
 					DisplayTeamPlayers(rc.teamBPlayers, 400,2);
 				}
@@ -261,7 +261,7 @@ public class Scoreboard : MonoBehaviour
 				if(rc.currentGameMode == "FFA")
                 {
 					//Team A and the only in Free For ALl Mode
-					DisplayTeamPlayers(rc.teamAPlayers, 808,1);
+					DisplayTeamPlayers(rc.teamAPlayers, 808,1, true);
 				}
 			GUILayout.EndHorizontal();
 		GUILayout.EndScrollView();
@@ -272,13 +272,13 @@ public class Scoreboard : MonoBehaviour
 		GUILayout.Label(rc.spectatorNames);
 	}
 
-	void DisplayTeamPlayers (List<PhotonPlayer> teamTmp, int fieldWidth,int team)
+	void DisplayTeamPlayers (List<PhotonPlayer> teamTmp, int fieldWidth,int team, bool isCounterTerrorist = false)
     {
 		GUILayout.BeginVertical();
 			if(teamTmp.Count == 0 /*&& rc.teamABots.Count == 0 && rc.teamBBots.Count == 0*/)
             {
 				GUI.color = new Color(1, 1, 1, 0.5f);
-				GUILayout.BeginVertical(GUI.skin.customStyles[1], GUILayout.Width(fieldWidth));
+				GUILayout.BeginVertical(GUI.skin.customStyles[ isCounterTerrorist ? 5 : 4], GUILayout.Width(fieldWidth));
 				GUILayout.Label(xml.button64);
 				GUILayout.Space(5);
 				GUILayout.Label("...");
@@ -290,7 +290,7 @@ public class Scoreboard : MonoBehaviour
 				for(int i = 0; i < teamTmp.Count; i ++)
                 {
 					GUI.color = teamTmp[i] == PhotonNetwork.player ? Color.white : GameSettings.otherPlayerGUIBoxColor;
-					GUILayout.BeginVertical(GUI.skin.customStyles[1], GUILayout.Width(fieldWidth));
+					GUILayout.BeginVertical(GUI.skin.customStyles[isCounterTerrorist ? 5 : 4], GUILayout.Width(fieldWidth));
 					
 					//Display player name
 					GUILayout.BeginHorizontal();
