@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class Scoreboard : MonoBehaviour
 {
-	[SerializeField] GUISkin scoreBoardGuiSkin;
 	public enum CurrentWindow { LeaveRoom }
 	[HideInInspector]
 	CurrentWindow currentWindow = CurrentWindow.LeaveRoom;
@@ -50,7 +49,7 @@ public class Scoreboard : MonoBehaviour
 	// Update is called once per frame
 	void OnGUI ()
     {
-		GUI.skin = scoreBoardGuiSkin;
+		GUI.skin = GameSettings.theRawGuiSkin;
 		if (rc.currentGameMode == "TDM" || rc.currentGameMode == "NORMAL") {
 			if (ShowFirst == 1) {
 				if (PhotonNetwork.room != null) {
@@ -135,7 +134,7 @@ public class Scoreboard : MonoBehaviour
     {
 		GUI.Label(new Rect(15, 0, 750, 35), PhotonNetwork.room.Name + " - " + PhotonNetwork.room.PlayerCount.ToString() + "/" + PhotonNetwork.room.MaxPlayers.ToString() + " - " + rc.currentGameMode);
 
-		if(GUI.Button(new Rect(850 - 28, 1, 28, 29), "", GameSettings.closeButtonStyle))
+		if(GUI.Button(new Rect(850 - 28, 1, 28, 29), "", GameSettings.minimizeButtonStyle))
         {
 			scoreAudioSource.clip = ClickSong;
 			scoreAudioSource.Play ();
@@ -146,7 +145,7 @@ public class Scoreboard : MonoBehaviour
         {
 			GUI.enabled = ((rc.ourTeam != 1 && rc.teamBPlayers.Count > rc.teamAPlayers.Count) || (rc.ourTeam == 0 && rc.teamBPlayers.Count == rc.teamAPlayers.Count)) && rc.currentRespawnTime == -1;
 
-			if(GUI.Button(new Rect(15, 50, 150, 30), "<color=#348BE1>"+ GameSettings.teamAName+"</color>"))
+			if(GUI.Button(new Rect(15, 50, 150, 30), "<color=#FFFFFF>" + GameSettings.teamAName+"</color>"))
             {
 				//ADManager.instance.ShowRewardedAd();
 				scoreAudioSource.clip = ClickSong;
@@ -156,7 +155,7 @@ public class Scoreboard : MonoBehaviour
 
 			GUI.enabled = ((rc.ourTeam != 2 && rc.teamAPlayers.Count > rc.teamBPlayers.Count) || (rc.ourTeam == 0 && rc.teamBPlayers.Count == rc.teamAPlayers.Count)) && rc.currentRespawnTime == -1;
 
-			if(GUI.Button(new Rect(175, 50, 150, 30), "<color=#FF9100>"+GameSettings.teamBName+"</color>"))
+			if(GUI.Button(new Rect(175, 50, 150, 30), "<color=#FFFFFF>" + GameSettings.teamBName+"</color>"))
             {
 				//ADManager.instance.ShowRewardedAd();
 				scoreAudioSource.clip = ClickSong;
@@ -169,7 +168,7 @@ public class Scoreboard : MonoBehaviour
         {
 			GUI.enabled = rc.ourTeam == 0 && rc.currentRespawnTime == -1;
 
-			if(GUI.Button(new Rect(15, 50, 310, 30), "<color=#00AD18>" + xml.button58 + "</color>"))
+			if(GUI.Button(new Rect(15, 50, 310, 30), "<color=#FFFFFF>" + xml.button58 + "</color>"))
             {
 				scoreAudioSource.clip = ClickSong;
 				scoreAudioSource.Play ();

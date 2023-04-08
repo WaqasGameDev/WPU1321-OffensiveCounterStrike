@@ -143,6 +143,10 @@ public class MultiplayerChat : Photon.MonoBehaviour
 	void OnGUI()
 	{
 
+		var theRawButtonStyle = new GUIStyle();
+		theRawButtonStyle.normal.background = GameSettings.theRawGuiSkin.button.normal.background;
+		theRawButtonStyle.alignment = TextAnchor.MiddleCenter;
+		theRawButtonStyle.normal.textColor = Color.white;
 
 		//float backtimeout;
 		//backtimeout = PhotonNetwork.BackgroundTimeout;
@@ -153,12 +157,7 @@ public class MultiplayerChat : Photon.MonoBehaviour
 		{
 			if (rc.ourPlayer.playerKilled)
 			{
-
-
-
-
-
-				if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height * 0.9f, 200, 35), "< SPECTATING >"))
+				if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height * 0.9f, 200, 35), "< SPECTATING >",theRawButtonStyle))
 
 				{
 					if (rc.WFollowCam >= rc.FollowCamAll.Count - 1)
@@ -182,7 +181,7 @@ public class MultiplayerChat : Photon.MonoBehaviour
 
 
 
-			if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height * 0.9f, 200, 35), "< SPECTATING >"))
+			if (GUI.Button(new Rect(Screen.width / 2 - 100, Screen.height * 0.9f, 200, 35), "< SPECTATING >", theRawButtonStyle))
 			{
 				if (rc.WFollowCam >= rc.FollowCamAll.Count - 1)
 				{
