@@ -36,6 +36,7 @@ public class SetupGUIStyles : MonoBehaviour
 		
 		GameSettings.createRoomOptionsStyle.font = guiSkin.font;
 		GameSettings.createRoomOptionsStyle = new GUIStyle(guiSkin.label);
+		GameSettings.createRoomOptionsStyle.hover.textColor = new Color(183,183,183);
 		GameSettings.createRoomOptionsStyle.alignment = TextAnchor.MiddleCenter;
 
 		GameSettings.timeStyle.font = guiSkin.font;

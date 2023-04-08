@@ -3,6 +3,11 @@ using System.Collections;
 
 public class OptionsSettings : MonoBehaviour
 {
+	[SerializeField] GUISkin guiSkin;
+	[SerializeField] Texture2D minimizeButtonImage;
+	[SerializeField] Texture2D leftButtonImage;
+	[SerializeField] Texture2D rightButtonImage;
+	[SerializeField] Texture2D saveButtonImage;
 
 	Resolution[] screenReolsutions = new Resolution[0];
 	string[] availableQualities = new string[0];
@@ -76,7 +81,7 @@ public class OptionsSettings : MonoBehaviour
     {
 		GUI.depth = 150;
 
-		GUI.skin = GameSettings.guiSkin;
+		GUI.skin = guiSkin;
 
 #if !UNITY_ANDROID && !UNITY_IOS && !UNITY_WP8 && !UNITY_WP8_1
         GUI.Window (0, new Rect(Screen.width/2 - 175, Screen.height/2 - 250,  350, 500), OptionsWindow, "");
@@ -95,7 +100,7 @@ public class OptionsSettings : MonoBehaviour
 			GUI.Label (new Rect (15, 0, 300, 35), rc.xml.button2);
 		}
 
-		if(GUI.Button(new Rect(350 - 28, 1, 28, 29), "", GameSettings.closeButtonStyle))
+		if(GUI.Button(new Rect(350 - 28, 1, 28, 29), "", Convert2DTextureToGUIStyle(minimizeButtonImage)))
         {
 			if(cm)
             {
@@ -116,7 +121,7 @@ public class OptionsSettings : MonoBehaviour
 			GUI.Label (new Rect (15, 40, 300, 30), rc.xml.button83);
 		}
 		GUI.enabled = selectedResolution > 0;
-		if(GUI.Button(new Rect(15, 70, 25, 25), "<"))
+		if(GUI.Button(new Rect(15, 70, 25, 25), "", Convert2DTextureToGUIStyle(leftButtonImage)))
         {
 			selectedResolution --;
 		}
@@ -130,7 +135,7 @@ public class OptionsSettings : MonoBehaviour
             GUI.Label(new Rect(45, 70, 175, 25), Screen.width.ToString() + " x " + Screen.height.ToString(), GameSettings.createRoomOptionsStyle);
         }
 		GUI.enabled = selectedResolution < screenReolsutions.Length - 1;
-		if(GUI.Button(new Rect(225, 70, 25, 25), ">"))
+		if(GUI.Button(new Rect(225, 70, 25, 25), "", Convert2DTextureToGUIStyle(rightButtonImage)))
         {
 			selectedResolution ++;
 		}
@@ -145,7 +150,7 @@ public class OptionsSettings : MonoBehaviour
 			GUI.Label (new Rect (15, 100, 300, 30), rc.xml.button84);
 		}
 		GUI.enabled = selectedQuality > 0;
-		if(GUI.Button(new Rect(15, 130, 25, 25), "<"))
+		if(GUI.Button(new Rect(15, 130, 25, 25), "", Convert2DTextureToGUIStyle(leftButtonImage)))
         {
 			selectedQuality --;
 			QualitySettings.SetQualityLevel(selectedQuality);
@@ -153,7 +158,7 @@ public class OptionsSettings : MonoBehaviour
 		GUI.enabled = true;
 		GUI.Label(new Rect(45,130, 175, 25), availableQualities[selectedQuality], GameSettings.createRoomOptionsStyle);
 		GUI.enabled = selectedQuality < availableQualities.Length - 1;
-		if(GUI.Button(new Rect(225, 130, 25, 25), ">"))
+		if(GUI.Button(new Rect(225, 130, 25, 25), "", Convert2DTextureToGUIStyle(rightButtonImage)))
         {
 			selectedQuality ++;
 			QualitySettings.SetQualityLevel(selectedQuality);
@@ -267,7 +272,7 @@ public class OptionsSettings : MonoBehaviour
         Rect saveButtonRect = new Rect(210, 230, 125, 25);
 #endif
 		if (cm) {
-			if (GUI.Button (saveButtonRect, cm.xml.button19)) {
+			if (GUI.Button (saveButtonRect, "", Convert2DTextureToGUIStyle(saveButtonImage))) {
 				PlayerPrefs.SetInt (qualityPrefsName, selectedQuality);
 				PlayerPrefs.SetFloat (mouseSensitivityPrefsName, mouseSensitivity);
 
@@ -297,7 +302,7 @@ public class OptionsSettings : MonoBehaviour
 		}
 
 		if (rc) {
-			if (GUI.Button (saveButtonRect, rc.xml.button19)) {
+			if (GUI.Button (saveButtonRect, "", Convert2DTextureToGUIStyle(saveButtonImage))) {
 				PlayerPrefs.SetInt (qualityPrefsName, selectedQuality);
 				PlayerPrefs.SetFloat (mouseSensitivityPrefsName, mouseSensitivity);
 
@@ -327,6 +332,13 @@ public class OptionsSettings : MonoBehaviour
 		}
 
 
+    }
+
+	private GUIStyle Convert2DTextureToGUIStyle(Texture2D texture)
+    {
+		var guiStyle = new GUIStyle();
+		guiStyle.normal.background = texture;
+		return guiStyle;
     }
 
     public void SetFullscreen ()

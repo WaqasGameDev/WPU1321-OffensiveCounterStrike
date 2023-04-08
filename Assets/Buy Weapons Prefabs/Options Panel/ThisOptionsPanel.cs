@@ -18,8 +18,9 @@ public class ThisOptionsPanel : MonoBehaviour
     {
         backButton.onClick.AddListener(() => { });
         saveButton.onClick.AddListener(() => { });
-        backButton.onClick.AddListener(() => { });
-        backButton.onClick.AddListener(() => { });
-        backButton.onClick.AddListener(() => { });
+        screenLeftButton.onClick.AddListener(() => { });
+        screenRightButton.onClick.AddListener(() => { });
+        qualityLeftButton.onClick.AddListener(() => { });
+        qualityRightutton.onClick.AddListener(() => { });
     }
 }
