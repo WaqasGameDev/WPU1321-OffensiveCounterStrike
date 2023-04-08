@@ -1,9 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class BuyMenu : MonoBehaviour
 {
+
+	float screenCenterX;
+	float screenCenterY;
+	Vector2 wheelImageSize = new Vector2(350, 350);
+	float wheelCenterX;
+	float wheelCenterY;
+	GUISkin guiSkin;
 
 	//This script is enabled/disabled from RoomController.cs
 	//Here player select weapons to buy
@@ -276,81 +284,65 @@ public class BuyMenu : MonoBehaviour
 	// Update is called once per frame
 	void OnGUI ()
     {
-		GUI.skin = GameSettings.guiSkin;
-
-		GUI.Window (0, new Rect(Screen.width/2 - 220, Screen.height/2 - 210,  440, 420), BuyMenuWindow, "");
+		guiSkin = GameSettings.theRawGuiSkin;
+		screenCenterX = Screen.width / 2;
+		screenCenterY = Screen.height / 2;
+		// Transparent buy main window
+		GUI.Window(0, new Rect(0, 0, Screen.width, Screen.height), BuyMenuWindow, "", guiSkin.customStyles[10]);
 	}
 
 	void Update(){
 		if (rc.ourPlayer) {
 			selectedSpecial = rc.ourPlayer.playerWeapons.selectedSpecial;
 		}
-
-
 	}
 
 	void BuyMenuWindow (int windowID)
     {
-		GUI.Label(new Rect(15, 0, 300, 35), xml.button67);
+		var wheelRectStartingPosX = screenCenterX - wheelImageSize.x / 2 + 200;
+		var wheelRectStartingPosY = screenCenterY - wheelImageSize.y / 2;
 
-		if(GUI.Button(new Rect(440 - 28, 1, 28, 29), "", GameSettings.closeButtonStyle))
-        {
+		// Wheel image
+		GUI.Box(new Rect(new Vector2(wheelRectStartingPosX, wheelRectStartingPosY), wheelImageSize), GUIContent.none, guiSkin.customStyles[6]);
+
+		wheelCenterX = wheelRectStartingPosX + wheelImageSize.x / 2;
+		wheelCenterY = wheelRectStartingPosY + wheelImageSize.y / 2;
+
+		// Minimize Button
+		if (GUI.Button(new Rect(Screen.width - 50, 50, 28, 28), "", guiSkin.customStyles[9]))
+		{
 			rc.showBuyMenu = false;
 		}
 
+		GUI.Label(new Rect(15, 0, 300, 35), xml.button67);
+
 		GUI.enabled = buySection != BuySection.Secondary;
 
-		if(GUI.Button(new Rect(15, 40, 140, 38), xml.button100, GameSettings.buyMenuButtonStyle))
-        {
-			scoreAudioSource.clip = ClickSong;
-			scoreAudioSource.Play ();
-			buySection = BuySection.Secondary;
-		}
+		var gunBackgroungButtonStyle = GameSettings.theRawGuiSkin.customStyles[11];
+
+		var buttonSize = new Vector2(70, 30);
+
+		CreateWeaponButtonWithBackground(xml.button100, buttonSize, new Vector2(-105, -130), BuySection.Secondary);
 
 		GUI.enabled = buySection != BuySection.HalfPrimary;
 
-		if(GUI.Button(new Rect(15, 102, 140, 38), xml.button101, GameSettings.buyMenuButtonStyle))
-		{
-			scoreAudioSource.clip = ClickSong;
-			scoreAudioSource.Play ();
-			buySection = BuySection.HalfPrimary;
-		}
+		CreateWeaponButtonWithBackground(xml.button101, buttonSize, new Vector2(80, -21),BuySection.HalfPrimary);
 
 		GUI.enabled = buySection != BuySection.Primary;
 
-		if(GUI.Button(new Rect(15, 164, 140, 38), xml.button102, GameSettings.buyMenuButtonStyle))
-        {
-			scoreAudioSource.clip = ClickSong;
-			scoreAudioSource.Play ();
-			buySection = BuySection.Primary;
-		}
+		CreateWeaponButtonWithBackground(xml.button102, buttonSize, new Vector2(-145, -21), BuySection.Primary);
 
 		GUI.enabled = buySection != BuySection.ShotGuns;
 
-		if(GUI.Button(new Rect(15, 226, 140, 38), xml.button103, GameSettings.buyMenuButtonStyle))
-		{
-			scoreAudioSource.clip = ClickSong;
-			scoreAudioSource.Play ();
-			buySection = BuySection.ShotGuns;
-		}
+		CreateWeaponButtonWithBackground(xml.button103, buttonSize, new Vector2(18, -130), BuySection.ShotGuns);
 
 		GUI.enabled = buySection != BuySection.Sniper;
 
-		if(GUI.Button(new Rect(15, 288, 140, 38), xml.button104, GameSettings.buyMenuButtonStyle))
-        {
-			scoreAudioSource.clip = ClickSong;
-			scoreAudioSource.Play ();
-			buySection = BuySection.Sniper;
-		}
+		CreateWeaponButtonWithBackground(xml.button104, buttonSize, new Vector2(-105, 90), BuySection.Sniper);
 
 		GUI.enabled = buySection != BuySection.Special;
 
-		if(GUI.Button(new Rect(15, 350, 140, 38), xml.button105, GameSettings.buyMenuButtonStyle))
-		{
-			scoreAudioSource.clip = ClickSong;
-			scoreAudioSource.Play ();
-			buySection = BuySection.Special;
-		}
+		CreateWeaponButtonWithBackground(xml.button105, buttonSize, new Vector2(18, 90), BuySection.Special);
 
 		GUI.enabled = true;
 		
@@ -387,13 +379,33 @@ public class BuyMenu : MonoBehaviour
 		}
 	}
 
+	private void CreateWeaponButtonWithBackground(string weaponName, Vector2 buttonSize, Vector2 offsets, BuySection weaponSectionToOpen)
+	{
+		var buyButtonBackgroundSize = new Vector2(buttonSize.x, buttonSize.y);
+		var weaponBuyBackgroundRectStartingPositioX = wheelCenterX + offsets.x;
+		var weaponBuyBackgroundRectStartingPositionY = wheelCenterY + offsets.y;
+
+		var buyButtonBackgroundRect = new Rect(weaponBuyBackgroundRectStartingPositioX, weaponBuyBackgroundRectStartingPositionY, buyButtonBackgroundSize.x, buyButtonBackgroundSize.y);
+
+		var weaponRect = new Rect(weaponBuyBackgroundRectStartingPositioX, weaponBuyBackgroundRectStartingPositionY, buyButtonBackgroundSize.x, buyButtonBackgroundSize.y);
+
+		if (GUI.Button(weaponRect, weaponName, guiSkin.customStyles[7]))
+		{
+			scoreAudioSource.clip = ClickSong;
+			scoreAudioSource.Play();
+			buySection = weaponSectionToOpen;
+		}
+	}
+
 	private GUIStyle guiStyle = new GUIStyle ();
 	void ShowWeaponItems (List<PlayerWeapons.WeaponSet> weaponListTmp, int selectedIndex, int type)
 	{
+		var weaponButtonGuiStyle = guiSkin.customStyles[11];
+		var weaponPanelGuiStyle = guiSkin.customStyles[12];
 		if (weaponListTmp != null) {
 			if (weaponListTmp == primaryWeaponsTmp && buySection == BuySection.Sniper) {
 				GUILayout.Space (30);
-				GUI.Box (new Rect (170, 39, 255, 350), "");
+				GUI.Box (new Rect (170, 39, 255, 350), "", weaponPanelGuiStyle);
 				for (int i = 0; i < weaponListTmp.Count; i++) {
 					GUI.enabled = true;
 
@@ -402,7 +414,7 @@ public class BuyMenu : MonoBehaviour
 					GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
 
 					if (i == 12) {
-						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 1) {
 									selectedPrimary = i;
@@ -418,7 +430,7 @@ public class BuyMenu : MonoBehaviour
 						}
 					}
 					if (i == 13) {
-						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 1) {
 									selectedPrimary = i;
@@ -474,7 +486,7 @@ public class BuyMenu : MonoBehaviour
 				}
 			} else if (weaponListTmp == primaryWeaponsTmp && buySection == BuySection.ShotGuns) {
 				GUILayout.Space (30);
-				GUI.Box (new Rect (170, 39, 255, 350), "");
+				GUI.Box (new Rect (170, 39, 255, 350), "", weaponPanelGuiStyle);
 				for (int i = 0; i < weaponListTmp.Count; i++) {
 					GUI.enabled = true;
 
@@ -482,7 +494,7 @@ public class BuyMenu : MonoBehaviour
 
 					GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
 					if (i == 9) {
-						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 1) {
 									selectedPrimary = i;
@@ -498,7 +510,7 @@ public class BuyMenu : MonoBehaviour
 						}
 					}
 					if (i == 10) {
-						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 1) {
 									selectedPrimary = i;
@@ -553,7 +565,7 @@ public class BuyMenu : MonoBehaviour
 				}
 			} else if (weaponListTmp == primaryWeaponsTmp && buySection == BuySection.HalfPrimary) {
 				GUILayout.Space (30);
-				GUI.Box (new Rect (170, 39, 255, 350), "");
+				GUI.Box (new Rect (170, 39, 255, 350), "", weaponPanelGuiStyle);
 				for (int i = 0; i < weaponListTmp.Count; i++) {
 					GUI.enabled = true;
 
@@ -561,7 +573,7 @@ public class BuyMenu : MonoBehaviour
 
 					GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
 					if (i == 2) {
-						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 1) {
 									selectedPrimary = i;
@@ -577,7 +589,7 @@ public class BuyMenu : MonoBehaviour
 						}
 					}
 					if (i == 4) {
-						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 1) {
 									selectedPrimary = i;
@@ -593,7 +605,7 @@ public class BuyMenu : MonoBehaviour
 						}
 					}
 					if (i == 3) {
-						if (GUI.Button (new Rect (169, 179, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 179, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 1) {
 									selectedPrimary = i;
@@ -609,7 +621,7 @@ public class BuyMenu : MonoBehaviour
 						}
 					}
 					if (i == 15) {
-						if (GUI.Button (new Rect (169, 249, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 249, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 1) {
 									selectedPrimary = i;
@@ -625,7 +637,7 @@ public class BuyMenu : MonoBehaviour
 						}
 					}
 					if (i == 11) {
-						if (GUI.Button (new Rect (169, 319, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 319, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 1) {
 									selectedPrimary = i;
@@ -719,7 +731,7 @@ public class BuyMenu : MonoBehaviour
 				}
 			} else if (weaponListTmp == primaryWeaponsTmp) {
 				GUILayout.Space (30);
-				GUI.Box (new Rect (170, 39, 255, 350), "");
+				GUI.Box (new Rect (170, 39, 255, 350), "", weaponPanelGuiStyle);
 				for (int i = 0; i < weaponListTmp.Count; i++) {
 					GUI.enabled = true;
 
@@ -727,7 +739,7 @@ public class BuyMenu : MonoBehaviour
 
 					GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
 					if (i == 5) {
-						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 1) {
 									selectedPrimary = i;
@@ -743,7 +755,7 @@ public class BuyMenu : MonoBehaviour
 						}
 					}
 					if (i == 6) {
-						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 1) {
 									selectedPrimary = i;
@@ -759,7 +771,7 @@ public class BuyMenu : MonoBehaviour
 						}
 					}
 					if (i == 7) {
-						if (GUI.Button (new Rect (169, 179, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 179, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 1) {
 									selectedPrimary = i;
@@ -775,7 +787,7 @@ public class BuyMenu : MonoBehaviour
 						}
 					}
 					if (i == 8) {
-						if (GUI.Button (new Rect (169, 249, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 249, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 1) {
 									selectedPrimary = i;
@@ -858,7 +870,7 @@ public class BuyMenu : MonoBehaviour
 				}
 			} else if (weaponListTmp == specialWeaponsTmp || weaponListTmp == grenadeTmp) {
 				GUILayout.Space (30);
-				GUI.Box (new Rect (170, 39, 255, 350), "");
+				GUI.Box (new Rect (170, 39, 255, 350), "", weaponPanelGuiStyle);
 				for (int i = 0; i < weaponListTmp.Count; i++) {
 					GUI.enabled = true;
 
@@ -866,12 +878,12 @@ public class BuyMenu : MonoBehaviour
 
 					GUI.enabled = false;
 					if (i == 0) {
-						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? xml.button71 : xml.button71)) {
+						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? xml.button71 : xml.button71, weaponButtonGuiStyle)) {
 						}
 					}
 					GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
 					if (i == 1) {
-						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 4) {
 									selectedGrenade = i;
@@ -919,7 +931,7 @@ public class BuyMenu : MonoBehaviour
 					GUILayout.Space (10);
 					GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
 					if (i == 2) {
-						if (GUI.Button (new Rect (169, 179, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 179, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 5) {
 									selectedFlash = i;
@@ -953,7 +965,7 @@ public class BuyMenu : MonoBehaviour
 			}
 			else {
 				GUILayout.Space (30);
-				GUI.Box (new Rect(170, 39, 255, 350),"");
+				GUI.Box (new Rect(170, 39, 255, 350),"", weaponPanelGuiStyle);
 				for (int i = 0; i < weaponListTmp.Count; i++) {
 					GUI.enabled = true;
 
@@ -961,7 +973,7 @@ public class BuyMenu : MonoBehaviour
 
 					GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
 					if (i == 0){
-					if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+					if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 						if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 							if (type == 2) {
 								selectedSecondary = i;
@@ -985,7 +997,7 @@ public class BuyMenu : MonoBehaviour
 					}
 				}
 					if (i == 1) {
-						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 2) {
 									selectedSecondary = i;
@@ -1009,7 +1021,7 @@ public class BuyMenu : MonoBehaviour
 						}
 					}
 					if (i == 2) {
-						if (GUI.Button (new Rect (169, 179, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 179, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 2) {
 									selectedSecondary = i;
@@ -1033,7 +1045,7 @@ public class BuyMenu : MonoBehaviour
 						}
 					}
 					if (i == 4) {
-						if (GUI.Button (new Rect (169, 249, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 249, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 2) {
 									selectedSecondary = i;
@@ -1057,7 +1069,7 @@ public class BuyMenu : MonoBehaviour
 						}
 					}
 					if (i == 3) {
-						if (GUI.Button (new Rect (169, 319, 256, 70), i != selectedIndex ? "" : xml.button71)) {
+						if (GUI.Button (new Rect (169, 319, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
 							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
 								if (type == 2) {
 									selectedSecondary = i;

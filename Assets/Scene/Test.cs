@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class Test : MonoBehaviour
 {
 
-    [SerializeField] Texture2D triangleTexture;
-	[SerializeField] Texture2D BuyMenuBackground;
 	[SerializeField] GUISkin guiSkin;
 	float screenCenterX;
 	float screenCenterY;
