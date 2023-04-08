@@ -11,8 +11,9 @@ public class Test : MonoBehaviour
 	[SerializeField] GUISkin guiSkin;
 	float screenCenterX;
 	float screenCenterY;
-	Vector2 size = new Vector2(500, 500);
-
+	Vector2 wheelImageSize = new Vector2(500, 500);
+	float wheelCenterX;
+	float wheelCenterY;
 
 	private void OnGUI()
     {
@@ -24,8 +25,14 @@ public class Test : MonoBehaviour
 
     void BuyMenuWindow(int windowID)
 	{
+		var wheelRectStartingPosX = screenCenterX - wheelImageSize.x / 2;
+		var wheelRectStartingPosY = screenCenterY - wheelImageSize.y / 2;
+
 		// Wheel image
-		GUI.Box(new Rect(new Vector2(screenCenterX - size.x / 2, screenCenterY - size.y / 2), size), GUIContent.none, guiSkin.customStyles[6]);
+		GUI.Box(new Rect(new Vector2( wheelRectStartingPosX, wheelRectStartingPosY), wheelImageSize), GUIContent.none, guiSkin.customStyles[6]);
+
+		wheelCenterX = wheelRectStartingPosX + wheelImageSize.x / 2;
+		wheelCenterY = wheelRectStartingPosY + wheelImageSize.y / 2;
 
 		// Minimize Button
 		if (GUI.Button(new Rect(Screen.width - 50, 50, 28, 28), "", guiSkin.customStyles[9]))
@@ -34,100 +41,33 @@ public class Test : MonoBehaviour
 		}
 
 
-		// Buy button background
-		var buyButtonBackgroundSize = new Vector2(70, 40);
+		CreateWeaponButtonWithBackground("Pistol",new Vector2(120,50),new Vector2(-150,-180));
+		CreateWeaponButtonWithBackground("Shotgun", new Vector2(120, 50), new Vector2(25, -180));
+		CreateWeaponButtonWithBackground("Light-Machine", new Vector2(120, 50), new Vector2(85, -30));
+		CreateWeaponButtonWithBackground("Heavy-Machine", new Vector2(120, 50), new Vector2(-210, -30));
+		CreateWeaponButtonWithBackground("Sniper", new Vector2(120, 50), new Vector2(-150, 130));
+		CreateWeaponButtonWithBackground("Ammunition", new Vector2(120, 50), new Vector2(25, 130));
+	}
 
-		var buyButtonBackgroundRect = new Rect(new Vector2(screenCenterX , screenCenterY), buyButtonBackgroundSize);
+	private void CreateWeaponButtonWithBackground(string weaponName, Vector2 buttonSize, Vector2 offsets)
+    {
+		var buyButtonBackgroundSize = new Vector2(buttonSize.x, buttonSize.y);
+		var weaponBuyBackgroundRectStartingPositioX = wheelCenterX + offsets.x;
+		var weaponBuyBackgroundRectStartingPositionY = wheelCenterY + offsets.y;
+
+		var buyButtonBackgroundRect = new Rect(weaponBuyBackgroundRectStartingPositioX, weaponBuyBackgroundRectStartingPositionY, buyButtonBackgroundSize.x, buyButtonBackgroundSize.y);
 
 		if (GUI.Button(buyButtonBackgroundRect, "", guiSkin.customStyles[8]))
 		{
-
+			Debug.Log($"{weaponName} Section opened!");
 		}
 
-		var pistolSize = new Vector2(100, 100);
-
-		var pistolRect = new Rect(screenCenterX - size.x / 2 - pistolSize.x / 2, screenCenterY - size.y / 2 + pistolSize.y / 2, pistolSize.x, pistolSize.y);
+		var weaponRect = new Rect(weaponBuyBackgroundRectStartingPositioX, weaponBuyBackgroundRectStartingPositionY, buyButtonBackgroundSize.x, buyButtonBackgroundSize.y);
 
 
-		if (GUI.Button(pistolRect, "Pistol", guiSkin.customStyles[7]))
+		if (GUI.Button(weaponRect, weaponName, guiSkin.customStyles[7]))
 		{
-			Debug.Log("Pistol Section opened!");
-		}
-
-		return;
-
-		if (GUI.Button(new Rect(screenCenterX, screenCenterY, 140, 38), "LightMachine", GameSettings.buyMenuButtonStyle))
-		{
-			Debug.Log("LightMachine Section opened!");
-		}
-
-		if (GUI.Button(new Rect(screenCenterX, screenCenterY, 140, 38), "HeavyMachine", GameSettings.buyMenuButtonStyle))
-		{
-			Debug.Log("HeavyMachine Section opened!");
-		}
-
-		if (GUI.Button(new Rect(screenCenterX, screenCenterY, 140, 38), "Shotgun", GameSettings.buyMenuButtonStyle))
-		{
-			Debug.Log("Shotgun Section opened!");
-		}
-
-		if (GUI.Button(new Rect(screenCenterX, screenCenterY, 140, 38), "Sniper", GameSettings.buyMenuButtonStyle))
-		{
-			Debug.Log("Sniper Section opened!");
-		}
-
-		if (GUI.Button(new Rect(screenCenterX, screenCenterY, 140, 38), "Ammunition", GameSettings.buyMenuButtonStyle))
-		{
-			Debug.Log("Ammuniation Section opened!");
 		}
 	}
-
-	//void OnGUI()
- //   {
-
- //       float rotationAngle = 45f; // Example rotation angle in degrees
- //       Vector2 buttonSize = new Vector2(500f, 500f); // Example button size
-
- //       Vector2 buttonPosition = new Vector2(50f, 50f); // Example button position
-
- //       // Save the current GUI matrix
- //       Matrix4x4 originalMatrix = GUI.matrix;
-
- //       // Apply rotation to the GUI matrix
- //       GUIUtility.RotateAroundPivot(rotationAngle, new Vector2(Screen.width / 2, Screen.height / 2));
-
- //       // Draw the rotated button
- //       if (GUILayout.Button("Rotated Button", GUILayout.Width(buttonSize.x), GUILayout.Height(buttonSize.y)))
- //       {
- //           // Button click event handling
- //           Debug.Log("Button clicked!");
- //       }
-
- //       // Restore the original GUI matrix
- //       GUI.matrix = originalMatrix;
- //       // Example texture for the triangular button
-
- //       // Check for mouse input
- //       Event currentEvent = Event.current;
- //       Vector2 mousePosition = currentEvent.mousePosition;
-
- //       // Convert mouse position to local GUI coordinates
- //       mousePosition.y = Screen.height - mousePosition.y;
-
- //       // Check if mouse is inside the button area
- //       Rect buttonRect = new Rect(buttonPosition.x, buttonPosition.y, buttonSize.x, buttonSize.y);
- //       if (buttonRect.Contains(mousePosition))
- //       {
- //           // Handle button interaction
- //           if (currentEvent.type == EventType.MouseDown && currentEvent.button == 0)
- //           {
- //               // Left mouse button down, button clicked
- //               Debug.Log("Button clicked!");
- //           }
- //       }
-
- //       // Draw the triangular button
- //       GUI.DrawTexture(buttonRect, triangleTexture, ScaleMode.StretchToFill);
- //   }
 
 }
