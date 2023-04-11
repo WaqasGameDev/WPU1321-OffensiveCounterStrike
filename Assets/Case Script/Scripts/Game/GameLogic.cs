@@ -180,6 +180,10 @@ public class GameLogic : MonoBehaviour
 
     public void SaveSkin()
     {
+        if(CurrencyManager.instance.normalCurrency < CaseManager.instance.casesData[selectedCaseIndex].skins[selectedSkinIndex].normalCurrencyWorth || CurrencyManager.instance.normalCurrency <= 0)
+        {
+            return;
+        }
         CurrencyManager.instance.normalCurrency -= CaseManager.instance.casesData[selectedCaseIndex].skins[selectedSkinIndex].normalCurrencyWorth;
         CaseManager.instance.casesSaveData[selectedCaseIndex].skins[selectedSkinIndex].amountOwned++;
         SaveLoadManager.instance.Save();

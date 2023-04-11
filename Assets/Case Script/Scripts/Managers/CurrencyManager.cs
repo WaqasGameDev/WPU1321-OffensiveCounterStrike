@@ -68,9 +68,13 @@ public class CurrencyManager : MonoBehaviour
 
     public void LoadSaveData(SaveData saveData)
     {
-      //  Debug.LogError("CALLED Load Data");
+      // Debug.LogError("CALLED Load Data");
         classSaveData = saveData.currencyManagerSaveData;
       //  Debug.LogError("Loaded value is"+classSaveData.normalCurrency);
+        if(classSaveData.normalCurrency < 0 || classSaveData.normalCurrency == 0)
+        {
+            classSaveData.normalCurrency = 0;
+        }
         normalCurrency = classSaveData.normalCurrency;
     }
     #endregion
