@@ -46,6 +46,8 @@ public class GameLogic : MonoBehaviour
     private GameObject es_GameObject;
     private Vector3 skinsHolderEndPosition;
 
+    [SerializeField] GameObject messagePanel;
+
     private void Awake()
     {
         if (instance == null)
@@ -182,11 +184,21 @@ public class GameLogic : MonoBehaviour
     {
         if(CurrencyManager.instance.normalCurrency < CaseManager.instance.casesData[selectedCaseIndex].skins[selectedSkinIndex].normalCurrencyWorth || CurrencyManager.instance.normalCurrency <= 0)
         {
+            StartCoroutine(nameof(ShowInsufficientCurrencyMessage));
             return;
         }
         CurrencyManager.instance.normalCurrency -= CaseManager.instance.casesData[selectedCaseIndex].skins[selectedSkinIndex].normalCurrencyWorth;
         CaseManager.instance.casesSaveData[selectedCaseIndex].skins[selectedSkinIndex].amountOwned++;
         SaveLoadManager.instance.Save();
         CaseUI.instance.LoadPreviewSkinsUI();
+    }
+
+    IEnumerator ShowInsufficientCurrencyMessage()
+    {
+
+        messagePanel.SetActive(true);
+        yield return new WaitForSeconds(2f);
+
+        messagePanel.SetActive(false);
     }
 }
