@@ -7245,7 +7245,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Offensive Strike : KingShots GAMES'
+  m_Text: 'Offensive Strike : The RAW'
 --- !u!222 &323443989
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -34231,7 +34231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.83500004, y: 0}
   m_AnchorMax: {x: 0.9925237, y: 1}
-  m_AnchoredPosition: {x: -0.19999695, y: 0.79999995}
+  m_AnchoredPosition: {x: -0.19999695, y: 0.79999924}
   m_SizeDelta: {x: 0, y: 4.8946}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1390101809
@@ -36856,7 +36856,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.29200003, y: 0}
   m_AnchorMax: {x: 0.707, y: 0.8595091}
-  m_AnchoredPosition: {x: 0, y: -0.7499962}
+  m_AnchoredPosition: {x: 0, y: -0.74999714}
   m_SizeDelta: {x: 0.6199951, y: 2.4119987}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1544860199
@@ -53970,7 +53970,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.85300004, y: 0.874}
   m_AnchorMax: {x: 0.9165888, y: 1}
-  m_AnchoredPosition: {x: -0.39001465, y: 1.800003}
+  m_AnchoredPosition: {x: -0.39001465, y: 1.7999878}
   m_SizeDelta: {x: 2.99, y: 0.069999695}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &569365879076332361
@@ -55054,7 +55054,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.42900002, y: 0.028888885}
   m_AnchorMax: {x: 0.592, y: 0.13544443}
-  m_AnchoredPosition: {x: -0.21020508, y: -1.1648865}
+  m_AnchoredPosition: {x: -0.21020508, y: -1.164856}
   m_SizeDelta: {x: 2.941597, y: 0.36429977}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1456008489622050522
@@ -61920,7 +61920,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.39000002, y: 0}
   m_AnchorMax: {x: 0.63288, y: 0.15358609}
-  m_AnchoredPosition: {x: 0.5, y: 5.99424}
+  m_AnchoredPosition: {x: 0.5, y: 5.994232}
   m_SizeDelta: {x: -0.15260029, y: -3.1106}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &5128072123644393800
