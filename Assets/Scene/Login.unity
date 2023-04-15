@@ -6747,7 +6747,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 141, y: 0}
+  m_AnchoredPosition: {x: 141.00006, y: 0}
   m_SizeDelta: {x: 141, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &453759997
@@ -12787,12 +12787,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 827120734}
   m_CullTransparentMesh: 0
---- !u!1 &829983569 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2184576274515131536, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-    type: 3}
-  m_PrefabInstance: {fileID: 1337645358524517006}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &841678885
 GameObject:
   m_ObjectHideFlags: 0
@@ -26466,16 +26460,6 @@ MonoBehaviour:
     _prefab: Assets/Addons/LoginSystem/Content/Prefabs/UI/Profile.prefab
   - _gameObject: {fileID: 1736255149646439}
     _prefab: Assets/Offensivestrike/Resources/Player.prefab
-  - _gameObject: {fileID: 829983569}
-    _prefab: Assets/Offensivestrike/Player Models/gign/gign.fbx
-  - _gameObject: {fileID: 1736255149646439}
-    _prefab: Assets/Offensivestrike/Resources/Player.prefab
-  - _gameObject: {fileID: 1625709869}
-    _prefab: Assets/Offensivestrike/Player Models/terror/terror.fbx
-  - _gameObject: {fileID: 1736255149646439}
-    _prefab: Assets/Offensivestrike/Resources/Player.prefab
-  - _gameObject: {fileID: 1736255149646439}
-    _prefab: Assets/Offensivestrike/Resources/Player.prefab
 --- !u!4 &1518866564
 Transform:
   m_ObjectHideFlags: 11
@@ -27585,12 +27569,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594998398}
   m_CullTransparentMesh: 0
---- !u!1 &1625709869 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2184576275310881524, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-    type: 3}
-  m_PrefabInstance: {fileID: 1337645358524517006}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1627358010
 GameObject:
   m_ObjectHideFlags: 0
@@ -33614,6 +33592,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1339379163183900905, guid: f27add20ae8c06a4c89adb9e54b8bd05,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1341694995598160317, guid: f27add20ae8c06a4c89adb9e54b8bd05,
         type: 3}
       propertyPath: m_RootOrder
@@ -33667,6 +33650,26 @@ PrefabInstance:
     - target: {fileID: 1341694995598160317, guid: f27add20ae8c06a4c89adb9e54b8bd05,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371167020766360305, guid: f27add20ae8c06a4c89adb9e54b8bd05,
+        type: 3}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371167020766360305, guid: f27add20ae8c06a4c89adb9e54b8bd05,
+        type: 3}
+      propertyPath: instantiationId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977458813547792685, guid: f27add20ae8c06a4c89adb9e54b8bd05,
+        type: 3}
+      propertyPath: primaryWeapons.Array.data[0].showThis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8977458813547792685, guid: f27add20ae8c06a4c89adb9e54b8bd05,
+        type: 3}
+      propertyPath: primaryWeapons.Array.data[1].showThis
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
