@@ -1100,7 +1100,7 @@ public class ConnectMenu : Photon.MonoBehaviour
 	{
 		LoadingMenu.SetActive(true);
 		loadingOn = true;
-		for (int i = 0; i <= 4;)
+		for (int i = 0; i <= 5;)
 		{
 			if ((string)availableRooms[selectedRoom].CustomProperties["MapName"] == availableMaps[i].mapName)
 			{
