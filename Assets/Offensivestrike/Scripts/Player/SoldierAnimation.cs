@@ -25,7 +25,7 @@ public class SoldierAnimation : MonoBehaviour
 	public WeaponAnimationSet m246Set;
 	public WeaponAnimationSet C4Set;
 
-	[System.Serializable]
+	/* A [System.Serializable]
 	public class AnimationSet
 	{
 		public AnimationClip idle;
@@ -37,6 +37,7 @@ public class SoldierAnimation : MonoBehaviour
 
 	public AnimationSet standingSet;
 	public AnimationSet crouchSet;
+	A*/
 
 	/*public AnimationClip reload;
 	public AnimationClip jumpPose;
@@ -46,7 +47,7 @@ public class SoldierAnimation : MonoBehaviour
 	public AnimationClip TPose;
 
 	public WeaponAnimationSet currentWeaponAnimationSet;
-	public AnimationSet currentAnimationSet;
+	/* A public AnimationSet currentAnimationSet; A */
 	public AnimationClip currentWalkAnimation;
 	FPSWeapon previousSelectedWeapon;
 
@@ -163,7 +164,7 @@ public class SoldierAnimation : MonoBehaviour
 		}
 	}
 
-	void SetWalkAnimations(AnimationSet anmset)
+	void SetWalkAnimations(/* A AnimationSet anmset A */)
 	{
 		/*soldierAnimationComponent[anmset.idle.name].wrapMode = WrapMode.Loop;
 		soldierAnimationComponent[anmset.walk_front.name].wrapMode = WrapMode.Loop;
@@ -291,10 +292,10 @@ public class SoldierAnimation : MonoBehaviour
 			{
 				soldierAnimationComponent.SetBool("IsJumping", false);
 				soldierAnimationComponent.SetBool("IsGrounded", true);
-				if (currentAnimationSet != standingSet)
+				/* A if (currentAnimationSet != standingSet)
 				{
 					//currentAnimationSet = standingSet;
-				}
+				} A */
 			}
 
 			if (movementState == 2)
