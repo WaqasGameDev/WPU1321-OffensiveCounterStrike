@@ -48961,7 +48961,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.4005404, y: 0.07872684}
   m_AnchorMax: {x: 0.601, y: 0.22587281}
-  m_AnchoredPosition: {x: 0.50001526, y: -1.9100189}
+  m_AnchoredPosition: {x: 0.50001526, y: -1.9100037}
   m_SizeDelta: {x: -0.6000004, y: 2.1799998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1997470760
@@ -54014,7 +54014,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.20534173, y: 0.15284114}
   m_AnchorMax: {x: 0.82968354, y: 0.7894206}
-  m_AnchoredPosition: {x: -1.540802, y: -0.030007362}
+  m_AnchoredPosition: {x: -1.540802, y: -0.030006409}
   m_SizeDelta: {x: -1.8800011, y: -0.13999939}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &569457535291423913
@@ -56821,7 +56821,7 @@ PrefabInstance:
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}
       propertyPath: availableMaps.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}

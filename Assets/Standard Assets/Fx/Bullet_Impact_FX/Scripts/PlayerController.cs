@@ -11,12 +11,14 @@ public class PlayerController : MonoBehaviour
     private float m_Gravity = 50.0f;
     private float m_WalkSpeed = 5f;
 
+    public bool dead;
+
     // Use this for initialization
     void Awake()
     {
         m_CharacterController = GetComponent<CharacterController>();
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
