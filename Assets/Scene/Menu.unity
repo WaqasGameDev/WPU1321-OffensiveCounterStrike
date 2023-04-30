@@ -19546,7 +19546,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.007369856, y: 0.064523116}
   m_AnchorMax: {x: 0.98931515, y: 0.18427023}
-  m_AnchoredPosition: {x: 0.67318726, y: -6.4047318}
+  m_AnchoredPosition: {x: 0.67318726, y: -6.4047394}
   m_SizeDelta: {x: 0.7244997, y: 1.4121001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &793451488
@@ -37549,7 +37549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.42100003, y: 0.24400002}
   m_AnchorMax: {x: 0.5796046, y: 0.74700004}
-  m_AnchoredPosition: {x: -0.5, y: 1.4999866}
+  m_AnchoredPosition: {x: -0.5, y: 1.4999847}
   m_SizeDelta: {x: -1, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1561864747
@@ -54014,7 +54014,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.20534173, y: 0.15284114}
   m_AnchorMax: {x: 0.82968354, y: 0.7894206}
-  m_AnchoredPosition: {x: -1.540802, y: -0.030007362}
+  m_AnchoredPosition: {x: -1.540802, y: -0.030006409}
   m_SizeDelta: {x: -1.8800011, y: -0.13999939}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &569457535291423913
@@ -56828,6 +56828,16 @@ PrefabInstance:
       propertyPath: FailButton4CloseConnecting
       value: 
       objectReference: {fileID: 1508994522}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
+      propertyPath: availableMaps.Array.data[4].mapName
+      value: Nuclear Facility
+      objectReference: {fileID: 0}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
+      propertyPath: availableMaps.Array.data[5].mapName
+      value: Nuclear Facility
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31f6e903bfff50c43b932345ebc1aa2b, type: 3}
 --- !u!1 &2704703840585186441 stripped
