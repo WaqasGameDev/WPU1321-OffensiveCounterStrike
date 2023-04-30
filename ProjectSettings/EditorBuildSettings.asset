@@ -15,11 +15,11 @@ EditorBuildSettings:
     path: Assets/Scene/Menu.unity
     guid: b8179f40a8d50084a878ef084d145e8f
   - enabled: 1
-    path: Assets/3D_Maps_/UZBEKISTAN.unity
-    guid: a1c15421faabc85458a5d1e172b89dbd
-  - enabled: 1
     path: Assets/3D_Maps_/Scenes/OLD_TOWN.unity
     guid: f8d2f21b9c0662848ad324f1d29e9369
+  - enabled: 1
+    path: Assets/3D_Maps_/UZBEKISTAN.unity
+    guid: a1c15421faabc85458a5d1e172b89dbd
   - enabled: 1
     path: Assets/warehouse/Scene/WAREHOUSE.unity
     guid: 0113de7461627554cb05b4c3c43f5369
