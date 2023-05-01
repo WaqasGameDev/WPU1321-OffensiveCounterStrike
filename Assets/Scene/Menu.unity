@@ -41542,7 +41542,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.411, y: 0.10759599}
   m_AnchorMax: {x: 0.588, y: 0.19549382}
-  m_AnchoredPosition: {x: -0.000015258789, y: -0.61001587}
+  m_AnchoredPosition: {x: -0.000015258789, y: -0.61000824}
   m_SizeDelta: {x: -0.60200024, y: -0.48480034}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1687539791
@@ -56830,14 +56830,42 @@ PrefabInstance:
       objectReference: {fileID: 1508994522}
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}
+      propertyPath: availableMaps.Array.data[2].mapMap
+      value: 
+      objectReference: {fileID: 21300000, guid: 8dbac8487787ab647bb254ed37a56ae5,
+        type: 3}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
+      propertyPath: availableMaps.Array.data[2].mapName
+      value: WAREHOUSE
+      objectReference: {fileID: 0}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
+      propertyPath: availableMaps.Array.data[3].mapName
+      value: NUCLEAR_FACILITY
+      objectReference: {fileID: 0}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
       propertyPath: availableMaps.Array.data[4].mapName
-      value: Nuclear Facility
+      value: NUCLEAR_FACILITY
       objectReference: {fileID: 0}
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}
       propertyPath: availableMaps.Array.data[5].mapName
-      value: Nuclear Facility
+      value: NUCLEAR_FACILITY
       objectReference: {fileID: 0}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
+      propertyPath: availableMaps.Array.data[2].mapPreview
+      value: 
+      objectReference: {fileID: 21300000, guid: 974ebd1240b45f2498a489f5059b420a,
+        type: 3}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
+      propertyPath: availableMaps.Array.data[3].mapPreview
+      value: 
+      objectReference: {fileID: 21300000, guid: 4f7301d30ead1e341895b2f976ea45be,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31f6e903bfff50c43b932345ebc1aa2b, type: 3}
 --- !u!1 &2704703840585186441 stripped

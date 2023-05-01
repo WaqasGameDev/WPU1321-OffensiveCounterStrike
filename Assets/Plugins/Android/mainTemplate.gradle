@@ -32,6 +32,8 @@ dependencies {
     implementation 'com.facebook.android:facebook-login:[14.0, 15)' // Assets/FacebookSDK/Plugins/Editor/Dependencies.xml:7
     implementation 'com.facebook.android:facebook-share:[14.0, 15)' // Assets/FacebookSDK/Plugins/Editor/Dependencies.xml:8
     implementation 'com.google.android.gms:play-services-ads:21.0.0' // Assets/GoogleMobileAds/Editor/GoogleMobileAdsDependencies.xml:7
+    implementation 'com.google.android.play:asset-delivery:2.0.2' // Assets/GooglePlayPlugins/com.google.play.assetdelivery/Editor/Dependencies.xml:3
+    implementation 'com.google.android.play:core-common:2.0.0' // Assets/GooglePlayPlugins/com.google.play.core/Editor/Dependencies.xml:3
     implementation 'com.parse.bolts:bolts-android:1.4.0' // Assets/FacebookSDK/Plugins/Editor/Dependencies.xml:4
 // Android Resolver Dependencies End
 **DEPS**}

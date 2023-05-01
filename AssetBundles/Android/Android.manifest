@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 3372199291
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: afghanistan
+      Dependencies: {}
+    Info_1:
+      Name: nuclear_facility
+      Dependencies: {}
+    Info_2:
+      Name: old_town
+      Dependencies: {}
+    Info_3:
+      Name: uzbekistan
+      Dependencies: {}
