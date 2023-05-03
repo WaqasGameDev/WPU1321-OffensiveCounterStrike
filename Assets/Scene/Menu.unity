@@ -41542,7 +41542,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.411, y: 0.10759599}
   m_AnchorMax: {x: 0.588, y: 0.19549382}
-  m_AnchoredPosition: {x: -0.000015258789, y: -0.61000824}
+  m_AnchoredPosition: {x: -0.000015258789, y: -0.61001587}
   m_SizeDelta: {x: -0.60200024, y: -0.48480034}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1687539791
@@ -56842,7 +56842,7 @@ PrefabInstance:
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}
       propertyPath: availableMaps.Array.data[3].mapName
-      value: NUCLEAR_FACILITY
+      value: OLD_TOWN
       objectReference: {fileID: 0}
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}

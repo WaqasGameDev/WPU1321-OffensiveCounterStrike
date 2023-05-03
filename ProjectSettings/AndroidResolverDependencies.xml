@@ -12,7 +12,6 @@
     <package>com.facebook.android:facebook-login:[14.0, 15)</package>
     <package>com.facebook.android:facebook-share:[14.0, 15)</package>
     <package>com.google.android.gms:play-services-ads:21.0.0</package>
-    <package>com.google.android.play:asset-delivery:2.0.2</package>
     <package>com.google.android.play:core-common:2.0.0</package>
     <package>com.parse.bolts:bolts-android:1.4.0</package>
   </packages>
