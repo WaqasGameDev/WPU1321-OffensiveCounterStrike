@@ -27,7 +27,7 @@ public class FPSController : MonoBehaviour
 	public int movementState = 0; //0 - walking, 1 - sprinting, 2 - crouch, 3 - in air, 4 - on ladder
 	[HideInInspector]
 	public bool isMoving = false;
-	[HideInInspector]
+	//[HideInInspector]
 	public bool isGrounded = false;
 	[HideInInspector]
 	public bool isCrouching = false;
@@ -592,6 +592,19 @@ public class FPSController : MonoBehaviour
 
 		// Move the controller, and set grounded true or false depending on whether we're standing on something
 		isGrounded = (controller.Move(moveDirection * Time.deltaTime) & CollisionFlags.Below) != 0;
+
+		// Do not turn off is grounded flag only due to small obstacles otherwise it will start to do a lot of jumps on ground as well
+
+		var rayOrigin = new Vector3(controller.transform.position.x, controller.transform.position.x - controller.height / 2, controller.transform.position.z);
+		var rayDirection = Vector3.down;
+		var maximumDistance = 5f;
+		//var layerMask = 
+
+
+		if (Physics.Raycast(rayOrigin, Vector3.down,out RaycastHit hitInfo, maximumDistance))
+        {
+
+        }
 
 		isMoving = controller.velocity.magnitude > 0.15f;
 	}
