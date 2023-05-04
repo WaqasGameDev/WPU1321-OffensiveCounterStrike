@@ -6848,7 +6848,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 141.00009, y: 0}
+  m_AnchoredPosition: {x: 141.00006, y: 0}
   m_SizeDelta: {x: 141, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &453759997
@@ -29155,21 +29155,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 207319465692849646, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlashM4A4 (fbx)
-      objectReference: {fileID: 0}
-    - target: {fileID: 803483701158119444, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlashAK47 (fbx)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1339302857908973061, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlashUSP (fbx)
-      objectReference: {fileID: 0}
     - target: {fileID: 1339379163183900905, guid: f27add20ae8c06a4c89adb9e54b8bd05,
         type: 3}
       propertyPath: m_Name
@@ -29239,93 +29224,6 @@ PrefabInstance:
         type: 3}
       propertyPath: instantiationId
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1402855691375606243, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: -4273947059271080163, guid: ad02869f08ee2704986a48f27af2f10d,
-        type: 3}
-    - target: {fileID: 1403225186719673163, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: -1562275218897716241, guid: aaccd33504dd8ce42ac3fbd559c761ee,
-        type: 3}
-    - target: {fileID: 1502123201857606036, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlash SG552 (fbx)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1502147384670355514, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlash MP5(fbx)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1503845184435714072, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlashP90 (fbx)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1503848104384563912, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlashM4A1 (fbx)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2920363923418555432, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlashAUG (fbx)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2924062764801466104, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlashDEAGLE (fbx)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3759064150504874189, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlash (fbx)TEC9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4461814285221884001, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlashMAC10 (fbx)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4589217270848814647, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlashFIVESEVEN (fbx)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5307502374125852099, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlashXM1014 (fbx)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5422872039934185766, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlash (fbx)AWP
-      objectReference: {fileID: 0}
-    - target: {fileID: 6154410616798883587, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlashP228 (fbx)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7396159829305887121, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlash (fbx)FAMAS
-      objectReference: {fileID: 0}
-    - target: {fileID: 7884117798856695757, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlashM3 (fbx)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8527993960044117792, guid: f27add20ae8c06a4c89adb9e54b8bd05,
-        type: 3}
-      propertyPath: m_Name
-      value: ThirdPersonMuzzleFlashSG550 (fbx)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f27add20ae8c06a4c89adb9e54b8bd05, type: 3}
