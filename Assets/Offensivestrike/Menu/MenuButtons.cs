@@ -98,7 +98,7 @@ public class MenuButtons : MonoBehaviour {
 		thisAudioSource.clip = ClickSong;
 		thisAudioSource.Play();
 		MainObject.gameObject.SetActive(false);
-		//CrObject.gameObject.SetActive(true);
+		// CrObject.gameObject.SetActive(true);
 		CrOfflineObject.gameObject.SetActive(true);
 	}
 

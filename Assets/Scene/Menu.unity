@@ -6962,7 +6962,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.37300003, y: 0}
   m_AnchorMax: {x: 0.62700003, y: 0.18869203}
-  m_AnchoredPosition: {x: 0.08300781, y: -0.9220581}
+  m_AnchoredPosition: {x: 0.08300781, y: -0.92211914}
   m_SizeDelta: {x: 1.4025574, y: -1.8059998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &258304115
@@ -22215,7 +22215,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.6466618}
   m_AnchorMax: {x: 0.5, y: 0.8334505}
-  m_AnchoredPosition: {x: 0.6529541, y: 0}
+  m_AnchoredPosition: {x: 648, y: -302}
   m_SizeDelta: {x: -0.69400024, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &770787646
@@ -31972,7 +31972,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: cbd48f4aeabe0b9448f31d0993753d8b, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -33952,7 +33952,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -16.067505, y: -35.964874}
+  m_AnchoredPosition: {x: -16.06781, y: -35.964783}
   m_SizeDelta: {x: -1996.2771, y: -1038.7308}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1207113442
@@ -37793,7 +37793,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: FFA
+  m_Text: FFA against Bots
 --- !u!222 &1346570388
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -42774,7 +42774,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.42100003, y: 0.24400002}
   m_AnchorMax: {x: 0.5796046, y: 0.74700004}
-  m_AnchoredPosition: {x: -0.5, y: 1.5}
+  m_AnchoredPosition: {x: -0.5, y: 1.4999847}
   m_SizeDelta: {x: -1, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1561864747
@@ -61527,7 +61527,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.37300003, y: 0}
   m_AnchorMax: {x: 0.62700003, y: 0.18869203}
-  m_AnchoredPosition: {x: 0.08300781, y: -0.92214966}
+  m_AnchoredPosition: {x: 0.08300781, y: -0.9221802}
   m_SizeDelta: {x: 1.4025574, y: -1.8059998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1456008489622050522
@@ -63195,6 +63195,11 @@ PrefabInstance:
       objectReference: {fileID: 2061510815}
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}
+      propertyPath: offlineMapName
+      value: 
+      objectReference: {fileID: 92112160}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
       propertyPath: profiletabname
       value: 
       objectReference: {fileID: 2004314423}
@@ -63225,9 +63230,34 @@ PrefabInstance:
       objectReference: {fileID: 1154969264}
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}
+      propertyPath: offlineMapMapImage
+      value: 
+      objectReference: {fileID: 1135039763}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
+      propertyPath: OnlineButtons.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
       propertyPath: FailButton4CloseConnecting
       value: 
       objectReference: {fileID: 1508994522}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
+      propertyPath: OnlineButtons.Array.data[0]
+      value: 
+      objectReference: {fileID: 359986925680081049}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
+      propertyPath: OnlineButtons.Array.data[1]
+      value: 
+      objectReference: {fileID: 359115286249631965}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
+      propertyPath: OnlineButtons.Array.data[2]
+      value: 
+      objectReference: {fileID: 383202529}
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}
       propertyPath: availableMaps.Array.data[1].mapMap

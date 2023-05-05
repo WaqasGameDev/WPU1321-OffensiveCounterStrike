@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 using System.Collections.Generic;
 using System.Globalization;
 using Ping = System.Net.NetworkInformation.Ping;
+using UnityEngine.SceneManagement;
 using MFPS.ULogin;
 using static MFPS.ULogin.bl_BanSystem;
 #if CLANS
@@ -1055,5 +1056,10 @@ public class bl_LoginPro : bl_LoginProBase
             if (_instance == null) { _instance = FindObjectOfType<bl_LoginPro>(); }
             return _instance;
         }
+    }
+
+    public void PlayOffline()
+    {
+        SceneManager.LoadScene(1);
     }
 }
