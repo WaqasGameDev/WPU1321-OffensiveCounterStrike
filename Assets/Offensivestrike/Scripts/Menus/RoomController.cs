@@ -17,6 +17,7 @@ public class RoomController : Photon.MonoBehaviour
 	public GameObject botAi;
 	public GameObject botAiTr;
 	public Camera welcomeCamera;
+	public bool offlineMode;
 
 
 
@@ -52,7 +53,7 @@ public class RoomController : Photon.MonoBehaviour
 	[HideInInspector]
 	public List<Transform> teamBSpawnPoints = new List<Transform>();
 
-	[HideInInspector]
+	//[HideInInspector]
 	public List<PhotonPlayer> teamAPlayers = new List<PhotonPlayer>();
 	[HideInInspector]
 	public List<PhotonPlayer> teamBPlayers = new List<PhotonPlayer>();
@@ -102,7 +103,7 @@ public class RoomController : Photon.MonoBehaviour
 	[HideInInspector]
 	public bool CashOn = false;
 
-	[HideInInspector]
+	//[HideInInspector]
 	public PlayerNetwork ourPlayer;
 	[HideInInspector]
 	public List<PlayerNetwork> otherPlayers = new List<PlayerNetwork>(); //Keep references of other spawned players
@@ -193,7 +194,7 @@ public class RoomController : Photon.MonoBehaviour
 	int previousGameStatus = 0;
 	bool doneSetup = false;
 	int i = 0;
-    int waitBeforeRespawn
+	int waitBeforeRespawn
 	{
 		get
 		{
@@ -209,7 +210,7 @@ public class RoomController : Photon.MonoBehaviour
 		} //How much seconds player need to wait before respawn again
 	}
 
-        Color addingColor = new Color(0, 1, 0, 0.75f);
+	Color addingColor = new Color(0, 1, 0, 0.75f);
 	Color substractingColor = new Color(1, 0.71f, 0.109f, 0.75f);
 	Color KillingSpreeColor = new Color(72 / 255.0f, 72 / 255.0f, 72 / 255.0f, 1);
 	Color HeadShotOut = new Color(196 / 255.0f, 0 / 255.0f, 0 / 255.0f, 1);
@@ -248,13 +249,13 @@ public class RoomController : Photon.MonoBehaviour
 
 	[HideInInspector]
 	public MultiplayerChat mc;
-	[HideInInspector]
+	//[HideInInspector]
 	public OptionsSettings os;
 
 	FPSMouseLook cameraMouseLook;
-	Scoreboard sb;
+	public Scoreboard sb;
 
-	BuyMenu bm;
+	public BuyMenu bm;
 	MultiplayerChat mtp;
 	RoomUI ru;
 	public AudioSource audioSource;
@@ -275,6 +276,20 @@ public class RoomController : Photon.MonoBehaviour
 	string killsayScorePrefsName = "KillSayScore";
 
 	public int WFollowCam = 0;
+
+	private void Awake()
+	{
+		if (PlayerPrefs.GetInt("OfflineMode", 0) == 1)
+		{
+			offlineMode = true;
+			currentGameMode = "FFA";
+			PhotonNetwork.offlineMode = true;
+		}
+		else
+		{
+			offlineMode = false;
+		}
+	}
 
 	//Compare players by kills (sort by list)
 	private static int SortPlayers(PhotonPlayer A, PhotonPlayer B)
@@ -310,13 +325,13 @@ public class RoomController : Photon.MonoBehaviour
 		}
 
 		for (int x = 0; x < teamBNormalPoints.Count; x++)
-        {
-            //	if (teamBNormalPoints[x] == null || teamBPlayers == null)
-            //	{
-            //		continue;
+		{
+			//	if (teamBNormalPoints[x] == null || teamBPlayers == null)
+			//	{
+			//		continue;
 
-            //	}
-            spawnB.Add(teamBNormalPoints[x]);
+			//	}
+			spawnB.Add(teamBNormalPoints[x]);
 		}
 
 		leavingRoom = false;
@@ -372,9 +387,12 @@ public class RoomController : Photon.MonoBehaviour
 		setPlayerProperties.Add("Ping", (int)PhotonNetwork.GetPing());
 		setPlayerProperties.Add("Team", (int)0); //0 = Spectators, 1 = teamA, 2 = teamB, 3 = Draw
 		setPlayerProperties.Add("PlayerHP", (int)-1);
-		PhotonNetwork.player.SetCustomProperties(setPlayerProperties);
 
-		RefreshPlayerList();
+		if (!offlineMode)
+		{
+			PhotonNetwork.player.SetCustomProperties(setPlayerProperties);
+			RefreshPlayerList();
+		}
 
 		welcomeCameraTransform = welcomeCamera.transform;
 		defaultCamPos = welcomeCameraTransform.position;
@@ -390,7 +408,12 @@ public class RoomController : Photon.MonoBehaviour
 			GameSettings.TimeOff = false;
 			GameSettings.C4on = false;
 			GameSettings.C4Who = "";
-			referenceTime = (float)PhotonNetwork.time;
+
+			if (!offlineMode)
+			{
+				referenceTime = (float)PhotonNetwork.time;
+			}
+
 			currentGameStatus = 0;
 			if (teamBPlayers.Count > 0)
 			{
@@ -403,63 +426,91 @@ public class RoomController : Photon.MonoBehaviour
 			}
 			C4WHO = GameSettings.C4Who;
 			howPlayer = teamAPlayers.Count + teamBPlayers.Count;
-			Hashtable setRoomProperties = new Hashtable();
-			setRoomProperties.Add("ReferenceTime", (float)PhotonNetwork.time);
-			setRoomProperties.Add("GameStatus", (int)0); //0 = Play, 1 = team A won, 2 = team B won
-			setRoomProperties.Add("TeamAScore", (int)0);
-			setRoomProperties.Add("TeamBScore", (int)0);
-			setRoomProperties.Add("TeamANormalScore", (int)0);
-			setRoomProperties.Add("TeamBNormalScore", (int)0);
-			setRoomProperties.Add("C4Who", (string)C4WHO);
-			setRoomProperties.Add("HowPlayer", (int)howPlayer);
-			PhotonNetwork.room.SetCustomProperties(setRoomProperties);
+			if (!offlineMode)
+			{
+				Hashtable setRoomProperties = new Hashtable();
+				setRoomProperties.Add("ReferenceTime", (float)PhotonNetwork.time);
+				setRoomProperties.Add("GameStatus", (int)0); //0 = Play, 1 = team A won, 2 = team B won
+				setRoomProperties.Add("TeamAScore", (int)0);
+				setRoomProperties.Add("TeamBScore", (int)0);
+				setRoomProperties.Add("TeamANormalScore", (int)0);
+				setRoomProperties.Add("TeamBNormalScore", (int)0);
+				setRoomProperties.Add("C4Who", (string)C4WHO);
+				setRoomProperties.Add("HowPlayer", (int)howPlayer);
+				PhotonNetwork.room.SetCustomProperties(setRoomProperties);
+			}
 
 		}
 		else
 		{
-			referenceTime = (float)PhotonNetwork.room.CustomProperties["ReferenceTime"];
-			currentGameStatus = (int)PhotonNetwork.room.CustomProperties["GameStatus"];
-			C4WHO = (string)PhotonNetwork.room.CustomProperties["C4Who"];
-			howPlayer = (int)PhotonNetwork.room.CustomProperties["HowPlayer"];
-			GameSettings.C4Who = C4WHO;
+			if (!offlineMode)
+			{
+				referenceTime = (float)PhotonNetwork.room.CustomProperties["ReferenceTime"];
+				currentGameStatus = (int)PhotonNetwork.room.CustomProperties["GameStatus"];
+				C4WHO = (string)PhotonNetwork.room.CustomProperties["C4Who"];
+				howPlayer = (int)PhotonNetwork.room.CustomProperties["HowPlayer"];
+				GameSettings.C4Who = C4WHO;
+			}
 		}
 
 		yield return new WaitForEndOfFrame();
 
-		currentGameMode = (string)PhotonNetwork.room.CustomProperties["GameMode"];
-		roundDuration = (float)PhotonNetwork.room.CustomProperties["RoundDuration"];
-		GetTeamScores();
+		if (!offlineMode)
+		{
+			currentGameMode = (string)PhotonNetwork.room.CustomProperties["GameMode"];
+			roundDuration = (float)PhotonNetwork.room.CustomProperties["RoundDuration"];
+			GetTeamScores();
+		}
+		else
+		{
+			currentGameMode = "FFA";
+			roundDuration = 30;
+
+		}
 
 		previousGameStatus = currentGameStatus;
 
-		//Used only for FFA mode
-		if (PhotonNetwork.room.CustomProperties["KillLimit"] != null)
+		if (offlineMode)
 		{
-			currentKillLimit = (int)PhotonNetwork.room.CustomProperties["KillLimit"];
+			//Offline mode for only FFA
+			currentKillLimit = 30;
 		}
 		else
 		{
-			currentKillLimit = -1;
+			//Used only for FFA mode
+			if (PhotonNetwork.room.CustomProperties["KillLimit"] != null)
+			{
+				currentKillLimit = (int)PhotonNetwork.room.CustomProperties["KillLimit"];
+			}
+			else
+			{
+				currentKillLimit = -1;
+			}
+
+			if (PhotonNetwork.room.CustomProperties["WinningPlayer"] != null)
+			{
+				winningPlayer = (PhotonPlayer)PhotonNetwork.room.CustomProperties["WinningPlayer"];
+			}
+			else
+			{
+				winningPlayer = null;
+			}
+
+			//Display notification that we joined room (locally)
+			PostActivityRemote("", PhotonNetwork.player.NickName + xml.button65, "", 0, 0);
+			InvokeRepeating("RefreshPing", 3.5f, 3.5f);
+
+			GameSettings.currentGameMode = currentGameMode;
+
+			yield return new WaitForEndOfFrame();
+
+			doneSetup = true;
 		}
 
-		if (PhotonNetwork.room.CustomProperties["WinningPlayer"] != null)
+		if (offlineMode)
 		{
-			winningPlayer = (PhotonPlayer)PhotonNetwork.room.CustomProperties["WinningPlayer"];
+			SpawnPlayer(1);
 		}
-		else
-		{
-			winningPlayer = null;
-		}
-
-		//Display notification that we joined room (locally)
-		PostActivityRemote("", PhotonNetwork.player.NickName + xml.button65, "", 0, 0);
-		InvokeRepeating("RefreshPing", 3.5f, 3.5f);
-
-		GameSettings.currentGameMode = currentGameMode;
-
-		yield return new WaitForEndOfFrame();
-
-		doneSetup = true;
 	}
 
 	void GetTeamScores()
@@ -520,8 +571,9 @@ public class RoomController : Photon.MonoBehaviour
 			Debug.Log("h14");
 			ourTeam = (int)PhotonNetwork.player.CustomProperties["Team"];
 			GameSettings.ourTeam = ourTeam;
-        }
-        else {
+		}
+		else
+		{
 			RefreshPlayerList();
 		}
 	}
@@ -559,21 +611,19 @@ public class RoomController : Photon.MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		//GameObject C4Box4 = GameObject.Find("C4Box1(Clone)");
+		//if (C4Box4 != null)
+		//{
+		//    Destroy(C4Box4);
+		//}
+		//if (C4BoxFD[1] != null)
+		//{
+		//	C4BoxFD = GameObject.FindGameObjectsWithTag("C4Box(Clone)");
+		//	foreach (GameObject c4box in C4BoxFD)
+		//		GameObject.Destroy(c4box);
+		//}
 
-
-        //GameObject C4Box4 = GameObject.Find("C4Box1(Clone)");
-        //if (C4Box4 != null)
-        //{
-        //    Destroy(C4Box4);
-        //}
-        //if (C4BoxFD[1] != null)
-        //{
-        //	C4BoxFD = GameObject.FindGameObjectsWithTag("C4Box(Clone)");
-        //	foreach (GameObject c4box in C4BoxFD)
-        //		GameObject.Destroy(c4box);
-        //}
-
-        if (!doneSetup)
+		if (!doneSetup)
 			return;
 
 		if (ourPlayer)
@@ -611,7 +661,7 @@ public class RoomController : Photon.MonoBehaviour
 		//}
 
 		//When some menu opened, block mouse views, walking, shooting etc.
-		GameSettings.menuOpened = showScoreBoard ||  showBuyMenu || mc.chatState != MultiplayerChat.ChatState.None || showOptions   ;
+		GameSettings.menuOpened = showScoreBoard || showBuyMenu || mc.chatState != MultiplayerChat.ChatState.None || showOptions;
 
 		if (!ourPlayer)
 		{
@@ -640,7 +690,7 @@ public class RoomController : Photon.MonoBehaviour
 		if (showScoreBoard || showBuyMenu || showOptions)
 		{
 
-	
+
 			if (lockState != 0)
 			{
 				lockState = 0;
@@ -668,22 +718,35 @@ public class RoomController : Photon.MonoBehaviour
 		{
 			RefreshPlayerList();
 		}
+
+		if (offlineMode)
+		{
+			sb.enabled = true;
+			GameSettings.menuOpened = true;
+		}
 	}
-	//[SerializeField] private GameObject buyWeaponPanel;
+
 	public void OpenBuyMenu()
 	{
 		if (!ourPlayer || timeToPurchase > 0)
 		{
-			print ("Buy menu key pressed");
+			//print ("Buy menu key pressed");
 			showBuyMenu = !showBuyMenu;
 			showScoreBoard = false;
 			showOptions = false;
-			//buyWeaponPanel.SetActive(true);
 			bm.buySection = BuyMenu.BuySection.Secondary;
 			GameSettings.updateActionReports = false;
-
-
-
+		}
+		if (offlineMode && timeToPurchase > 0)
+		{
+			Debug.Log("ZAK98");
+			showBuyMenu = !showBuyMenu;
+			showScoreBoard = false;
+			showOptions = false;
+			bm.buySection = BuyMenu.BuySection.Secondary;
+			GameSettings.updateActionReports = false;
+			bm.enabled = !showBuyMenu;
+			GameSettings.menuOpened = true;
 		}
 	}
 
@@ -797,7 +860,7 @@ public class RoomController : Photon.MonoBehaviour
 
 
 
-		
+
 
 
 			if (currentGameMode == "NORMAL")
@@ -1350,7 +1413,7 @@ public class RoomController : Photon.MonoBehaviour
 
 			//}
 			spawnA.Add(teamANormalPoints[x]);
-		
+
 		}
 
 		for (int x = 0; x < teamBNormalPoints.Count; x++)
@@ -1362,7 +1425,7 @@ public class RoomController : Photon.MonoBehaviour
 			//}
 			spawnB.Add(teamBNormalPoints[x]);
 
-		
+
 		}
 		yield return new WaitForSeconds(delay);
 		Hashtable setRoomProperties = new Hashtable();
@@ -1393,7 +1456,7 @@ public class RoomController : Photon.MonoBehaviour
 			{
 				ourPlayer.WonTeror();
 			}
-	
+
 
 		}
 		//if (Who != 1 || Who != 2)
@@ -1451,15 +1514,15 @@ public class RoomController : Photon.MonoBehaviour
 			showBuyMenu = false;
 			showOptions = false;
 		}
-        else
-        {
-            //Reset weapons if we got killed
-            bm.ResetSelectedWeapons();
-        }
+		else
+		{
+			//Reset weapons if we got killed
+			bm.ResetSelectedWeapons();
+		}
 
 		Renderer[] enemySMRs = null;
-		
-        if (team < 0)
+
+		if (team < 0)
 		{
 			if (currentGameMode != "NORMAL")
 			{
@@ -1496,7 +1559,7 @@ public class RoomController : Photon.MonoBehaviour
 				}
 
 				welcomeCamera.gameObject.SetActive(true);
-				
+
 				cameraMouseLook.AssignTarget(targetTmp, enemySMRs);
 
 
@@ -1549,7 +1612,7 @@ public class RoomController : Photon.MonoBehaviour
 
 		if (currentGameStatus == 0 && currentGameMode == "NORMAL" && teamAPlayers.Count + teamBPlayers.Count < 2)
 		{
-		
+
 			this.StopCoroutine("PrepareRespawnCoroutine");
 			this.StartCoroutine("PrepareRespawnCoroutine");
 		}
@@ -1580,7 +1643,10 @@ public class RoomController : Photon.MonoBehaviour
 			yield return new WaitForSeconds(1);
 		}
 
-		SpawnPlayer((int)PhotonNetwork.player.CustomProperties["Team"]);
+		if (!offlineMode)
+		{
+			SpawnPlayer((int)PhotonNetwork.player.CustomProperties["Team"]);
+		}
 		//yield break;
 	}
 
@@ -1604,12 +1670,12 @@ public class RoomController : Photon.MonoBehaviour
 		SoundBas = 0;
 		if (currentGameMode == "NORMAL")
 		{
-            GameObject C4w = GameObject.Find("C4n(Clone)");
-            if (C4w != null)
-            {
-                Destroy(C4w);
-                GameSettings.C4on = false;
-			
+			GameObject C4w = GameObject.Find("C4n(Clone)");
+			if (C4w != null)
+			{
+				Destroy(C4w);
+				GameSettings.C4on = false;
+
 			}
 			//AdmobAds.singleton.ShowInterstitialAd();
 			//GameObject C4BOXS = GameObject.Find("C4Box(Clone)");
@@ -1682,7 +1748,7 @@ public class RoomController : Photon.MonoBehaviour
 
 			//}
 
-		
+
 
 			if (currentGameMode == "NORMAL")
 			{
@@ -1720,12 +1786,21 @@ public class RoomController : Photon.MonoBehaviour
 				}
 			}
 
-			GameObject ourPlayerTmp = PhotonNetwork.Instantiate(playerPrefab.name, spawnPontTmp.position, spawnPontTmp.rotation, 0);
-			ourPlayer = ourPlayerTmp.GetComponent<PlayerNetwork>();
-			
-            bm.lastSelectedWeapon = 1;
+			if (!offlineMode)
+			{
+				GameObject ourPlayerTmp = PhotonNetwork.Instantiate(playerPrefab.name, spawnPontTmp.position, spawnPontTmp.rotation, 0);
+				ourPlayer = ourPlayerTmp.GetComponent<PlayerNetwork>();
+			}
+			else
+			{
+				GameObject ourPlayerTmp = Instantiate(playerPrefab, spawnPontTmp.position, spawnPontTmp.rotation);
+				ourPlayer = ourPlayerTmp.GetComponent<PlayerNetwork>();
+			}
 
-            welcomeCamera.gameObject.SetActive(false);
+
+			bm.lastSelectedWeapon = 1;
+
+			welcomeCamera.gameObject.SetActive(false);
 
 			this.StopCoroutine("PurchaseTimer");
 			this.StartCoroutine("PurchaseTimer");
@@ -1810,6 +1885,12 @@ public class RoomController : Photon.MonoBehaviour
 			timeToPurchase--;
 			yield return new WaitForSeconds(1);
 		}
+
+		//Turn off buy menu on purchase time over
+		if (offlineMode)
+		{
+			bm.enabled = false;
+		}
 	}
 
 	IEnumerator ShieldTimer()
@@ -1849,7 +1930,7 @@ public class RoomController : Photon.MonoBehaviour
 
 		//print ("Round is already at: " + ((float)PhotonNetwork.time - referenceTime).ToString() + " seconds");
 
-		if (currentGameMode == "FFA" && PhotonNetwork.isMasterClient && currentGameStatus == 0)
+		if (currentGameMode == "FFA" && PhotonNetwork.isMasterClient && currentGameStatus == 0 && !offlineMode)
 		{
 			if (teamAPlayers.Count > 0 && (float)PhotonNetwork.time - referenceTime > 15)
 			{
@@ -1874,7 +1955,7 @@ public class RoomController : Photon.MonoBehaviour
 
 		//Display notification that player disconnected
 		PostActivityRemote("", otherPlayer.NickName + xml.button66, "", 0, 0);
-	
+
 	}
 
 	void OnPhotonCustomRoomPropertiesChanged(/*ExitGames.Client.Photon.Hashtable propertiesThatChanged*/)
@@ -1963,13 +2044,13 @@ public class RoomController : Photon.MonoBehaviour
 						else if (teamAPlayers.Count + teamBPlayers.Count == 2 && (teamAPlayers[0].CustomProperties["PlayerHP"] == null || ((int)this.teamAPlayers[0].CustomProperties["PlayerHP"] < 1 && teamBPlayers[0].CustomProperties["PlayerHP"] == null) || (int)teamBPlayers[0].CustomProperties["PlayerHP"] < 1))
 						{
 							GameSettings.TimeOff = true;
-							 int who = 0;
+							int who = 0;
 							roundTimeString = "";
 							base.StartCoroutine(Restart(tmpGameState, 3f));
-                        }
-                      
+						}
 
-				}
+
+					}
 
 				}
 			}
@@ -2150,8 +2231,8 @@ public class RoomController : Photon.MonoBehaviour
 		if (team == 1 || team == 2)
 		{
 			joinedTeam = team == 1 ? GameSettings.teamAName : GameSettings.teamBName;
-			colorRef = team;		
-			
+			colorRef = team;
+
 
 		}
 		photonView.RPC("PostActivityRemote", PhotonTargets.All, "", PhotonNetwork.playerName + xml.button73, joinedTeam, 0, colorRef);

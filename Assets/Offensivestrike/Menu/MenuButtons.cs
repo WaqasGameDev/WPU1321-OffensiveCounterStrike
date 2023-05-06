@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Advertisements;
 
-public class MenuButtons : MonoBehaviour {
+public class MenuButtons : MonoBehaviour
+{
 
 	public GameObject ButtonFalse;
 	public GameObject ButtonTrue;
@@ -34,7 +35,7 @@ public class MenuButtons : MonoBehaviour {
 	AudioSource thisAudioSource;
 
 
-	public static MenuButtons Instance{ set; get;}
+	public static MenuButtons Instance { set; get; }
 
 	public Image fadeImage;
 	private bool İsInTransition;
@@ -48,8 +49,14 @@ public class MenuButtons : MonoBehaviour {
 	[Header("[ Create Room Object]")]
 	public GameObject CrObject;
 
+	[Header("[ Create Offline Room Object]")]
+	public GameObject CrOfflineObject;
+
 	[Header("[ Create Game Room Object]")]
 	public GameObject CrGameObject;
+
+	[Header("[ Create Offline Game Room Object]")]
+	public GameObject CrOfflineGameObject;
 
 	[Header("[ Lobby Object]")]
 	public GameObject LobyObject;
@@ -59,7 +66,7 @@ public class MenuButtons : MonoBehaviour {
 		Instance = this;
 	}
 
-	public void Fade(bool showing,float duration)
+	public void Fade(bool showing, float duration)
 	{
 		İsShowing = showing;
 		İsInTransition = true;
@@ -67,12 +74,13 @@ public class MenuButtons : MonoBehaviour {
 		transition = (İsShowing) ? 0 : 1;
 	}
 
-	private void Update(){
+	private void Update()
+	{
 		if (!İsInTransition)
 			return;
 
 		transition += (İsShowing) ? Time.deltaTime * (1 / duration) : -Time.deltaTime * (1 / duration);
-		fadeImage.color = Color.Lerp (new Color (0, 0, 0, 0), Color.black, transition);
+		fadeImage.color = Color.Lerp(new Color(0, 0, 0, 0), Color.black, transition);
 
 		if (transition > 1 || transition < 0)
 			İsInTransition = false;
@@ -80,11 +88,20 @@ public class MenuButtons : MonoBehaviour {
 	}
 
 	public void CreateRoomEnabled()
-    {
+	{
 		thisAudioSource.clip = ClickSong;
 		thisAudioSource.Play();
 		MainObject.gameObject.SetActive(false);
 		CrObject.gameObject.SetActive(true);
+	}
+
+	public void CreateOfflineRoomEnabled()
+	{
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		MainObject.gameObject.SetActive(false);
+		// CrObject.gameObject.SetActive(true);
+		CrOfflineObject.gameObject.SetActive(true);
 	}
 
 	public void MainMenuEnabled()
@@ -93,6 +110,7 @@ public class MenuButtons : MonoBehaviour {
 		thisAudioSource.Play();
 		MainObject.gameObject.SetActive(true);
 		CrObject.gameObject.SetActive(false);
+		CrOfflineObject.gameObject.SetActive(false);
 		LobyObject.gameObject.SetActive(false);
 	}
 
@@ -102,6 +120,14 @@ public class MenuButtons : MonoBehaviour {
 		thisAudioSource.Play();
 		CrObject.gameObject.SetActive(true);
 		CrGameObject.gameObject.SetActive(false);
+	}
+
+	public void CreateOfflineGameRoomEnabled()
+	{
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		//CrOfflineObject.gameObject.SetActive(true);
+		CrOfflineGameObject.gameObject.SetActive(false);
 	}
 
 	public void LoobyEnabled()
@@ -114,160 +140,206 @@ public class MenuButtons : MonoBehaviour {
 
 
 
-	void Start(){
+	void Start()
+	{
 		thisAudioSource = GetComponent<AudioSource>();
-		Sound1 = GameObject.FindWithTag ("Dust2");
-		Sound2 = GameObject.FindWithTag ("car");
-		Sound3 = GameObject.FindWithTag ("c4bip");
+		Sound1 = GameObject.FindWithTag("Dust2");
+		Sound2 = GameObject.FindWithTag("car");
+		Sound3 = GameObject.FindWithTag("c4bip");
 	}
 
-	public void FalseSounds(){
+	public void FalseSounds()
+	{
 		thisAudioSource.clip = ClickSong;
-		thisAudioSource.Play ();
-		ButtonFalse.SetActive (true);
-		ButtonTrue.SetActive (false);
-		Sound1.GetComponent<AudioSource> ().Stop ();
-		Sound2.GetComponent<AudioSource> ().Stop ();
-		Sound3.GetComponent<AudioSource> ().volume = 0;
+		thisAudioSource.Play();
+		ButtonFalse.SetActive(true);
+		ButtonTrue.SetActive(false);
+		Sound1.GetComponent<AudioSource>().Stop();
+		Sound2.GetComponent<AudioSource>().Stop();
+		Sound3.GetComponent<AudioSource>().volume = 0;
 
-		
+
 	}
 
-	public void Ads(){
+	public void Ads()
+	{
 		thisAudioSource.clip = ClickSong;
-		thisAudioSource.Play ();
+		thisAudioSource.Play();
 		//Advertisement.Show();
 	}
 
-	public void TrueSounds(){
+	public void TrueSounds()
+	{
 		thisAudioSource.clip = ClickSong;
-		thisAudioSource.Play ();
-		ButtonTrue.SetActive (true);
-		ButtonFalse.SetActive (false);
-		Sound1.GetComponent<AudioSource> ().Play ();
-		Sound2.GetComponent<AudioSource> ().Play ();
-		Sound3.GetComponent<AudioSource> ().volume = 0.5f;
+		thisAudioSource.Play();
+		ButtonTrue.SetActive(true);
+		ButtonFalse.SetActive(false);
+		Sound1.GetComponent<AudioSource>().Play();
+		Sound2.GetComponent<AudioSource>().Play();
+		Sound3.GetComponent<AudioSource>().volume = 0.5f;
 
 
 	}
 
-	public void Click(){
+	public void Click()
+	{
 		thisAudioSource.clip = ClickSong;
-		thisAudioSource.Play ();
+		thisAudioSource.Play();
 	}
 
 
 
-	public void CreaterBombMode(){
+	public void CreaterBombMode()
+	{
 		thisAudioSource.clip = ClickSong;
-		thisAudioSource.Play ();
-		StartCoroutine ("CreateRommOnBomb");
+		thisAudioSource.Play();
+		StartCoroutine("CreateRommOnBomb");
 	}
 
-	public void CreaterTeamMode(){
+	public void CreaterTeamMode()
+	{
 		thisAudioSource.clip = ClickSong;
-		thisAudioSource.Play ();
-		StartCoroutine ("CreateRommOnTeam");
+		thisAudioSource.Play();
+		StartCoroutine("CreateRommOnTeam");
 	}
 
-	public void CreaterOnlyOne(){
+	public void CreaterOnlyOne()
+	{
 		thisAudioSource.clip = ClickSong;
-		thisAudioSource.Play ();
-		StartCoroutine ("CreateRommOnOne");
+		thisAudioSource.Play();
+		StartCoroutine("CreateRommOnOne");
 	}
 
-	public void İnfoOn(){
+
+
+
+
+	public void CreaterBombModeOffline()
+	{
 		thisAudioSource.clip = ClickSong;
-		thisAudioSource.Play ();
-		İnfo.SetActive (true);
-		İnfoOfff.SetActive (true);
-		İnfoOnn.SetActive (false);
-	}
-	public void İnfoOff(){
-		thisAudioSource.clip = ClickSong;
-		thisAudioSource.Play ();
-		İnfo.SetActive (false);
-		İnfoOfff.SetActive (false);
-		İnfoOnn.SetActive (true);
+		thisAudioSource.Play();
+		StartCoroutine("CreateOfflineRommOnBomb");
 	}
 
-	public void PlayLoff(){
-		Play.SetActive (false);
+	public void CreaterTeamModeOffline()
+	{
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		StartCoroutine("CreateOfflineRommOnTeam");
+	}
+
+	public void CreaterOnlyOneOffline()
+	{
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		StartCoroutine("CreateOfflineRommOnOne");
+	}
+
+	public void İnfoOn()
+	{
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		İnfo.SetActive(true);
+		İnfoOfff.SetActive(true);
+		İnfoOnn.SetActive(false);
+	}
+	public void İnfoOff()
+	{
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		İnfo.SetActive(false);
+		İnfoOfff.SetActive(false);
+		İnfoOnn.SetActive(true);
+	}
+
+	public void PlayLoff()
+	{
+		Play.SetActive(false);
 	}
 
 	IEnumerator PlaysOn()
 	{
-		Fade (true, 0.85f);
-		yield return new WaitForSeconds (0.95f);
-		Fade (false, 1f);
-		for (int i = 0; i < 8; i++) {
-			Creates [i].SetActive (true);	
+		Fade(true, 0.85f);
+		yield return new WaitForSeconds(0.95f);
+		Fade(false, 1f);
+		for (int i = 0; i < 8; i++)
+		{
+			Creates[i].SetActive(true);
 		}
-		Play.SetActive (false);
-		CaseOnOff.SetActive (false);
+		Play.SetActive(false);
+		CaseOnOff.SetActive(false);
 	}
 
 	IEnumerator CaseOn()
 	{
-		Fade (true, 0.85f);
-		yield return new WaitForSeconds (0.95f);
-		SceneManager.LoadScene (3);
+		Fade(true, 0.85f);
+		yield return new WaitForSeconds(0.95f);
+		SceneManager.LoadScene(3);
 	}
 
-	public void PlayOn(){
+	public void PlayOn()
+	{
 		thisAudioSource.clip = ClickSong;
-		thisAudioSource.Play ();
-		StartCoroutine ("PlaysOn");
+		thisAudioSource.Play();
+		StartCoroutine("PlaysOn");
 	}
 
-	public void CaseOnn(){
+	public void CaseOnn()
+	{
 		thisAudioSource.clip = ClickSong;
-		thisAudioSource.Play ();
-		StartCoroutine ("CaseOn");
+		thisAudioSource.Play();
+		StartCoroutine("CaseOn");
 	}
 
 	IEnumerator CreatesL()
 	{
-		Fade (true, 0.85f);
-		yield return new WaitForSeconds (0.95f);
-		Fade (false, 1f);
-		for (int i = 0; i < 8; i++) {
-			Creates [i].SetActive (false);	
+		Fade(true, 0.85f);
+		yield return new WaitForSeconds(0.95f);
+		Fade(false, 1f);
+		for (int i = 0; i < 8; i++)
+		{
+			Creates[i].SetActive(false);
 		}
-		for (int i = 0; i < 4; i++) {
-			Loobys [i].SetActive (true);	
+		for (int i = 0; i < 4; i++)
+		{
+			Loobys[i].SetActive(true);
 		}
 	}
 
-	public void CreatesLobi(){
+	public void CreatesLobi()
+	{
 		thisAudioSource.clip = ClickSong;
-		thisAudioSource.Play ();
-		StartCoroutine ("CreatesL");
+		thisAudioSource.Play();
+		StartCoroutine("CreatesL");
 	}
 
 	IEnumerator BackAllPlay()
 	{
-		Fade (true, 0.85f);
-		yield return new WaitForSeconds (0.95f);
-		Fade (false, 1f);
-		for (int i = 0; i < 8; i++) {
-			Creates [i].SetActive (false);	
+		Fade(true, 0.85f);
+		yield return new WaitForSeconds(0.95f);
+		Fade(false, 1f);
+		for (int i = 0; i < 8; i++)
+		{
+			Creates[i].SetActive(false);
 		}
-		for (int i = 0; i < 4; i++) {
-			Loobys [i].SetActive (false);	
+		for (int i = 0; i < 4; i++)
+		{
+			Loobys[i].SetActive(false);
 		}
-		for (int i = 0; i < 15; i++) {
-			CreateRoom [i].SetActive (false);	
+		for (int i = 0; i < 15; i++)
+		{
+			CreateRoom[i].SetActive(false);
 		}
-		Play.SetActive (true);
-		OnlyOneText.SetActive (false);
-		CaseOnOff.SetActive (true);
+		Play.SetActive(true);
+		OnlyOneText.SetActive(false);
+		CaseOnOff.SetActive(true);
 	}
 
-	public void OffAll(){
+	public void OffAll()
+	{
 		thisAudioSource.clip = ClickSong;
-		thisAudioSource.Play ();
-		StartCoroutine ("BackAllPlay");
+		thisAudioSource.Play();
+		StartCoroutine("BackAllPlay");
 	}
 
 	public void CreateRommOnBomb()
@@ -300,27 +372,61 @@ public class MenuButtons : MonoBehaviour {
 		CrGameObject.gameObject.SetActive(true);
 	}
 
+	public void CreateOfflineRommOnBomb()
+	{
+		Mode = "BOMB";
+		ModeTex.text = Mode;
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		CrOfflineObject.gameObject.SetActive(false);
+		CrOfflineGameObject.gameObject.SetActive(true);
+	}
+
+	public void CreateOfflineRommOnTeam()
+	{
+		Mode = "TDM";
+		ModeTex.text = Mode;
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		CrOfflineObject.gameObject.SetActive(false);
+		CrOfflineGameObject.gameObject.SetActive(true);
+	}
+
+	public void CreateOfflineRommOnOne()
+	{
+		Mode = "FFA";
+		ModeTex.text = Mode;
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+		CrOfflineObject.gameObject.SetActive(false);
+		CrOfflineGameObject.gameObject.SetActive(true);
+	}
+
 	IEnumerator BackLobys()
 	{
-		Fade (true, 0.85f);
-		yield return new WaitForSeconds (0.95f);
-		Fade (false, 1f);
-		for (int i = 0; i < 8; i++) {
-			Creates [i].SetActive (true);	
+		Fade(true, 0.85f);
+		yield return new WaitForSeconds(0.95f);
+		Fade(false, 1f);
+		for (int i = 0; i < 8; i++)
+		{
+			Creates[i].SetActive(true);
 		}
-		for (int i = 0; i < 4; i++) {
-			Loobys [i].SetActive (false);	
+		for (int i = 0; i < 4; i++)
+		{
+			Loobys[i].SetActive(false);
 		}
-		for (int i = 0; i < 15; i++) {
-			CreateRoom [i].SetActive (false);	
+		for (int i = 0; i < 15; i++)
+		{
+			CreateRoom[i].SetActive(false);
 		}
 
 	}
 
-	public void BackLooby(){
+	public void BackLooby()
+	{
 		thisAudioSource.clip = ClickSong;
-		thisAudioSource.Play ();
-		StartCoroutine ("BackLobys");
+		thisAudioSource.Play();
+		StartCoroutine("BackLobys");
 	}
 
 

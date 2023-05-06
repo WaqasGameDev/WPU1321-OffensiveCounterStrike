@@ -37,7 +37,9 @@ public class ConnectMenu : Photon.MonoBehaviour
 	public Image MapText;
 	public Image MapText2;
 	public Image MapMapImage;
+	public Image offlineMapMapImage;
 	public Text MapName;
+	public Text offlineMapName;
 	public Text MapName2;
 	public Toggle PriToogle;
 	public float Loadings;
@@ -87,7 +89,7 @@ public class ConnectMenu : Photon.MonoBehaviour
 	string roomName = "";
 	public InputField roomInputField;
 
-	int[] playerLimits = { 2, 4, 6, 8, 10};
+	int[] playerLimits = { 2, 4, 6, 8, 10 };
 	public Text playerLimitText;
 	public Button LeftBtn;
 	public Button RightBtn;
@@ -189,8 +191,18 @@ public class ConnectMenu : Photon.MonoBehaviour
 	private bool İsShowing;
 	private float duration;
 
+	[SerializeField] private GameObject[] OnlineButtons;
+
 	private void Awake()
 	{
+		if (Application.internetReachability == NetworkReachability.NotReachable)
+		{
+			foreach (var button in OnlineButtons)
+			{
+				button.gameObject.SetActive(false);
+			}
+		}
+
 		Instance = this;
 	}
 
@@ -210,9 +222,11 @@ public class ConnectMenu : Photon.MonoBehaviour
 		GameMode.text = "";
 	}
 
-
 	void Start()
 	{
+
+
+		PlayerPrefs.SetInt("OfflineMode", 0);
 
 		//NameInput.gameObject.SetActive(false);
 		GameOnConnect = false;
@@ -291,8 +305,8 @@ public class ConnectMenu : Photon.MonoBehaviour
 
 			//Debug.Log(playerName);
 		}
-	
-	
+
+
 		//else
 		//{
 
@@ -391,7 +405,7 @@ public class ConnectMenu : Photon.MonoBehaviour
 			timeon = true;
 		}
 
-		
+
 
 		if (!timeon)
 		{
@@ -550,9 +564,34 @@ public class ConnectMenu : Photon.MonoBehaviour
 		xml.currentLanguage = PlayerPrefs.GetInt(languagesPrefsName);
 		//PlayerLimit.text = playerLimits [selectedPlayerLimit].ToString ();
 		MapText.sprite = availableMaps[selectedMap].mapPreview ? availableMaps[selectedMap].mapPreview : defaultMapPreview;
+		offlineMapMapImage.sprite = availableMaps[selectedMap].mapPreview ? availableMaps[selectedMap].mapPreview : defaultMapPreview;
 		MapText2.sprite = availableMaps[selectedMap].mapPreview ? availableMaps[selectedMap].mapPreview : defaultMapPreview;
 		MapName.text = availableMaps[selectedMap].mapName;
+		offlineMapName.text = availableMaps[selectedMap].mapName;
 		MapName2.text = availableMaps[selectedMap].mapName;
+
+
+	}
+
+	IEnumerator LoadingOfflineSc()
+	{
+		PlayerPrefs.SetInt("OfflineMode", 1);
+
+		//Remember player settings when creating new room
+		PlayerPrefs.SetInt(playerLimitPrefsName, selectedPlayerLimit);
+		PlayerPrefs.SetInt(gameModePrefsName, selectedGameMode);
+		PlayerPrefs.SetInt(specRoomPrefsName, selectedSpecRoom);
+		yield return new WaitForSeconds(1.65f);
+		thisAudioSource.clip = ClickSong;
+		thisAudioSource.Play();
+
+		//Load offline scene
+		OnJoinedOfflineRoom();
+
+		PlayerPrefs.SetInt(selectedMapPrefsName, selectedMap);
+		yield return new WaitForSeconds(12.5f);
+		FailButton2.gameObject.SetActive(true);
+		loadingOn = false;
 
 
 	}
@@ -560,6 +599,7 @@ public class ConnectMenu : Photon.MonoBehaviour
 	IEnumerator LoadingSc()
 	{
 		StartCoroutine(JoinCreateRoom(roomName, availableMaps[selectedMap].mapName, playerLimits[selectedPlayerLimit], gameModes[selectedGameMode], specRoom[selectedSpecRoom], (float)roundDurations[selectedGameMode], gameModes[selectedGameMode] == "FFA" ? killLimits[selectedKillLimit] : -1));
+
 		//Remember player settings when creating new room
 		PlayerPrefs.SetInt(playerLimitPrefsName, selectedPlayerLimit);
 		PlayerPrefs.SetInt(gameModePrefsName, selectedGameMode);
@@ -571,9 +611,6 @@ public class ConnectMenu : Photon.MonoBehaviour
 		yield return new WaitForSeconds(12.5f);
 		FailButton2.gameObject.SetActive(true);
 		loadingOn = false;
-
-
-
 	}
 
 	IEnumerator LoadingSelect()
@@ -1072,11 +1109,36 @@ public class ConnectMenu : Photon.MonoBehaviour
 		}
 	}
 
+	public void createOfflineRoom()
+	{
+		loadingOn = true;
+		LoadingBack.sprite = availableMaps[selectedMap].mapPreview ? availableMaps[selectedMap].mapPreview : defaultMapPreview;
+		MapMapImage.sprite = availableMaps[selectedMap].mapMap ? availableMaps[selectedMap].mapPreview : defaultMapPreview;
+		LoadinMapName.text = availableMaps[selectedMap].mapName;
+
+		if (selectedGameMode == 0)
+		{
+			LoadinModInfo.text =
+				"Settings:\n- Friendly Fire is OFF\n- Team Collision is ON\n- Best out of 12 Rounds\n- Bomb duration 60 sec.\n\nGood Luck..";
+		}
+		else if (selectedGameMode == 1)
+		{
+			LoadinModInfo.text =
+				"Settings:\n- Friendly Fire is OFF\n- Team Collision is ON\n- Round Time 10 Minutes\n\nGood Luck..";
+		}
+		else
+		{
+			LoadinModInfo.text = "Settings\n- Friendly Fire is ON\n- Team Collision is OFF\n- Round Time 10 Minutes\n- The player who kills 30 wins.\n\nGood Luck..";
+		}
+
+		StartCoroutine("LoadingOfflineSc");
+	}
+
 	public void CreateRom()
 	{
 		loadingOn = true;
 		LoadingBack.sprite = availableMaps[selectedMap].mapPreview ? availableMaps[selectedMap].mapPreview : defaultMapPreview;
-		MapMapImage.sprite = availableMaps[selectedMap].mapMap ? availableMaps[selectedMap].mapMap : defaultMapPreview;
+		offlineMapMapImage.sprite = availableMaps[selectedMap].mapMap ? availableMaps[selectedMap].mapMap : defaultMapPreview;
 		LoadinMapName.text = availableMaps[selectedMap].mapName;
 		if (selectedGameMode == 0)
 		{
@@ -1100,7 +1162,7 @@ public class ConnectMenu : Photon.MonoBehaviour
 	{
 		LoadingMenu.SetActive(true);
 		loadingOn = true;
-		for (int i = 0; i <= 5;)
+		for (int i = 0; i <= 4;)
 		{
 			if ((string)availableRooms[selectedRoom].CustomProperties["MapName"] == availableMaps[i].mapName)
 			{
@@ -2124,6 +2186,12 @@ public class ConnectMenu : Photon.MonoBehaviour
 		print(xml.button45);
 		PhotonNetwork.isMessageQueueRunning = false;
 		SceneManager.LoadScene((string)PhotonNetwork.room.CustomProperties["MapName"]);
+	}
+
+	void OnJoinedOfflineRoom()
+	{
+		//Load room map
+		SceneManager.LoadScene(availableMaps[selectedMap].mapName);
 	}
 
 	void OnPhotonCreateRoomFailed()

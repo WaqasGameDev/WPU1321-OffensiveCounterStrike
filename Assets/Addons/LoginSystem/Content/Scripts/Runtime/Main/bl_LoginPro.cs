@@ -54,6 +54,7 @@ public class bl_LoginPro : bl_LoginProBase
     #endregion
     public CustomAuthCredentials customAuthCredentials { get; set; }
     public static Action<AuthenticationType> onRequestAuth;
+    public static bool isOffline = false;
 
     /// <summary>
     /// 
@@ -584,6 +585,7 @@ public class bl_LoginPro : bl_LoginProBase
         bl_ULoginLoadingWindow.Instance?.SetText("Checking connection...");
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
+            isOffline = true;
             noConnectionUI.SetActive(true);
             yield break;
         }
@@ -1055,5 +1057,10 @@ public class bl_LoginPro : bl_LoginProBase
             if (_instance == null) { _instance = FindObjectOfType<bl_LoginPro>(); }
             return _instance;
         }
+    }
+
+    public void ProceedOfflineMode()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 }

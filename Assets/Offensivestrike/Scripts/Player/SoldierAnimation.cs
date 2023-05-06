@@ -192,7 +192,7 @@ public class SoldierAnimation : MonoBehaviour
 				/*currentWeaponAnimationSet = knifeSet;
 				soldierAnimationComponent.speed = 0.2f;*/
 			}
-			else 
+			else
 			{
 				soldierAnimationComponent.SetBool("KnifeIdle", false);
 			}
@@ -304,7 +304,7 @@ public class SoldierAnimation : MonoBehaviour
 				soldierAnimationComponent.SetBool("IsGrounded", true);
 			}
 
-			else 
+			else
 			{
 				soldierAnimationComponent.SetBool("IsCrouch", false);
 			}
@@ -316,7 +316,7 @@ public class SoldierAnimation : MonoBehaviour
 				{
 					soldierAnimationComponent.SetFloat("Forward", forwardSpeed);
 				}
-				else 
+				else
 				{
 					soldierAnimationComponent.SetFloat("Forward", 0);
 				}
@@ -338,7 +338,7 @@ public class SoldierAnimation : MonoBehaviour
 				//currentAnimationToPlay = currentWalkAnimation;
 			}
 
-			
+
 			else
 			{
 				soldierAnimationComponent.SetFloat("Forward", 0);
@@ -354,12 +354,12 @@ public class SoldierAnimation : MonoBehaviour
 				{
 					soldierAnimationComponent.SetFloat("Strafe", strafeSpeed);
 				}
-				else 
+				else
 				{
 					soldierAnimationComponent.SetFloat("Strafe", 0);
 				}
 			}
-			else 
+			else
 			{
 				soldierAnimationComponent.SetFloat("Strafe", 0);
 			}
@@ -410,11 +410,11 @@ public class SoldierAnimation : MonoBehaviour
 				forwardSpeed = playerNetwork.thisT.InverseTransformDirection(velocity).z * Time.deltaTime * 2.0f;
 				strafeSpeed = -(playerNetwork.thisT.InverseTransformDirection(velocity).x * Time.deltaTime) * 2.0f;
 
-                if ((strafeSpeed > 0.3f || strafeSpeed < -0.3f) && forwardSpeed > -0.2f && forwardSpeed < 0.2f)
-                {
-                    forwardSpeed = Mathf.Abs(strafeSpeed);
-                }
-            }
+				if ((strafeSpeed > 0.3f || strafeSpeed < -0.3f) && forwardSpeed > -0.2f && forwardSpeed < 0.2f)
+				{
+					forwardSpeed = Mathf.Abs(strafeSpeed);
+				}
+			}
 		}
 		else
 		{
