@@ -6824,7 +6824,7 @@ MonoBehaviour:
   CrObject: {fileID: 8014163894362093195}
   CrOfflineObject: {fileID: 0}
   CrGameObject: {fileID: 7478664052719807988}
-  CrOfflineGameObject: {fileID: 0}
+  CrOfflineGameObject: {fileID: 5913644641007337626}
   LobyObject: {fileID: 1704362255}
 --- !u!1 &302658352
 GameObject:
@@ -57067,6 +57067,11 @@ PrefabInstance:
       objectReference: {fileID: 2061510815}
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}
+      propertyPath: offlineMapName
+      value: 
+      objectReference: {fileID: 5913644640617868364}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
       propertyPath: profiletabname
       value: 
       objectReference: {fileID: 2004314423}
@@ -57095,6 +57100,11 @@ PrefabInstance:
       propertyPath: ConnectionButtons
       value: 
       objectReference: {fileID: 1154969264}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
+      propertyPath: offlineMapMapImage
+      value: 
+      objectReference: {fileID: 5913644641712962687}
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}
       propertyPath: availableMaps.Array.size
