@@ -195,7 +195,8 @@ public class ConnectMenu : Photon.MonoBehaviour
 
 	private void Awake()
 	{
-		if (Application.internetReachability == NetworkReachability.NotReachable)
+		
+		if (bl_LoginPro.isOffline)
 		{
 			foreach (var button in OnlineButtons)
 			{
