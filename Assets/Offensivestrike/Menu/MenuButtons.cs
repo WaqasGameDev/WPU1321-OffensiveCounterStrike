@@ -49,8 +49,8 @@ public class MenuButtons : MonoBehaviour
 	[Header("[ Create Room Object]")]
 	public GameObject CrObject;
 
-	[Header("[ Create Offline Room Object]")]
-	public GameObject CrOfflineObject;
+	//[Header("[ Create Offline Room Object]")]
+	//public GameObject CrOfflineObject;
 
 	[Header("[ Create Game Room Object]")]
 	public GameObject CrGameObject;
@@ -101,7 +101,7 @@ public class MenuButtons : MonoBehaviour
 		thisAudioSource.Play();
 		MainObject.gameObject.SetActive(false);
 		// CrObject.gameObject.SetActive(true);
-		CrOfflineObject.gameObject.SetActive(true);
+		//CrOfflineObject.gameObject.SetActive(true);
 	}
 
 	public void MainMenuEnabled()
@@ -110,7 +110,7 @@ public class MenuButtons : MonoBehaviour
 		thisAudioSource.Play();
 		MainObject.gameObject.SetActive(true);
 		CrObject.gameObject.SetActive(false);
-		CrOfflineObject.gameObject.SetActive(false);
+		//CrOfflineObject.gameObject.SetActive(false);
 		LobyObject.gameObject.SetActive(false);
 	}
 
@@ -378,7 +378,7 @@ public class MenuButtons : MonoBehaviour
 		ModeTex.text = Mode;
 		thisAudioSource.clip = ClickSong;
 		thisAudioSource.Play();
-		CrOfflineObject.gameObject.SetActive(false);
+		//CrOfflineObject.gameObject.SetActive(false);
 		CrOfflineGameObject.gameObject.SetActive(true);
 	}
 
@@ -388,7 +388,7 @@ public class MenuButtons : MonoBehaviour
 		ModeTex.text = Mode;
 		thisAudioSource.clip = ClickSong;
 		thisAudioSource.Play();
-		CrOfflineObject.gameObject.SetActive(false);
+		//CrOfflineObject.gameObject.SetActive(false);
 		CrOfflineGameObject.gameObject.SetActive(true);
 	}
 
@@ -398,7 +398,7 @@ public class MenuButtons : MonoBehaviour
 		ModeTex.text = Mode;
 		thisAudioSource.clip = ClickSong;
 		thisAudioSource.Play();
-		CrOfflineObject.gameObject.SetActive(false);
+		//CrOfflineObject.gameObject.SetActive(false);
 		CrOfflineGameObject.gameObject.SetActive(true);
 	}
 
