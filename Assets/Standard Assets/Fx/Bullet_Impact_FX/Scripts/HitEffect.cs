@@ -15,10 +15,4 @@ public class HitEffect : MonoBehaviour
 
 		Destroy(gameObject,m_HitEffectLifeTime);
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
 }

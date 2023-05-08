@@ -57,6 +57,7 @@ public class ConnectMenu : Photon.MonoBehaviour
 	public string SelectMapName;
 	public Text GameMode;
 	public Text Mekills;
+	public bool canPlayWithBots = false;
 
 	[System.Serializable]
 	public class AvailableMaps
@@ -577,6 +578,7 @@ public class ConnectMenu : Photon.MonoBehaviour
 	IEnumerator LoadingOfflineSc()
 	{
 		PlayerPrefs.SetInt("OfflineMode", 1);
+		canPlayWithBots = true;
 
 		//Remember player settings when creating new room
 		PlayerPrefs.SetInt(playerLimitPrefsName, selectedPlayerLimit);

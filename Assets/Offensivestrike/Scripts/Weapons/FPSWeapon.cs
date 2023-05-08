@@ -643,7 +643,15 @@ public class FPSWeapon : MonoBehaviour
 		// Did we hit anything?
 		if (Physics.Raycast (firePoint, fireDirection, out hit, tmpFireRange))
         {
-            if (hit.transform.CompareTag("Ai") && (int)playerNetwork.photonView.owner.CustomProperties["Team"] == 2)
+			if (hit.collider.tag == "Bot")
+			{
+				//Blood particle
+
+				Debug.LogError("PLAYER HIT THE BOT");
+				Instantiate(playerWeapons.bloodParticles, hit.point, Quaternion.LookRotation(hit.normal));
+			}
+
+			if (hit.transform.CompareTag("Ai") && (int)playerNetwork.photonView.owner.CustomProperties["Team"] == 2)
             {
 				if(GameSettings.rc.ourPlayer.playerWeapons.currentSelectedWeapon.weaponName == "AWP")
                 {
@@ -671,6 +679,8 @@ public class FPSWeapon : MonoBehaviour
 
 				Instantiate(playerWeapons.bloodParticles, hit.point, Quaternion.LookRotation(hit.normal));
 			}
+
+           
 
 			if (hit.transform.CompareTag("Body"))
             {

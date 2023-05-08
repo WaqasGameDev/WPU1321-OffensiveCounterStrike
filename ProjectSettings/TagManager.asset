@@ -31,6 +31,7 @@ TagManager:
   - PlayerAI
   - GasTank
   - ExplosiveBarrel
+  - Bot
   layers:
   - Default
   - TransparentFX
@@ -47,7 +48,7 @@ TagManager:
   - Weapon
   - 
   - Playerlight
-  - 
+  - Bot
   - 
   - 
   - 

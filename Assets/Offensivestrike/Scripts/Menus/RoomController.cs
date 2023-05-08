@@ -1795,6 +1795,10 @@ public class RoomController : Photon.MonoBehaviour
 			{
 				GameObject ourPlayerTmp = Instantiate(playerPrefab, spawnPontTmp.position, spawnPontTmp.rotation);
 				ourPlayer = ourPlayerTmp.GetComponent<PlayerNetwork>();
+
+				//EnemyManager.instance.initialBotCount = 15;
+				//EnemyManager.instance.SpawnEnemies();
+				//EnemyManager.instance.StartCoroutine("CheckToSpawnEnemies");
 			}
 
 
