@@ -2263,12 +2263,7 @@ public class RoomUI : Photon.MonoBehaviour
 		var hitbox = hit ? hitInfo.transform.GetComponent<HitBox>() : null;
 		
 		Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.green);
-		if(hitbox.transform.tag == "Bot")
-        {
-			fireButton.isActive = true;
-			GameSettings.mobileFiring = true;
-			BotAiScript.instance.TakeDamage(25f);
-		}
+		
 		if (!hitbox || hitbox.playerNetwork.playerTeam == rc.ourTeam)
         {
 			fireButton.isActive = false;

@@ -719,12 +719,12 @@ public class RoomController : Photon.MonoBehaviour
 			RefreshPlayerList();
 		}
 
-		if (offlineMode)
-		{
-			sb.enabled = true;
-			GameSettings.menuOpened = true;
-		}
-	}
+        if (offlineMode)
+        {
+            sb.enabled = true;
+            GameSettings.menuOpened = true;
+        }
+    }
 
 	public void OpenBuyMenu()
 	{

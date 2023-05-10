@@ -36,6 +36,9 @@ public class BotAiScript : MonoBehaviour
     {
         if (health <= 0)
         {
+            agent.enabled = false;
+            enemyAnimator.Dead();
+            StartCoroutine(DestroyDeadBot());
             // Bot is dead
             return;
         }
@@ -57,7 +60,7 @@ public class BotAiScript : MonoBehaviour
         {
             // Player is out of range, stop moving
             agent.SetDestination(transform.position);
-            enemyAnimator.Walk(true);
+            enemyAnimator.Walk(false);
         }
     }
 
@@ -91,14 +94,16 @@ public class BotAiScript : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+        Debug.LogWarning("PLAYER SHOOTS THE BOT AND ITS HEALTH IS " + health);
         if (health <= 0)
         {
-            // Bot is dead, play death animation
-            enemyAnimator.Dead();
-
-            // Disable bot's collider
-            agent.enabled = false;
-            // Disable bot's shooting and movement scripts
+           
         }
+    }
+
+    IEnumerator DestroyDeadBot()
+    {
+        yield return new WaitForSeconds(5f);
+        Destroy(gameObject);
     }
 }

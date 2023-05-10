@@ -36,6 +36,7 @@ public class EnemyController : MonoBehaviour
         enemyAnimator = GetComponent<EnemyAnimator>();
         navAgent = GetComponent<NavMeshAgent>();
         enemyAudio = GetComponentInChildren<EnemyAudio>();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
     void Start()
     {
