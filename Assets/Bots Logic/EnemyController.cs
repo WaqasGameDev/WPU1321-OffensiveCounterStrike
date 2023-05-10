@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour
     private float patrolTimer;
     public float waitBeforeAttack = 2f;
     private float attackTimer;
-    [SerializeField]private Transform target;
+    private Transform target;
     public GameObject attackPoint;
     private EnemyAudio enemyAudio;
 

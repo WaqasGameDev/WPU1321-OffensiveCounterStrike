@@ -12,9 +12,16 @@ public class HealthScript : MonoBehaviour
     public bool isPlayer, isCannible, isBoar;
     private bool isDead;
     private EnemyAudio enemyAudio;
+
+    public static HealthScript instance;
    // private PlayerStats playerStats;
     void Awake()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
+
         if (isBoar || isCannible)
         {
             enemyAnimator = GetComponent<EnemyAnimator>();
@@ -119,7 +126,7 @@ public class HealthScript : MonoBehaviour
         //else
         //{
             // when the any enemy will die, it will deactivate 
-            //Invoke("TurnOffGame", 3f);
+            Invoke("TurnOffGameObject", 3f);
        // }
     }
     //void RestartGame()
@@ -127,7 +134,7 @@ public class HealthScript : MonoBehaviour
     //    UnityEngine.SceneManagement.SceneManager.LoadScene("FPS Level1");
 
     //}
-    void TurnOffGame()
+    void TurnOffGameObject()
     {
         gameObject.SetActive(false);
     }
