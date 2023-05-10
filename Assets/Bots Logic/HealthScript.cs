@@ -44,6 +44,8 @@ public class HealthScript : MonoBehaviour
 
         health -= damage;
 
+        Debug.LogError("CURRENT BOT'S HEALTH IS ==== " + health);
+
         //if (isPlayer)
         //{
         //    // show the state(display the health UI value
