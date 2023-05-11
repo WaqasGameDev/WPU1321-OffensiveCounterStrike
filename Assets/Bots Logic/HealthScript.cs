@@ -15,7 +15,7 @@ public class HealthScript : MonoBehaviour
 
     public static HealthScript instance;
    // private PlayerStats playerStats;
-    void Awake()
+    void Start()
     {
         if(instance == null)
         {
@@ -96,7 +96,7 @@ public class HealthScript : MonoBehaviour
             // Boar has a dead animation
             navAgent.velocity = Vector3.zero;
             navAgent.isStopped = true;
-            enemyController.enabled = false;
+            // enemyController.enabled = false;
             enemyAnimator.Dead();
             // start Coroutine
             StartCoroutine(DeadSound());

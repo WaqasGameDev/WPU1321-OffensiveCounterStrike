@@ -12,7 +12,8 @@ public class EnemyManager : MonoBehaviour
     private int botEnemyCount;
     public int initialBotCount;
     public float waitBeforsSpawnEnemiesTime = 10f;
-
+    private List<GameObject> spawnedBots = new List<GameObject>();
+    public bool isPlayerSpawned = false;
 
     private void Awake()
     {
@@ -28,6 +29,14 @@ public class EnemyManager : MonoBehaviour
         StartCoroutine("CheckToSpawnEnemies");
     }
 
+    public void NotifyBotsAboutPlayer()
+    {
+
+            foreach (var bot in spawnedBots)
+            {
+                bot.gameObject.SetActive(true);
+            }
+    }
     public void SpawnEnemies()
     {
         SpawnBot();
@@ -43,7 +52,8 @@ public class EnemyManager : MonoBehaviour
                 index = 0;
             }
            var bot = Instantiate(botPrefab, botSpawnPoint[index].position, Quaternion.identity);
-            bot.GetComponent<EnemyController>().enabled = true;
+            bot.gameObject.SetActive(false);
+            spawnedBots.Add(bot);
 
             index++;
         }

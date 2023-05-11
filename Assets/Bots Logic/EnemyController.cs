@@ -39,10 +39,11 @@ public class EnemyController : MonoBehaviour
         enemyAnimator = GetComponent<EnemyAnimator>();
         navAgent = GetComponent<NavMeshAgent>();
         enemyAudio = GetComponentInChildren<EnemyAudio>();
-        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
     void Start()
     {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+        Debug.LogWarning("WE FIND THE TARGET WITH NAME " + target.name);
         enemyState = EnemyState.PATROL;
         patrolTimer = patrolForThisTime;
         // when the enemy first get to the player
@@ -68,17 +69,11 @@ public class EnemyController : MonoBehaviour
         {
             Attack();
         }
+        Debug.LogError(navAgent.velocity.normalized.sqrMagnitude);
 
-        if (forward < 0)
-        {
-            forward = 0;
-        }
+        forward = navAgent.velocity.normalized.sqrMagnitude;
 
-        if (forward > 1)
-        {
-            forward = 1;
-        }
-
+        Debug.LogWarning("FORWARD VALUE = " + forward);
         animator.SetFloat("Forward", forward);
     }
     public void Patrol()
@@ -99,26 +94,19 @@ public class EnemyController : MonoBehaviour
             patrolTimer = 0f;
         }
         // Enemy is moving
-        if (navAgent.velocity.sqrMagnitude > 0)
-        {
+        //if (navAgent.velocity.sqrMagnitude > 0)
+        //{
 
             //Debug.LogWarning("NAMESH TRANSFORM IS === " + navAgent.velocity.sqrMagnitude);
             // play walk animation
             // enemyAnimator.Walk(true);
-            forward += Time.deltaTime * 0.5f;
-        }
-        else
-        {
-            // if not moving, stop walk animation
-            // enemyAnimator.Walk(false);
-            forward -= Time.deltaTime * 0.5f;
-        }
-        return;
+        //}
+
         // test the distance between Player and Enemy
         if (Vector3.Distance(transform.position, target.position) <= chaseDistance)
         {
             // stop walk animation
-            forward -= Time.deltaTime * 0.5f;
+            //forward -= Time.deltaTime * 0.5f;
             //enemyAnimator.Walk(false);
             // chane enemy state to chase so that enemy will run
             enemyState = EnemyState.CHASE;
@@ -151,8 +139,7 @@ public class EnemyController : MonoBehaviour
         {
             // stop run and walk animation
             enemyAnimator.Run(false);
-
-            forward -= Time.deltaTime * 0.5f;
+            //forward -= Time.deltaTime * 0.5f;
             //enemyAnimator.Walk(false);
             // change enemy state to attack
             enemyState = EnemyState.ATTACK;

@@ -643,7 +643,7 @@ public class FPSWeapon : MonoBehaviour
 		// Did we hit anything?
 		if (Physics.Raycast (firePoint, fireDirection, out hit, tmpFireRange))
         {
-			if (hit.collider.tag == "Bot")
+			if (hit.transform.gameObject.name == "AI_Bot(Clone)")
 			{
 				//Blood particle
 
