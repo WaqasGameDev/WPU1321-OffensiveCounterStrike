@@ -19857,7 +19857,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.051275738, y: 0.4202218}
   m_AnchorMax: {x: 0.19264227, y: 0.5745523}
-  m_AnchoredPosition: {x: 4.245224, y: 0}
+  m_AnchoredPosition: {x: 4.2452087, y: 0}
   m_SizeDelta: {x: 7.6122, y: -1.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &801287789
@@ -57112,7 +57112,7 @@ PrefabInstance:
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}
       propertyPath: availableMaps.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}
@@ -57142,6 +57142,12 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}
+      propertyPath: availableMaps.Array.data[6].mapMap
+      value: 
+      objectReference: {fileID: 21300000, guid: 8dbac8487787ab647bb254ed37a56ae5,
+        type: 3}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
       propertyPath: availableMaps.Array.data[2].mapName
       value: WAREHOUSE
       objectReference: {fileID: 0}
@@ -57162,6 +57168,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}
+      propertyPath: availableMaps.Array.data[6].mapName
+      value: Test
+      objectReference: {fileID: 0}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
       propertyPath: availableMaps.Array.data[2].mapPreview
       value: 
       objectReference: {fileID: 21300000, guid: 974ebd1240b45f2498a489f5059b420a,
@@ -57171,6 +57182,12 @@ PrefabInstance:
       propertyPath: availableMaps.Array.data[3].mapPreview
       value: 
       objectReference: {fileID: 21300000, guid: 4f7301d30ead1e341895b2f976ea45be,
+        type: 3}
+    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
+        type: 3}
+      propertyPath: availableMaps.Array.data[6].mapPreview
+      value: 
+      objectReference: {fileID: 21300000, guid: 712346d3f454fe44e947fafcfef19220,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31f6e903bfff50c43b932345ebc1aa2b, type: 3}

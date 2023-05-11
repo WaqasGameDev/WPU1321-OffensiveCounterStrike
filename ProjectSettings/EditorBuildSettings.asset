@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/ScenesAssetBundles/NUCLEAR_FACILITY.unity
     guid: d06aecf6f4c84c44fad9c86ff555081d
+  - enabled: 1
+    path: Assets/Scene/Test.unity
+    guid: 2bfa350d0d251d84b884bb2774023006
   - enabled: 0
     path: Assets/3D_Maps_/FPS Shooting Environment/Scenes/Forest.unity
     guid: 7611f361f45dc644ea1a6e2f1cc0a307

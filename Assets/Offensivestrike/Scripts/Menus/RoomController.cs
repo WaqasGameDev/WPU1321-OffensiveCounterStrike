@@ -1002,117 +1002,117 @@ public class RoomController : Photon.MonoBehaviour
 		if (currentGameMode == "NORMAL")
 		{
 
-			//if (meTeam == 1)
-			//{
-			//	if (teamAPlayers.Count > 0)
-			//	{
-			//		for (int i = 0; i < teamAPlayers.Count; i++)
-			//		{
-			//			if (teamAPlayers[i].CustomProperties["PlayerHP"] == null || (int)teamAPlayers[i].CustomProperties["PlayerHP"] < 1)
-			//			{
-			//				if (FollowCam.Count > 0)
-			//				{
-			//					for (int f = 0; f < FollowCam.Count; f++)
-			//					{
-			//						if (FollowCam[f] == teamAPlayers[i].NickName)
-			//						{
-			//							FollowCam.Remove(FollowCam[f]);
-			//						}
-			//					}
-			//				}
-			//			}
-			//			else
-			//			{
-			//				bool find = false;
-			//				if (FollowCam.Count > 0)
-			//				{
-			//					if (teamAPlayers[i].NickName != PlayerPrefs.GetString(playerNameJoinPrefsName))
-			//					{
-			//						for (int z = 0; z < FollowCam.Count; z++)
-			//						{
-			//							if (teamAPlayers[i].NickName == FollowCam[z])
-			//							{
-			//								find = true;
-			//							}
-			//						}
-			//						if (find == false)
-			//						{
-			//							FollowCam.Add(teamAPlayers[i].NickName);
-			//						}
-			//					}
-			//				}
-			//				else
-			//				{
-			//					if (teamAPlayers[i].NickName != PlayerPrefs.GetString(playerNameJoinPrefsName))
-			//					{
-			//						FollowCam.Add(teamAPlayers[i].NickName);
-			//					}
-			//				}
-			//			}
-			//		}
-			//	}
-			//	else
-			//	{
-			//		FollowCam.Clear();
-			//	}
-			//}
+            //if (meTeam == 1)
+            //{
+            //	if (teamAPlayers.Count > 0)
+            //	{
+            //		for (int i = 0; i < teamAPlayers.Count; i++)
+            //		{
+            //			if (teamAPlayers[i].CustomProperties["PlayerHP"] == null || (int)teamAPlayers[i].CustomProperties["PlayerHP"] < 1)
+            //			{
+            //				if (FollowCam.Count > 0)
+            //				{
+            //					for (int f = 0; f < FollowCam.Count; f++)
+            //					{
+            //						if (FollowCam[f] == teamAPlayers[i].NickName)
+            //						{
+            //							FollowCam.Remove(FollowCam[f]);
+            //						}
+            //					}
+            //				}
+            //			}
+            //			else
+            //			{
+            //				bool find = false;
+            //				if (FollowCam.Count > 0)
+            //				{
+            //					if (teamAPlayers[i].NickName != PlayerPrefs.GetString(playerNameJoinPrefsName))
+            //					{
+            //						for (int z = 0; z < FollowCam.Count; z++)
+            //						{
+            //							if (teamAPlayers[i].NickName == FollowCam[z])
+            //							{
+            //								find = true;
+            //							}
+            //						}
+            //						if (find == false)
+            //						{
+            //							FollowCam.Add(teamAPlayers[i].NickName);
+            //						}
+            //					}
+            //				}
+            //				else
+            //				{
+            //					if (teamAPlayers[i].NickName != PlayerPrefs.GetString(playerNameJoinPrefsName))
+            //					{
+            //						FollowCam.Add(teamAPlayers[i].NickName);
+            //					}
+            //				}
+            //			}
+            //		}
+            //	}
+            //	else
+            //	{
+            //		FollowCam.Clear();
+            //	}
+            //}
 
-			//if (meTeam == 2)
-			//{
-			//	if (teamBPlayers.Count > 0)
-			//	{
-			//		for (int i = 0; i < teamBPlayers.Count; i++)
-			//		{
-			//			if (teamBPlayers[i].CustomProperties["PlayerHP"] == null || (int)teamBPlayers[i].CustomProperties["PlayerHP"] < 1)
-			//			{
-			//				if (FollowCam.Count > 0)
-			//				{
-			//					for (int f = 0; f < FollowCam.Count; f++)
-			//					{
-			//						if (FollowCam[f] == teamBPlayers[i].NickName)
-			//						{
-			//							FollowCam.Remove(FollowCam[f]);
-			//						}
-			//					}
-			//				}
-			//			}
-			//			else
-			//			{
-			//				bool find = false;
-			//				if (FollowCam.Count > 0)
-			//				{
-			//					if (teamBPlayers[i].NickName != PlayerPrefs.GetString(playerNameJoinPrefsName))
-			//					{
-			//						for (int z = 0; z < FollowCam.Count; z++)
-			//						{
-			//							if (teamBPlayers[i].NickName == FollowCam[z])
-			//							{
-			//								find = true;
-			//							}
-			//						}
-			//						if (find == false)
-			//						{
-			//							FollowCam.Add(teamBPlayers[i].NickName);
-			//						}
-			//					}
-			//				}
-			//				else
-			//				{
-			//					if (teamBPlayers[i].NickName != PlayerPrefs.GetString(playerNameJoinPrefsName))
-			//					{
-			//						FollowCam.Add(teamBPlayers[i].NickName);
-			//					}
-			//				}
-			//			}
-			//		}
-			//	}
-			//	else
-			//	{
-			//		FollowCam.Clear();
-			//	}
-			//}
+            //if (meTeam == 2)
+            //{
+            //	if (teamBPlayers.Count > 0)
+            //	{
+            //		for (int i = 0; i < teamBPlayers.Count; i++)
+            //		{
+            //			if (teamBPlayers[i].CustomProperties["PlayerHP"] == null || (int)teamBPlayers[i].CustomProperties["PlayerHP"] < 1)
+            //			{
+            //				if (FollowCam.Count > 0)
+            //				{
+            //					for (int f = 0; f < FollowCam.Count; f++)
+            //					{
+            //						if (FollowCam[f] == teamBPlayers[i].NickName)
+            //						{
+            //							FollowCam.Remove(FollowCam[f]);
+            //						}
+            //					}
+            //				}
+            //			}
+            //			else
+            //			{
+            //				bool find = false;
+            //				if (FollowCam.Count > 0)
+            //				{
+            //					if (teamBPlayers[i].NickName != PlayerPrefs.GetString(playerNameJoinPrefsName))
+            //					{
+            //						for (int z = 0; z < FollowCam.Count; z++)
+            //						{
+            //							if (teamBPlayers[i].NickName == FollowCam[z])
+            //							{
+            //								find = true;
+            //							}
+            //						}
+            //						if (find == false)
+            //						{
+            //							FollowCam.Add(teamBPlayers[i].NickName);
+            //						}
+            //					}
+            //				}
+            //				else
+            //				{
+            //					if (teamBPlayers[i].NickName != PlayerPrefs.GetString(playerNameJoinPrefsName))
+            //					{
+            //						FollowCam.Add(teamBPlayers[i].NickName);
+            //					}
+            //				}
+            //			}
+            //		}
+            //	}
+            //	else
+            //	{
+            //		FollowCam.Clear();
+            //	}
+            //}
 
-			/*if (ourPlayer) {
+            /*if (ourPlayer) {
 				if (ourPlayer.playerKilled) {
 					if (FollowCam.Count > 0 && otherPlayers.Count > 0) {
 						if (!FollowCamera) {
@@ -1165,20 +1165,20 @@ public class RoomController : Photon.MonoBehaviour
 					welcomeCamera.transform.rotation = defaultCamRot;
 				}
 			}*/
-			//if (FollowCamAll.Count > 0 && teamAPlayers.Count + teamBPlayers.Count <= 1 && teamABots.Count + teamBBots.Count > 0)
-			//{
-			//	for (int a = 0; a < FollowCamAll.Count; a++)
-			//	{
-			//		if (FollowCamAll[a] != null && FollowCamAll[a].GetComponent<BotAi>().health <= 0)
-			//		{
-			//			FollowCamAll.Remove(FollowCamAll[a]);
-			//		}
-			//	}
-			//}
-			//else
-			//{
+            if (FollowCamAll.Count > 0 && teamAPlayers.Count + teamBPlayers.Count <= 1 && teamABots.Count + teamBBots.Count > 0)
+            {
+                for (int a = 0; a < FollowCamAll.Count; a++)
+                {
+                    if (FollowCamAll[a] != null && FollowCamAll[a].GetComponent<BotAi>().health <= 0)
+                    {
+                        FollowCamAll.Remove(FollowCamAll[a]);
+                    }
+                }
+            }
+            else
+            {
 
-			if (teamAPlayers.Count > 0 /*&& ourPlayer.playerKilled || ourTeam != 1 || ourTeam != 2*/)
+                if (teamAPlayers.Count > 0 /*&& ourPlayer.playerKilled || ourTeam != 1 || ourTeam != 2*/)
 			{
 				for (int i = 0; i < teamAPlayers.Count; i++)
 				{
@@ -1262,7 +1262,7 @@ public class RoomController : Photon.MonoBehaviour
 				}
 			}
 
-			//}
+			}
 
 
 			if (ourPlayer)
@@ -1280,8 +1280,8 @@ public class RoomController : Photon.MonoBehaviour
 									cameraMouseLook.AssignTarget(FollowCamAll[WFollowCam].GetComponent<PlayerNetwork>().CameraFollow.transform);
 									FollowCamera = true;
 								}
-								//welcomeCameraTransform.position = FollowCamAll[WFollowCam].GetComponent<BotAi>().CameraFollow.transform.position;
-								//welcomeCameraTransform.rotation = FollowCamAll[WFollowCam].GetComponent<BotAi>().CameraFollow.transform.rotation;
+								welcomeCameraTransform.position = FollowCamAll[WFollowCam].GetComponent<BotAi>().CameraFollow.transform.position;
+								welcomeCameraTransform.rotation = FollowCamAll[WFollowCam].GetComponent<BotAi>().CameraFollow.transform.rotation;
 							}
 							if (FollowCamAll.Count > 0 && teamAPlayers.Count + teamBPlayers.Count > 1)
 							{
@@ -1796,10 +1796,10 @@ public class RoomController : Photon.MonoBehaviour
 				GameObject ourPlayerTmp = Instantiate(playerPrefab, spawnPontTmp.position, spawnPontTmp.rotation);
 				ourPlayer = ourPlayerTmp.GetComponent<PlayerNetwork>();
 
-				//EnemyManager.instance.initialBotCount = 15;
-				//EnemyManager.instance.SpawnEnemies();
-				//EnemyManager.instance.StartCoroutine("CheckToSpawnEnemies");
-			}
+                EnemyManager.instance.initialBotCount = 15;
+                EnemyManager.instance.SpawnEnemies();
+                EnemyManager.instance.StartCoroutine("CheckToSpawnEnemies");
+            }
 
 
 			bm.lastSelectedWeapon = 1;
@@ -1831,55 +1831,55 @@ public class RoomController : Photon.MonoBehaviour
 		}
 
 		FollowCamAll.Clear();
-		//if (teamABots.Count > 0 && (teamAPlayers.Count + teamBPlayers.Count) < 2 && otherPlayers.Count == 0)
-		//{
-		//	for (int x = 0; x < teamABots.Count; x++)
-		//	{
-		//		int ARandom = Random.Range(0, spawnA.Count);
-		//		teamABots[x].GetComponent<BotAi>().RestartBot();
-		//		teamABots[x].gameObject.transform.position = spawnA[ARandom].position;
-		//		teamABots[x].gameObject.transform.rotation = spawnA[ARandom].rotation;
-		//		spawnA.RemoveAt(ARandom);
-		//		FollowCamAll.Add(teamABots[x].gameObject);
-		//	}
-		//}
+        if (teamABots.Count > 0 && (teamAPlayers.Count + teamBPlayers.Count) < 2 && otherPlayers.Count == 0)
+        {
+            for (int x = 0; x < teamABots.Count; x++)
+            {
+                int ARandom = Random.Range(0, spawnA.Count);
+                teamABots[x].GetComponent<BotAi>().RestartBot();
+                teamABots[x].gameObject.transform.position = spawnA[ARandom].position;
+                teamABots[x].gameObject.transform.rotation = spawnA[ARandom].rotation;
+                spawnA.RemoveAt(ARandom);
+                FollowCamAll.Add(teamABots[x].gameObject);
+            }
+        }
 
-		//if (teamBBots.Count > 0 && (teamAPlayers.Count + teamBPlayers.Count) < 2 && otherPlayers.Count == 0)
-		//{
-		//	for (int x = 0; x < teamBBots.Count; x++)
-		//	{
-		//		int BRandom = Random.Range(0, spawnB.Count);
-		//		teamBBots[x].GetComponent<BotAi>().RestartBot();
-		//		teamBBots[x].gameObject.transform.position = spawnB[BRandom].position;
-		//		teamBBots[x].gameObject.transform.rotation = spawnB[BRandom].rotation;
-		//		spawnB.RemoveAt(BRandom);
-		//		FollowCamAll.Add(teamBBots[x].gameObject);
-		//	}
-		//}
+        if (teamBBots.Count > 0 && (teamAPlayers.Count + teamBPlayers.Count) < 2 && otherPlayers.Count == 0)
+        {
+            for (int x = 0; x < teamBBots.Count; x++)
+            {
+                int BRandom = Random.Range(0, spawnB.Count);
+                teamBBots[x].GetComponent<BotAi>().RestartBot();
+                teamBBots[x].gameObject.transform.position = spawnB[BRandom].position;
+                teamBBots[x].gameObject.transform.rotation = spawnB[BRandom].rotation;
+                spawnB.RemoveAt(BRandom);
+                FollowCamAll.Add(teamBBots[x].gameObject);
+            }
+        }
 
-		currentRespawnTime = -1;
+        currentRespawnTime = -1;
 
 	}
 
-	//public void SpawnBot(Transform points, int team)
-	//{
-	//	if (team == 1)
-	//	{
-	//		GameObject botAi1 = PhotonNetwork.Instantiate(botAi.name, points.position, points.rotation, 0);
-	//		botAi1.GetComponent<BotAi>().isMine = true;
-	//		botAi1.GetComponent<BotAi>().team = 1;
-	//		teamABots.Add(botAi1);
-	//	}
-	//	if (team == 2)
-	//	{
-	//		GameObject botAiTr1 = PhotonNetwork.Instantiate(botAiTr.name, points.position, points.rotation, 0);
-	//		botAiTr1.GetComponent<BotAi>().isMine = true;
-	//		botAiTr1.GetComponent<BotAi>().team = 2;
-	//		teamBBots.Add(botAiTr1);
-	//	}
-	//}
+    public void SpawnBot(Transform points, int team)
+    {
+        if (team == 1)
+        {
+            GameObject botAi1 = PhotonNetwork.Instantiate(botAi.name, points.position, points.rotation, 0);
+            botAi1.GetComponent<BotAi>().isMine = true;
+            botAi1.GetComponent<BotAi>().team = 1;
+            teamABots.Add(botAi1);
+        }
+        if (team == 2)
+        {
+            GameObject botAiTr1 = PhotonNetwork.Instantiate(botAiTr.name, points.position, points.rotation, 0);
+            botAiTr1.GetComponent<BotAi>().isMine = true;
+            botAiTr1.GetComponent<BotAi>().team = 2;
+            teamBBots.Add(botAiTr1);
+        }
+    }
 
-	IEnumerator PurchaseTimer()
+    IEnumerator PurchaseTimer()
 	{
 		//Allow some time (in seconds) to allow newly spawned player purchase weapon)
 		timeToPurchase = 15;
@@ -2204,18 +2204,18 @@ public class RoomController : Photon.MonoBehaviour
 			playersTmp[i].SetCustomProperties(setPlayerProperties);
 		}
 
-		//for (int a = 0; a < teamABots.Count; a++)
-		//{
-		//	teamABots[a].GetComponent<BotAi>().KillAll = 0;
-		//	teamABots[a].GetComponent<BotAi>().DieAll = 0;
-		//}
+        for (int a = 0; a < teamABots.Count; a++)
+        {
+            teamABots[a].GetComponent<BotAi>().KillAll = 0;
+            teamABots[a].GetComponent<BotAi>().DieAll = 0;
+        }
 
-		//for (int b = 0; b < teamBBots.Count; b++)
-		//{
-		//	teamBBots[b].GetComponent<BotAi>().KillAll = 0;
-		//	teamBBots[b].GetComponent<BotAi>().DieAll = 0;
-		//}
-	}
+        for (int b = 0; b < teamBBots.Count; b++)
+        {
+            teamBBots[b].GetComponent<BotAi>().KillAll = 0;
+            teamBBots[b].GetComponent<BotAi>().DieAll = 0;
+        }
+    }
 
 	IEnumerator AddCashDelayed()
 	{

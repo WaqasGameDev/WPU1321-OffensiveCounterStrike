@@ -59,4 +59,9 @@ MonoBehaviour:
   - WonCT
   - WonT
   - <OnGUI>g__SendChatRemote|55_3
+  - AiBotDamage
+  - AiDamage
+  - setTarget
+  - setTargetC4
+  - setTargetPlayers
   DisableAutoOpenWizard: 1
