@@ -15,8 +15,9 @@ public class AttackScript : MonoBehaviour
     {
         RaycastHit hit;
         int attackRange = 50;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange))
+        if (Physics.Raycast(transform.position, transform.up, out hit, attackRange))
         {
+            Debug.LogWarning("RAY CASTING IN ATTACK SCRIPT");
             Debug.DrawRay(transform.position, transform.up, Color.green);
             if (hit.transform.gameObject.name == "OfflinePlayer")
             {

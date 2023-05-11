@@ -52,7 +52,6 @@ public class EnemyManager : MonoBehaviour
                 index = 0;
             }
            var bot = Instantiate(botPrefab, botSpawnPoint[index].position, Quaternion.identity);
-            bot.gameObject.SetActive(false);
             spawnedBots.Add(bot);
 
             index++;

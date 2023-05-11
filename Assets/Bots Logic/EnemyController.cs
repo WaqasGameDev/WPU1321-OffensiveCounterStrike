@@ -32,6 +32,7 @@ public class EnemyController : MonoBehaviour
     private EnemyAudio enemyAudio;
     Animator animator;
     float forward;
+    RoomUI roomUI;
 
     private void Awake()
     {
@@ -42,6 +43,8 @@ public class EnemyController : MonoBehaviour
     }
     void Start()
     {
+        roomUI = GameObject.Find("_RoomController(Clone)").GetComponent<RoomUI>();
+
         target = GameObject.FindGameObjectWithTag("Player").transform;
         Debug.LogWarning("WE FIND THE TARGET WITH NAME " + target.name);
         enemyState = EnemyState.PATROL;
@@ -69,11 +72,9 @@ public class EnemyController : MonoBehaviour
         {
             Attack();
         }
-        Debug.LogError(navAgent.velocity.normalized.sqrMagnitude);
 
         forward = navAgent.velocity.normalized.sqrMagnitude;
 
-        Debug.LogWarning("FORWARD VALUE = " + forward);
         animator.SetFloat("Forward", forward);
     }
     public void Patrol()
@@ -93,25 +94,13 @@ public class EnemyController : MonoBehaviour
             // at new position patrolTimer set to be zero
             patrolTimer = 0f;
         }
-        // Enemy is moving
-        //if (navAgent.velocity.sqrMagnitude > 0)
-        //{
-
-            //Debug.LogWarning("NAMESH TRANSFORM IS === " + navAgent.velocity.sqrMagnitude);
-            // play walk animation
-            // enemyAnimator.Walk(true);
-        //}
+      
 
         // test the distance between Player and Enemy
         if (Vector3.Distance(transform.position, target.position) <= chaseDistance)
         {
-            // stop walk animation
-            //forward -= Time.deltaTime * 0.5f;
-            //enemyAnimator.Walk(false);
             // chane enemy state to chase so that enemy will run
             enemyState = EnemyState.CHASE;
-            // Play Sound when enemy starts chasing Player
-            enemyAudio.PlayScreamSound();
         }
 
 
@@ -139,8 +128,7 @@ public class EnemyController : MonoBehaviour
         {
             // stop run and walk animation
             enemyAnimator.Run(false);
-            //forward -= Time.deltaTime * 0.5f;
-            //enemyAnimator.Walk(false);
+            
             // change enemy state to attack
             enemyState = EnemyState.ATTACK;
             // reset the chase distance to previous
@@ -176,7 +164,22 @@ public class EnemyController : MonoBehaviour
         attackTimer += Time.deltaTime;
         if (attackTimer > waitBeforeAttack)
         {
+            Debug.LogWarning("ATTACK IN ENEMYCONTROLLER");
             enemyAnimator.Attack();
+
+            roomUI.aColor = Color.red;
+
+
+            HitBox tmp;
+            if ((tmp = target.transform.GetComponent<HitBox>()) != null)
+            {
+                //Compose values we are going to pass
+                int[] values = new int[3];
+                values[0] = 0; //What weapon we used to make damage
+                values[1] = (int)tmp.bodyPart; //What body part we hit
+                values[2] = 0; //What side of player was hit (For hit marks), this is assigned later at HitBox.cs
+                tmp.Damage(values, target.position);
+            }
             // Reset attack timer otherwise enemy will attack again and again
             attackTimer = 0f;
             // play sound
@@ -208,7 +211,7 @@ public class EnemyController : MonoBehaviour
     {
         if (attackPoint.activeInHierarchy)
         {
-            attackPoint.SetActive(true);
+            attackPoint.SetActive(false);
         }
 
     }

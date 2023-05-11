@@ -75,77 +75,26 @@ public class HealthScript : MonoBehaviour
 
     void PlayerDied()
     {
-        //if (isCannible)
-        //{
-        //    // cannible does not have dead animation
-        //    GetComponent<Animator>().enabled = false;
-        //    GetComponent<BoxCollider>().isTrigger = false;
-        //    // AddTurque() applys angular force to gameObject
-        //    GetComponent<Rigidbody>().AddTorque(-transform.forward * 50f);
-        //    enemyController.enabled = false;
-        //    navAgent.enabled = false;
-        //    enemyAnimator.enabled = false;
-        //    // start coroutine
-        //    StartCoroutine(DeadSound());
-        //    // EnemyManager spawn more enemies
-        //    EnemyManager.instance.EnemyDied(true);
-        //}
-
-        if (isBoar)
-        {
-            // Boar has a dead animation
             navAgent.velocity = Vector3.zero;
-            navAgent.isStopped = true;
-            // enemyController.enabled = false;
+            navAgent.enabled = false;
+            enemyController.enabled = false;
+       
             enemyAnimator.Dead();
-            // start Coroutine
-            StartCoroutine(DeadSound());
+            // start Coroutine for dead sound
+           // StartCoroutine(DeadSound());
             // Spawn more enemies
-            EnemyManager.instance.EnemyDied(false);
+            EnemyManager.instance.EnemyDied(true);
 
-        }
-
-        //if (isPlayer)
-        //{
-        //    // when player is died all enemies will be called inside enemies[]
-        //    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Bot");
-
-        //    for (int i = 0; i < enemies.Length; i++)
-        //    {
-        //        //every kind of action of the enemies will be disabled
-        //        enemies[i].GetComponent<EnemyController>().enabled = false;
-        //        // call Enemy Manager to stop spawning enemies
-        //        EnemyManager.instance.StopSpawningEnemies();
-        //    }
-
-        //    //GetComponent<PlayerMovement>().enabled = false;
-        //    //GetComponent<PlayerAttack>().enabled = false;
-        //    //GetComponent<WeaponManager>().GetCurrentSelectedWeapon().gameObject.SetActive(false);
-        //}
-
-        // when player is died, Restart the game
-        //if (tag == Tags.PLAYER_TAG)
-        //{
-        //    Invoke("RestartGame", 3f);
-        //}
-        //else
-        //{
-            // when the any enemy will die, it will deactivate 
             Invoke("TurnOffGameObject", 3f);
-       // }
     }
-    //void RestartGame()
-    //{
-    //    UnityEngine.SceneManagement.SceneManager.LoadScene("FPS Level1");
-
-    //}
+   
     void TurnOffGameObject()
     {
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
     IEnumerator DeadSound()
     {
         yield return new WaitForSeconds(0.3f);
-        enemyAudio.PlayDeadSound();
+        //enemyAudio.PlayDeadSound();
     }
 }
