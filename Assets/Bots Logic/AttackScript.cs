@@ -14,11 +14,11 @@ public class AttackScript : MonoBehaviour
     void FixedUpdate()
     {
         RaycastHit hit;
-        int attackRange = 30;
+        int attackRange = 50;
         if (Physics.Raycast(transform.position, transform.forward, out hit, attackRange))
         {
             Debug.DrawRay(transform.position, transform.up, Color.green);
-            if (hit.transform.tag == "Player")
+            if (hit.transform.gameObject.name == "OfflinePlayer")
             {
                 Debug.LogWarning("BOT HITS THE PLAYER WITH TAG = " + hit.transform.tag);
 

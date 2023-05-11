@@ -53,9 +53,11 @@ public class HealthScript : MonoBehaviour
 
         //}
 
-        if (isCannible || isBoar)
+        if (isBoar)
         {
             // if enemy is patrolling far away from player and player shoot 
+
+            Debug.LogWarning("PLAY HIT THE BOT");
             if (enemyController.EnemyState == EnemyState.PATROL)
             {
                 // enemy will notic the shoot and chase the player 
@@ -73,21 +75,21 @@ public class HealthScript : MonoBehaviour
 
     void PlayerDied()
     {
-        if (isCannible)
-        {
-            // cannible does not have dead animation
-            GetComponent<Animator>().enabled = false;
-            GetComponent<BoxCollider>().isTrigger = false;
-            // AddTurque() applys angular force to gameObject
-            GetComponent<Rigidbody>().AddTorque(-transform.forward * 50f);
-            enemyController.enabled = false;
-            navAgent.enabled = false;
-            enemyAnimator.enabled = false;
-            // start coroutine
-            StartCoroutine(DeadSound());
-            // EnemyManager spawn more enemies
-            EnemyManager.instance.EnemyDied(true);
-        }
+        //if (isCannible)
+        //{
+        //    // cannible does not have dead animation
+        //    GetComponent<Animator>().enabled = false;
+        //    GetComponent<BoxCollider>().isTrigger = false;
+        //    // AddTurque() applys angular force to gameObject
+        //    GetComponent<Rigidbody>().AddTorque(-transform.forward * 50f);
+        //    enemyController.enabled = false;
+        //    navAgent.enabled = false;
+        //    enemyAnimator.enabled = false;
+        //    // start coroutine
+        //    StartCoroutine(DeadSound());
+        //    // EnemyManager spawn more enemies
+        //    EnemyManager.instance.EnemyDied(true);
+        //}
 
         if (isBoar)
         {
@@ -100,25 +102,26 @@ public class HealthScript : MonoBehaviour
             StartCoroutine(DeadSound());
             // Spawn more enemies
             EnemyManager.instance.EnemyDied(false);
+
         }
 
-        if (isPlayer)
-        {
-            // when player is died all enemies will be called inside enemies[]
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Bot");
+        //if (isPlayer)
+        //{
+        //    // when player is died all enemies will be called inside enemies[]
+        //    GameObject[] enemies = GameObject.FindGameObjectsWithTag("Bot");
 
-            for (int i = 0; i < enemies.Length; i++)
-            {
-                //every kind of action of the enemies will be disabled
-                enemies[i].GetComponent<EnemyController>().enabled = false;
-                // call Enemy Manager to stop spawning enemies
-                EnemyManager.instance.StopSpawningEnemies();
-            }
+        //    for (int i = 0; i < enemies.Length; i++)
+        //    {
+        //        //every kind of action of the enemies will be disabled
+        //        enemies[i].GetComponent<EnemyController>().enabled = false;
+        //        // call Enemy Manager to stop spawning enemies
+        //        EnemyManager.instance.StopSpawningEnemies();
+        //    }
 
-            //GetComponent<PlayerMovement>().enabled = false;
-            //GetComponent<PlayerAttack>().enabled = false;
-            //GetComponent<WeaponManager>().GetCurrentSelectedWeapon().gameObject.SetActive(false);
-        }
+        //    //GetComponent<PlayerMovement>().enabled = false;
+        //    //GetComponent<PlayerAttack>().enabled = false;
+        //    //GetComponent<WeaponManager>().GetCurrentSelectedWeapon().gameObject.SetActive(false);
+        //}
 
         // when player is died, Restart the game
         //if (tag == Tags.PLAYER_TAG)

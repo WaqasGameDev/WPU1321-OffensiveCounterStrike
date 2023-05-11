@@ -25,14 +25,17 @@ public class EnemyController : MonoBehaviour
     public float patrolRadiusMax = 60f;
     public float patrolForThisTime = 15f;
     private float patrolTimer;
-    public float waitBeforeAttack = 2f;
+    public float waitBeforeAttack = 1f;
     private float attackTimer;
     private Transform target;
     public GameObject attackPoint;
     private EnemyAudio enemyAudio;
+    Animator animator;
+    float forward;
 
     private void Awake()
     {
+        animator = GetComponent<Animator>();
         enemyAnimator = GetComponent<EnemyAnimator>();
         navAgent = GetComponent<NavMeshAgent>();
         enemyAudio = GetComponentInChildren<EnemyAudio>();
@@ -66,7 +69,17 @@ public class EnemyController : MonoBehaviour
             Attack();
         }
 
+        if (forward < 0)
+        {
+            forward = 0;
+        }
 
+        if (forward > 1)
+        {
+            forward = 1;
+        }
+
+        animator.SetFloat("Forward", forward);
     }
     public void Patrol()
     {
@@ -88,20 +101,25 @@ public class EnemyController : MonoBehaviour
         // Enemy is moving
         if (navAgent.velocity.sqrMagnitude > 0)
         {
+
+            //Debug.LogWarning("NAMESH TRANSFORM IS === " + navAgent.velocity.sqrMagnitude);
             // play walk animation
-            enemyAnimator.Walk(true);
+            // enemyAnimator.Walk(true);
+            forward += Time.deltaTime * 0.5f;
         }
         else
         {
             // if not moving, stop walk animation
-            enemyAnimator.Walk(false);
+            // enemyAnimator.Walk(false);
+            forward -= Time.deltaTime * 0.5f;
         }
-
+        return;
         // test the distance between Player and Enemy
         if (Vector3.Distance(transform.position, target.position) <= chaseDistance)
         {
             // stop walk animation
-            enemyAnimator.Walk(false);
+            forward -= Time.deltaTime * 0.5f;
+            //enemyAnimator.Walk(false);
             // chane enemy state to chase so that enemy will run
             enemyState = EnemyState.CHASE;
             // Play Sound when enemy starts chasing Player
@@ -133,7 +151,9 @@ public class EnemyController : MonoBehaviour
         {
             // stop run and walk animation
             enemyAnimator.Run(false);
-            enemyAnimator.Walk(false);
+
+            forward -= Time.deltaTime * 0.5f;
+            //enemyAnimator.Walk(false);
             // change enemy state to attack
             enemyState = EnemyState.ATTACK;
             // reset the chase distance to previous
@@ -211,7 +231,10 @@ public class EnemyController : MonoBehaviour
         get; set;
     }
 
-
+    private void OnDisable()
+    {
+        Debug.LogWarning("CALLED");
+    }
 
 
 }

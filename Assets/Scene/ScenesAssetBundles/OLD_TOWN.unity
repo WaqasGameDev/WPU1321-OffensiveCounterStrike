@@ -1688,7 +1688,7 @@ PrefabInstance:
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.size
-      value: 30
+      value: 28
       objectReference: {fileID: 0}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
@@ -1754,87 +1754,87 @@ PrefabInstance:
         type: 3}
       propertyPath: botSpawnPoint.Array.data[12]
       value: 
-      objectReference: {fileID: 1011266040}
+      objectReference: {fileID: 2146685981}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[13]
       value: 
-      objectReference: {fileID: 2146685964}
+      objectReference: {fileID: 2146685980}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[14]
       value: 
-      objectReference: {fileID: 2146685981}
+      objectReference: {fileID: 2146685979}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[15]
       value: 
-      objectReference: {fileID: 2146685980}
+      objectReference: {fileID: 2146685978}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[16]
       value: 
-      objectReference: {fileID: 2146685979}
+      objectReference: {fileID: 2146685977}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[17]
       value: 
-      objectReference: {fileID: 2146685978}
+      objectReference: {fileID: 2146685976}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[18]
       value: 
-      objectReference: {fileID: 2146685977}
+      objectReference: {fileID: 2146685975}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[19]
       value: 
-      objectReference: {fileID: 2146685976}
+      objectReference: {fileID: 2146685974}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[20]
       value: 
-      objectReference: {fileID: 2146685975}
+      objectReference: {fileID: 2146685973}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[21]
       value: 
-      objectReference: {fileID: 2146685974}
+      objectReference: {fileID: 2146685972}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[22]
       value: 
-      objectReference: {fileID: 2146685973}
+      objectReference: {fileID: 2146685971}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[23]
       value: 
-      objectReference: {fileID: 2146685972}
+      objectReference: {fileID: 2146685970}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[24]
       value: 
-      objectReference: {fileID: 2146685971}
+      objectReference: {fileID: 2146685969}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[25]
       value: 
-      objectReference: {fileID: 2146685970}
+      objectReference: {fileID: 2146685968}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[26]
       value: 
-      objectReference: {fileID: 2146685969}
+      objectReference: {fileID: 2146685967}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[27]
       value: 
-      objectReference: {fileID: 2146685968}
+      objectReference: {fileID: 2146685966}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[28]
       value: 
-      objectReference: {fileID: 2146685967}
+      objectReference: {fileID: 2146685966}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.data[29]
