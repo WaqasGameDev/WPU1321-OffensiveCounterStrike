@@ -1630,7 +1630,7 @@ public class RoomController : Photon.MonoBehaviour
 
 	}
 
-	IEnumerator PrepareRespawnCoroutine()
+	public IEnumerator PrepareRespawnCoroutine()
 	{
 		RefreshPlayerList();
 
@@ -1646,7 +1646,11 @@ public class RoomController : Photon.MonoBehaviour
 		if (!offlineMode)
 		{
 			SpawnPlayer((int)PhotonNetwork.player.CustomProperties["Team"]);
-		}
+        }
+        else
+        {
+			SpawnPlayer(1);
+        }
 		//yield break;
 	}
 
@@ -1795,10 +1799,8 @@ public class RoomController : Photon.MonoBehaviour
 			{
 				GameObject ourPlayerTmp = Instantiate(playerPrefab, spawnPontTmp.position, spawnPontTmp.rotation);
 				ourPlayer = ourPlayerTmp.GetComponent<PlayerNetwork>();
+				ourPlayer.gameObject.layer = LayerMask.NameToLayer("OfflinePlayer");
 
-				//EnemyManager.instance.initialBotCount = 15;
-				//EnemyManager.instance.SpawnEnemies();
-				//EnemyManager.instance.StartCoroutine("CheckToSpawnEnemies");
 			}
 
 
@@ -1944,7 +1946,7 @@ public class RoomController : Photon.MonoBehaviour
 					ResetGameStatus(tmpGameState, teamAPlayers[0]);
 				}
 			}
-		}
+        }
 	}
 
 	void OnPhotonPlayerConnected(PhotonPlayer newPlayer)

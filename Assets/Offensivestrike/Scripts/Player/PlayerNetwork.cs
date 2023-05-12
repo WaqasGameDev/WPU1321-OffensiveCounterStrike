@@ -135,6 +135,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 		if (!GameSettings.rc.offlineMode)
 		{
 			gameObject.name = photonView.owner.NickName;
+			gameObject.layer = 2;
 		}
 		else
 		{
@@ -146,6 +147,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 		if (!GameSettings.rc.offlineMode)
 		{
 			MeName = photonView.owner.NickName;
+			gameObject.layer = 2;
 		}
 		else
 		{
@@ -154,7 +156,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 
 		playerKilled = false;
 		KillSay = 1;
-		gameObject.layer = 2; //Set layer to Ignore Raycast
+		 //Set layer to Ignore Raycast
 
 		if (!photonView.isMine)
 		{
@@ -777,22 +779,28 @@ public class PlayerNetwork : Photon.MonoBehaviour
 
 			if (PhotonNetwork.isMasterClient)
 			{
-				int currentHP = photonView.owner.CustomProperties["PlayerHP"] != null ? (int)photonView.owner.CustomProperties["PlayerHP"] : 100;
-				currentHP -= GetDMG((int)values[0], (int)values[1]);
-				Hashtable setPlayerData = new Hashtable();
-				setPlayerData.Add("PlayerHP", currentHP); //Setup player HP by master client
-				photonView.owner.SetCustomProperties(setPlayerData);
-
-
-				if (currentHP < 1)
-				{
-					photonView.RPC("KillPlayer", PhotonTargets.All, killerID);
-					playerKilled = true;
-				}
+				DecreaseHealth(values,killerID);
+				
 			}
 		}
 	}
 
+
+	public void DecreaseHealth(int[] values, int killerID)
+    {
+		int currentHP = photonView.owner.CustomProperties["PlayerHP"] != null ? (int)photonView.owner.CustomProperties["PlayerHP"] : 100;
+		currentHP -= GetDMG((int)values[0], (int)values[1]);
+		Hashtable setPlayerData = new Hashtable();
+		setPlayerData.Add("PlayerHP", currentHP); //Setup player HP by master client
+		photonView.owner.SetCustomProperties(setPlayerData);
+
+
+		if (currentHP < 1)
+		{
+			photonView.RPC("KillPlayer", PhotonTargets.All, killerID);
+			playerKilled = true;
+		}
+	}
 	[PunRPC]
 	public void DamageRemoteBot(int[] values, string killerName, int team, string WepName)
 	{
@@ -1046,11 +1054,22 @@ public class PlayerNetwork : Photon.MonoBehaviour
 	}
 
 	[PunRPC]
-	void KillPlayer(int killerID)
+	public void KillPlayer(int killerID)
 	{
 		playerKilled = true;
 		KillSay = 1;
+        if (GameSettings.rc.offlineMode)
+        {
+			firstPersonView.SetActive(false);
 
+			localMouseLook.enabled = false;
+			//fpsController.enabled = false;
+			playerWeapons.enabled = false;
+			playerWeapons.isFiring = false;
+
+			GameSettings.rc.StartCoroutine("PrepareRespawnCoroutine");
+
+		}
 		if (photonView.isMine)
 		{
 			soldierAnimation.gameObject.SetActive(true);

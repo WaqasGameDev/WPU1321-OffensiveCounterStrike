@@ -165,21 +165,11 @@ public class EnemyController : MonoBehaviour
         if (attackTimer > waitBeforeAttack)
         {
             Debug.LogWarning("ATTACK IN ENEMYCONTROLLER");
-            enemyAnimator.Attack();
-
-            roomUI.aColor = Color.red;
-
-
-            HitBox tmp;
-            if ((tmp = target.transform.GetComponent<HitBox>()) != null)
+            if (AttackScript.instance.isOffLinePlayerGetHit)
             {
-                //Compose values we are going to pass
-                int[] values = new int[3];
-                values[0] = 0; //What weapon we used to make damage
-                values[1] = (int)tmp.bodyPart; //What body part we hit
-                values[2] = 0; //What side of player was hit (For hit marks), this is assigned later at HitBox.cs
-                tmp.Damage(values, target.position);
+                enemyAnimator.Attack();
             }
+
             // Reset attack timer otherwise enemy will attack again and again
             attackTimer = 0f;
             // play sound

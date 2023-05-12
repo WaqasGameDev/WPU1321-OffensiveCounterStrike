@@ -57,7 +57,7 @@ public class HealthScript : MonoBehaviour
         {
             // if enemy is patrolling far away from player and player shoot 
 
-            Debug.LogWarning("PLAY HIT THE BOT");
+            Debug.LogWarning("PLAYER HIT THE BOT");
             if (enemyController.EnemyState == EnemyState.PATROL)
             {
                 // enemy will notic the shoot and chase the player 
@@ -85,12 +85,12 @@ public class HealthScript : MonoBehaviour
             // Spawn more enemies
             EnemyManager.instance.EnemyDied(true);
 
-            Invoke("TurnOffGameObject", 3f);
+            Invoke("TurnOffGameObject", 5f);
     }
    
     void TurnOffGameObject()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
     IEnumerator DeadSound()
     {
