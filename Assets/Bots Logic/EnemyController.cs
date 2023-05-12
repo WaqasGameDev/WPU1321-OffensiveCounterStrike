@@ -87,8 +87,8 @@ public class EnemyController : MonoBehaviour
         // patrolForThisTime means the new point from where Enemy starts patrolling
         if (patrolTimer > patrolForThisTime)
         {
-            // inside this function enemy gets new point inside the Terrain 
-            // when enemy reaches to the Boundary of the Terrain
+            // inside this function enemy gets new point 
+            // when enemy reaches to the Boundary 
             SetNewRandomDistance();
 
             // at new position patrolTimer set to be zero
@@ -164,11 +164,9 @@ public class EnemyController : MonoBehaviour
         attackTimer += Time.deltaTime;
         if (attackTimer > waitBeforeAttack)
         {
-            Debug.LogWarning("ATTACK IN ENEMYCONTROLLER");
-            if (AttackScript.instance.isOffLinePlayerGetHit)
-            {
+           
                 enemyAnimator.Attack();
-            }
+         
 
             // Reset attack timer otherwise enemy will attack again and again
             attackTimer = 0f;
