@@ -648,8 +648,9 @@ public class FPSWeapon : MonoBehaviour
 				//Blood particle
 
 				Debug.LogError("PLAYER HIT THE BOT");
-				Instantiate(playerWeapons.bloodParticles, hit.point, Quaternion.LookRotation(hit.normal));
-				hit.transform.GetComponent<HealthScript>().ApplyDamage(25f);
+				
+					Instantiate(playerWeapons.bloodParticles, hit.point, Quaternion.LookRotation(hit.normal));
+					hit.transform.GetComponent<HealthScript>().ApplyDamage(25f);
 			}
 
 			if (hit.transform.CompareTag("Ai") && (int)playerNetwork.photonView.owner.CustomProperties["Team"] == 2)

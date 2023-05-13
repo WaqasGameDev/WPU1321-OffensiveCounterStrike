@@ -24,6 +24,7 @@ public class EnemyManager : MonoBehaviour
     }
     private void Start()
     {
+       
         initialBotCount = botEnemyCount;
         SpawnEnemies();
         StartCoroutine("CheckToSpawnEnemies");

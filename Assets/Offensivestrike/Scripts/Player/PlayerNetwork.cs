@@ -140,6 +140,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 		else
 		{
 			gameObject.name = "OfflinePlayer";
+			
 		}
 
 		thisT = transform;
@@ -152,6 +153,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 		else
 		{
 			MeName = "OfflinePlayer";
+			
 		}
 
 		playerKilled = false;
