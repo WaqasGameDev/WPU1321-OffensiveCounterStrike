@@ -42,7 +42,11 @@ public class AttackScript : MonoBehaviour
                     PN.KillPlayer(0);
                     EnemyManager.instance.StopSpawningEnemies();
                 }
-               // hit.transform.GetComponent<PlayerNetwork>().ApplyDamage(values);
+                // hit.transform.GetComponent<PlayerNetwork>().ApplyDamage(values);
+            }
+            else
+            {
+                isOffLinePlayerGetHit = false;
             }
         }
     }

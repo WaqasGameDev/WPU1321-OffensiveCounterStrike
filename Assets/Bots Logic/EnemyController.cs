@@ -94,7 +94,12 @@ public class EnemyController : MonoBehaviour
             // at new position patrolTimer set to be zero
             patrolTimer = 0f;
         }
-      
+
+
+        if (!target)
+        {
+            return;
+        }
 
         // test the distance between Player and Enemy
         if (Vector3.Distance(transform.position, target.position) <= chaseDistance)

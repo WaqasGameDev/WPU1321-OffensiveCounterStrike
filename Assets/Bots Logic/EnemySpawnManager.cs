@@ -7,7 +7,7 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] GameObject enemySpawner ;
     void Start()
     {
-       // enemySpawner.SetActive(false);
+        enemySpawner.SetActive(false);
         if (ConnectMenu.Instance.canPlayWithBots)
         {
             enemySpawner.SetActive(true);

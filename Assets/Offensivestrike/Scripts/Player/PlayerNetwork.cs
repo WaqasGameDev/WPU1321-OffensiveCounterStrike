@@ -9,7 +9,10 @@ public class PlayerNetwork : Photon.MonoBehaviour
 	//This is main script that coordinate our player in game, it decides which component to enable/disable
 	//Also it sync's our data with remote instances over network
 
-
+	public bool isBot
+	{
+		get { return transform.tag == "Bot"; }
+	}
 	public SoldierAnimation soldierAnimation;
 	public GameObject Counter;
 	public GameObject Teror;
@@ -438,7 +441,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 		}
 		RoomCk = GameObject.Find("_RoomController(Clone)");
 		bm = RoomCk.GetComponent<BuyMenu>();
-		if (!GameSettings.rc.offlineMode)
+		if (!isBot && !GameSettings.rc.offlineMode)
 		{
 			playerTeam = (int)photonView.owner.CustomProperties["Team"];
 		}
@@ -447,7 +450,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			playerTeam = 1;
 		}
 
-		if (playerTeam == 1 || playerTeam == 2)
+		if ((playerTeam == 1 || playerTeam == 2) && !isBot)
 		{
 			if (playerTeam == 1)
 			{
@@ -545,7 +548,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			}
 
 		}
-		if (!photonView.isMine)
+		if (!isBot && !photonView.isMine)
 		{
 			InterpolatePosition();
 
@@ -614,11 +617,14 @@ public class PlayerNetwork : Photon.MonoBehaviour
 		}
 		else
 		{
-			//Send cameraFOV to reduce mouse sensitivity when aiming
-			//localMouseLook.cameraFOV = playerWeapons.mainPlayerCamera.fieldOfView;
-			//cameraMouseLook.cameraFOV = playerWeapons.mainPlayerCamera.fieldOfView;
-
-			receivedMovementState = fpsController.movementState;
+            //Send cameraFOV to reduce mouse sensitivity when aiming
+            //localMouseLook.cameraFOV = playerWeapons.mainPlayerCamera.fieldOfView;
+            //cameraMouseLook.cameraFOV = playerWeapons.mainPlayerCamera.fieldOfView;
+            if (!isBot)
+            {
+				receivedMovementState = fpsController.movementState;
+			}
+			
 		}
 
 		//Play footstep sound for both local and remote player instances

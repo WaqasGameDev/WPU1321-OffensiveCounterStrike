@@ -2265,7 +2265,6 @@ public class RoomUI : Photon.MonoBehaviour
 
 		Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.green);
 
-		Debug.LogWarning("Team:" + hitbox.playerNetwork.playerTeam);
 
 		if (!hitbox || (hitbox.playerNetwork.playerTeam == rc.ourTeam && !rc.offlineMode))
         {

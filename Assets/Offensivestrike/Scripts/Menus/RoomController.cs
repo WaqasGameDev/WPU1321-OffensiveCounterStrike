@@ -721,7 +721,7 @@ public class RoomController : Photon.MonoBehaviour
 
         if (offlineMode)
         {
-            sb.enabled = true;
+            sb.enabled = showScoreBoard;
             GameSettings.menuOpened = true;
         }
     }
