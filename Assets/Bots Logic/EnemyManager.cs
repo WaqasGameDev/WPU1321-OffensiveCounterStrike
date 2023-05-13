@@ -26,7 +26,7 @@ public class EnemyManager : MonoBehaviour
     {
        
         initialBotCount = botEnemyCount;
-        SpawnEnemies();
+       // SpawnEnemies();
         StartCoroutine("CheckToSpawnEnemies");
     }
 

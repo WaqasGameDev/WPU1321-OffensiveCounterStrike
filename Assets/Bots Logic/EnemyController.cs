@@ -36,13 +36,13 @@ public class EnemyController : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
-        enemyAnimator = GetComponent<EnemyAnimator>();
         navAgent = GetComponent<NavMeshAgent>();
-        enemyAudio = GetComponentInChildren<EnemyAudio>();
     }
     void Start()
     {
+        animator = GetComponent<Animator>();
+        enemyAnimator = GetComponent<EnemyAnimator>();
+
         roomUI = GameObject.Find("_RoomController(Clone)").GetComponent<RoomUI>();
 
         target = GameObject.FindGameObjectWithTag("Player").transform;

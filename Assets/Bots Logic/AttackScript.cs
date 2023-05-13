@@ -40,6 +40,7 @@ public class AttackScript : MonoBehaviour
                 if (PN.rc.currentHP < 1)
                 {
                     PN.KillPlayer(0);
+                    EnemyManager.instance.StopSpawningEnemies();
                 }
                // hit.transform.GetComponent<PlayerNetwork>().ApplyDamage(values);
             }
