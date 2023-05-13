@@ -622,7 +622,6 @@ public class RoomController : Photon.MonoBehaviour
 		//	foreach (GameObject c4box in C4BoxFD)
 		//		GameObject.Destroy(c4box);
 		//}
-
 		if (!doneSetup)
 			return;
 
@@ -708,20 +707,22 @@ public class RoomController : Photon.MonoBehaviour
 
 	}
 
+
 	public void ShowScoreboard()
 	{
 		showScoreBoard = !showScoreBoard;
+
 		showBuyMenu = false;
 		showOptions = false;
 
-		if (showScoreBoard)
-		{
-			RefreshPlayerList();
-		}
+        if (showScoreBoard)
+        {
+            RefreshPlayerList();
+        }
 
         if (offlineMode)
         {
-            sb.enabled = showScoreBoard;
+			sb.enabled = true;
             GameSettings.menuOpened = true;
         }
     }

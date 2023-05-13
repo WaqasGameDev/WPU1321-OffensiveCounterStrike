@@ -9,7 +9,7 @@ public class MultiplayerChat : Photon.MonoBehaviour
 	public enum ChatState { None, Public, Team }
 	[HideInInspector]
 	public ChatState chatState = ChatState.None;
-
+	public static bool showOfflineModePauseButton = true;
 	Scoreboard sc;
 
 	[System.Serializable]
@@ -957,12 +957,15 @@ public class MultiplayerChat : Photon.MonoBehaviour
 
 #if UNITY_ANDROID || UNITY_IOS || UNITY_WP8 || UNITY_WP8_1
 
-				//Open team chat on mobile
-				GUI.color = new Color(1, 1, 1, 1f);
-				if (GUI.Button(new Rect(Screen.width / 2 * 1.9f, 10, 30, 25), Pause, GUI.skin.customStyles[2]))
+				if (!rc.offlineMode || showOfflineModePauseButton)
 				{
-					rc.ShowScoreboard();
-
+					//Open team chat on mobile
+					GUI.color = new Color(1, 1, 1, 1f);
+					if (GUI.Button(new Rect(Screen.width / 2 * 1.9f, 10, 30, 25), Pause, GUI.skin.customStyles[2]))
+					{
+						rc.ShowScoreboard();
+						showOfflineModePauseButton = false;
+					}
 				}
 
 			}

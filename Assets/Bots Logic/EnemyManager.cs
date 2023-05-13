@@ -76,7 +76,6 @@ public class EnemyManager : MonoBehaviour
     {
         while (true) 
         {
-            Debug.LogWarning("BEFORE WAIT TO SPAWN");
             yield return new WaitForSeconds(waitBeforsSpawnEnemiesTime);
             if(allow)
             SpawnBot();

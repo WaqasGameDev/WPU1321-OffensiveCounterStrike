@@ -213,10 +213,6 @@ public class EnemyController : MonoBehaviour
         get; set;
     }
 
-    private void OnDisable()
-    {
-        Debug.LogWarning("CALLED");
-    }
 
 
 }

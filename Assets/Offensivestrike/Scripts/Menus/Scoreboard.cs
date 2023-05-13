@@ -24,9 +24,32 @@ public class Scoreboard : MonoBehaviour
 	private int tryToLeaveNum;
 
 	public static Scoreboard Instance;
+    bool isTDMorNormalMode
+    {
+        get
+        {
+			return rc.currentGameMode == "TDM" || rc.currentGameMode == "NORMAL";
+        }
+    }
 
-	// Use this for initialization
-	void Start ()
+    bool isFreeFolAllMode
+    {
+        get
+        {
+			return rc.currentGameMode == "FFA";
+		}
+    }
+
+	bool isOfflineMode
+    {
+        get
+        {
+			return rc.offlineMode;
+        }
+    }
+
+    // Use this for initialization
+    void Start ()
     {
 		leaving = false;
 		adOpen = false;
@@ -50,7 +73,14 @@ public class Scoreboard : MonoBehaviour
 	void OnGUI ()
     {
 		GUI.skin = GameSettings.theRawGuiSkin;
-		if (rc.currentGameMode == "TDM" || rc.currentGameMode == "NORMAL") {
+
+        if (isOfflineMode)
+        {
+			GUI.Window(0, new Rect(Screen.width / 2 - 450 / 2, Screen.height / 2 - 200 / 2, 450, 200), ShowOfflineModeLeavePanel, "");
+			return;
+        }
+
+		if (isTDMorNormalMode) {
 			if (ShowFirst == 1) {
 				if (PhotonNetwork.room != null) {
 					GUI.Window (0, new Rect (Screen.width / 2 - 425, Screen.height / 2 - 225, 850, 450), ScoreboardWindow, "");
@@ -71,8 +101,19 @@ public class Scoreboard : MonoBehaviour
 				GUI.Window (0, new Rect (0, 0, Screen.width, Screen.height), LeaveRoomNow, "");
 			}
 		}
-
 	}
+
+	private void ShowOfflineModeLeavePanel(int WindowId)
+    {
+		if (GUI.Button(new Rect(450-28, 1, 28, 29), "", GameSettings.minimizeButtonStyle))
+		{
+			scoreAudioSource.clip = ClickSong;
+			scoreAudioSource.Play();
+			GameSettings.menuOpened = false;
+			rc.sb.enabled = false;
+			MultiplayerChat.showOfflineModePauseButton = true;
+		}
+    }
 
 	private void OnInterstitialDone()
 	{
@@ -106,7 +147,7 @@ public class Scoreboard : MonoBehaviour
 	public void ShowTeamSelected(int windowID)
 	{
 
-		if (rc.currentGameMode == "TDM" || rc.currentGameMode == "NORMAL") {
+		if (isTDMorNormalMode) {
 			GUI.enabled = ((rc.ourTeam != 1 && rc.teamBPlayers.Count > rc.teamAPlayers.Count) || (rc.ourTeam == 0 && rc.teamBPlayers.Count == rc.teamAPlayers.Count)) && rc.currentRespawnTime == -1;
 
 			if (GUI.Button (new Rect (0.5f, 0, 253, 272), CounterText)) {
@@ -141,7 +182,7 @@ public class Scoreboard : MonoBehaviour
 			rc.showScoreBoard = false;
 		}
 
-		if(rc.currentGameMode == "TDM" || rc.currentGameMode == "NORMAL")
+		if(isTDMorNormalMode)
         {
 			GUI.enabled = ((rc.ourTeam != 1 && rc.teamBPlayers.Count > rc.teamAPlayers.Count) || (rc.ourTeam == 0 && rc.teamBPlayers.Count == rc.teamAPlayers.Count)) && rc.currentRespawnTime == -1;
 
@@ -164,9 +205,9 @@ public class Scoreboard : MonoBehaviour
 			}
 		}
 
-		if(rc.currentGameMode == "FFA")
+		if(isFreeFolAllMode)
         {
-			GUI.enabled = rc.ourTeam == 0 && rc.currentRespawnTime == -1;
+			GUI.enabled = isOfflineMode || rc.ourTeam == 0 && rc.currentRespawnTime == -1;
 
 			if(GUI.Button(new Rect(15, 50, 310, 30), "<color=#FFFFFF>" + xml.button58 + "</color>"))
             {
@@ -210,7 +251,7 @@ public class Scoreboard : MonoBehaviour
 
 		}
 
-		if (rc.currentGameMode == "TDM" || rc.currentGameMode == "NORMAL")
+		if (isTDMorNormalMode)
         {
 			GUI.color = GameSettings.textShadowColor;
 			GUI.Label(new Rect(16, 81, 300, 35), GameSettings.teamAName + " Score: " + rc.teamAScore.ToString());
@@ -231,7 +272,7 @@ public class Scoreboard : MonoBehaviour
 			GUI.Label(new Rect(740, 80, 300, 35), "Deaths");
 		}
 
-		if(rc.currentGameMode == "FFA")
+		if(isFreeFolAllMode)
         {
 			GUI.color = Color.black;
 			GUI.Label(new Rect(16, 81, 300, 35), xml.button62 + rc.currentKillLimit.ToString() + xml.button63);
@@ -250,7 +291,7 @@ public class Scoreboard : MonoBehaviour
 		//Scoreboard
 		scoreBoardScroll = GUILayout.BeginScrollView(scoreBoardScroll, true, true, GUILayout.Height(500 - 175));
 			GUILayout.BeginHorizontal();
-		if(rc.currentGameMode == "TDM" || rc.currentGameMode == "NORMAL")
+		if(isTDMorNormalMode)
                 {
 					//Team A
 					DisplayTeamPlayers(rc.teamAPlayers, 400,1, true);
@@ -258,7 +299,7 @@ public class Scoreboard : MonoBehaviour
 					DisplayTeamPlayers(rc.teamBPlayers, 400,2);
 				}
 
-				if(rc.currentGameMode == "FFA")
+				if(isFreeFolAllMode)
                 {
 					//Team A and the only in Free For ALl Mode
 					DisplayTeamPlayers(rc.teamAPlayers, 808,1, true);

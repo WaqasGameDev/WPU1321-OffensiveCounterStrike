@@ -9,7 +9,7 @@ public class HealthScript : MonoBehaviour
     private NavMeshAgent navAgent;
     private EnemyController enemyController;
     public float health = 100f;
-    public bool isPlayer, isCannible, isBoar;
+    public bool isPlayer, isCannible, isBot;
     private bool isDead;
     private EnemyAudio enemyAudio;
 
@@ -21,20 +21,12 @@ public class HealthScript : MonoBehaviour
         {
             instance = this;
         }
-
-        if (isBoar || isCannible)
-        {
             enemyAnimator = GetComponent<EnemyAnimator>();
             enemyController = GetComponent<EnemyController>();
             navAgent = GetComponent<NavMeshAgent>();
             // get enemy Audio
             enemyAudio = GetComponentInChildren<EnemyAudio>();
-        }
-        //if (isPlayer)
-        //{
-        //    playerStats = GetComponent<PlayerStats>();
-
-        //}
+        
     }
     public void ApplyDamage(float damage)
     {
@@ -44,20 +36,10 @@ public class HealthScript : MonoBehaviour
 
         health -= damage;
 
-        Debug.LogError("CURRENT BOT'S HEALTH IS ==== " + health);
-
-        //if (isPlayer)
-        //{
-        //    // show the state(display the health UI value
-        //    playerStats.DisplayStaminaStats(health);
-
-        //}
-
-        if (isBoar)
+        if (isBot)
         {
             // if enemy is patrolling far away from player and player shoot 
 
-            Debug.LogWarning("PLAYER HIT THE BOT");
             if (enemyController.EnemyState == EnemyState.PATROL)
             {
                 // enemy will notic the shoot and chase the player 

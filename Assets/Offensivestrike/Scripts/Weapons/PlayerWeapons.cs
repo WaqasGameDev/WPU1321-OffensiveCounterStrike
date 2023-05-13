@@ -230,7 +230,7 @@ public class PlayerWeapons : MonoBehaviour
 		    }
 #else
 		//Switch weapons mobile
-		if(previousWeaponIndex != GameSettings.switchWeaponIndex)
+		if (previousWeaponIndex != GameSettings.switchWeaponIndex)
 		{
 		if(selectedPrimary>1){
 		if(GameSettings.switchWeaponIndex > 3 || GameSettings.switchWeaponIndex < 1)
