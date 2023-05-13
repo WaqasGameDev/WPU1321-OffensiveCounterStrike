@@ -746,7 +746,7 @@ public class RoomController : Photon.MonoBehaviour
 			bm.buySection = BuyMenu.BuySection.Secondary;
 			GameSettings.updateActionReports = false;
 			bm.enabled = !showBuyMenu;
-			GameSettings.menuOpened = true;
+			//GameSettings.menuOpened = true;
 		}
 	}
 
