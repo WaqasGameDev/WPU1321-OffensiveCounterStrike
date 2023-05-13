@@ -2241,10 +2241,8 @@ public class RoomUI : Photon.MonoBehaviour
 		if (!rc.ourPlayer) 
 		{
 			return;
-			Debug.Log("IN3");
 
 		}
-		Debug.Log("IN2");
 
 		int rayLength;
 
@@ -2261,14 +2259,12 @@ public class RoomUI : Photon.MonoBehaviour
 		var ray = rc.ourPlayer.playerWeapons.playerCamera.GetComponent<Camera>().ScreenPointToRay(new Vector3(Screen.width/2,Screen.height/2,0));
 		bool hit = Physics.Raycast(ray, out RaycastHit hitInfo, rayLength);
 		var hitbox = hit ? hitInfo.collider.GetComponent<HitBox>() : null;
-		Debug.LogWarning("Hitbox:"+hitbox);
 
 		Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.green);
 
 
 		if (!hitbox || (hitbox.playerNetwork.playerTeam == rc.ourTeam && !rc.offlineMode))
         {
-			Debug.LogWarning("Reached 0");
 			fireButton.isActive = false;
 			GameSettings.mobileFiring = false;
 			return;
@@ -2277,19 +2273,16 @@ public class RoomUI : Photon.MonoBehaviour
 
 		if (rc.ourPlayer.playerWeapons.selectedGrenade == 1 && rc.ourPlayer.playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.GRENADE_LAUNCHER)
 		{
-			Debug.LogWarning("Reached 1");
 			fireButton.isActive = false;
 			GameSettings.grenadeShoot = true;
 		}
 		else if (rc.ourPlayer.playerWeapons.selectedFlash == 2 && rc.ourPlayer.playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.FlashBang)
 		{
-			Debug.LogWarning("Reached 2");
 			fireButton.isActive = false;
 			GameSettings.flashShoot = true;
 		}
 		else if (rc.ourPlayer.playerWeapons.currentSelectedWeapon.wSettings.fireType != PlayerWeapons.FireType.C4)
         {
-			Debug.LogWarning("Reached 3");
 			fireButton.isActive = true;
             GameSettings.mobileFiring = true;
         }

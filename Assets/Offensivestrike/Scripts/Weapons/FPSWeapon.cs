@@ -608,9 +608,6 @@ public class FPSWeapon : MonoBehaviour
 		rc = rcF.GetComponent<RoomController> ();
 		rU = rcF.GetComponent<RoomUI> ();
 		//Setup fire direction and fire point, for third person we push fire point slightly to front to not hit our Hitboxes
-		Debug.LogWarning("PLAYER WEAPON = " + playerWeapons );
-		Debug.LogWarning("PLAYER CAMERA = " + playerWeapons.playerCamera );
-		Debug.LogWarning("thisT = " + thisT );
 		Vector3 fireDirection = isThirdPerson ? (playerWeapons.playerCamera.position + playerWeapons.playerCamera.forward * 100) - thisT.position : playerWeapons.playerCamera.forward * 100;
 		Vector3 firePoint = isThirdPerson ? thisT.position + fireDirection * 0.001f : playerWeapons.playerCamera.position;
 		int tmpFireRange = 150;

@@ -144,9 +144,6 @@ public class MultiplayerChat : Photon.MonoBehaviour
 	{
 
 		var theRawButtonStyle = new GUIStyle();
-		Debug.LogWarning("gamessettings.therawguiskin = " + GameSettings.theRawGuiSkin);
-		Debug.LogWarning("gamessettings.therawguiskin.button = " + GameSettings.theRawGuiSkin.button);
-		Debug.LogWarning("gamessettings.therawguiskin.button.normal = " + GameSettings.theRawGuiSkin.button.normal);
 		theRawButtonStyle.normal.background = GameSettings.theRawGuiSkin.button.normal.background;
 		theRawButtonStyle.alignment = TextAnchor.MiddleCenter;
 		theRawButtonStyle.normal.textColor = Color.white;

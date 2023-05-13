@@ -25,22 +25,18 @@ public class AttackScript : MonoBehaviour
        
         if (Physics.Raycast(transform.position, transform.up, out hit, attackRange))
         {
-            Debug.LogWarning("RAY CASTING IN ATTACK SCRIPT");
             Debug.DrawRay(transform.position, transform.up, Color.green);
             if (hit.transform.tag == "Player")
             {
                 isOffLinePlayerGetHit = true;
-                Debug.LogWarning("BOT HITS THE OFFLINEPLAYER WITH TAG = " + hit.transform.tag);
-
-                
                 int[] values = new int[3];
                 GameSettings.rc.DoHitDetector((int)values[2]);
                 var PN = hit.transform.GetComponent<PlayerNetwork>(); 
-                PN.rc.currentHP -= 4;
+                PN.rc.currentHP -= 2;
                 if (PN.rc.currentHP < 1)
                 {
                     PN.KillPlayer(0);
-                    EnemyManager.instance.StopSpawningEnemies();
+                  //  EnemyManager.instance.StopSpawningEnemies();
                 }
                 // hit.transform.GetComponent<PlayerNetwork>().ApplyDamage(values);
             }

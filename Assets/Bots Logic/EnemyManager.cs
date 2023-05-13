@@ -11,6 +11,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     private int botEnemyCount;
     public int initialBotCount;
+    public bool allow = true;
     public float waitBeforsSpawnEnemiesTime = 10f;
     private List<GameObject> spawnedBots = new List<GameObject>();
     public bool isPlayerSpawned = false;
@@ -60,21 +61,31 @@ public class EnemyManager : MonoBehaviour
         botEnemyCount = 0;
     }
 
-    public void EnemyDied(bool cannible)
+    public void EnemyDied(GameObject bot)
     {
-       
+        if (spawnedBots.Contains(bot))
+        {
+            spawnedBots.Remove(bot);
+            Destroy(bot);
+        }
                 botEnemyCount++;
                 botEnemyCount = initialBotCount;
         
     }
     IEnumerator CheckToSpawnEnemies()
     {
-        yield return new WaitForSeconds(waitBeforsSpawnEnemiesTime);
-        SpawnBot();
-        StartCoroutine("CheckToSpawnEnemies");
+        while (true) 
+        {
+            Debug.LogWarning("BEFORE WAIT TO SPAWN");
+            yield return new WaitForSeconds(waitBeforsSpawnEnemiesTime);
+            if(allow)
+            SpawnBot();
+        }
+       
     }
     public void StopSpawningEnemies()
     {
+        Debug.LogWarning("STOPPING ENEMY SPAWNING");
         StopCoroutine("CheckToSpawnEnemies");
     }
 }

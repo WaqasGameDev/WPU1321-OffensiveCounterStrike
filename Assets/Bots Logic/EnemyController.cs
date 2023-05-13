@@ -46,7 +46,6 @@ public class EnemyController : MonoBehaviour
         roomUI = GameObject.Find("_RoomController(Clone)").GetComponent<RoomUI>();
 
         target = GameObject.FindGameObjectWithTag("Player").transform;
-        Debug.LogWarning("WE FIND THE TARGET WITH NAME " + target.name);
         enemyState = EnemyState.PATROL;
         patrolTimer = patrolForThisTime;
         // when the enemy first get to the player

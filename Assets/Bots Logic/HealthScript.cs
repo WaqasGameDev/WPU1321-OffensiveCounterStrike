@@ -75,6 +75,7 @@ public class HealthScript : MonoBehaviour
 
     void PlayerDied()
     {
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             navAgent.velocity = Vector3.zero;
             navAgent.enabled = false;
             enemyController.enabled = false;
@@ -83,14 +84,14 @@ public class HealthScript : MonoBehaviour
             // start Coroutine for dead sound
            // StartCoroutine(DeadSound());
             // Spawn more enemies
-            EnemyManager.instance.EnemyDied(true);
 
-            Invoke("TurnOffGameObject", 5f);
+            Invoke(nameof(DestroyEnemy), 5f);
     }
    
-    void TurnOffGameObject()
+    void DestroyEnemy()
     {
-        gameObject.SetActive(false);
+        EnemyManager.instance.EnemyDied(this.gameObject);
+
     }
     IEnumerator DeadSound()
     {
