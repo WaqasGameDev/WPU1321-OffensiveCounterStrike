@@ -203,6 +203,24 @@ public class RoomUI : Photon.MonoBehaviour
         InitializeGUI();
     }
 
+	private IEnumerator StartOfflineModeTimer()
+    {
+		var timer = 0f;
+
+		while (true)
+		{
+			timer += Time.deltaTime;
+
+			int minutes = Mathf.FloorToInt(timer / 60);
+			int seconds = Mathf.FloorToInt(timer % 60);
+
+			string timerTextString = string.Format("{0:00}:{1:00}", minutes, seconds);
+			roundTimeText.text = timerTextString;
+
+			yield return null;
+		}
+	}
+
     void InitializeGUI()
     {
         //This function will initialize general GUI elements (HP, Cash, Round time and mobile controls)
@@ -346,7 +364,10 @@ public class RoomUI : Photon.MonoBehaviour
         roundTimeText.rectTransform.pivot = new Vector2(0.5f, 1);
         roundTimeText.rectTransform.position = new Vector3(Screen.width / 2 - 12f, Screen.height - 3, 0);
         roundTimeText.alignment = TextAnchor.MiddleCenter;
-
+        if (rc.offlineMode)
+        {
+			StartCoroutine(StartOfflineModeTimer());
+        }
 
 
 		//Round Counter Score

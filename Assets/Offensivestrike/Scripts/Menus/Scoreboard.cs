@@ -76,7 +76,7 @@ public class Scoreboard : MonoBehaviour
 
         if (isOfflineMode)
         {
-			GUI.Window(0, new Rect(Screen.width / 2 - 450 / 2, Screen.height / 2 - 200 / 2, 450, 200), ShowOfflineModeLeavePanel, "");
+			GUI.Window(0, new Rect(Screen.width / 2 - 450 / 2, Screen.height / 2 - 200 / 2, 450, 200), ShowOfflineModeLeavePanel, "", GameSettings.theRawGuiSkin.customStyles[11]);
 			return;
         }
 
@@ -113,7 +113,17 @@ public class Scoreboard : MonoBehaviour
 			rc.sb.enabled = false;
 			MultiplayerChat.showOfflineModePauseButton = true;
 		}
-    }
+		
+		if (GUI.Button(new Rect(450/2 - 75, 200/2 - 25, 150, 50), "Leave Room", GameSettings.theRawGuiSkin.customStyles[13]))
+		{
+			scoreAudioSource.clip = ClickSong;
+			scoreAudioSource.Play();
+			GameSettings.menuOpened = false;
+			rc.sb.enabled = false;
+			MultiplayerChat.showOfflineModePauseButton = true;
+			UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        }
+	}
 
 	private void OnInterstitialDone()
 	{
