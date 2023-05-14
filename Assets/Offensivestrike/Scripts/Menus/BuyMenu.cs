@@ -312,6 +312,10 @@ public class BuyMenu : MonoBehaviour
 		if (GUI.Button(new Rect(Screen.width - 50, 50, 28, 28), "", guiSkin.customStyles[9]))
 		{
 			rc.showBuyMenu = false;
+            if (rc.offlineMode)
+            {
+				rc.bm.enabled = false;	
+            }
 		}
 
 		GUI.Label(new Rect(15, 0, 300, 35), xml.button67);
