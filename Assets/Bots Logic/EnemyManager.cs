@@ -27,7 +27,6 @@ public class EnemyManager : MonoBehaviour
     {
        
         initialBotCount = botEnemyCount;
-       // SpawnEnemies();
         StartCoroutine("CheckToSpawnEnemies");
     }
 
@@ -74,13 +73,13 @@ public class EnemyManager : MonoBehaviour
     }
     IEnumerator CheckToSpawnEnemies()
     {
-        while (true) 
+        while (true)
         {
+            if (allow)
+                SpawnBot();
             yield return new WaitForSeconds(waitBeforsSpawnEnemiesTime);
-            if(allow)
-            SpawnBot();
         }
-       
+
     }
     public void StopSpawningEnemies()
     {

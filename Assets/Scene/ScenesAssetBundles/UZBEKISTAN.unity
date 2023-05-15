@@ -3744,6 +3744,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BotSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 323081674313329117, guid: 74e71b69282188641b4623c821c65602,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74e71b69282188641b4623c821c65602, type: 3}
 --- !u!1 &683663603 stripped
@@ -6438,7 +6443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fee3a6538f9b6a94c82224da9589f14d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawner: {fileID: 0}
+  enemySpawner: {fileID: 683663603}
 --- !u!1 &1368950491
 GameObject:
   m_ObjectHideFlags: 0

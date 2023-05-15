@@ -291,8 +291,10 @@ public class BuyMenu : MonoBehaviour
 		GUI.Window(0, new Rect(0, 0, Screen.width, Screen.height), BuyMenuWindow, "", guiSkin.customStyles[10]);
 	}
 
-	void Update(){
-		if (rc.ourPlayer) {
+	void Update()
+	{
+		if (rc.ourPlayer) 
+		{
 			selectedSpecial = rc.ourPlayer.playerWeapons.selectedSpecial;
 		}
 	}

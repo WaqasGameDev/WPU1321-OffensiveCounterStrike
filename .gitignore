@@ -67,3 +67,6 @@ out/*
 out_BackUpThisFolder_ButDontShipItWithYourGame/*
 out_BurstDebugInformation_DoNotShip/*
 Assets/FfmpegUnity/Plugins/iOS/libavcodec.framework/libavcodec
+Assets/AnimTest/
+Assets/Invector-3rdPersonController/Shooter/Prefabs/Weapon/_weapons_WITH_Inventory/_weaponsPrefabs/vAssaultRifle_Inventory_v2.prefab.meta
+Assets/Invector-3rdPersonController/Shooter/Prefabs/Weapon/_weapons_WITHOUT_Inventory/_weaponsPrefabs/vSniper_NO_Inventory Variant.prefab

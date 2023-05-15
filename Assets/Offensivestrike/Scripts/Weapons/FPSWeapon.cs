@@ -647,7 +647,7 @@ public class FPSWeapon : MonoBehaviour
 			{
 				//Blood particle
 
-				Debug.LogError("PLAYER HIT THE BOT");
+				//Debug.LogError("PLAYER HIT THE BOT");
 				
 					Instantiate(playerWeapons.bloodParticles, hit.point, Quaternion.LookRotation(hit.normal));
 					hit.transform.GetComponent<HealthScript>().ApplyDamage(25f);
