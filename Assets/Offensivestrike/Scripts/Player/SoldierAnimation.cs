@@ -224,8 +224,6 @@ public class SoldierAnimation : MonoBehaviour
 	// Update is called once per frame
 	void LateUpdate()
 	{
-		Debug.LogError("Movement State :"+movementState.ToString());
-
 		if (isDead || !playerWeapons || !doneSetup)
 			return;
 
@@ -408,6 +406,9 @@ public class SoldierAnimation : MonoBehaviour
 
 		//Hit effect rotation
 		spine2.eulerAngles = new Vector3(spine2.eulerAngles.x + currentHitPosition.x, spine2.eulerAngles.y + currentHitPosition.y, spine2.eulerAngles.z);
+
+		soldierAnimator.SetFloat(AnimationParameters.inputMagnitude, AnimationParameters.inputMagnitudeValue);
+	
 	}
 
 	void CalculatePlayerSpeed()
@@ -415,35 +416,38 @@ public class SoldierAnimation : MonoBehaviour
 		if (!doneSetup)
 			return;
 
-		//Calculate speed
-		if (isMoving)
-		{
-			velocity = (playerNetwork.thisT.position - lastPosition) / Time.deltaTime; //Units per second.
-			AnimationParameters.inputMagnitudeValue = (playerNetwork.thisT.position - lastPosition).magnitude / Time.deltaTime;
-			
-			lastPosition = playerNetwork.thisT.position;
+		velocity = (playerNetwork.thisT.position - lastPosition) / Time.deltaTime; //Units per second.
+		AnimationParameters.inputVerticalValue = playerNetwork.thisT.InverseTransformDirection(velocity).z * Time.deltaTime * 2.0f;
+		AnimationParameters.inputHorizontalValue = playerNetwork.thisT.InverseTransformDirection(velocity).x * Time.deltaTime * 2.0f;
 
-			if (AnimationParameters.inputMagnitudeValue > 0)
-			{
-				soldierAnimator.SetFloat(AnimationParameters.inputMagnitude, 1);
+        //Calculate speed
+        if (isMoving)
+        {
+            velocity = (playerNetwork.thisT.position - lastPosition) / Time.deltaTime; //Units per second.
+            AnimationParameters.inputMagnitudeValue = (playerNetwork.thisT.position - lastPosition).magnitude / Time.deltaTime;
 
-				AnimationParameters.inputVerticalValue = playerNetwork.thisT.InverseTransformDirection(velocity).z * Time.deltaTime * 2.0f;
-				Debug.LogWarning("Forward Speed Received" + playerNetwork.thisT.InverseTransformDirection(velocity).z * Time.deltaTime * 2.0f);
-				AnimationParameters.inputHorizontalValue = -(playerNetwork.thisT.InverseTransformDirection(velocity).x * Time.deltaTime) * 2.0f;
+            lastPosition = playerNetwork.thisT.position;
 
-				if ((AnimationParameters.inputHorizontalValue > 0.3f || AnimationParameters.inputHorizontalValue < -0.3f) && AnimationParameters.inputVerticalValue > -0.2f && AnimationParameters.inputVerticalValue < 0.2f)
-				{
-					AnimationParameters.inputVerticalValue = Mathf.Abs(AnimationParameters.inputHorizontalValue);
-				}
-			}
-		}
-		else
-		{
-			AnimationParameters.inputMagnitudeValue = 0;
-			velocity = Vector3.zero;
-			AnimationParameters.inputVerticalValue = 0;
-			AnimationParameters.inputHorizontalValue = 0;
-		}
+            if (AnimationParameters.inputMagnitudeValue > 0)
+            {
+				AnimationParameters.inputMagnitudeValue = Mathf.Clamp01(AnimationParameters.inputMagnitudeValue);
+                AnimationParameters.inputVerticalValue = Mathf.Clamp(playerNetwork.thisT.InverseTransformDirection(velocity).z * Time.deltaTime * 2.0f,-1,1);
+                AnimationParameters.inputHorizontalValue = Mathf.Clamp(playerNetwork.thisT.InverseTransformDirection(velocity).x * Time.deltaTime * 2.0f,-1,1);
+            }
+        }
+        else
+        {
+            AnimationParameters.inputMagnitudeValue = 0;
+            velocity = Vector3.zero;
+            AnimationParameters.inputVerticalValue = 0;
+            AnimationParameters.inputHorizontalValue = 0;
+        }
+
+		Debug.Log($"<color=pink>isMoving: {isMoving}</color>");
+		Debug.Log($"<color=red>MovementState: {movementState}</color>");
+		Debug.Log($"<color=blue>InputVerticalValue: {AnimationParameters.inputVerticalValue}</color>");
+		Debug.Log($"<color=green>InputHorizontalValue: {AnimationParameters.inputHorizontalValue}</color>");
+		Debug.Log($"<color=yellow>InputMagnitudeValue: {AnimationParameters.inputMagnitudeValue}</color>");
 	}
 
 	void RecalculateBoneRotations()
