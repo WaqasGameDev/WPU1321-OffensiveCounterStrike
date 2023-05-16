@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using Hashtable = ExitGames.Client.Photon.Hashtable; //Replace default Hashtables with Photon hashtables
+using System;
 
 public class PlayerNetwork : Photon.MonoBehaviour
 {
@@ -343,7 +344,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			currentWeaponIndex = (int)stream.ReceiveNext();
 			isFiringRemote = (bool)stream.ReceiveNext();
 			if (soldierAnimation != null)
-				soldierAnimation.movementState = (int)stream.ReceiveNext();
+				soldierAnimation.movementState = (SoldierAnimation.MovementStates) Enum.ToObject(typeof(SoldierAnimation.MovementStates),(int)stream.ReceiveNext());
 
 
 			// Shift buffer contents, oldest data erased, 18 becomes 19, ... , 0 becomes 1
@@ -616,7 +617,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 				}
 			}
 
-			receivedMovementState = soldierAnimation.movementState;
+			receivedMovementState = (int) soldierAnimation.movementState;
 		}
 		else
 		{
@@ -1339,13 +1340,13 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			if (movementStateLocal == 4)
 			{
 				//On ladder
-				walkingAudio.clip = ladderSounds[Random.Range(0, ladderSounds.Length - 1)];
+				walkingAudio.clip = ladderSounds[UnityEngine.Random.Range(0, ladderSounds.Length - 1)];
 			}
 
 			if (movementStateLocal == 0 && !fpsController.isCrouching)
 			{
 				//Walkig
-				walkingAudio.clip = walkingSounds[Random.Range(0, walkingSounds.Length - 1)];
+				walkingAudio.clip = walkingSounds[UnityEngine.Random.Range(0, walkingSounds.Length - 1)];
 			}
 
 			walkingAudio.Play();
