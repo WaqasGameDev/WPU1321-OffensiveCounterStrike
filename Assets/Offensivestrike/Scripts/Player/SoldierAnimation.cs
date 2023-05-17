@@ -80,6 +80,7 @@ public class SoldierAnimation : MonoBehaviour
     {
 		public static readonly string isDead = "isDead";
 		public static readonly string isGrounded = "IsGrounded";
+		public static readonly string isJumping = "IsJumping";
 		public static readonly string canAim = "CanAim";
 		public static readonly string isAiming = "IsAiming";
 		public static readonly string isCrouching = "IsCrouching";
@@ -174,9 +175,9 @@ public class SoldierAnimation : MonoBehaviour
 
 		doneSetup = true;
 
-		soldierAnimator.SetBool(AnimationParameters.canAim, true);
-		soldierAnimator.SetBool(AnimationParameters.isAiming, true);
-	}
+        soldierAnimator.SetBool(AnimationParameters.canAim, true);
+        soldierAnimator.SetBool(AnimationParameters.isAiming, true);
+    }
 
 	void SetMixedTransforms(WeaponAnimationSet anmset, bool fix = false)
 	{
@@ -237,9 +238,9 @@ public class SoldierAnimation : MonoBehaviour
 			}
 			else
 			{
-				SetAnimationToPistolIdle();
-			}
-			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.GRENADE_LAUNCHER || playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.FlashBang)
+                SetAnimationToPistolIdle();
+            }
+            if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.GRENADE_LAUNCHER || playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.FlashBang)
 			{
 				SetUpperBodyAnimatin(AnimationWeaponSwitch.RIFFLE);
 				/*currentWeaponAnimationSet = bombSet;
@@ -247,8 +248,8 @@ public class SoldierAnimation : MonoBehaviour
 			}
 			else
 			{
-				SetAnimationToPistolIdle();
-			}
+                SetAnimationToPistolIdle();
+            }
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.C4)
 			{
 				SetUpperBodyAnimatin(AnimationWeaponSwitch.C4);
@@ -256,8 +257,8 @@ public class SoldierAnimation : MonoBehaviour
 			}
 			else
 			{
-				SetAnimationToPistolIdle();
-			}
+                SetAnimationToPistolIdle();
+            }
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Dual)
 			{
 				SetUpperBodyAnimatin(AnimationWeaponSwitch.RIFFLE);
@@ -265,8 +266,8 @@ public class SoldierAnimation : MonoBehaviour
 			}
 			else
 			{
-				SetAnimationToPistolIdle();
-			}
+                SetAnimationToPistolIdle();
+            }
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.m246)
 			{
 				SetUpperBodyAnimatin(AnimationWeaponSwitch.RIFFLE);
@@ -322,30 +323,29 @@ public class SoldierAnimation : MonoBehaviour
 
 		if (movementState == MovementStates.JUMP)
 		{
-			soldierAnimator.SetBool("IsJumping", true);
+			soldierAnimator.SetBool(AnimationParameters.isJumping, true);
 			soldierAnimator.SetBool(AnimationParameters.isGrounded, false);
 		}
 		else
 		{
 			if (movementState == MovementStates.IDLE || movementState == MovementStates.GROUNDED)
 			{
-				soldierAnimator.SetBool("IsJumping", false);
+				soldierAnimator.SetBool(AnimationParameters.isJumping, false);
 				soldierAnimator.SetBool(AnimationParameters.isGrounded, true);
 			}
 
 			if (movementState == MovementStates.CROUCH)
 			{
 				soldierAnimator.SetBool(AnimationParameters.isCrouching, true);
-				soldierAnimator.SetBool("IsJumping", false);
+				soldierAnimator.SetBool(AnimationParameters.isJumping, false);
 				soldierAnimator.SetBool(AnimationParameters.isGrounded, true);
 			}
-
 			else
 			{
 				soldierAnimator.SetBool(AnimationParameters.isCrouching, false);
 			}
 
-			if (isMoving && (AnimationParameters.inputVerticalValue > 0.2f || AnimationParameters.inputVerticalValue < -0.2f))
+			if ((AnimationParameters.inputVerticalValue > 0.2f || AnimationParameters.inputVerticalValue < -0.2f))
 			{
 				//CHECKPOINT
 				if (movementState != MovementStates.JUMP)
@@ -357,14 +357,12 @@ public class SoldierAnimation : MonoBehaviour
 					soldierAnimator.SetFloat(AnimationParameters.inputVertical, 0);
 				}
 			}
-
-
 			else
 			{
 				soldierAnimator.SetFloat(AnimationParameters.inputVertical, 0);
 			}
 
-			if (isMoving && (AnimationParameters.inputHorizontalValue > 0.3f || AnimationParameters.inputHorizontalValue < -0.3f))
+			if ((AnimationParameters.inputHorizontalValue > 0.3f || AnimationParameters.inputHorizontalValue < -0.3f))
 			{
 				if (movementState != MovementStates.JUMP)
 				{
@@ -421,29 +419,31 @@ public class SoldierAnimation : MonoBehaviour
 		AnimationParameters.inputHorizontalValue = playerNetwork.thisT.InverseTransformDirection(velocity).x * Time.deltaTime * 2.0f;
 
         //Calculate speed
-        if (isMoving)
-        {
+        //if (isMoving)
+        //{
             velocity = (playerNetwork.thisT.position - lastPosition) / Time.deltaTime; //Units per second.
-            AnimationParameters.inputMagnitudeValue = (playerNetwork.thisT.position - lastPosition).magnitude / Time.deltaTime;
+            //AnimationParameters.inputMagnitudeValue = (playerNetwork.thisT.position - lastPosition).magnitude / Time.deltaTime;
 
             lastPosition = playerNetwork.thisT.position;
 
-            if (AnimationParameters.inputMagnitudeValue > 0)
-            {
-				AnimationParameters.inputMagnitudeValue = Mathf.Clamp01(AnimationParameters.inputMagnitudeValue);
+            //if (AnimationParameters.inputMagnitudeValue > 0)
+            //{
                 AnimationParameters.inputVerticalValue = Mathf.Clamp(playerNetwork.thisT.InverseTransformDirection(velocity).z * Time.deltaTime * 2.0f,-1,1);
                 AnimationParameters.inputHorizontalValue = Mathf.Clamp(playerNetwork.thisT.InverseTransformDirection(velocity).x * Time.deltaTime * 2.0f,-1,1);
-            }
-        }
-        else
-        {
-            AnimationParameters.inputMagnitudeValue = 0;
-            velocity = Vector3.zero;
-            AnimationParameters.inputVerticalValue = 0;
-            AnimationParameters.inputHorizontalValue = 0;
-        }
+			
+				AnimationParameters.inputMagnitudeValue = Mathf.Approximately(AnimationParameters.inputVerticalValue, 0) && Mathf.Approximately(AnimationParameters.inputHorizontalValue, 0) ? 0 : 1;
 
-		Debug.Log($"<color=pink>isMoving: {isMoving}</color>");
+			//}
+		//}
+		//else
+  //      {
+  //          AnimationParameters.inputMagnitudeValue = 0;
+  //          velocity = Vector3.zero;
+  //          AnimationParameters.inputVerticalValue = 0;
+  //          AnimationParameters.inputHorizontalValue = 0;
+  //      }
+
+		Debug.Log($"<color=orange>isMoving: {isMoving}</color>");
 		Debug.Log($"<color=red>MovementState: {movementState}</color>");
 		Debug.Log($"<color=blue>InputVerticalValue: {AnimationParameters.inputVerticalValue}</color>");
 		Debug.Log($"<color=green>InputHorizontalValue: {AnimationParameters.inputHorizontalValue}</color>");

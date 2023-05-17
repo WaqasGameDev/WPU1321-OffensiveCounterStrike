@@ -334,6 +334,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			stream.SendNext(playerWeapons.playerCamera.position + playerWeapons.playerCamera.forward * 100);
 			stream.SendNext(playerWeapons.globalWeaponIndex);
 			stream.SendNext(playerWeapons.isFiring);
+			Debug.LogError("++++++++++" + fpsController.movementState);
 			stream.SendNext(fpsController.movementState);
 		}
 		else
@@ -344,7 +345,12 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			currentWeaponIndex = (int)stream.ReceiveNext();
 			isFiringRemote = (bool)stream.ReceiveNext();
 			if (soldierAnimation != null)
-				soldierAnimation.movementState = (SoldierAnimation.MovementStates) Enum.ToObject(typeof(SoldierAnimation.MovementStates),(int)stream.ReceiveNext());
+            {
+				var movementStateIndex = (int)stream.ReceiveNext();
+			Debug.LogError("***********" + movementStateIndex);
+			soldierAnimation.movementState = (SoldierAnimation.MovementStates)Enum.ToObject(typeof(SoldierAnimation.MovementStates), movementStateIndex);
+			}
+
 
 
 			// Shift buffer contents, oldest data erased, 18 becomes 19, ... , 0 becomes 1
@@ -648,7 +654,6 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			}
 		}
 	}
-
 	void InterpolatePosition()
 	{
 		d = Vector3.Distance(thisT.position, m_BufferedState[0].pos);
