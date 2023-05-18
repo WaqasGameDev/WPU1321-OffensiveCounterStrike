@@ -524,7 +524,7 @@ public class FPSWeapon : MonoBehaviour
 			if(muzzleFlash)
 			{
 				StopCoroutine(DoMuzzleFlash());
-				StartCoroutine(DoMuzzleFlash());
+				StartCoroutine(nameof(DoMuzzleFlash));
 			}
 			if (casingPrefab != null) {
 				StopCoroutine(CasingDelay());

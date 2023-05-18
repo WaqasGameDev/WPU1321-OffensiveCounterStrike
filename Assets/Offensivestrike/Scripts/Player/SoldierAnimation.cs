@@ -233,6 +233,7 @@ public class SoldierAnimation : MonoBehaviour
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Knife)
 			{
 				SetUpperBodyAnimatin(AnimationWeaponSwitch.KNIFE_OR_GRENADE);
+				Debug.LogWarning("UPPERBODY_ID FOR KNIFE OR GRENADE >>>>>>" + AnimationWeaponSwitch.KNIFE_OR_GRENADE);
 				/*currentWeaponAnimationSet = knifeSet;
 				soldierAnimationComponent.speed = 0.2f;*/
 			}
@@ -243,6 +244,7 @@ public class SoldierAnimation : MonoBehaviour
             if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.GRENADE_LAUNCHER || playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.FlashBang)
 			{
 				SetUpperBodyAnimatin(AnimationWeaponSwitch.RIFFLE);
+				Debug.LogWarning("UPPERBODY_ID FOR RIFFLE >>>>>>" + AnimationWeaponSwitch.RIFFLE);
 				/*currentWeaponAnimationSet = bombSet;
 				soldierAnimationComponent.speed = 0.2f;*/
 			}
@@ -253,6 +255,7 @@ public class SoldierAnimation : MonoBehaviour
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.C4)
 			{
 				SetUpperBodyAnimatin(AnimationWeaponSwitch.C4);
+				Debug.LogWarning("UPPERBODY_ID FOR C4 >>>>>>" + AnimationWeaponSwitch.C4);
 				/*currentWeaponAnimationSet = C4Set;*/
 			}
 			else
@@ -262,6 +265,7 @@ public class SoldierAnimation : MonoBehaviour
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Dual)
 			{
 				SetUpperBodyAnimatin(AnimationWeaponSwitch.RIFFLE);
+				Debug.LogWarning("UPPERBODY_ID FOR RIFFLE >>>>>>" + AnimationWeaponSwitch.RIFFLE);
 				/*currentWeaponAnimationSet = eliteSet;*/
 			}
 			else
@@ -280,6 +284,7 @@ public class SoldierAnimation : MonoBehaviour
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Shotgun)
 			{
 				SetUpperBodyAnimatin(AnimationWeaponSwitch.SHOTGUN);
+				Debug.LogWarning("UPPERBODY_ID FOR SHOTGUN >>>>>>" + AnimationWeaponSwitch.SHOTGUN);
 				/*SetMixedTransforms(ShotGunSet);
 				currentWeaponAnimationSet = ShotGunSet;*/
 			}
