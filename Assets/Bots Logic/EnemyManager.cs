@@ -32,17 +32,17 @@ public class EnemyManager : MonoBehaviour
 
     public void NotifyBotsAboutPlayer()
     {
-
             foreach (var bot in spawnedBots)
             {
-                bot.gameObject.SetActive(true);
+                bot.gameObject.GetComponent<EnemyController>().ResetEnemyController();
             }
     }
     public void SpawnEnemies()
     {
         SpawnBot();
     }
-  
+
+    int totalBotsSpawnedSoFar = 0;
     void SpawnBot()
     {
         int index = 0;
@@ -53,9 +53,11 @@ public class EnemyManager : MonoBehaviour
                 index = 0;
             }
            var bot = Instantiate(botPrefab, botSpawnPoint[index].position, Quaternion.identity);
+            bot.name += totalBotsSpawnedSoFar;
             spawnedBots.Add(bot);
 
             index++;
+            totalBotsSpawnedSoFar++;
         }
         botEnemyCount = 0;
     }

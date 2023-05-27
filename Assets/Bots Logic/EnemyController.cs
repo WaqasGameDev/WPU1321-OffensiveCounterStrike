@@ -14,7 +14,7 @@ public class EnemyController : MonoBehaviour
 {
     private EnemyAnimator enemyAnimator;
     private NavMeshAgent navAgent;
-    private EnemyState enemyState;
+    public EnemyState enemyState;
     public float walkSpeed = 0.5f;
     public float runSpeed = 4f;
     public float chaseDistance = 7f;
@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour
     private float patrolTimer;
     public float waitBeforeAttack = 1f;
     private float attackTimer;
-    private Transform target;
+    public Transform target;
     public GameObject attackPoint;
     private EnemyAudio enemyAudio;
     Animator animator;
@@ -39,6 +39,11 @@ public class EnemyController : MonoBehaviour
         navAgent = GetComponent<NavMeshAgent>();
     }
     void Start()
+    {
+        ResetEnemyController();
+    }
+
+    public void ResetEnemyController()
     {
         animator = GetComponent<Animator>();
         enemyAnimator = GetComponent<EnemyAnimator>();
@@ -103,7 +108,7 @@ public class EnemyController : MonoBehaviour
         // test the distance between Player and Enemy
         if (Vector3.Distance(transform.position, target.position) <= chaseDistance)
         {
-            // chane enemy state to chase so that enemy will run
+            // change enemy state to chase so that enemy will run
             enemyState = EnemyState.CHASE;
         }
 
