@@ -335,7 +335,6 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			stream.SendNext(playerWeapons.globalWeaponIndex);
 			stream.SendNext(playerWeapons.isFiring);
 			stream.SendNext(fpsController.movementState);
-			Debug.LogError("Detecting before sending"+GameSettings.jumpScheduled);
 			stream.SendNext(GameSettings.jumpScheduled);
 			GameSettings.jumpScheduled = false;
 		}
@@ -1098,6 +1097,8 @@ public class PlayerNetwork : Photon.MonoBehaviour
 		if (photonView.isMine)
 		{
 			soldierAnimation.gameObject.SetActive(true);
+			soldierAnimation.Setup();
+			soldierAnimation.PlayKillAnimation();
 			firstPersonView.SetActive(false);
 
 			localMouseLook.enabled = false;
