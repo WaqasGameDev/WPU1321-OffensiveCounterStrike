@@ -329,26 +329,29 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			//Send data
 			if (!thisT)
 				return;
-
+			
 			stream.SendNext(thisT.position);
 			stream.SendNext(playerWeapons.playerCamera.position + playerWeapons.playerCamera.forward * 100);
 			stream.SendNext(playerWeapons.globalWeaponIndex);
 			stream.SendNext(playerWeapons.isFiring);
-			Debug.LogError("++++++++++" + fpsController.movementState);
 			stream.SendNext(fpsController.movementState);
 		}
 		else
 		{
 			//Receive data
 			playerPos = (Vector3)stream.ReceiveNext();
+			Debug.LogWarning(" NAME = " + thisT.name + " PLAYER POS = " + playerPos);
 			aimPos = (Vector3)stream.ReceiveNext();
+			Debug.LogWarning(" NAME = " + thisT.name + " AIM POS = " + aimPos);
 			currentWeaponIndex = (int)stream.ReceiveNext();
+			Debug.LogWarning(" NAME = " + thisT.name + " CURREN WEAPON INDEX = " + currentWeaponIndex);
 			isFiringRemote = (bool)stream.ReceiveNext();
+			Debug.LogWarning(" NAME = " + thisT.name + " IS FIRING REMOTE = " + isFiringRemote);
 			if (soldierAnimation != null)
             {
 				var movementStateIndex = (int)stream.ReceiveNext();
-			Debug.LogError("***********" + movementStateIndex);
-			soldierAnimation.movementState = (SoldierAnimation.MovementStates)Enum.ToObject(typeof(SoldierAnimation.MovementStates), movementStateIndex);
+				soldierAnimation.movementState = (SoldierAnimation.MovementStates)Enum.ToObject(typeof(SoldierAnimation.MovementStates), movementStateIndex);
+				Debug.LogWarning(" NAME = " + thisT.name + " MOVEMENT STATE = " + (SoldierAnimation.MovementStates)Enum.ToObject(typeof(SoldierAnimation.MovementStates), movementStateIndex));
 			}
 
 

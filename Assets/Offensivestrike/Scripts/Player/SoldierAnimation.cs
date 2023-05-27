@@ -78,20 +78,20 @@ public class SoldierAnimation : MonoBehaviour
 
 	class AnimationParameters
     {
-		public static readonly string isDead = "isDead";
-		public static readonly string isGrounded = "IsGrounded";
-		public static readonly string isJumping = "IsJumping";
-		public static readonly string canAim = "CanAim";
-		public static readonly string isAiming = "IsAiming";
-		public static readonly string isCrouching = "IsCrouching";
-		public static readonly string shoottrigger = "Shoot";
-		public static readonly string inputHorizontal = "InputHorizontal";
-		public static readonly string inputVertical = "InputVertical";
-		public static readonly string inputMagnitude = "InputMagnitude";
-		public static readonly string upperBody_ID = "UpperBody_ID";
-		public static float inputVerticalValue;
-		public static float inputHorizontalValue;
-		public static float inputMagnitudeValue;
+		public readonly string isDead = "isDead";
+		public readonly string isGrounded = "IsGrounded";
+		public readonly string isJumping = "IsJumping";
+		public readonly string canAim = "CanAim";
+		public readonly string isAiming = "IsAiming";
+		public readonly string isCrouching = "IsCrouching";
+		public readonly string shoottrigger = "Shoot";
+		public readonly string inputHorizontal = "InputHorizontal";
+		public readonly string inputVertical = "InputVertical";
+		public readonly string inputMagnitude = "InputMagnitude";
+		public readonly string upperBody_ID = "UpperBody_ID";
+		public float inputVerticalValue;
+		public float inputHorizontalValue;
+		public float inputMagnitudeValue;
 	}
 
 	Vector2 hitPosition;
@@ -110,11 +110,13 @@ public class SoldierAnimation : MonoBehaviour
 
 	bool doneSetup = false;
 
+	AnimationParameters animationParameters;
+
 	//Called from PlayerNetwork.cs upon initialization
 	public void Setup()
 	{
 		soldierAnimator = GetComponent<Animator>();
-		
+		animationParameters = new AnimationParameters();
 		//playerWeapons = GetComponent<PlayerWeapons>();
 		//soldierAnimationComponent.playAutomatically = false;
 
@@ -175,8 +177,8 @@ public class SoldierAnimation : MonoBehaviour
 
 		doneSetup = true;
 
-        soldierAnimator.SetBool(AnimationParameters.canAim, true);
-        soldierAnimator.SetBool(AnimationParameters.isAiming, true);
+        soldierAnimator.SetBool(animationParameters.canAim, true);
+        soldierAnimator.SetBool(animationParameters.isAiming, true);
     }
 
 	void SetMixedTransforms(WeaponAnimationSet anmset, bool fix = false)
@@ -214,20 +216,21 @@ public class SoldierAnimation : MonoBehaviour
 
 	private void SetUpperBodyAnimatin(AnimationWeaponSwitch animationWeaponSwitch)
     {
-		soldierAnimator.SetFloat(AnimationParameters.upperBody_ID, ConvertEnumToFloat(animationWeaponSwitch));
+		soldierAnimator.SetFloat(animationParameters.upperBody_ID, ConvertEnumToFloat(animationWeaponSwitch));
 	}
 
 	private void SetAnimationToPistolIdle()
     {
-		soldierAnimator.SetFloat(AnimationParameters.upperBody_ID, ConvertEnumToFloat(AnimationWeaponSwitch.PISTOL_IDLE));
+		soldierAnimator.SetFloat(animationParameters.upperBody_ID, ConvertEnumToFloat(AnimationWeaponSwitch.PISTOL_IDLE));
 	}
 
 	// Update is called once per frame
 	void LateUpdate()
 	{
+		Debug.LogError(playerNetwork.thisT.name+" InputVertical Value 1 : " + animationParameters.inputVerticalValue);
 		if (isDead || !playerWeapons || !doneSetup)
 			return;
-
+		Debug.LogError(playerNetwork.thisT.name + " InputVertical Value 2 : " + animationParameters.inputVerticalValue);
 		if (playerWeapons.currentSelectedWeapon != null && previousSelectedWeapon != playerWeapons.currentSelectedWeapon)
 		{
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Knife)
@@ -315,9 +318,8 @@ public class SoldierAnimation : MonoBehaviour
 
 			/*soldierAnimationComponent.Play(currentWeaponAnimationSet.idle.name);*/
 			//Debug.LogFormat("<color=green>Playing idle: {0}</color>", currentWeaponAnimationSet.idle.name);
-
+			Debug.LogError(playerNetwork.thisT.name + " InputVertical Value 3 : " + animationParameters.inputVerticalValue);
 			RecalculateBoneRotations();
-
 			/*if (currentWeaponAnimationSet.idle == null)
 			{
 				currentWeaponAnimationSet = normalSet;
@@ -328,59 +330,60 @@ public class SoldierAnimation : MonoBehaviour
 
 		if (movementState == MovementStates.JUMP)
 		{
-			soldierAnimator.SetBool(AnimationParameters.isJumping, true);
-			soldierAnimator.SetBool(AnimationParameters.isGrounded, false);
+			soldierAnimator.SetBool(animationParameters.isJumping, true);
+			soldierAnimator.SetBool(animationParameters.isGrounded, false);
 		}
 		else
 		{
 			if (movementState == MovementStates.IDLE || movementState == MovementStates.GROUNDED)
 			{
-				soldierAnimator.SetBool(AnimationParameters.isJumping, false);
-				soldierAnimator.SetBool(AnimationParameters.isGrounded, true);
+				soldierAnimator.SetBool(animationParameters.isJumping, false);
+				soldierAnimator.SetBool(animationParameters.isGrounded, true);
 			}
 
 			if (movementState == MovementStates.CROUCH)
 			{
-				soldierAnimator.SetBool(AnimationParameters.isCrouching, true);
-				soldierAnimator.SetBool(AnimationParameters.isJumping, false);
-				soldierAnimator.SetBool(AnimationParameters.isGrounded, true);
+				soldierAnimator.SetBool(animationParameters.isCrouching, true);
+				soldierAnimator.SetBool(animationParameters.isJumping, false);
+				soldierAnimator.SetBool(animationParameters.isGrounded, true);
 			}
 			else
 			{
-				soldierAnimator.SetBool(AnimationParameters.isCrouching, false);
+				soldierAnimator.SetBool(animationParameters.isCrouching, false);
 			}
 
-			if ((AnimationParameters.inputVerticalValue > 0.2f || AnimationParameters.inputVerticalValue < -0.2f))
+			if ((animationParameters.inputVerticalValue > 0.2f || animationParameters.inputVerticalValue < -0.2f))
 			{
 				//CHECKPOINT
 				if (movementState != MovementStates.JUMP)
 				{
-					soldierAnimator.SetFloat(AnimationParameters.inputVertical, AnimationParameters.inputVerticalValue);
+					Debug.LogError("InputVertical Value: "+ animationParameters.inputVerticalValue);
+					soldierAnimator.SetFloat(animationParameters.inputVertical, animationParameters.inputVerticalValue);
 				}
 				else
 				{
-					soldierAnimator.SetFloat(AnimationParameters.inputVertical, 0);
+					soldierAnimator.SetFloat(animationParameters.inputVertical, 0);
 				}
 			}
 			else
 			{
-				soldierAnimator.SetFloat(AnimationParameters.inputVertical, 0);
+				soldierAnimator.SetFloat(animationParameters.inputVertical, 0);
 			}
 
-			if ((AnimationParameters.inputHorizontalValue > 0.3f || AnimationParameters.inputHorizontalValue < -0.3f))
+			if ((animationParameters.inputHorizontalValue > 0.3f || animationParameters.inputHorizontalValue < -0.3f))
 			{
 				if (movementState != MovementStates.JUMP)
 				{
-					soldierAnimator.SetFloat(AnimationParameters.inputHorizontal, AnimationParameters.inputHorizontalValue);
+					soldierAnimator.SetFloat(animationParameters.inputHorizontal, animationParameters.inputHorizontalValue);
 				}
 				else
 				{
-					soldierAnimator.SetFloat(AnimationParameters.inputHorizontal, 0);
+					soldierAnimator.SetFloat(animationParameters.inputHorizontal, 0);
 				}
 			}
 			else
 			{
-				soldierAnimator.SetFloat(AnimationParameters.inputHorizontal, 0);
+				soldierAnimator.SetFloat(animationParameters.inputHorizontal, 0);
 			}
 		}
 
@@ -410,7 +413,7 @@ public class SoldierAnimation : MonoBehaviour
 		//Hit effect rotation
 		spine2.eulerAngles = new Vector3(spine2.eulerAngles.x + currentHitPosition.x, spine2.eulerAngles.y + currentHitPosition.y, spine2.eulerAngles.z);
 
-		soldierAnimator.SetFloat(AnimationParameters.inputMagnitude, AnimationParameters.inputMagnitudeValue);
+		soldierAnimator.SetFloat(animationParameters.inputMagnitude, animationParameters.inputMagnitudeValue);
 	
 	}
 
@@ -419,40 +422,21 @@ public class SoldierAnimation : MonoBehaviour
 		if (!doneSetup)
 			return;
 
-		velocity = (playerNetwork.thisT.position - lastPosition) / Time.deltaTime; //Units per second.
-		AnimationParameters.inputVerticalValue = playerNetwork.thisT.InverseTransformDirection(velocity).z * Time.deltaTime * 2.0f;
-		AnimationParameters.inputHorizontalValue = playerNetwork.thisT.InverseTransformDirection(velocity).x * Time.deltaTime * 2.0f;
-
-        //Calculate speed
-        //if (isMoving)
-        //{
             velocity = (playerNetwork.thisT.position - lastPosition) / Time.deltaTime; //Units per second.
-            //AnimationParameters.inputMagnitudeValue = (playerNetwork.thisT.position - lastPosition).magnitude / Time.deltaTime;
-
             lastPosition = playerNetwork.thisT.position;
 
-            //if (AnimationParameters.inputMagnitudeValue > 0)
-            //{
-                AnimationParameters.inputVerticalValue = Mathf.Clamp(playerNetwork.thisT.InverseTransformDirection(velocity).z * Time.deltaTime * 2.0f,-1,1);
-                AnimationParameters.inputHorizontalValue = Mathf.Clamp(playerNetwork.thisT.InverseTransformDirection(velocity).x * Time.deltaTime * 2.0f,-1,1);
+		animationParameters.inputVerticalValue = Mathf.Clamp(playerNetwork.thisT.InverseTransformDirection(velocity).z * Time.deltaTime * 2.0f,-1,1);
+		Debug.LogError(playerNetwork.thisT.name + " InputVertical Value 0 : " + animationParameters.inputVerticalValue);
+		animationParameters.inputHorizontalValue = Mathf.Clamp(playerNetwork.thisT.InverseTransformDirection(velocity).x * Time.deltaTime * 2.0f,-1,1);
 			
-				AnimationParameters.inputMagnitudeValue = Mathf.Approximately(AnimationParameters.inputVerticalValue, 0) && Mathf.Approximately(AnimationParameters.inputHorizontalValue, 0) ? 0 : 1;
+				animationParameters.inputMagnitudeValue = Mathf.Approximately(animationParameters.inputVerticalValue, 0) && Mathf.Approximately(animationParameters.inputHorizontalValue, 0) ? 0 : 1;
 
-			//}
-		//}
-		//else
-  //      {
-  //          AnimationParameters.inputMagnitudeValue = 0;
-  //          velocity = Vector3.zero;
-  //          AnimationParameters.inputVerticalValue = 0;
-  //          AnimationParameters.inputHorizontalValue = 0;
-  //      }
 
-		Debug.Log($"<color=orange>isMoving: {isMoving}</color>");
-		Debug.Log($"<color=red>MovementState: {movementState}</color>");
-		Debug.Log($"<color=blue>InputVerticalValue: {AnimationParameters.inputVerticalValue}</color>");
-		Debug.Log($"<color=green>InputHorizontalValue: {AnimationParameters.inputHorizontalValue}</color>");
-		Debug.Log($"<color=yellow>InputMagnitudeValue: {AnimationParameters.inputMagnitudeValue}</color>");
+		Debug.Log($"<color=orange>isMoving: {playerNetwork.thisT.name}+++{isMoving}</color>");
+		Debug.Log($"<color=red>MovementState: {playerNetwork.thisT.name}+++{movementState}</color>");
+		Debug.Log($"<color=blue>InputVerticalValue: {playerNetwork.thisT.name}+++{animationParameters.inputVerticalValue}</color>");
+		Debug.Log($"<color=green>InputHorizontalValue: {playerNetwork.thisT.name}+++{animationParameters.inputHorizontalValue}</color>");
+		Debug.Log($"<color=yellow>InputMagnitudeValue: {playerNetwork.thisT.name}+++{animationParameters.inputMagnitudeValue}</color>");
 	}
 
 	void RecalculateBoneRotations()
@@ -480,11 +464,11 @@ public class SoldierAnimation : MonoBehaviour
 
 		if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Knife)
 		{
-			soldierAnimator.SetTrigger(AnimationParameters.shoottrigger);
+			soldierAnimator.SetTrigger(animationParameters.shoottrigger);
 		}
 		if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.GRENADE_LAUNCHER || playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.FlashBang)
 		{
-			soldierAnimator.SetTrigger(AnimationParameters.shoottrigger);
+			soldierAnimator.SetTrigger(animationParameters.shoottrigger);
 		}
 		/*if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.C4)
 		{
@@ -493,23 +477,23 @@ public class SoldierAnimation : MonoBehaviour
 		*/
 		if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Dual)
 		{
-			soldierAnimator.SetTrigger(AnimationParameters.shoottrigger);
+			soldierAnimator.SetTrigger(animationParameters.shoottrigger);
 		}
 		if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.m246)
 		{
-			soldierAnimator.SetTrigger(AnimationParameters.shoottrigger);
+			soldierAnimator.SetTrigger(animationParameters.shoottrigger);
 		}
 		if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Shotgun)
 		{
-			soldierAnimator.SetTrigger(AnimationParameters.shoottrigger);
+			soldierAnimator.SetTrigger(animationParameters.shoottrigger);
 		}
 		if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.MachinePistol || playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Pistol)
 		{
-			soldierAnimator.SetTrigger(AnimationParameters.shoottrigger);
+			soldierAnimator.SetTrigger(animationParameters.shoottrigger);
 		}
 		if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.MachineGun || playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.SniperRifle || playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.SniperRifleAuto)
 		{
-			soldierAnimator.SetTrigger(AnimationParameters.shoottrigger);
+			soldierAnimator.SetTrigger(animationParameters.shoottrigger);
 		}
 	}
 
@@ -606,12 +590,12 @@ public class SoldierAnimation : MonoBehaviour
 		{
 			/*soldierAnimationComponent.Play(crouchSet.crouchDie.name);*/
 			//soldierAnimationComponent.SetTrigger("CrouchDie");
-			soldierAnimator.SetTrigger(AnimationParameters.isDead);
+			soldierAnimator.SetTrigger(animationParameters.isDead);
 		}
 		else
 		{
 			/*soldierAnimationComponent.Play(HeadFalls.name);*/
-			soldierAnimator.SetTrigger(AnimationParameters.isDead);
+			soldierAnimator.SetTrigger(animationParameters.isDead);
 		}
 	}
 
@@ -620,7 +604,7 @@ public class SoldierAnimation : MonoBehaviour
 		if (!doneSetup)
 		{
 			soldierAnimator = GetComponent<Animator>();
-			soldierAnimator.SetTrigger(AnimationParameters.isDead);
+			soldierAnimator.SetTrigger(animationParameters.isDead);
 			/*for (int i = 0; i < killedFalls.Length; i++)
 			{
 				soldierAnimationComponent[killedFalls[i].name].wrapMode = WrapMode.Once;
@@ -633,11 +617,11 @@ public class SoldierAnimation : MonoBehaviour
 		{
 			/*soldierAnimationComponent.Play(crouchSet.crouchDie.name);*/
 			//soldierAnimationComponent.SetTrigger("CrouchDie");
-			soldierAnimator.SetTrigger(AnimationParameters.isDead);
+			soldierAnimator.SetTrigger(animationParameters.isDead);
 		}
 		else
 		{
-			soldierAnimator.SetTrigger(AnimationParameters.isDead);
+			soldierAnimator.SetTrigger(animationParameters.isDead);
 			/*if (killedFalls.Length > 0)
 			{
 				int rnd = Random.Range(0, killedFalls.Length - 1);
