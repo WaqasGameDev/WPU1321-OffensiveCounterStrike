@@ -2280,11 +2280,11 @@ public class RoomUI : Photon.MonoBehaviour
 		var ray = rc.ourPlayer.playerWeapons.playerCamera.GetComponent<Camera>().ScreenPointToRay(new Vector3(Screen.width/2,Screen.height/2,0));
 		bool hit = Physics.Raycast(ray, out RaycastHit hitInfo, rayLength);
 		var hitbox = hit ? hitInfo.collider.GetComponent<HitBox>() : null;
-
+		Debug.LogError("hitbox" + hitbox);
 		Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.green);
 
 
-		if (!hitbox || (hitbox.playerNetwork.playerTeam == rc.ourTeam && !rc.offlineMode))
+		if (!hitbox || (hitbox.playerNetwork.playerTeam == rc.ourTeam && !rc.offlineMode && rc.currentGameMode != "FFA"))
         {
 			fireButton.isActive = false;
 			GameSettings.mobileFiring = false;
