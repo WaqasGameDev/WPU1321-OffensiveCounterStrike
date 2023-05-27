@@ -33,6 +33,7 @@ public class GameSettings : MonoBehaviour
 	public static bool MoveOn = false;
 	public static bool AnimOn = false;
 	public static bool C4Diffuse = false;
+	public static bool jumpScheduled = false;
 #endif
 
 	//Static references

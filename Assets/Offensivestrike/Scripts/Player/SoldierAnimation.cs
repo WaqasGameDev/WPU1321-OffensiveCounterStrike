@@ -76,11 +76,10 @@ public class SoldierAnimation : MonoBehaviour
 	// Animator Parameters
 	public enum AnimationWeaponSwitch {PISTOL_IDLE, RIFFLE, SHOTGUN, C4, KNIFE_OR_GRENADE };
 
-	class AnimationParameters
+	public class AnimationParameters
     {
-		public bool jumpInProgress = false;
-		public float initialVerticalPositionForJump = 0f;
-		public readonly float jumpThreshold = 0.5f;
+		public bool jumpInputReceivingAllowed = true;
+		public bool jumpKeyWasPressed = false;
 		public readonly string isDead = "isDead";
 		public readonly string isGrounded = "IsGrounded";
 		public readonly string isJumping = "IsJumping";
@@ -113,7 +112,7 @@ public class SoldierAnimation : MonoBehaviour
 
 	bool doneSetup = false;
 
-	AnimationParameters animationParameters;
+	public AnimationParameters animationParameters;
 
 	//Called from PlayerNetwork.cs upon initialization
 	public void Setup()
@@ -330,24 +329,14 @@ public class SoldierAnimation : MonoBehaviour
 
 		if (movementState == MovementStates.JUMP)
 		{
-            if (!animationParameters.jumpInProgress)
+            if (animationParameters.jumpKeyWasPressed)
             {
-				animationParameters.jumpInProgress = true;
-				animationParameters.initialVerticalPositionForJump = playerNetwork.thisT.position.y;
+                soldierAnimator.SetBool(animationParameters.isJumping, true);
+                soldierAnimator.SetBool(animationParameters.isGrounded, false);
+                animationParameters.jumpInputReceivingAllowed = true;
+				animationParameters.jumpKeyWasPressed = false;
             }
-
-            if (animationParameters.jumpInProgress)
-            {
-				Debug.LogError("Jump Anim Threshold : " + (playerNetwork.thisT.position.y - animationParameters.initialVerticalPositionForJump));
-				if (Mathf.Abs(playerNetwork.thisT.position.y - animationParameters.initialVerticalPositionForJump) > animationParameters.jumpThreshold)
-                {
-					Debug.LogError("Jummp Animation Triggered");
-					soldierAnimator.SetBool(animationParameters.isJumping, true);
-					soldierAnimator.SetBool(animationParameters.isGrounded, false);
-					animationParameters.jumpInProgress = false;
-				}
-            }
-		}
+        }
 		else
 		{
 			if (movementState == MovementStates.IDLE || movementState == MovementStates.GROUNDED)

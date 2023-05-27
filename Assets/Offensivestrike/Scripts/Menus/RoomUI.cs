@@ -2101,8 +2101,12 @@ public class RoomUI : Photon.MonoBehaviour
         {
             //reloadButton.isActive = true;
 			GameSettings.mobileJumping = true;
+            if (!GameSettings.jumpScheduled)
+            {
+				GameSettings.jumpScheduled = true;
+			}
 
-        }
+		}
 
 		//Crouch button press
 		if ((new Rect(Screen.width - crouchButton.mainArea.x - crouchButton.mainArea.width, Screen.height - crouchButton.mainArea.y - crouchButton.mainArea.height,
