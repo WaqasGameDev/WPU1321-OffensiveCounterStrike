@@ -78,6 +78,9 @@ public class SoldierAnimation : MonoBehaviour
 
 	class AnimationParameters
     {
+		public bool jumpInProgress = false;
+		public float initialVerticalPositionForJump = 0f;
+		public readonly float jumpThreshold = 0.5f;
 		public readonly string isDead = "isDead";
 		public readonly string isGrounded = "IsGrounded";
 		public readonly string isJumping = "IsJumping";
@@ -227,10 +230,8 @@ public class SoldierAnimation : MonoBehaviour
 	// Update is called once per frame
 	void LateUpdate()
 	{
-		Debug.LogError(playerNetwork.thisT.name+" InputVertical Value 1 : " + animationParameters.inputVerticalValue);
 		if (isDead || !playerWeapons || !doneSetup)
 			return;
-		Debug.LogError(playerNetwork.thisT.name + " InputVertical Value 2 : " + animationParameters.inputVerticalValue);
 		if (playerWeapons.currentSelectedWeapon != null && previousSelectedWeapon != playerWeapons.currentSelectedWeapon)
 		{
 			if (playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.Knife)
@@ -318,7 +319,6 @@ public class SoldierAnimation : MonoBehaviour
 
 			/*soldierAnimationComponent.Play(currentWeaponAnimationSet.idle.name);*/
 			//Debug.LogFormat("<color=green>Playing idle: {0}</color>", currentWeaponAnimationSet.idle.name);
-			Debug.LogError(playerNetwork.thisT.name + " InputVertical Value 3 : " + animationParameters.inputVerticalValue);
 			RecalculateBoneRotations();
 			/*if (currentWeaponAnimationSet.idle == null)
 			{
@@ -330,8 +330,23 @@ public class SoldierAnimation : MonoBehaviour
 
 		if (movementState == MovementStates.JUMP)
 		{
-			soldierAnimator.SetBool(animationParameters.isJumping, true);
-			soldierAnimator.SetBool(animationParameters.isGrounded, false);
+            if (!animationParameters.jumpInProgress)
+            {
+				animationParameters.jumpInProgress = true;
+				animationParameters.initialVerticalPositionForJump = playerNetwork.thisT.position.y;
+            }
+
+            if (animationParameters.jumpInProgress)
+            {
+				Debug.LogError("Jump Anim Threshold : " + (playerNetwork.thisT.position.y - animationParameters.initialVerticalPositionForJump));
+				if (Mathf.Abs(playerNetwork.thisT.position.y - animationParameters.initialVerticalPositionForJump) > animationParameters.jumpThreshold)
+                {
+					Debug.LogError("Jummp Animation Triggered");
+					soldierAnimator.SetBool(animationParameters.isJumping, true);
+					soldierAnimator.SetBool(animationParameters.isGrounded, false);
+					animationParameters.jumpInProgress = false;
+				}
+            }
 		}
 		else
 		{
@@ -357,7 +372,6 @@ public class SoldierAnimation : MonoBehaviour
 				//CHECKPOINT
 				if (movementState != MovementStates.JUMP)
 				{
-					Debug.LogError("InputVertical Value: "+ animationParameters.inputVerticalValue);
 					soldierAnimator.SetFloat(animationParameters.inputVertical, animationParameters.inputVerticalValue);
 				}
 				else
@@ -385,15 +399,6 @@ public class SoldierAnimation : MonoBehaviour
 			{
 				soldierAnimator.SetFloat(animationParameters.inputHorizontal, 0);
 			}
-		}
-
-		if (previousAnimationPlayed != currentAnimationToPlay)
-		{
-			/*previousAnimationPlayed = currentAnimationToPlay;
-			soldierAnimationComponent.CrossFade(currentAnimationToPlay.name);*/
-
-			//Debug.LogFormat("<color=green>"+ previousAnimationPlayed.name + " " + soldierAnimationComponent[previousAnimationPlayed.name].wrapMode.ToString() + "</color>");
-			//print (previousAnimationPlayed.name + " " + soldierAnimationComponent[previousAnimationPlayed.name].wrapMode.ToString());
 		}
 
 		//Aiming
@@ -426,17 +431,9 @@ public class SoldierAnimation : MonoBehaviour
             lastPosition = playerNetwork.thisT.position;
 
 		animationParameters.inputVerticalValue = Mathf.Clamp(playerNetwork.thisT.InverseTransformDirection(velocity).z * Time.deltaTime * 2.0f,-1,1);
-		Debug.LogError(playerNetwork.thisT.name + " InputVertical Value 0 : " + animationParameters.inputVerticalValue);
 		animationParameters.inputHorizontalValue = Mathf.Clamp(playerNetwork.thisT.InverseTransformDirection(velocity).x * Time.deltaTime * 2.0f,-1,1);
 			
 				animationParameters.inputMagnitudeValue = Mathf.Approximately(animationParameters.inputVerticalValue, 0) && Mathf.Approximately(animationParameters.inputHorizontalValue, 0) ? 0 : 1;
-
-
-		Debug.Log($"<color=orange>isMoving: {playerNetwork.thisT.name}+++{isMoving}</color>");
-		Debug.Log($"<color=red>MovementState: {playerNetwork.thisT.name}+++{movementState}</color>");
-		Debug.Log($"<color=blue>InputVerticalValue: {playerNetwork.thisT.name}+++{animationParameters.inputVerticalValue}</color>");
-		Debug.Log($"<color=green>InputHorizontalValue: {playerNetwork.thisT.name}+++{animationParameters.inputHorizontalValue}</color>");
-		Debug.Log($"<color=yellow>InputMagnitudeValue: {playerNetwork.thisT.name}+++{animationParameters.inputMagnitudeValue}</color>");
 	}
 
 	void RecalculateBoneRotations()
