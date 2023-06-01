@@ -26,7 +26,13 @@ public class CurrencyManager : MonoBehaviour
     [HideInInspector]
     public float normalCurrency;
 
-    
+    public class PurchaseItemIDs
+    {
+        public const string buycurrency500 = "offensivestrike.buycurrency500";
+        public const string buycurrency1800 = "offensivestrike.buycurrency1800";
+        public const string buycurrency3200 = "offensivestrike.buycurrency3200";
+    }
+
 
     private void Awake()
     {
@@ -38,7 +44,24 @@ public class CurrencyManager : MonoBehaviour
 
     public void AddMoreCurrencyToAccount(UnityEngine.Purchasing.Product product)
     {
-        normalCurrency += int.Parse(product.metadata.localizedTitle);
+        Debug.Log($"Product transaction Id clicked was :"+product.metadata.localizedTitle);
+
+        var currencyAddition = 0;
+
+        switch (product.transactionID)
+        {
+            case PurchaseItemIDs.buycurrency500:
+                currencyAddition = 500;
+                break;
+            case PurchaseItemIDs.buycurrency1800:
+                currencyAddition = 1800;
+                break;
+            case PurchaseItemIDs.buycurrency3200:
+                currencyAddition = 3200;
+                break;
+        }
+
+        normalCurrency += currencyAddition;
         SaveLoadManager.instance.Save();
     }
 
