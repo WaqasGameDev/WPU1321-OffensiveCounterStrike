@@ -413,7 +413,7 @@ public class SoldierAnimation : MonoBehaviour
 
 	void CalculatePlayerSpeed()
 	{
-		if (!doneSetup)
+		if (!doneSetup || playerNetwork == null)
 			return;
 
             velocity = (playerNetwork.thisT.position - lastPosition) / Time.deltaTime; //Units per second.
