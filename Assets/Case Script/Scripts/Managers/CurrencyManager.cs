@@ -48,7 +48,7 @@ public class CurrencyManager : MonoBehaviour
 
         var currencyAddition = 0;
 
-        switch (product.transactionID)
+        switch (product.metadata.localizedTitle)
         {
             case PurchaseItemIDs.buycurrency500:
                 currencyAddition = 500;
@@ -60,6 +60,8 @@ public class CurrencyManager : MonoBehaviour
                 currencyAddition = 3200;
                 break;
         }
+
+        Debug.Log("Currency addition to be done : " + currencyAddition);
 
         normalCurrency += currencyAddition;
         SaveLoadManager.instance.Save();
@@ -101,4 +103,4 @@ public class CurrencyManager : MonoBehaviour
         normalCurrency = classSaveData.normalCurrency;
     }
     #endregion
-}
+} 
