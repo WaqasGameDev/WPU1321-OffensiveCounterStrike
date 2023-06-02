@@ -44,11 +44,12 @@ public class CurrencyManager : MonoBehaviour
 
     public void AddMoreCurrencyToAccount(UnityEngine.Purchasing.Product product)
     {
-        Debug.Log($"Product transaction Id clicked was :"+product.metadata.localizedTitle);
+        var productId = product.definition.storeSpecificId;
+        Debug.Log($"Product Id clicked was :" + productId);
 
         var currencyAddition = 0;
 
-        switch (product.metadata.localizedTitle)
+        switch (productId)
         {
             case PurchaseItemIDs.buycurrency500:
                 currencyAddition = 500;
