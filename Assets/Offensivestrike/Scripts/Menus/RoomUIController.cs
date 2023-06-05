@@ -9,6 +9,10 @@ public class RoomUIController : MonoBehaviour
 
 	//Crosshair
 	public GameObject crosshairRoot;
+
+	public UIDragLookScript UIDragLook;
+	public UIJoyStick uIJoyStick;
+
 	public Image[] crosshairSet = new Image[4];
 	public Image redScreen;
 

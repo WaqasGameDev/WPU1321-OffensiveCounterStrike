@@ -270,7 +270,7 @@ PlayerSettings:
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
   chromeosInputEmulation: 0
-  AndroidMinifyWithR8: 1
+  AndroidMinifyWithR8: 0
   AndroidMinifyRelease: 0
   AndroidMinifyDebug: 0
   AndroidValidateAppBundleSize: 0
@@ -774,7 +774,7 @@ PlayerSettings:
     Standalone: 0
     WebPlayer: 0
   il2cppCompilerConfiguration:
-    Android: 2
+    Android: 1
   managedStrippingLevel:
     Android: 3
   incrementalIl2cppBuild: {}

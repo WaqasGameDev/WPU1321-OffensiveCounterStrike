@@ -226,7 +226,7 @@ public class bl_LayoutCustomizer : bl_LayoutBase
             mark.SetActiveSectionUI(true);
         }
         propertiesWindow?.PrepareForLayout(mark.LayoutEntity);
-        propertiesWindow?.Show();
+       // propertiesWindow?.Show();
     }
 
     private static bl_LayoutCustomizer _instance;

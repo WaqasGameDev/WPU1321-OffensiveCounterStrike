@@ -118,11 +118,13 @@ public class RoomUI : Photon.MonoBehaviour
     float scopeTextureRatio;
     Sprite scopeTextureTmp;
 
+	public UIDragLookScript UIDragLook;
 
-   
-   
+	public UIJoyStick uIJoyStick;
 
-    [System.Serializable]
+
+
+	[System.Serializable]
     public class ActionButton
     {
 		public GameObject pGameObject;
@@ -158,12 +160,7 @@ public class RoomUI : Photon.MonoBehaviour
 	public GameObject moveTouch;
 
 
-	//Implement fast swiping to look around
-	Vector2 initialTouchPos = Vector3.zero;
-    float swipeTime = 0;
-    //How long to keep rotating after we swiped
-    float keepRotatingTime = 0;
-    float previousTouchDirX = 0;
+
 	public float C4Create = 0f;
 	public float DiffuseCreate = 0f;
 	bool diffuseSound = false;
@@ -197,9 +194,11 @@ public class RoomUI : Photon.MonoBehaviour
         actionReports = new ActionReports[GameSettings.actionReportsLimit];
 		actionWeaponsReports = new ActionReports[GameSettings.actionWeaponReportsLimit];
         chatMessages = new ActionReports[GameSettings.chatMessagesLimit];
-		uIController =  GameObject.Instantiate(uiMenu).GetComponentInChildren<RoomUIController>();
-        //Use new Unity UI
-        InitializeGUI();
+		GameObject uiCanvasObject = GameObject.Instantiate(uiMenu);
+		uiCanvasObject.SetActive(true);
+		uIController = uiCanvasObject.GetComponentInChildren<RoomUIController>();
+		//Use new Unity UI
+		InitializeGUI();
     }
 
 	private IEnumerator StartOfflineModeTimer()
@@ -290,9 +289,10 @@ public class RoomUI : Photon.MonoBehaviour
 		ChatButton = uIController.ChatButton;
 		LookWeaponButton = uIController.LookWeaponButton;
 		moveTouch = uIController.moveTouch;
+		UIDragLook = uIController.UIDragLook;
+		uIJoyStick = uIController.uIJoyStick;
 
-
-		roundTimeText.font = GameSettings.guiSkin.customStyles[1].font;
+	roundTimeText.font = GameSettings.guiSkin.customStyles[1].font;
 		roundCounterScoreText.font = GameSettings.guiSkin.customStyles[1].font;
 		roundTerorScoreText.font = GameSettings.guiSkin.customStyles[1].font;
 		RoundTerorText.font = GameSettings.guiSkin.customStyles[3].font;
@@ -509,9 +509,9 @@ public class RoomUI : Photon.MonoBehaviour
                     scopeTextureTmp = GameSettings.currentScopeTexture;
                     if (scopeTextureTmp != null)
                     {
-                        scopeTextureRatio = ((float)scopeTextureTmp.rect.width * 0.01f) / ((float)scopeTextureTmp.rect.height * 0.01f);
-                        sniperScope.sprite = scopeTextureTmp;
-                        sniperScope.rectTransform.sizeDelta = new Vector2(Screen.height * scopeTextureRatio, Screen.height);
+                        //scopeTextureRatio = ((float)scopeTextureTmp.rect.width * 0.01f) / ((float)scopeTextureTmp.rect.height * 0.01f);
+                        //sniperScope.sprite = scopeTextureTmp;
+                        //sniperScope.rectTransform.sizeDelta = new Vector2(Screen.height * scopeTextureRatio, Screen.height);
                         sniperScope.gameObject.SetActive(true);
                     }
                     else
@@ -751,9 +751,7 @@ public class RoomUI : Photon.MonoBehaviour
         //Show buy menu text
         if (!rc.ourPlayer || rc.timeToPurchase > 0)
         {
-			//shopBuyT.pGameObject.SetActive(true); 
-		//	ToggleFire.icon.rectTransform.sizeDelta = new Vector2(80, 80);
-
+	
 			string textShd = "";
 			string textTmp = xml.button76 + "\n\n";
 			textTmp += rc.timeToPurchase > 0 && rc.ourPlayer ? rc.timeToPurchase.ToString() + xml.button77 : "";
@@ -781,169 +779,33 @@ public class RoomUI : Photon.MonoBehaviour
 
 		Inputs();
 
-		
-
-
-
-
-		//Check UI interaction
-
-//#if UNITY_ANDROID || UNITY_IOS || UNITY_WP8 || UNITY_WP8_1
-
-//#if !UNITY_EDITOR
-//        //Handle touch input
-//        for (var i = 0; i < Input.touchCount; ++i)
-//        {
-//            Touch touch = Input.GetTouch(i);
-
-//            if (touch.phase == TouchPhase.Began)
-//            {
-//                MobileButtonsCheck(new Vector2(touch.position.x, Screen.height - touch.position.y), touch.fingerId);
-//            }
-
-//            if (touch.phase == TouchPhase.Moved )
-//            {
-//                if(moveTouch.isActive && moveTouch.touchID == touch.fingerId)
-//                {
-//                    moveTouch.currentTouchPos = touch.position;
-//                }
-
-//                if (fpsLookTouch.isActive && fpsLookTouch.touchID == touch.fingerId)
-//                {
-//                    fpsLookTouch.currentTouchPos = touch.position;
-//                }
-//            }
-
-//            if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
-//            {
-//                MobileButtonStop(touch.fingerId);
-//            }
-//        }
-//#else
-		//Test mobile controls in editor, use mouse instead of touch controls
-
-//		if (Input.GetMouseButtonDown(0))
-//        {
-//           MobileButtonsCheck(new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y), -1);
-//        }
-
-//        if (Input.GetMouseButtonUp(0))
-//        {
-//            MobileButtonStop(-1);
-//        }
-
-//#endif
-
-   //     //Moving
-   //     if (moveTouch.isActive)
-   //     {
-			//moveTouch.mainButton.rectTransform.position = new Vector3(Mathf.Clamp(moveTouch.currentTouchPos.x - moveTouch.touchOffset.x,45, 250), Mathf.Clamp(moveTouch.currentTouchPos.y - moveTouch.touchOffset.y,20,247.5f));
-   //         GameSettings.moveDirection.x = moveTouch.mainButton.rectTransform.position.x - moveTouch.defaultArea.x;
-   //         GameSettings.moveDirection.y = moveTouch.mainButton.rectTransform.position.y - moveTouch.defaultArea.y;
-
-   //         if (Mathf.Abs(GameSettings.moveDirection.x) < 19)
-   //         {
-   //             GameSettings.moveDirection.x = 0;
-   //         }
-   //         else
-   //         {
-   //             GameSettings.moveDirection.x = Mathf.Clamp(GameSettings.moveDirection.x / 75.000f, -1.000f, 1.000f);
-   //         }
-
-   //         if (Mathf.Abs(GameSettings.moveDirection.y) < 19)
-   //         {
-   //             GameSettings.moveDirection.y = 0;
-   //         }
-   //         else
-   //         {
-   //             GameSettings.moveDirection.y = Mathf.Clamp(GameSettings.moveDirection.y / 75.000f, -1.000f, 1.000f);
-   //         }
-   //     }
-   //     else
-   //     {
-   //         moveTouch.mainButton.rectTransform.position = new Vector3(moveTouch.defaultArea.x, moveTouch.defaultArea.y);
-   //         GameSettings.moveDirection = Vector2.zero;
-   //     }
-
-   //     //Looking around
-   //     if (fpsLookTouch.isActive)
-   //     {
-   //         if (fpsLookTouch.touchOffset.x != fpsLookTouch.currentTouchPos.x || fpsLookTouch.touchOffset.y != fpsLookTouch.currentTouchPos.y)
-   //         {
-   //             GameSettings.lookDirection = new Vector2(
-   //                 Mathf.Clamp((fpsLookTouch.currentTouchPos.x - fpsLookTouch.touchOffset.x) / 5.500f, -5.500f, 5.500f),
-   //                 Mathf.Clamp((fpsLookTouch.currentTouchPos.y - fpsLookTouch.touchOffset.y) / 5.500f, -5.500f, 5.500f));
-
-   //             //print(GameSettings.lookDirection);
-
-   //             fpsLookTouch.touchOffset = fpsLookTouch.currentTouchPos;
-   //         }
-   //         else
-   //         {
-   //             GameSettings.lookDirection = Vector2.zero;
-   //         }
-
-
-   //         //Fast swiping timer
-   //         swipeTime += Time.deltaTime;
-   //     }
-   //     else
-   //     {
-   //         if (initialTouchPos != Vector2.zero)
-   //         {
-   //             float distanceXTmp = Mathf.Abs(fpsLookTouch.currentTouchPos.x - initialTouchPos.x);
-   //             float distanceYTmp = Mathf.Abs(fpsLookTouch.currentTouchPos.y - initialTouchPos.y);
-
-   //             if (swipeTime < 0.05f && distanceXTmp > 4 && distanceXTmp > distanceYTmp)
-   //             {
-   //                 GameSettings.lookDirection = new Vector2(Mathf.Clamp(GameSettings.lookDirection.x, - 1, 1), Mathf.Clamp(GameSettings.lookDirection.y, -1, 1));
-
-   //                 keepRotatingTime = 1.05f;
-   //                 previousTouchDirX = Mathf.Clamp(GameSettings.lookDirection.x * 2, -10, 10);
-   //                 GameSettings.lookDirection.y = 0;
-   //             }
-   //             else
-   //             {
-   //                 keepRotatingTime = 0;
-   //             }
-                
-   //             //print(swipeTime);
-
-   //             initialTouchPos = Vector2.zero;
-   //         }
-
-   //         if(keepRotatingTime > 0)
-   //         {
-   //             //Slowly decrease rotation time, make it framerate independent
-   //             keepRotatingTime = Mathf.Lerp(keepRotatingTime, -0.1f, Time.deltaTime / (GameSettings.currentFPS / 100.00f));
-   //             GameSettings.lookDirection.x = (previousTouchDirX * keepRotatingTime) / (GameSettings.currentFPS / 100.00f);
-
-   //             //print(GameSettings.currentFPS);
-   //         }
-   //         else
-   //         {
-   //             //fpsLookTouch.mainButton.rectTransform.position = new Vector3(fpsLookTouch.defaultArea.x, fpsLookTouch.defaultArea.y);
-   //             GameSettings.lookDirection = Vector2.zero;
-   //         }
-   //     }
-
-        //print(GameSettings.moveDirection.x.ToString() + "   " + GameSettings.moveDirection.y.ToString());
-//#endif
     }
 
 
 	public void Inputs()
     {
-		GameSettings.moveDirection.x = ControlFreak2.CF2Input.GetAxis("Horizontal");
-		GameSettings.moveDirection.y = ControlFreak2.CF2Input.GetAxis("Vertical");
-		GameSettings.lookDirection = new Vector2(ControlFreak2.CF2Input.GetAxis("Mouse X"), ControlFreak2.CF2Input.GetAxis("Mouse Y"));
-		//GameSettings.mobileFiring = fireButton.uiBtnScript.isPressing;
-		GameSettings.mobileCrounch = crouchButton.uiBtnScript.isPressing;
-		GameSettings.mobileJumping = jumpButton.uiBtnScript.isPressing;
-		GameSettings.mobileReloading = reloadButton.uiBtnScript.isPressing;
-		GameSettings.mobileAiming = aimButton.uiBtnScript.isPressing;
-		GameSettings.mobileLook = LookWeaponButton.uiBtnScript.isPressing;
+        //GameSettings.moveDirection.x = ControlFreak2.CF2Input.GetAxis("Horizontal");
+        //GameSettings.moveDirection.y = ControlFreak2.CF2Input.GetAxis("Vertical");
+        //GameSettings.lookDirection = new Vector2(ControlFreak2.CF2Input.GetAxis("Mouse X"), ControlFreak2.CF2Input.GetAxis("Mouse Y"));
 
+        GameSettings.moveDirection = uIJoyStick.GetHorizontalAndVerticalValue();
+        GameSettings.lookDirection = UIDragLook.GetHorizontalAndVerticalValue();
+
+        GameSettings.mobileFiring = fireButton.uiBtnScript.isPressing;
+		GameSettings.mobileReloading = reloadButton.uiBtnScript.isPressing;
+		GameSettings.mobileLook = LookWeaponButton.uiBtnScript.isPressing;
+		GameSettings.mobileJumping = jumpButton.uiBtnScript.isPressing;
+
+		if (crouchButton.uiBtnScript.isPressing)
+        {
+			GameSettings.mobileCrounch = crouchButton.uiBtnScript.isPressing;
+			crouchButton.uiBtnScript.isPressing = false;
+		}
+		if (aimButton.uiBtnScript.isPressing)
+		{
+			GameSettings.mobileAiming = aimButton.uiBtnScript.isPressing;
+			aimButton.uiBtnScript.isPressing = false;
+		}
 
 		if (fireButton.uiBtnScript.isPressing)
 		{
@@ -1260,72 +1122,8 @@ public class RoomUI : Photon.MonoBehaviour
 		Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.red);
 	}
 
-    void MobileButtonStop(int touchID)
-    {
-  //      if (moveTouch.isActive && moveTouch.touchID == touchID)
-  //      {
-  //          moveTouch.isActive = false;
-  //          moveTouch.touchOffset = Vector2.zero;
-  //          moveTouch.touchID = -1;
-  //      }
-
-		//if (fireButton.isActive && fireButton.touchID == touchID)
-		//{
-		//	if (rc.ourPlayer.playerWeapons.selectedGrenade == 1 && rc.ourPlayer.playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.GRENADE_LAUNCHER)
-		//	{
-		//		fireButton.isActive = false;
-		//		GameSettings.grenadeShoot = true;
-		//	}
-		//	else if (rc.ourPlayer.playerWeapons.selectedFlash == 2 && rc.ourPlayer.playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.FlashBang)
-		//	{
-		//		fireButton.isActive = false;
-		//		GameSettings.flashShoot = true;
-		//	}
-		//	else
-		//	{
-		//		fireButton.isActive = false;
-		//		GameSettings.mobileFiring = false;
-		//	}
-		//}
-
-		//if (fpsLookTouch.isActive && fpsLookTouch.touchID == touchID)
-  //      {
-  //          fpsLookTouch.isActive = false;
-  //          fpsLookTouch.touchOffset = Vector2.zero;
-  //          fpsLookTouch.touchID = -1;
-  //      }
-
-		//if (c4Button.isActive && c4Button.touchID == touchID) {
-		//	C4Create = 0f;
-		//	BombI.rectTransform.sizeDelta = new Vector2(4, 7.5f);
-		//	BombI.gameObject.SetActive (false);
-		//	BombBorderI.gameObject.SetActive (false);
-		//	c4Button.isActive = false;
-		//	if (rc.C4Tag) {
-		//		GameSettings.C4idle = true;
-		//		GameSettings.C4CreateUI = false;
-		//		GameSettings.mobileFiring = false;
-		//		GameSettings.mobileCrounch = true;
-		//		if (!GameSettings.AnimOn) {
-		//			GameSettings.AnimOn = true;
-		//		}
-		//	}
-		//}
-
-		//if (DiffuseButton.isActive && DiffuseButton.touchID == touchID) {
-		//	DiffuseCreate = 0;
-		//	BombI.rectTransform.sizeDelta = new Vector2(4, 7.5f);
-		//	BombI.gameObject.SetActive (false);
-		//	BombBorderI.gameObject.SetActive (false);
-		//	DiffuseButton.isActive = false;
-		//	if (rc.DiffuseTag) {
-		//		rc.DiffuseCreateUI = false;
-		//		diffuseSound = false;
-		//		GameSettings.mobileCrounch = true;
-		//	}
-		//}
-
-    }
+   
+    
 #endif
 
 }
