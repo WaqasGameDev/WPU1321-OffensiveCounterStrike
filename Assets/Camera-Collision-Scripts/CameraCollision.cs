@@ -31,6 +31,10 @@ public class CameraCollision : MonoBehaviour
 
         allActive = active;
 
+        if (enemySMRs==null)
+        {
+            return;
+        }
         foreach (var smr in enemySMRs)
         {
             smr.enabled = active;

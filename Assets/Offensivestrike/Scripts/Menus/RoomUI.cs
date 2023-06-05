@@ -917,6 +917,8 @@ public class RoomUI : Photon.MonoBehaviour
 				{
 					if (rc.DiffuseTag)
 					{
+						DiffuseButton.uiBtnScript.isPressing = false;
+						//Invoke("ResetCrouch", 0.25f);
 						rc.DiffuseCreateUI = true;
 						GameSettings.mobileCrounch = true;
 						if (!diffuseSound)
@@ -980,6 +982,12 @@ public class RoomUI : Photon.MonoBehaviour
 			switchBulletToggle();
 
 		}
+
+	}
+
+	void ResetCrouch()
+    {
+		GameSettings.mobileCrounch = false;
 
 	}
 	public void switchBulletToggle()
