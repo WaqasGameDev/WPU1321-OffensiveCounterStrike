@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "496efb51",
         "name": "com.offensive.strike",
-        "processId": 25177,
+        "processId": 21448,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -52,44 +52,8 @@
         },
         {
             "deviceId": "496efb51",
-            "name": "com.android.vending",
-            "processId": 27567,
-            "exited": true
-        },
-        {
-            "deviceId": "496efb51",
             "name": "com.offensive.strike",
-            "processId": 27433,
-            "exited": true
-        },
-        {
-            "deviceId": "496efb51",
-            "name": "com.offensive.strike",
-            "processId": 14348,
-            "exited": true
-        },
-        {
-            "deviceId": "496efb51",
-            "name": "com.offensive.strike",
-            "processId": 8255,
-            "exited": true
-        },
-        {
-            "deviceId": "496efb51",
-            "name": "com.offensive.strike",
-            "processId": 20451,
-            "exited": true
-        },
-        {
-            "deviceId": "496efb51",
-            "name": "com.offensive.strike",
-            "processId": 21811,
-            "exited": false
-        },
-        {
-            "deviceId": "496efb51",
-            "name": "com.offensive.strike",
-            "processId": 25177,
+            "processId": 21448,
             "exited": false
         }
     ],
