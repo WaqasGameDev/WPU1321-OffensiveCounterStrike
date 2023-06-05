@@ -270,7 +270,7 @@ PlayerSettings:
     banner: {fileID: 0}
   androidGamepadSupportLevel: 0
   chromeosInputEmulation: 0
-  AndroidMinifyWithR8: 1
+  AndroidMinifyWithR8: 0
   AndroidMinifyRelease: 0
   AndroidMinifyDebug: 0
   AndroidValidateAppBundleSize: 0
@@ -763,9 +763,10 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    Android: CROSS_PLATFORM_INPUT;MOBILE_INPUT;INVECTOR_BASIC;INVECTOR_MELEE;INVECTOR_SHOOTER
+    Android: CROSS_PLATFORM_INPUT;MOBILE_INPUT;INVECTOR_BASIC;INVECTOR_MELEE;INVECTOR_SHOOTER;CF_FORCE_MOBILE_MODE
     Standalone: CROSS_PLATFORM_INPUT
-    iPhone: CROSS_PLATFORM_INPUT;MOBILE_INPUT
+    Windows Store Apps: CF_FORCE_MOBILE_MODE
+    iPhone: CROSS_PLATFORM_INPUT;MOBILE_INPUT;CF_FORCE_MOBILE_MODE
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -876,7 +877,7 @@ PlayerSettings:
   projectName: Offensive Strike
   organizationId: aqilnoor
   cloudEnabled: 0
-  legacyClampBlendShapeWeights: 1
+  legacyClampBlendShapeWeights: 0
   playerDataPath: 
   forceSRGBBlit: 1
   virtualTexturingSupportEnabled: 0

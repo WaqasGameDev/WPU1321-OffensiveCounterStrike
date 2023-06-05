@@ -463,6 +463,7 @@ public class FPSController : MonoBehaviour
 
 						this.StopCoroutine(MoveCameraCrouch());
 						this.StartCoroutine(MoveCameraCrouch());
+					//	GameSettings.mobileCrounch = false;
 					}
 
 					if (isCrouching)
