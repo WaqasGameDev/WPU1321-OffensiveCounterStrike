@@ -81,6 +81,8 @@ public class PlayerWeaponsEditor : Editor
 		PlayerWeapons myTarget = (PlayerWeapons)target;
 
 		myTarget.playerCamera = EditorGUILayout.ObjectField("Player Camera", myTarget.playerCamera, typeof(Transform), true) as Transform;
+		myTarget.weaponCamera = EditorGUILayout.ObjectField("Weapon Camera", myTarget.weaponCamera, typeof(Camera), true) as Camera;
+
 
 		myTarget.concreteParticles= EditorGUILayout.ObjectField("Concrete Particles", myTarget.concreteParticles, typeof(GameObject), true) as GameObject;
 		myTarget.metalParticles = EditorGUILayout.ObjectField("Metal Particles", myTarget.metalParticles, typeof(GameObject), true) as GameObject;

@@ -883,8 +883,12 @@ public class FPSWeapon : MonoBehaviour
 			if (bulletsWeNeed >= wSettings.reserveBullets) {bulletsWeNeed = wSettings.reserveBullets;}
 			for (int i = 0; i < bulletsWeNeed; i++) {
 				animationController.Rewind (fpsAnimations.reload2.name);
-				animationController [fpsAnimations.reload2.name].speed = 0.75f;
-				animationController.Play (fpsAnimations.reload2.name);
+            if (animationController[fpsAnimations.reload2.name])
+            {
+				animationController[fpsAnimations.reload2.name].speed = 0.75f;
+
+			}
+			animationController.Play (fpsAnimations.reload2.name);
 				yield return new WaitForSeconds (0.4f);
 				audioSource.Stop ();
 				audioSource.clip = wSettings.clipIn;

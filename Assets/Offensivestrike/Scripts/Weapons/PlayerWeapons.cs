@@ -6,9 +6,11 @@ public class PlayerWeapons : MonoBehaviour
 {
 
     public Transform playerCamera;
-    //public Transform playerCameraw;
-    //Impact particles used by every weapon
-    public GameObject concreteParticles;
+	public Camera weaponCamera;
+
+	//public Transform playerCameraw;
+	//Impact particles used by every weapon
+	public GameObject concreteParticles;
 	//public GameObject dsds;
 	public GameObject metalParticles;
 	public GameObject bloodParticles;
@@ -157,7 +159,12 @@ public class PlayerWeapons : MonoBehaviour
 
 	}
 
-	void PrepareWepaons(List<WeaponSet> tmpWeapons)
+ //   private void Start()
+ //   {
+	//	weaponCamera = playerCamera.GetComponentInChildren<Camera>();
+
+	//}
+    void PrepareWepaons(List<WeaponSet> tmpWeapons)
     {
 		for(int i = 0; i < tmpWeapons.Count; i++)
         {
@@ -442,11 +449,15 @@ public class PlayerWeapons : MonoBehaviour
 
                     if (isAimed && currentSelectedWeapon.wSettings.aimType == AimType.CameraOnly && currentSelectedWeapon.wSettings.scopeTexture != null)
                     {
+						if(weaponCamera)
+						  weaponCamera.enabled = false;
 						GameSettings.currentScopeTexture = currentSelectedWeapon.wSettings.scopeTexture;
                     }
                     else
                     {
-                        GameSettings.currentScopeTexture = null;
+						if (weaponCamera)
+							weaponCamera.enabled = true;
+						GameSettings.currentScopeTexture = null;
                     }
                 }
             }
@@ -500,6 +511,8 @@ public class PlayerWeapons : MonoBehaviour
 				if(GameSettings.currentScopeTexture  != null)
                 {
 					GameSettings.currentScopeTexture  = null;
+					if (weaponCamera)
+						weaponCamera.enabled = true;
 				}
 			}
 

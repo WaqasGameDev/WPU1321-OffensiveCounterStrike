@@ -510,7 +510,7 @@ public class RoomUI : Photon.MonoBehaviour
                     if (scopeTextureTmp != null)
                     {
                         //scopeTextureRatio = ((float)scopeTextureTmp.rect.width * 0.01f) / ((float)scopeTextureTmp.rect.height * 0.01f);
-                        //sniperScope.sprite = scopeTextureTmp;
+                        sniperScope.sprite = scopeTextureTmp;
                         //sniperScope.rectTransform.sizeDelta = new Vector2(Screen.height * scopeTextureRatio, Screen.height);
                         sniperScope.gameObject.SetActive(true);
                     }
