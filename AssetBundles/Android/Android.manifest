@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3372199291
+CRC: 1061432559
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -13,4 +13,14 @@ AssetBundleManifest:
       Dependencies: {}
     Info_3:
       Name: uzbekistan
+      Dependencies: {}
+    Info_4:
+      Name: sceneassetbundle
+      Dependencies:
+        Dependency_0: textureassetbundle
+    Info_5:
+      Name: textureassetbundle
+      Dependencies: {}
+    Info_6:
+      Name: lost_temple
       Dependencies: {}
