@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Offensivestrike/Scenes/Logo.unity
     guid: dd75a049bc30d1645b0dbeb7d4ac88c3
+  - enabled: 1
+    path: Assets/_LostTemple/Scenes/LOST_TEMPLE.unity
+    guid: 7d6e33d6de6a4ad42b64fa7f3383b981
   m_configObjects: {}

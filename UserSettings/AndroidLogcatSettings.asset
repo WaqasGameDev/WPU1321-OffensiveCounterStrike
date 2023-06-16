@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "496efb51",
         "name": "com.offensive.strike",
-        "processId": 21448,
+        "processId": 32071,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -54,6 +54,18 @@
             "deviceId": "496efb51",
             "name": "com.offensive.strike",
             "processId": 21448,
+            "exited": true
+        },
+        {
+            "deviceId": "496efb51",
+            "name": "com.offensive.strike",
+            "processId": 27638,
+            "exited": true
+        },
+        {
+            "deviceId": "496efb51",
+            "name": "com.offensive.strike",
+            "processId": 32071,
             "exited": false
         }
     ],

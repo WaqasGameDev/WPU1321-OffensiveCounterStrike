@@ -4601,7 +4601,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.21720913, y: 0.43056753}
   m_AnchorMax: {x: 0.28942877, y: 0.57777405}
-  m_AnchoredPosition: {x: 0.23013306, y: 0.089099884}
+  m_AnchoredPosition: {x: 0.23016357, y: 0.089099884}
   m_SizeDelta: {x: 0.35119247, y: 0.48419952}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &186139637
@@ -5888,7 +5888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.41900003, y: 0.04666667}
   m_AnchorMax: {x: 0.58400005, y: 0.14644445}
-  m_AnchoredPosition: {x: -0.49999237, y: -1}
+  m_AnchoredPosition: {x: -0.5, y: -1}
   m_SizeDelta: {x: 0.7413025, y: -1.614399}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &258304115
@@ -20189,7 +20189,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.316, y: 0.040000003}
   m_AnchorMax: {x: 0.684, y: 0.957}
-  m_AnchoredPosition: {x: 0.5, y: -0.28993225}
+  m_AnchoredPosition: {x: 0.5, y: -0.2899475}
   m_SizeDelta: {x: -2.08, y: 0.5800171}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &810958085
@@ -21605,7 +21605,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.23520914, y: 0.6846653}
   m_AnchorMax: {x: 0.28942877, y: 0.80728346}
-  m_AnchoredPosition: {x: 0, y: 0.27399445}
+  m_AnchoredPosition: {x: 0, y: 0.27400208}
   m_SizeDelta: {x: 0.14999962, y: -0.7589998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &863441188
@@ -26021,7 +26021,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.33748996, y: 0.2082169}
   m_AnchorMax: {x: 0.7174899, y: 0.32700002}
-  m_AnchoredPosition: {x: -11, y: -0.11503601}
+  m_AnchoredPosition: {x: -11, y: -0.11505127}
   m_SizeDelta: {x: -1.8730011, y: 1.1044998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1050782711
@@ -29319,7 +29319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.34841165, y: 0.22215588}
   m_AnchorMax: {x: 0.6506597, y: 0.5708442}
-  m_AnchoredPosition: {x: 0.019989014, y: -0.37010193}
+  m_AnchoredPosition: {x: 0.019989014, y: -0.37008667}
   m_SizeDelta: {x: -1.2000122, y: -0.69999695}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1202138294
@@ -29609,7 +29609,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -16.067627, y: -35.964905}
+  m_AnchoredPosition: {x: -16.067505, y: -35.964935}
   m_SizeDelta: {x: -1996.2771, y: -1038.7308}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1207113442
@@ -34507,7 +34507,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.83500004, y: 0}
   m_AnchorMax: {x: 0.9925237, y: 1}
-  m_AnchoredPosition: {x: -0.19999695, y: 0.79999924}
+  m_AnchoredPosition: {x: -0.2000122, y: 0.79999924}
   m_SizeDelta: {x: 0, y: 4.8946}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1390101809
@@ -41817,7 +41817,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.411, y: 0.10759599}
   m_AnchorMax: {x: 0.588, y: 0.19549382}
-  m_AnchoredPosition: {x: -0.000015258789, y: -0.61001587}
+  m_AnchoredPosition: {x: -0.000015258789, y: -0.60998535}
   m_SizeDelta: {x: -0.60200024, y: -0.48480034}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1687539791
@@ -49236,7 +49236,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.4005404, y: 0.07872684}
   m_AnchorMax: {x: 0.601, y: 0.22587281}
-  m_AnchoredPosition: {x: 0.50001526, y: -1.9099884}
+  m_AnchoredPosition: {x: 0.50001526, y: -1.9100037}
   m_SizeDelta: {x: -0.6000004, y: 2.1799998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1997470760
@@ -57106,16 +57106,6 @@ PrefabInstance:
       objectReference: {fileID: 5913644641712962687}
     - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
         type: 3}
-      propertyPath: OnlineButtons.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
-        type: 3}
-      propertyPath: availableMaps.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
-        type: 3}
       propertyPath: FailButton4CloseConnecting
       value: 
       objectReference: {fileID: 1508994522}
@@ -57134,44 +57124,6 @@ PrefabInstance:
       propertyPath: OnlineButtons.Array.data[2]
       value: 
       objectReference: {fileID: 359986925680081049}
-    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
-        type: 3}
-      propertyPath: availableMaps.Array.data[2].mapMap
-      value: 
-      objectReference: {fileID: 21300000, guid: 8dbac8487787ab647bb254ed37a56ae5,
-        type: 3}
-    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
-        type: 3}
-      propertyPath: availableMaps.Array.data[2].mapName
-      value: WAREHOUSE
-      objectReference: {fileID: 0}
-    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
-        type: 3}
-      propertyPath: availableMaps.Array.data[3].mapName
-      value: OLD_TOWN
-      objectReference: {fileID: 0}
-    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
-        type: 3}
-      propertyPath: availableMaps.Array.data[4].mapName
-      value: NUCLEAR_FACILITY
-      objectReference: {fileID: 0}
-    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
-        type: 3}
-      propertyPath: availableMaps.Array.data[5].mapName
-      value: NUCLEAR_FACILITY
-      objectReference: {fileID: 0}
-    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
-        type: 3}
-      propertyPath: availableMaps.Array.data[2].mapPreview
-      value: 
-      objectReference: {fileID: 21300000, guid: 974ebd1240b45f2498a489f5059b420a,
-        type: 3}
-    - target: {fileID: 2704703841184988093, guid: 31f6e903bfff50c43b932345ebc1aa2b,
-        type: 3}
-      propertyPath: availableMaps.Array.data[3].mapPreview
-      value: 
-      objectReference: {fileID: 21300000, guid: 4f7301d30ead1e341895b2f976ea45be,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31f6e903bfff50c43b932345ebc1aa2b, type: 3}
 --- !u!1 &2704703840585186441 stripped
@@ -60219,7 +60171,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.13481683, y: 0.89057654}
   m_AnchorMax: {x: 0.287, y: 0.98800004}
-  m_AnchoredPosition: {x: 0.57403564, y: -0.6000366}
+  m_AnchoredPosition: {x: 0.5739746, y: -0.6000366}
   m_SizeDelta: {x: 0.08000183, y: -0.30000305}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &3688599807809739537

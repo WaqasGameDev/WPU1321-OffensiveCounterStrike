@@ -21,7 +21,7 @@ public class RoomListSee : MonoBehaviour
         MenuFind.GameMode.text = GameMode.text;
         MenuFind.SelectMapName = Map.text;
 
-        for (int a = 0; a < MenuFind.availableMaps.Length -1; a++)
+        for (int a = 0; a < MenuFind.availableMaps.Length ; a++)
         {
             if (MenuFind.availableMaps[a].mapName == MenuFind.SelectMapName)
             {
