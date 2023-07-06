@@ -291,7 +291,7 @@ MonoBehaviour:
     m_LineSpacing: 0.9
   m_Text: 'Multiplayer Battle
 
-    v13.1.3.12'
+    v13.1.3.13'
 --- !u!222 &259423150
 CanvasRenderer:
   m_ObjectHideFlags: 0
