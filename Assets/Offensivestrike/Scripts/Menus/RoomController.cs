@@ -257,7 +257,8 @@ public class RoomController : Photon.MonoBehaviour
 
 	public BuyMenu bm;
 	MultiplayerChat mtp;
-	RoomUI ru;
+	[HideInInspector]
+	public RoomUI ru;
 	public AudioSource audioSource;
 	public xmlReader xml;
 	public AudioSource ZeroStrikeX;
@@ -729,7 +730,8 @@ public class RoomController : Photon.MonoBehaviour
 
 	public void OpenBuyMenu()
 	{
-		if (!ourPlayer || timeToPurchase > 0)
+		
+		if (!ourPlayer /*|| timeToPurchase > 0*/)
 		{
 			//print ("Buy menu key pressed");
 			showBuyMenu = !showBuyMenu;
@@ -738,7 +740,7 @@ public class RoomController : Photon.MonoBehaviour
 			bm.buySection = BuyMenu.BuySection.Secondary;
 			GameSettings.updateActionReports = false;
 		}
-		if (offlineMode && timeToPurchase > 0)
+		if (offlineMode /*&& timeToPurchase > 0*/)
 		{
 			Debug.Log("ZAK98");
 			showBuyMenu = !showBuyMenu;
@@ -1809,8 +1811,8 @@ public class RoomController : Photon.MonoBehaviour
 
 			welcomeCamera.gameObject.SetActive(false);
 
-			this.StopCoroutine("PurchaseTimer");
-			this.StartCoroutine("PurchaseTimer");
+			//this.StopCoroutine("PurchaseTimer");
+			//this.StartCoroutine("PurchaseTimer");
 
 			this.StopCoroutine("ShieldTimer");
 			this.StartCoroutine("ShieldTimer");
@@ -1896,7 +1898,7 @@ public class RoomController : Photon.MonoBehaviour
 		//Turn off buy menu on purchase time over
 		if (offlineMode)
 		{
-			bm.enabled = false;
+		//	bm.enabled = false;
 		}
 	}
 

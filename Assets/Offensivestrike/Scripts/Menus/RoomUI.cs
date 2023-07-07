@@ -155,7 +155,8 @@ public class RoomUI : Photon.MonoBehaviour
 	public ActionButton Gun3Button;
 	public ActionButton c4Button;
 	public ActionButton DiffuseButton;
-	ActionButton shopBuyT;
+	
+	 ActionButton shopBuyT;
 
 	public GameObject moveTouch;
 
@@ -749,7 +750,7 @@ public class RoomUI : Photon.MonoBehaviour
         }
 
         //Show buy menu text
-        if (!rc.ourPlayer || rc.timeToPurchase > 0)
+        if (!rc.ourPlayer /*|| rc.timeToPurchase > 0*/)
         {
 	
 			string textShd = "";
@@ -769,7 +770,7 @@ public class RoomUI : Photon.MonoBehaviour
         }
         else
         {
-			shopBuyT.pGameObject.SetActive(false);
+		//	shopBuyT.pGameObject.SetActive(false);
 
 			buyMenuText.mainText.text = "";
             buyMenuText.textShadow.text = "";
@@ -970,10 +971,11 @@ public class RoomUI : Photon.MonoBehaviour
 		if (shopBuyT.uiBtnScript.isPressing && 
 			!GameSettings.menuOpened)
 		{
-			if (!rc.ourPlayer || rc.timeToPurchase > 0)
-			{
-				rc.OpenBuyMenu();
-			}
+			rc.OpenBuyMenu();
+			//if (!rc.ourPlayer /*|| rc.timeToPurchase > 0*/)
+			//{
+			//	rc.OpenBuyMenu();
+			//}
 		}
 
 		if (!GameSettings.menuOpened && ToggleFire.uiBtnScript.isPressing)
