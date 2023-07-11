@@ -29,7 +29,6 @@ public class FPSWeapon : MonoBehaviour
 	RaycastHit automaticFire;
 
 	public bool ShotGunReload = false;
-
 	[HideInInspector]
 	public string weaponName;
 	[HideInInspector]

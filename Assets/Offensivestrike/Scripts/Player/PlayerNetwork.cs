@@ -208,7 +208,9 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			soldierAnimation.gameObject.SetActive(false);
 			cameraMouseLook = playerWeapons.playerCamera.GetComponent<FPSMouseLook>();
 
+			playerWeapons.selectedPrimary = PlayerPrefs.GetInt(GameSettings.LastSelectedGun , 0);
 			playerWeapons.GetWeaponToSelect(1);
+			playerWeapons.GetWeaponToSelect(2);
 			GameSettings.menuOpened = false;
 			GetComponent<FPSController>().startWhoTeam();
 			soldierAnimation.playerWeapons = playerWeapons;

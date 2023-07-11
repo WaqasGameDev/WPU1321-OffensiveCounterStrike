@@ -43,6 +43,9 @@ public class BuyMenu : MonoBehaviour
 	int selectedFlash;
 	int selectedC4;
 
+
+	string Sniper1 = "Sniper 1";
+	string Sniper2 = "Sniper 2";
 	//Sort weapons by their cost
 
 	// Use this for initialization
@@ -417,39 +420,92 @@ public class BuyMenu : MonoBehaviour
 
 					GUILayout.Space (10);
 
-					GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
+			//		GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
 
 					if (i == 12) {
-						if (GUI.Button (new Rect (169, 39, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
-							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
-								if (type == 1) {
-									selectedPrimary = i;
-									rc.SubstractCash (1);
-								}
-								if (rc.ourPlayer) {
-									lastSelectedWeapon = type;
-									Invoke ("ApplySelectedWeapons", 0.035f);
-								}
+						if(PlayerPrefs.GetInt(primaryWeaponsTmp[i].firstPersonWeapon.name) == 1)
+                        {
+							if (GUI.Button(new Rect(169, 39, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle))
+                            {
+								selectedPrimary = i;
+								lastSelectedWeapon = type;
+								PlayerPrefs.SetInt(GameSettings.LastSelectedGun, selectedPrimary);
+								Invoke("ApplySelectedWeapons", 0.035f);
+							}
+							if(i == PlayerPrefs.GetInt(GameSettings.LastSelectedGun))
+                            {
+								GUI.Button(new Rect(169, 39, 256, 70), xml.button71, weaponButtonGuiStyle);
 
-								rc.showBuyMenu = false;
 							}
 						}
+						else
+                        {
+							if (GUI.Button(new Rect(169, 39, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle))
+							{
+								if (rc.GetCash() >= GameSettings.cnst - weaponListTmp[i].obfuscatedPrice)
+								{
+									if (type == 1)
+									{
+										selectedPrimary = i;
+										rc.SubstractCash(1);
+										PlayerPrefs.SetInt(GameSettings.LastSelectedGun, selectedPrimary);
+										PlayerPrefs.SetInt(primaryWeaponsTmp[i].firstPersonWeapon.name, 1);
+                                        PlayerPrefs.Save();
+                                    }
+									if (rc.ourPlayer)
+									{
+										lastSelectedWeapon = type;
+										Invoke("ApplySelectedWeapons", 0.035f);
+									}
+
+									rc.showBuyMenu = false;
+								}
+							}
+						}
+						
 					}
 					if (i == 13) {
-						if (GUI.Button (new Rect (169, 109, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle)) {
-							if (rc.GetCash () >= GameSettings.cnst - weaponListTmp [i].obfuscatedPrice) {
-								if (type == 1) {
-									selectedPrimary = i;
-									rc.SubstractCash (1);
-								}
-								if (rc.ourPlayer) {
-									lastSelectedWeapon = type;
-									Invoke ("ApplySelectedWeapons", 0.035f);
-								}
+						if (PlayerPrefs.GetInt(primaryWeaponsTmp[i].firstPersonWeapon.name) == 1)
+						{
+							if (GUI.Button(new Rect(169, 109, 256, 70), i == selectedIndex ? xml.button71 : "" , weaponButtonGuiStyle))
+                            {
+								selectedPrimary = i;
+								lastSelectedWeapon = type;
+								PlayerPrefs.SetInt(GameSettings.LastSelectedGun, selectedPrimary);
+								Invoke("ApplySelectedWeapons", 0.035f);
+							}
+							if (i == PlayerPrefs.GetInt(GameSettings.LastSelectedGun))
+							{
+								GUI.Button(new Rect(169, 109, 256, 70), xml.button71, weaponButtonGuiStyle);
 
-								rc.showBuyMenu = false;
 							}
 						}
+						else
+                        {
+							if (GUI.Button(new Rect(169, 109, 256, 70), i != selectedIndex ? "" : xml.button71, weaponButtonGuiStyle))
+							{
+								if (rc.GetCash() >= GameSettings.cnst - weaponListTmp[i].obfuscatedPrice)
+								{
+									if (type == 1)
+									{
+										selectedPrimary = i;
+										rc.SubstractCash(1);
+										PlayerPrefs.SetInt(GameSettings.LastSelectedGun, selectedPrimary);
+										PlayerPrefs.SetInt(primaryWeaponsTmp[i].firstPersonWeapon.name, 1);
+                                        PlayerPrefs.Save();
+
+                                    }
+									if (rc.ourPlayer)
+									{
+										lastSelectedWeapon = type;
+										Invoke("ApplySelectedWeapons", 0.035f);
+									}
+
+									rc.showBuyMenu = false;
+								}
+							}
+						}
+						
 					}
 
 
@@ -457,19 +513,19 @@ public class BuyMenu : MonoBehaviour
 
 					guiStyle.fontSize = 22;
 					guiStyle.alignment = TextAnchor.UpperCenter;
-					guiStyle.normal.textColor = weaponListTmp [i].obfuscatedPrice >= rc.totalCash ? GameSettings.drawColor : GameSettings.customRedColor;
-					if (i == 12) {
+					guiStyle.normal.textColor = weaponListTmp[i].obfuscatedPrice >= rc.totalCash ? GameSettings.drawColor : GameSettings.customRedColor ; /*PlayerPrefs.SetInt(Sniper1, 0);*/
+					if (i == 12  && PlayerPrefs.GetInt(primaryWeaponsTmp[i].firstPersonWeapon.name) == 0) {
 						if (i != selectedIndex) {
 							GUI.Label (new Rect (330, 66, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
 							guiStyle.normal.textColor = Color.white;
 						} else {
 							GUILayout.Label ("", guiStyle);
 						}
-					} else if (i == 13) {
+					} else if (i == 13  && PlayerPrefs.GetInt(primaryWeaponsTmp[i].firstPersonWeapon.name) == 0) {
 						if (i != selectedIndex) {
-							GUI.Label (new Rect (330, 134, 70, 50), (GameSettings.cnst - weaponListTmp [i].obfuscatedPrice).ToString () + " $", guiStyle);
-							guiStyle.normal.textColor = Color.white;
-						} else {
+                            GUI.Label(new Rect(330, 134, 70, 50), (GameSettings.cnst - weaponListTmp[i].obfuscatedPrice).ToString() + " $", guiStyle);
+                            guiStyle.normal.textColor = Color.white;
+                        } else {
 							GUILayout.Label ("", guiStyle);
 						}
 					}

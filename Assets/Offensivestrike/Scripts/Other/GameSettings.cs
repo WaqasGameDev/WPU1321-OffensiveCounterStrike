@@ -36,6 +36,8 @@ public class GameSettings : MonoBehaviour
 	public static bool jumpScheduled = false;
 #endif
 
+	public static string LastSelectedGun = "LastSelectedGun";
+
 	//Static references
 	public static RoomController rc;
 	public static Scoreboard sb;

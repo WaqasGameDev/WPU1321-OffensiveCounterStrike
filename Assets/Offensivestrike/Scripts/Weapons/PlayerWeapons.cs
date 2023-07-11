@@ -28,8 +28,10 @@ public class PlayerWeapons : MonoBehaviour
     {
 		public FPSWeapon firstPersonWeapon;
 		public FPSWeapon thirdPersonWeapon;
+		public string weaponName;
 		public int weaponCost;
 		public FireType fireType;
+		
 		public float timeToDeploy; //How long it should take to take this weapon
 		public float reloadTime; //How long it should take to reload this weapon
 		public float fireRate;

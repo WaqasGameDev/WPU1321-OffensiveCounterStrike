@@ -1520,7 +1520,9 @@ public class RoomController : Photon.MonoBehaviour
 		else
 		{
 			//Reset weapons if we got killed
-			bm.ResetSelectedWeapons();
+			//	bm.ResetSelectedWeapons();
+			ourPlayer.playerWeapons.selectedPrimary = PlayerPrefs.GetInt(GameSettings.LastSelectedGun);
+			ourPlayer.playerWeapons.GetWeaponToSelect(GameSettings.switchWeaponIndex);
 		}
 
 		Renderer[] enemySMRs = null;
