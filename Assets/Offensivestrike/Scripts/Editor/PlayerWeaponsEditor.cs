@@ -207,9 +207,9 @@ public class PlayerWeaponsEditor : Editor
 
 					if(wsets[i].showThis)
                     {
-						wsets[i].weaponName = EditorGUILayout.TextField("Weapon Name", wsets[i].weaponName);
 						wsets[i].weaponCost = EditorGUILayout.IntField("Weapon Cost", wsets[i].weaponCost);
 						wsets[i].fireType = (PlayerWeapons.FireType)EditorGUILayout.EnumPopup("Fire Type", wsets[i].fireType);
+						wsets[i].BuySection = (BuyMenu.BuySection)EditorGUILayout.EnumPopup("Buy Section", wsets[i].BuySection);
 						wsets[i].timeToDeploy = EditorGUILayout.FloatField("Time To Deploy", wsets[i].timeToDeploy);
 						wsets[i].reloadTime = EditorGUILayout.FloatField("Reload Time", wsets[i].reloadTime);
 						wsets[i].fireRate = EditorGUILayout.FloatField("Fire Rate", wsets[i].fireRate);
