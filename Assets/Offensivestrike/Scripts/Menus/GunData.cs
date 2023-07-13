@@ -15,4 +15,6 @@ public class GunData : MonoBehaviour
     public BuyMenu.BuySection tempBuySection;
     [HideInInspector]
     public string weaponName;
+    [HideInInspector]
+    public PlayerWeapons.FireType fireType;
 }

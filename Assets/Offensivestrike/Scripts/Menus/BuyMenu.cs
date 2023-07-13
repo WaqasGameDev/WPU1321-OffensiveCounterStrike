@@ -102,6 +102,7 @@ public class BuyMenu : MonoBehaviour
 			{
 				GunData[showGunIndex].gameObject.SetActive(true);
 				GunData[showGunIndex].tempBuySection = buySection;
+				GunData[showGunIndex].fireType = weaponList[i].fireType;
 				GunData[showGunIndex].weaponName = weaponList[i].firstPersonWeapon.name;
 				GunData[showGunIndex].nameTxt.text = weaponList[i].firstPersonWeapon.name.ToString();
 				Sprite newSprite = Sprite.Create((Texture2D)weaponList[i].gunPreview, new Rect(0, 0, weaponList[i].gunPreview.width, weaponList[i].gunPreview.height), Vector2.one * 0.5f);
@@ -214,6 +215,23 @@ public class BuyMenu : MonoBehaviour
 				break;
 
 			case BuySection.Special:
+
+				if(GunData[GunBtnIndex].fireType == specialWeaponsTmp[0].fireType)
+                {
+					Buy(specialWeaponsTmp, GunBtnIndex, 4);
+				}
+				else if (GunData[GunBtnIndex].fireType == grenadeTmp[0].fireType)
+				{
+					Buy(grenadeTmp, GunBtnIndex, 4);
+				}
+				else
+				{
+					Buy(flashTmp, GunBtnIndex, 5);
+				}
+				ShowGunData(specialWeaponsTmp, BuySection.Special);
+				ShowGunData(grenadeTmp, BuySection.Special);
+				ShowGunData(flashTmp, BuySection.Special);
+
 				break;
 
 			case BuySection.Sniper:
@@ -256,8 +274,12 @@ public class BuyMenu : MonoBehaviour
                 {
 					StoreWeaponSelectedIndex(weaponList, i, type);
 					rc.SubstractCash(type);
-					PlayerPrefs.SetInt(weaponList[i].firstPersonWeapon.name, 1);
-					PlayerPrefs.Save();
+					if(GunData[weaponIndex].tempBuySection != BuySection.Special)
+                    {
+						PlayerPrefs.SetInt(weaponList[i].firstPersonWeapon.name, 1);
+						PlayerPrefs.Save();
+					}
+					
 					GunData[weaponIndex].priceTxt.gameObject.SetActive(false);
 					GunData[weaponIndex].equippedTxt.gameObject.SetActive(true);
 					if (rc.ourPlayer)
