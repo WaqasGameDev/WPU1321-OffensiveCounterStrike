@@ -737,7 +737,9 @@ public class RoomController : Photon.MonoBehaviour
 			showBuyMenu = !showBuyMenu;
 			showScoreBoard = false;
 			showOptions = false;
-			bm.buySection = BuyMenu.BuySection.Secondary;
+			//bm.buySection = BuyMenu.BuySection.Secondary;
+			bm.GunScreen.SetActive(true);
+			bm.LoadGuns(1);
 			GameSettings.updateActionReports = false;
 		}
 		if (offlineMode /*&& timeToPurchase > 0*/)
@@ -752,6 +754,17 @@ public class RoomController : Photon.MonoBehaviour
 			bm.LoadGuns(1);
 			//	bm.enabled = !showBuyMenu;
 			//GameSettings.menuOpened = true;
+		}
+        else
+        {
+			//print ("Buy menu key pressed");
+			showBuyMenu = !showBuyMenu;
+			showScoreBoard = false;
+			showOptions = false;
+			//bm.buySection = BuyMenu.BuySection.Secondary;
+			bm.GunScreen.SetActive(true);
+			bm.LoadGuns(1);
+			GameSettings.updateActionReports = false;
 		}
 	}
 
