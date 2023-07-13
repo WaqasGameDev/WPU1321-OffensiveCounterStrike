@@ -43,9 +43,296 @@ public class BuyMenu : MonoBehaviour
 	int selectedFlash;
 	int selectedC4;
 
+	public GameObject GunScreen;
+	public GunData[] GunData;
 
-	string Sniper1 = "Sniper 1";
-	string Sniper2 = "Sniper 2";
+	int showGunIndex = 0;
+	public void LoadGuns(int buySection)
+    {
+		RefreshGunData();
+		switch (buySection)
+        {
+			case 0: //primary
+
+				ShowGunData(primaryWeaponsTmp, BuySection.Primary);
+				break;
+
+			case 1: //Secondary
+
+				ShowGunData(secondaryWeaponsTmp, BuySection.Secondary);
+				break;
+
+			case 2: //Special
+
+				ShowGunData(specialWeaponsTmp, BuySection.Special);
+				ShowGunData(grenadeTmp, BuySection.Special);
+				ShowGunData(flashTmp, BuySection.Special);
+				break;
+
+			case 3: //Sniper
+
+
+				ShowGunData(primaryWeaponsTmp, BuySection.Sniper);
+				break;
+
+			case 4: //ShotGuns
+
+
+				ShowGunData(primaryWeaponsTmp, BuySection.ShotGuns);
+				break;
+
+			case 5: //HalfPrimary
+
+
+				ShowGunData(primaryWeaponsTmp, BuySection.HalfPrimary);
+				break;
+		}
+    }
+
+	private void ShowGunData(List<PlayerWeapons.WeaponSet> weaponList , BuySection buySection)
+    {
+		for (int i = 0; i < weaponList.Count; i++)
+		{
+			if(weaponList[0].weaponCost < 1 && (weaponList == secondaryWeaponsTmp || weaponList == specialWeaponsTmp))
+            {
+				PlayerPrefs.SetInt(weaponList[0].firstPersonWeapon.name, 1);
+			}
+
+			if (weaponList[i].BuySection == buySection)
+			{
+				GunData[showGunIndex].gameObject.SetActive(true);
+				GunData[showGunIndex].tempBuySection = buySection;
+				GunData[showGunIndex].weaponName = weaponList[i].firstPersonWeapon.name;
+				GunData[showGunIndex].nameTxt.text = weaponList[i].firstPersonWeapon.name.ToString();
+				Sprite newSprite = Sprite.Create((Texture2D)weaponList[i].gunPreview, new Rect(0, 0, weaponList[i].gunPreview.width, weaponList[i].gunPreview.height), Vector2.one * 0.5f);
+				GunData[showGunIndex].GunIcon.sprite = newSprite;
+				//CHECK GUN PRICES
+				CheckGunPrices(weaponList, i );
+               
+				showGunIndex++;
+			}
+		}
+		
+	}
+
+	void CheckGunPrices(List<PlayerWeapons.WeaponSet> weaponList , int weaponIndex)
+    {
+		if (PlayerPrefs.GetInt(weaponList[weaponIndex].firstPersonWeapon.name) == 1 )
+        {
+			GunData[showGunIndex].priceTxt.gameObject.SetActive(false);
+			GunData[showGunIndex].equippedTxt.gameObject.SetActive(false);
+			GunData[showGunIndex].onClickBtn.interactable = true;
+		}
+		else
+        {
+			GunData[showGunIndex].priceTxt.gameObject.SetActive(true);
+
+			if ((GameSettings.cnst - weaponList[weaponIndex].obfuscatedPrice) >= (GameSettings.cnst - rc.totalCash))
+			{
+				if(weaponList == primaryWeaponsTmp)
+                {
+					GunData[showGunIndex].priceTxt.text = (GameSettings.cnst - weaponList[weaponIndex].obfuscatedPrice).ToString() + " $";
+					GunData[showGunIndex].priceTxt.color = Color.red;
+					GunData[showGunIndex].onClickBtn.interactable = false;
+				}
+				else if(weaponList == secondaryWeaponsTmp)
+                {
+					GunData[showGunIndex].priceTxt.text = (GameSettings.cnst - weaponList[weaponIndex].obfuscatedPrice).ToString() + " $";
+					GunData[showGunIndex].priceTxt.color = Color.red;
+					GunData[showGunIndex].onClickBtn.interactable = false;
+				}
+				else
+                {
+					GunData[showGunIndex].priceTxt.text = (GameSettings.cnst - weaponList[weaponIndex].obfuscatedPrice).ToString() + " $";
+					GunData[showGunIndex].priceTxt.color = Color.red;
+					GunData[showGunIndex].onClickBtn.interactable = false;
+				}
+				
+			}
+			else
+			{
+				GunData[showGunIndex].onClickBtn.interactable = true;
+				if (weaponList == primaryWeaponsTmp)
+				{
+					GunData[showGunIndex].priceTxt.text = (GameSettings.cnst - weaponList[weaponIndex].obfuscatedPrice).ToString() + " $";
+				}
+				else if (weaponList == secondaryWeaponsTmp)
+				{
+					GunData[showGunIndex].priceTxt.text = (GameSettings.cnst - weaponList[weaponIndex].obfuscatedPrice).ToString() + " $";
+				}
+				else
+				{
+					GunData[showGunIndex].priceTxt.text = (GameSettings.cnst - weaponList[weaponIndex].obfuscatedPrice).ToString() + " $";
+				}
+				
+			}
+		}
+
+		// Check if gun is in player inventry
+		if (weaponIndex == PlayerPrefs.GetInt(GameSettings.LastSelectedPrimaryGun) && weaponList == primaryWeaponsTmp)
+		{
+			GunData[showGunIndex].equippedTxt.gameObject.SetActive(true);
+		}
+		else if (weaponIndex == PlayerPrefs.GetInt(GameSettings.LastSelectedSecondaryGun) && weaponList == secondaryWeaponsTmp)
+		{
+			GunData[showGunIndex].equippedTxt.gameObject.SetActive(true);
+		}
+
+
+	}
+
+	public void RefreshGunData()
+    {
+		showGunIndex = 0;
+
+		for(int i = 0; i < GunData.Length; i++)
+        {
+			GunData[i].gameObject.SetActive(false);
+			GunData[i].priceTxt.color = Color.green;
+			GunData[i].equippedTxt.gameObject.SetActive(false);
+			GunData[showGunIndex].onClickBtn.interactable = true;
+		} 
+	}
+
+	public void BuyGun(int GunBtnIndex)
+    {
+		RefreshGunData();
+		switch(GunData[GunBtnIndex].tempBuySection)
+        {
+			case BuySection.Primary:
+
+				Buy(primaryWeaponsTmp, GunBtnIndex, 1);
+				ShowGunData(primaryWeaponsTmp, BuySection.Primary);
+
+				break;
+
+			case BuySection.Secondary:
+
+				Buy(secondaryWeaponsTmp, GunBtnIndex, 2);
+				ShowGunData(secondaryWeaponsTmp, BuySection.Secondary);
+
+				break;
+
+			case BuySection.Special:
+				break;
+
+			case BuySection.Sniper:
+
+				Buy(primaryWeaponsTmp, GunBtnIndex, 1);
+				ShowGunData(primaryWeaponsTmp, BuySection.Sniper);
+
+				break;
+
+			case BuySection.ShotGuns:
+
+				Buy(primaryWeaponsTmp, GunBtnIndex, 1);
+				ShowGunData(primaryWeaponsTmp, BuySection.ShotGuns);
+
+				break;
+
+			case BuySection.HalfPrimary:
+
+				Buy(primaryWeaponsTmp, GunBtnIndex, 1);
+				ShowGunData(primaryWeaponsTmp, BuySection.HalfPrimary);
+
+				break;
+		}
+    }
+
+	void Buy(List<PlayerWeapons.WeaponSet> weaponList , int weaponIndex , int type)
+    {
+
+		for (int i = 0; i < weaponList.Count; i++)
+		{
+			if (GunData[weaponIndex].weaponName == weaponList[i].firstPersonWeapon.name)
+            {
+				if (PlayerPrefs.GetInt(weaponList[i].firstPersonWeapon.name) == 1)
+				{
+					StoreWeaponSelectedIndex(weaponList, i , type);
+					GunData[weaponIndex].equippedTxt.gameObject.SetActive(true);
+					rc.ourPlayer.playerWeapons.GetWeaponToSelect(lastSelectedWeapon, weaponList);
+				}
+				else
+                {
+					StoreWeaponSelectedIndex(weaponList, i, type);
+					rc.SubstractCash(type);
+					PlayerPrefs.SetInt(weaponList[i].firstPersonWeapon.name, 1);
+					PlayerPrefs.Save();
+					GunData[weaponIndex].priceTxt.gameObject.SetActive(false);
+					GunData[weaponIndex].equippedTxt.gameObject.SetActive(true);
+					if (rc.ourPlayer)
+					{
+						rc.ourPlayer.playerWeapons.GetWeaponToSelect(lastSelectedWeapon, weaponList);
+					}
+					
+				}
+			}
+				
+			
+		}
+    }
+
+	void StoreWeaponSelectedIndex(List<PlayerWeapons.WeaponSet> weaponList , int index , int type)
+    {
+		if(weaponList == primaryWeaponsTmp)
+        {
+			selectedPrimary = index;
+			rc.ourPlayer.playerWeapons.selectedPrimary = selectedPrimary;
+			PlayerPrefs.SetInt(GameSettings.LastSelectedPrimaryGun, selectedPrimary);
+		}
+		else if(weaponList == secondaryWeaponsTmp)
+        {
+			selectedSecondary = index;
+			rc.ourPlayer.playerWeapons.selectedSecondary = selectedSecondary;
+			PlayerPrefs.SetInt(GameSettings.LastSelectedSecondaryGun, selectedSecondary);
+		}
+		else if (weaponList == specialWeaponsTmp)
+        {
+			selectedSpecial = index;
+			rc.ourPlayer.playerWeapons.selectedSpecial = selectedSpecial;
+			PlayerPrefs.SetInt(GameSettings.LastSelectedSpecialGun, selectedSpecial);
+		}
+		else if (weaponList == grenadeTmp)
+		{
+			selectedGrenade = index;
+			rc.ourPlayer.playerWeapons.selectedGrenade = selectedGrenade;
+			PlayerPrefs.SetInt(GameSettings.LastSelectedPrimaryGun, selectedPrimary);
+		}
+		else if (weaponList == flashTmp)
+		{
+			selectedFlash = index;
+			rc.ourPlayer.playerWeapons.selectedFlash = selectedFlash;
+			PlayerPrefs.SetInt(GameSettings.LastSelectedPrimaryGun, selectedPrimary);
+		}
+
+		lastSelectedWeapon = type;
+		
+		PlayerPrefs.SetInt(GameSettings.LastSelectedType, type);
+
+		for (int i = 0; i < GunData.Length; i++)
+		{
+			GunData[i].equippedTxt.gameObject.SetActive(false);
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public void CloseGunMenu()
+    {
+		GunScreen.SetActive(false);
+    }
+
 	//Sort weapons by their cost
 
 	// Use this for initialization
@@ -283,18 +570,18 @@ public class BuyMenu : MonoBehaviour
 
 		return -1;
 	}
-	
-	// Update is called once per frame
-	void OnGUI ()
-    {
-		guiSkin = GameSettings.theRawGuiSkin;
-		screenCenterX = Screen.width / 2;
-		screenCenterY = Screen.height / 2;
-		// Transparent buy main window
-		GUI.Window(0, new Rect(0, 0, Screen.width, Screen.height), BuyMenuWindow, "", guiSkin.customStyles[10]);
-	}
 
-	void Update()
+    // Update is called once per frame
+    //void OnGUI()
+    //{
+    //    guiSkin = GameSettings.theRawGuiSkin;
+    //    screenCenterX = Screen.width / 2;
+    //    screenCenterY = Screen.height / 2;
+    //    // Transparent buy main window
+    //    GUI.Window(0, new Rect(0, 0, Screen.width, Screen.height), BuyMenuWindow, "", guiSkin.customStyles[10]);
+    //}
+
+    void Update()
 	{
 		if (rc.ourPlayer) 
 		{
@@ -319,8 +606,9 @@ public class BuyMenu : MonoBehaviour
 			rc.showBuyMenu = false;
             if (rc.offlineMode)
             {
-				rc.bm.enabled = false;	
-            }
+				rc.bm.GunScreen.SetActive(false);
+				//rc.bm.enabled = false;	
+			}
 		}
 
 		GUI.Label(new Rect(15, 0, 300, 35), xml.button67);
@@ -419,7 +707,7 @@ public class BuyMenu : MonoBehaviour
 					GUI.enabled = true;
 
 					GUILayout.Space (10);
-
+					
 			//		GUI.enabled = i != selectedIndex && weaponListTmp [i].obfuscatedPrice >= rc.totalCash;
 
 					if (i == 12) {
@@ -429,10 +717,10 @@ public class BuyMenu : MonoBehaviour
                             {
 								selectedPrimary = i;
 								lastSelectedWeapon = type;
-								PlayerPrefs.SetInt(GameSettings.LastSelectedGun, selectedPrimary);
+								PlayerPrefs.SetInt(GameSettings.LastSelectedPrimaryGun, selectedPrimary);
 								Invoke("ApplySelectedWeapons", 0.035f);
 							}
-							if(i == PlayerPrefs.GetInt(GameSettings.LastSelectedGun))
+							if(i == PlayerPrefs.GetInt(GameSettings.LastSelectedPrimaryGun))
                             {
 								GUI.Button(new Rect(169, 39, 256, 70), xml.button71, weaponButtonGuiStyle);
 
@@ -448,7 +736,7 @@ public class BuyMenu : MonoBehaviour
 									{
 										selectedPrimary = i;
 										rc.SubstractCash(1);
-										PlayerPrefs.SetInt(GameSettings.LastSelectedGun, selectedPrimary);
+										PlayerPrefs.SetInt(GameSettings.LastSelectedPrimaryGun, selectedPrimary);
 										PlayerPrefs.SetInt(primaryWeaponsTmp[i].firstPersonWeapon.name, 1);
                                         PlayerPrefs.Save();
                                     }
@@ -471,10 +759,10 @@ public class BuyMenu : MonoBehaviour
                             {
 								selectedPrimary = i;
 								lastSelectedWeapon = type;
-								PlayerPrefs.SetInt(GameSettings.LastSelectedGun, selectedPrimary);
+								PlayerPrefs.SetInt(GameSettings.LastSelectedPrimaryGun, selectedPrimary);
 								Invoke("ApplySelectedWeapons", 0.035f);
 							}
-							if (i == PlayerPrefs.GetInt(GameSettings.LastSelectedGun))
+							if (i == PlayerPrefs.GetInt(GameSettings.LastSelectedPrimaryGun))
 							{
 								GUI.Button(new Rect(169, 109, 256, 70), xml.button71, weaponButtonGuiStyle);
 
@@ -490,7 +778,7 @@ public class BuyMenu : MonoBehaviour
 									{
 										selectedPrimary = i;
 										rc.SubstractCash(1);
-										PlayerPrefs.SetInt(GameSettings.LastSelectedGun, selectedPrimary);
+										PlayerPrefs.SetInt(GameSettings.LastSelectedPrimaryGun, selectedPrimary);
 										PlayerPrefs.SetInt(primaryWeaponsTmp[i].firstPersonWeapon.name, 1);
                                         PlayerPrefs.Save();
 

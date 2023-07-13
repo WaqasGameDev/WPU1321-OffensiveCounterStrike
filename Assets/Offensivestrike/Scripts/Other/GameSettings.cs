@@ -36,7 +36,10 @@ public class GameSettings : MonoBehaviour
 	public static bool jumpScheduled = false;
 #endif
 
-	public static string LastSelectedGun = "LastSelectedGun";
+	public static string LastSelectedPrimaryGun = "LastSelectedPrimaryGun";
+	public static string LastSelectedSecondaryGun = "LastSelectedSecondaryGun";
+	public static string LastSelectedSpecialGun = "LastSelectedSpecialGun";
+	public static string LastSelectedType = "LastSelectedType";
 
 	//Static references
 	public static RoomController rc;

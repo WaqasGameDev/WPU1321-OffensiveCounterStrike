@@ -550,6 +550,23 @@ public class PlayerWeapons : MonoBehaviour
 			}
 		}
 	}
+	public void GetWeaponToSelect(int type, List<WeaponSet> weaponList)
+	{
+		if (type == 1)
+		{
+			SwitchWeapon(primaryWeapons[selectedPrimary].firstPersonWeapon, true);
+		}
+
+		if (type == 2 )
+		{
+			SwitchWeapon(secondaryWeapons[selectedSecondary].firstPersonWeapon, true);
+		}
+
+		if (type == 3 )
+		{
+			SwitchWeapon(specialWeapons[selectedSpecial].firstPersonWeapon, true);
+		}
+	}
 
 	void FixedUpdate ()
     {

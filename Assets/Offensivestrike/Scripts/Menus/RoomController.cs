@@ -652,7 +652,7 @@ public class RoomController : Photon.MonoBehaviour
 
 		os.enabled = showOptions;
 		sb.enabled = showScoreBoard;
-		bm.enabled = showBuyMenu;
+	//	bm.enabled = showBuyMenu;
 
 		//if (Input.GetKeyDown(GameSettings.playerKeys[13]))
 		//{
@@ -746,9 +746,11 @@ public class RoomController : Photon.MonoBehaviour
 			showBuyMenu = !showBuyMenu;
 			showScoreBoard = false;
 			showOptions = false;
-			bm.buySection = BuyMenu.BuySection.Secondary;
+			//	bm.buySection = BuyMenu.BuySection.Secondary;
 			GameSettings.updateActionReports = false;
-			bm.enabled = !showBuyMenu;
+			bm.GunScreen.SetActive(true);
+			bm.LoadGuns(1);
+			//	bm.enabled = !showBuyMenu;
 			//GameSettings.menuOpened = true;
 		}
 	}
@@ -1521,7 +1523,8 @@ public class RoomController : Photon.MonoBehaviour
 		{
 			//Reset weapons if we got killed
 			//	bm.ResetSelectedWeapons();
-			ourPlayer.playerWeapons.selectedPrimary = PlayerPrefs.GetInt(GameSettings.LastSelectedGun);
+			ourPlayer.playerWeapons.selectedPrimary = PlayerPrefs.GetInt(GameSettings.LastSelectedPrimaryGun);
+			ourPlayer.playerWeapons.selectedSecondary = PlayerPrefs.GetInt(GameSettings.LastSelectedSecondaryGun);
 			ourPlayer.playerWeapons.GetWeaponToSelect(GameSettings.switchWeaponIndex);
 		}
 
