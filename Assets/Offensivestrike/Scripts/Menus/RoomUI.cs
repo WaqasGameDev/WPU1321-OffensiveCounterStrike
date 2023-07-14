@@ -157,6 +157,7 @@ public class RoomUI : Photon.MonoBehaviour
 	public ActionButton DiffuseButton;
 	
 	 ActionButton shopBuyT;
+	ActionButton dropGunBtn;
 
 	public GameObject moveTouch;
 
@@ -267,6 +268,7 @@ public class RoomUI : Photon.MonoBehaviour
 
 		redScreen = uIController.redScreen;
 		shopBuyT = uIController.shopBuyT;
+		dropGunBtn = uIController.dropGunBtn;
 		buyMenuText = uIController.buyMenuText;
 
 		respawnTimeText = uIController.respawnTimeText;
@@ -370,6 +372,7 @@ public class RoomUI : Photon.MonoBehaviour
 				ChatButton.pGameObject.SetActive (true);
 				cashText.gameObject.SetActive (true);
 				shopBuyT.pGameObject.gameObject.SetActive (true);
+				dropGunBtn.pGameObject.gameObject.SetActive(true);
 				Gun1Button.pGameObject.SetActive(true);
 				Gun2Button.pGameObject.SetActive(true);
 				Gun3Button.pGameObject.SetActive(true);
@@ -568,6 +571,7 @@ public class RoomUI : Photon.MonoBehaviour
 				ChatButton.pGameObject.SetActive (false);
 				cashText.gameObject.SetActive (false);
 				shopBuyT.pGameObject.SetActive (false);
+				dropGunBtn.pGameObject.gameObject.SetActive(false);
 				Gun1Button.pGameObject.SetActive(false);
 				Gun2Button.pGameObject.SetActive(false);
 				Gun3Button.pGameObject.SetActive(false);
@@ -977,6 +981,12 @@ public class RoomUI : Photon.MonoBehaviour
 			//	rc.OpenBuyMenu();
 			//}
 		}
+
+		if(dropGunBtn.uiBtnScript.isPressing)
+        {
+			dropGunBtn.uiBtnScript.isPressing = false;
+			rc.DropGuns();
+        }
 
 		if (!GameSettings.menuOpened && ToggleFire.uiBtnScript.isPressing)
 		{

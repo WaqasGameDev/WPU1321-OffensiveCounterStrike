@@ -34,6 +34,8 @@ public class GameSettings : MonoBehaviour
 	public static bool AnimOn = false;
 	public static bool C4Diffuse = false;
 	public static bool jumpScheduled = false;
+	public static bool isPrimaryGun = false;
+	public static bool isSecondaryGun = false;
 #endif
 
 	public static string LastSelectedPrimaryGun = "LastSelectedPrimaryGun";

@@ -77,6 +77,7 @@ public class RoomUIController : MonoBehaviour
 	public RoomUI.ActionButton DiffuseButton;
 	public RoomUI.ActionButton LookWeaponButton;
 	public RoomUI.ActionButton shopBuyT;
+	public RoomUI.ActionButton dropGunBtn;
 
 
 	public Image sniperScope;

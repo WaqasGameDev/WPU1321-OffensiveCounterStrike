@@ -753,7 +753,7 @@ public class RoomController : Photon.MonoBehaviour
 			bm.GunScreen.SetActive(true);
 			bm.LoadGuns(1);
 			//	bm.enabled = !showBuyMenu;
-			//GameSettings.menuOpened = true;
+			GameSettings.menuOpened = true;
 		}
         else
         {
@@ -768,6 +768,11 @@ public class RoomController : Photon.MonoBehaviour
 		}
 	}
 
+
+	public void DropGuns()
+    {
+		ourPlayer.dropGunMech.DropGun();
+    }
 	void LockCursor(bool lockCursor)
 	{
 

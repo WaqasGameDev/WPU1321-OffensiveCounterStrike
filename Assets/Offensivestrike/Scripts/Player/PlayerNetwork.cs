@@ -33,6 +33,8 @@ public class PlayerNetwork : Photon.MonoBehaviour
 	public GameObject RoomCk;
 	public GameObject CameraFollow;
 
+	public DropGunsMechanism dropGunMech;
+
 	public Transform C4ThrowPoint; // New Code
 
 	public Transform nameLabelTransform;
@@ -135,6 +137,8 @@ public class PlayerNetwork : Photon.MonoBehaviour
 		playerWeapons.soldierAnimation = soldierAnimation;
 		playerWeapons.fpsController = fpsController;
 		playerWeapons.QuickSetup(photonView.isMine);
+		dropGunMech.playerNetwork = this;
+		dropGunMech.playerweaponController = playerWeapons;
 
 		if (!GameSettings.rc.offlineMode)
 		{

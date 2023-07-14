@@ -527,13 +527,18 @@ public class PlayerWeapons : MonoBehaviour
 
 	public void GetWeaponToSelect (int type)
 	{
+		GameSettings.isPrimaryGun = false;
+		GameSettings.isSecondaryGun = false;
 		if (selectedPrimary > 1) {
 			if (type == 1) {
 				SwitchWeapon (primaryWeapons [selectedPrimary].firstPersonWeapon, true);
+				GameSettings.isPrimaryGun = true;
+				
 			}
 
 			if (type == 2) {
 				SwitchWeapon (secondaryWeapons [selectedSecondary].firstPersonWeapon, true);
+				GameSettings.isSecondaryGun = true;
 			}
 
 			if (type == 3) {
@@ -543,29 +548,38 @@ public class PlayerWeapons : MonoBehaviour
 		else {
 			if (type == 1) {
 				SwitchWeapon (secondaryWeapons [selectedSecondary].firstPersonWeapon, true);
+				GameSettings.isSecondaryGun = true;
 			}
 
 			if (type == 2) {
 				SwitchWeapon (specialWeapons [selectedSpecial].firstPersonWeapon, true);
 			}
 		}
+		PlayerPrefs.SetInt(GameSettings.LastSelectedPrimaryGun, selectedPrimary);
+		PlayerPrefs.SetInt(GameSettings.LastSelectedSecondaryGun, selectedSecondary);
 	}
 	public void GetWeaponToSelect(int type, List<WeaponSet> weaponList)
 	{
+		GameSettings.isPrimaryGun = false;
+		GameSettings.isSecondaryGun = false;
 		if (type == 1)
 		{
 			SwitchWeapon(primaryWeapons[selectedPrimary].firstPersonWeapon, true);
+			GameSettings.isPrimaryGun = true;
 		}
 
 		if (type == 2 )
 		{
 			SwitchWeapon(secondaryWeapons[selectedSecondary].firstPersonWeapon, true);
+			GameSettings.isSecondaryGun = true;
 		}
 
 		if (type == 3 )
 		{
 			SwitchWeapon(specialWeapons[selectedSpecial].firstPersonWeapon, true);
 		}
+		PlayerPrefs.SetInt(GameSettings.LastSelectedPrimaryGun, selectedPrimary);
+		PlayerPrefs.SetInt(GameSettings.LastSelectedSecondaryGun, selectedSecondary);
 	}
 
 	void FixedUpdate ()
