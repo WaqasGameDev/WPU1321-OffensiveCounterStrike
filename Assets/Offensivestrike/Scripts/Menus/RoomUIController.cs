@@ -81,6 +81,10 @@ public class RoomUIController : MonoBehaviour
 
 
 	public Image sniperScope;
+
+	public GameObject switchPopUp;
+	public RoomUI.ActionButton switchGunBtn;
+	public RoomUI.ActionButton noBtn;
 	float scopeTextureRatio;
 	Sprite scopeTextureTmp;
 

@@ -139,7 +139,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 		playerWeapons.QuickSetup(photonView.isMine);
 		dropGunMech.playerNetwork = this;
 		dropGunMech.playerweaponController = playerWeapons;
-
+		bm.GunScreen.SetActive(false);
 		if (!GameSettings.rc.offlineMode)
 		{
 			gameObject.name = photonView.owner.NickName;
@@ -213,9 +213,27 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			cameraMouseLook = playerWeapons.playerCamera.GetComponent<FPSMouseLook>();
 
 			playerWeapons.selectedPrimary = PlayerPrefs.GetInt(GameSettings.LastSelectedPrimaryGun , 0);
-			playerWeapons.selectedSecondary = PlayerPrefs.GetInt(GameSettings.LastSelectedSecondaryGun, 0);
-			playerWeapons.GetWeaponToSelect(1 , playerWeapons.primaryWeapons);
-			playerWeapons.GetWeaponToSelect(2 , playerWeapons.secondaryWeapons);
+			playerWeapons.selectedSecondary = PlayerPrefs.GetInt(GameSettings.LastSelectedSecondaryGun, 1);
+            if (playerWeapons.selectedPrimary <= 0 && playerWeapons.selectedSecondary <= 0 && GameSettings.isRespawned)
+            {
+				playerWeapons.GetWeaponToSelect(1, playerWeapons.primaryWeapons);
+				playerWeapons.GetWeaponToSelect(2, playerWeapons.secondaryWeapons);
+				playerWeapons.GetWeaponToSelect(3, playerWeapons.primaryWeapons);
+            }
+			else if (playerWeapons.selectedPrimary <= 0 && playerWeapons.selectedSecondary <= 0)
+            {
+				 PlayerPrefs.SetInt(GameSettings.LastSelectedSecondaryGun, 1);
+			     playerWeapons.selectedSecondary = PlayerPrefs.GetInt(GameSettings.LastSelectedSecondaryGun, 1);
+				 playerWeapons.GetWeaponToSelect(1, playerWeapons.primaryWeapons);
+				 playerWeapons.GetWeaponToSelect(2, playerWeapons.secondaryWeapons);
+			}
+			else
+            {
+                playerWeapons.GetWeaponToSelect(1, playerWeapons.primaryWeapons);
+                playerWeapons.GetWeaponToSelect(2, playerWeapons.secondaryWeapons);
+            }
+           
+
 			GameSettings.menuOpened = false;
 			GetComponent<FPSController>().startWhoTeam();
 			soldierAnimation.playerWeapons = playerWeapons;

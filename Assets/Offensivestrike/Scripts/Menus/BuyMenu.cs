@@ -93,9 +93,9 @@ public class BuyMenu : MonoBehaviour
     {
 		for (int i = 0; i < weaponList.Count; i++)
 		{
-			if(weaponList[0].weaponCost < 1 && (weaponList == secondaryWeaponsTmp || weaponList == specialWeaponsTmp))
+			if(weaponList[i].weaponCost < 1 && (weaponList == secondaryWeaponsTmp || weaponList == specialWeaponsTmp))
             {
-				PlayerPrefs.SetInt(weaponList[0].firstPersonWeapon.name, 1);
+				PlayerPrefs.SetInt(weaponList[i].firstPersonWeapon.name, 1);
 			}
 
 			if (weaponList[i].BuySection == buySection)
@@ -288,6 +288,8 @@ public class BuyMenu : MonoBehaviour
 					}
 					
 				}
+
+				return;
 			}
 				
 			
@@ -473,54 +475,54 @@ public class BuyMenu : MonoBehaviour
 		}
 	}
 
-	public void  ApplySelectedWeapons ()
-    {
-		//Check what weapons we have selected and apply them to newly spawned player
-		if(rc.ourPlayer)
-        {
-			for(int i = 0; i < rc.ourPlayer.playerWeapons.primaryWeapons.Count; i++)
-            {
-				if(rc.ourPlayer.playerWeapons.primaryWeapons[i].firstPersonWeapon.name == primaryWeaponsTmp[selectedPrimary].firstPersonWeapon.name)
-                {
-					rc.ourPlayer.playerWeapons.selectedPrimary = i;
-				}
-			}
+	//public void  ApplySelectedWeapons ()
+ //   {
+	//	//Check what weapons we have selected and apply them to newly spawned player
+	//	if(rc.ourPlayer)
+ //       {
+	//		for(int i = 0; i < rc.ourPlayer.playerWeapons.primaryWeapons.Count; i++)
+ //           {
+	//			if(rc.ourPlayer.playerWeapons.primaryWeapons[i].firstPersonWeapon.name == primaryWeaponsTmp[selectedPrimary].firstPersonWeapon.name)
+ //               {
+	//				rc.ourPlayer.playerWeapons.selectedPrimary = i;
+	//			}
+	//		}
 			
-			for(int i = 0; i < rc.ourPlayer.playerWeapons.secondaryWeapons.Count; i++)
-            {
-				if(rc.ourPlayer.playerWeapons.secondaryWeapons[i].firstPersonWeapon.name == secondaryWeaponsTmp[selectedSecondary].firstPersonWeapon.name)
-                {
-					rc.ourPlayer.playerWeapons.selectedSecondary = i;
-				}
-			}
+	//		for(int i = 0; i < rc.ourPlayer.playerWeapons.secondaryWeapons.Count; i++)
+ //           {
+	//			if(rc.ourPlayer.playerWeapons.secondaryWeapons[i].firstPersonWeapon.name == secondaryWeaponsTmp[selectedSecondary].firstPersonWeapon.name)
+ //               {
+	//				rc.ourPlayer.playerWeapons.selectedSecondary = i;
+	//			}
+	//		}
 			
-			for(int i = 0; i < rc.ourPlayer.playerWeapons.specialWeapons.Count; i++)
-            {
-				if(rc.ourPlayer.playerWeapons.specialWeapons[i].firstPersonWeapon.name == specialWeaponsTmp[selectedSpecial].firstPersonWeapon.name)
-                {
-					rc.ourPlayer.playerWeapons.selectedSpecial =  i;
-				}
-			}
+	//		for(int i = 0; i < rc.ourPlayer.playerWeapons.specialWeapons.Count; i++)
+ //           {
+	//			if(rc.ourPlayer.playerWeapons.specialWeapons[i].firstPersonWeapon.name == specialWeaponsTmp[selectedSpecial].firstPersonWeapon.name)
+ //               {
+	//				rc.ourPlayer.playerWeapons.selectedSpecial =  i;
+	//			}
+	//		}
 
-			for(int i = 0; i < rc.ourPlayer.playerWeapons.Grenade.Count; i++)
-			{
-				if(rc.ourPlayer.playerWeapons.Grenade[i].firstPersonWeapon.name == grenadeTmp[selectedGrenade].firstPersonWeapon.name)
-				{
-					rc.ourPlayer.playerWeapons.selectedGrenade =  i;
-				}
-			}
+	//		for(int i = 0; i < rc.ourPlayer.playerWeapons.Grenade.Count; i++)
+	//		{
+	//			if(rc.ourPlayer.playerWeapons.Grenade[i].firstPersonWeapon.name == grenadeTmp[selectedGrenade].firstPersonWeapon.name)
+	//			{
+	//				rc.ourPlayer.playerWeapons.selectedGrenade =  i;
+	//			}
+	//		}
 
-			for(int i = 0; i < rc.ourPlayer.playerWeapons.Flash.Count; i++)
-			{
-				if(rc.ourPlayer.playerWeapons.Flash[i].firstPersonWeapon.name == flashTmp[selectedFlash].firstPersonWeapon.name)
-				{
-					rc.ourPlayer.playerWeapons.selectedFlash =  i;
-				}
-			}
+	//		for(int i = 0; i < rc.ourPlayer.playerWeapons.Flash.Count; i++)
+	//		{
+	//			if(rc.ourPlayer.playerWeapons.Flash[i].firstPersonWeapon.name == flashTmp[selectedFlash].firstPersonWeapon.name)
+	//			{
+	//				rc.ourPlayer.playerWeapons.selectedFlash =  i;
+	//			}
+	//		}
 			
-			rc.ourPlayer.playerWeapons.GetWeaponToSelect(lastSelectedWeapon);
-		}
-	}
+	//		rc.ourPlayer.playerWeapons.GetWeaponToSelect(lastSelectedWeapon);
+	//	}
+	//}
 
 	public void  ApplySelectedWeaponsGrenades ()
 	{

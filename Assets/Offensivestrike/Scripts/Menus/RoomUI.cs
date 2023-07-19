@@ -158,6 +158,7 @@ public class RoomUI : Photon.MonoBehaviour
 	
 	 ActionButton shopBuyT;
 	ActionButton dropGunBtn;
+	ActionButton switchBtn, noBtn;
 
 	public GameObject moveTouch;
 
@@ -270,6 +271,8 @@ public class RoomUI : Photon.MonoBehaviour
 		shopBuyT = uIController.shopBuyT;
 		dropGunBtn = uIController.dropGunBtn;
 		buyMenuText = uIController.buyMenuText;
+		switchBtn = uIController.switchGunBtn;
+		noBtn = uIController.noBtn;
 
 		respawnTimeText = uIController.respawnTimeText;
 		shieldText = uIController.shieldText;
@@ -451,13 +454,28 @@ public class RoomUI : Photon.MonoBehaviour
 						Gun2Ammo.text = "";
 						Gun2Button.icon.enabled = false;
 					}
+					// For Secondary Gun
+					if (rc.ourPlayer.playerWeapons.secondaryWeapons[rc.ourPlayer.playerWeapons.selectedSecondary].firstPersonWeapon != null && rc.ourPlayer.playerWeapons.selectedSecondary > 0)
+					{
+						Gun3Button.icon.enabled = true;
+						Gun5 = Resources.Load<Sprite>(rc.ourPlayer.playerWeapons.secondaryWeapons[rc.ourPlayer.playerWeapons.selectedSecondary].firstPersonWeapon.weaponName);
+						Gun3Button.icon.sprite = Gun5;
+						Gun1Ammo.text = rc.ourPlayer.playerWeapons.secondaryWeapons[rc.ourPlayer.playerWeapons.selectedSecondary].firstPersonWeapon.wSettings.bulletsPerClip.ToString() + " / " + rc.ourPlayer.playerWeapons.secondaryWeapons[rc.ourPlayer.playerWeapons.selectedSecondary].firstPersonWeapon.wSettings.reserveBullets.ToString();
+					}
+					else
+					{
+						Gun1Ammo.text = "";
+						Gun3Button.icon.enabled = false;
+					}
+
 				}
 
+				// undo old Functionality
 
-					Gun4 = Resources.Load<Sprite> (rc.ourPlayer.playerWeapons.secondaryWeapons [rc.ourPlayer.playerWeapons.selectedSecondary].firstPersonWeapon.weaponName);
-					if (Gun4 == null) { Gun4 = Resources.Load<Sprite>(rc.ourPlayer.playerWeapons.secondaryWeapons[0].firstPersonWeapon.weaponName); }
-				         Gun3Button.icon.sprite = Gun4;
-					     Gun1Ammo.text = rc.ourPlayer.playerWeapons.secondaryWeapons [rc.ourPlayer.playerWeapons.selectedSecondary].firstPersonWeapon.wSettings.bulletsPerClip.ToString () + " / " + rc.ourPlayer.playerWeapons.secondaryWeapons [rc.ourPlayer.playerWeapons.selectedSecondary].firstPersonWeapon.wSettings.reserveBullets.ToString ();
+					//Gun4 = Resources.Load<Sprite> (rc.ourPlayer.playerWeapons.secondaryWeapons [rc.ourPlayer.playerWeapons.selectedSecondary].firstPersonWeapon.weaponName);
+					//if (Gun4 == null) { Gun4 = Resources.Load<Sprite>(rc.ourPlayer.playerWeapons.secondaryWeapons[0].firstPersonWeapon.weaponName); }
+				 //        Gun3Button.icon.sprite = Gun4;
+					//     Gun1Ammo.text = rc.ourPlayer.playerWeapons.secondaryWeapons [rc.ourPlayer.playerWeapons.selectedSecondary].firstPersonWeapon.wSettings.bulletsPerClip.ToString () + " / " + rc.ourPlayer.playerWeapons.secondaryWeapons [rc.ourPlayer.playerWeapons.selectedSecondary].firstPersonWeapon.wSettings.reserveBullets.ToString ();
 
 
 					
@@ -987,6 +1005,18 @@ public class RoomUI : Photon.MonoBehaviour
 			dropGunBtn.uiBtnScript.isPressing = false;
 			rc.DropGuns();
         }
+
+		if (switchBtn.uiBtnScript.isPressing)
+		{
+			switchBtn.uiBtnScript.isPressing = false;
+			rc.SwitchGun();
+		}
+
+		if (noBtn.uiBtnScript.isPressing)
+		{
+			noBtn.uiBtnScript.isPressing = false;
+			RoomUIController.instance.switchPopUp.SetActive(false);
+		}
 
 		if (!GameSettings.menuOpened && ToggleFire.uiBtnScript.isPressing)
 		{

@@ -753,7 +753,7 @@ public class RoomController : Photon.MonoBehaviour
 			bm.GunScreen.SetActive(true);
 			bm.LoadGuns(1);
 			//	bm.enabled = !showBuyMenu;
-			GameSettings.menuOpened = true;
+			//GameSettings.menuOpened = true;
 		}
         else
         {
@@ -773,6 +773,11 @@ public class RoomController : Photon.MonoBehaviour
     {
 		ourPlayer.dropGunMech.DropGun();
     }
+
+	public void SwitchGun()
+	{
+		ourPlayer.playerWeapons.switchDropGun();
+	}
 	void LockCursor(bool lockCursor)
 	{
 
@@ -1525,6 +1530,7 @@ public class RoomController : Photon.MonoBehaviour
 	{
 		Debug.Log("h4");
 		//playerKilled = true;
+		bm.GunScreen.SetActive(false);
 		if (!wasSwitched)
 		{
 			ZeroStrikeX.clip = KillNormalDie;
@@ -1543,7 +1549,10 @@ public class RoomController : Photon.MonoBehaviour
 			//	bm.ResetSelectedWeapons();
 			ourPlayer.playerWeapons.selectedPrimary = PlayerPrefs.GetInt(GameSettings.LastSelectedPrimaryGun);
 			ourPlayer.playerWeapons.selectedSecondary = PlayerPrefs.GetInt(GameSettings.LastSelectedSecondaryGun);
-			ourPlayer.playerWeapons.GetWeaponToSelect(GameSettings.switchWeaponIndex);
+			ourPlayer.playerWeapons.GetWeaponToSelect(1, ourPlayer.playerWeapons.primaryWeapons);
+			ourPlayer.playerWeapons.GetWeaponToSelect(2, ourPlayer.playerWeapons.secondaryWeapons);
+			ourPlayer.playerWeapons.GetWeaponToSelect(3, ourPlayer.playerWeapons.primaryWeapons);
+			GameSettings.isRespawned = true;
 		}
 
 		Renderer[] enemySMRs = null;

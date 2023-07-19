@@ -100,7 +100,7 @@ public class PlayerWeapons : MonoBehaviour
 	//Primary, Secondary and Special weapons should be index from weapons array
 	//For example if primaryWeapon = 0, than player will select Element 1 from weapons (primaryWeapons[1])
 	public int selectedPrimary = 0;
-	public int selectedSecondary = 0;
+	public int selectedSecondary = 1;
 	public int selectedSpecial = 0;
 	public int selectedGrenade = 0;
 	public int selectedFlash = 0;
@@ -524,6 +524,38 @@ public class PlayerWeapons : MonoBehaviour
 
 		//DoWeaponBobbing();
 	}
+
+	public void switchDropGun()
+    {
+		if(GameSettings.droppedGunType == 1)
+        {
+			for(int i = 0; i < primaryWeapons.Count; i++)
+            {
+				if(i == GameSettings.droppedGunIndex)
+                {
+					selectedPrimary = i;
+					GetWeaponToSelect(GameSettings.droppedGunType, primaryWeapons);
+					playerNetwork.dropGunMech.DestroyIt();
+					return;
+				}
+            }
+        }
+		else if(GameSettings.droppedGunType == 2)
+        {
+			for (int i = 0; i < secondaryWeapons.Count; i++)
+			{
+				if (i == GameSettings.droppedGunIndex)
+				{
+					selectedSecondary = i;
+					GetWeaponToSelect(GameSettings.droppedGunType, secondaryWeapons);
+					playerNetwork.dropGunMech.DestroyIt();
+					return;
+				}
+			}
+		}
+		
+	}
+
 
 	public void GetWeaponToSelect (int type)
 	{

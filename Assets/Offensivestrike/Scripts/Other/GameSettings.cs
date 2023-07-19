@@ -36,6 +36,7 @@ public class GameSettings : MonoBehaviour
 	public static bool jumpScheduled = false;
 	public static bool isPrimaryGun = false;
 	public static bool isSecondaryGun = false;
+	public static bool isRespawned = false;
 #endif
 
 	public static string LastSelectedPrimaryGun = "LastSelectedPrimaryGun";
@@ -49,9 +50,13 @@ public class GameSettings : MonoBehaviour
 	//Random number used for value obfuscation
 	public static int cnst = Random.Range(1111111, 9999999);
 
+	public static int droppedGunIndex = 0;
+	public static int droppedGunType = 0;
+
 	//Camera settings
 	public static float defaultFOV = 60;
 	public static float currentFOV = GameSettings.defaultFOV;
+
 
 	public static Sprite currentScopeTexture = null; //This is assigned at PlayerWeapons.cs when we aiming and using scope texture
 
