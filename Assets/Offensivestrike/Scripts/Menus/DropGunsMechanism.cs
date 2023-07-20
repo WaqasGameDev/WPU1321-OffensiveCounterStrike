@@ -42,15 +42,23 @@ public class DropGunsMechanism : MonoBehaviour
         {
             if (dropGunArray[i].fireType == weaponList[i].fireType && i == weaponINdex)
             {
-                droppedGun = Instantiate(dropGunArray[i].gameObject, playerNetwork.transform.position, Quaternion.identity);
-                Physics.IgnoreCollision(playerNetwork.GetComponent<CharacterController>(), droppedGun.GetComponent<Collider>());
-                Physics.IgnoreCollision(playerNetwork.GetComponent<CapsuleCollider>(), droppedGun.GetComponent<Collider>());
+                if(GameSettings.rc.offlineMode)
+                {
+                    droppedGun = Instantiate(dropGunArray[i].gameObject, playerNetwork.transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    droppedGun = PhotonNetwork.Instantiate(dropGunArray[i].name, playerNetwork.transform.position, Quaternion.identity, 0);
+                }
+                
+                Physics.IgnoreCollision(playerNetwork.GetComponent<CharacterController>(), droppedGun.GetComponent<DropableGun>().childCollider);
+                Physics.IgnoreCollision(playerNetwork.GetComponent<CapsuleCollider>(), droppedGun.GetComponent<DropableGun>().childCollider);
                 droppedGun.SetActive(true);
                 dropGunArray[i].tempObject = droppedGun;
-                Rigidbody gunRigidbody = droppedGun.AddComponent<Rigidbody>();
+                Rigidbody gunRigidbody = droppedGun.GetComponent<Rigidbody>();
                 Vector3 throwDirection = playerNetwork.transform.forward + Vector3.up;
                 gunRigidbody.AddForce(throwDirection * throwForce, ForceMode.Impulse);
-                StartCoroutine(StopPhysic(droppedGun , gunRigidbody));
+               // StartCoroutine(StopPhysic(droppedGun , gunRigidbody));
                 return;
             }
         }
@@ -101,14 +109,18 @@ public class DropGunsMechanism : MonoBehaviour
     public void DestroyIt()
     {
         RoomUIController.instance.switchPopUp.SetActive(false);
-        if (GameSettings.droppedGunType == 1)
+        if (RoomUIController.instance.tempGunObject)
         {
-            Destroy(primaryGuns[GameSettings.droppedGunIndex].tempObject);
+            RoomUIController.instance.tempGunObject.GetComponent<DropableGun>().DestroyOnAll();
         }
-        else if (GameSettings.droppedGunType == 2)
-        {
-            Destroy(secondaryGuns[GameSettings.droppedGunIndex].tempObject);
-        }
+        //if (GameSettings.droppedGunType == 1)
+        //{
+        //    PhotonNetwork.Destroy(primaryGuns[GameSettings.droppedGunIndex].tempObject);
+        //}
+        //else if (GameSettings.droppedGunType == 2)
+        //{
+        //    PhotonNetwork.Destroy(secondaryGuns[GameSettings.droppedGunIndex].tempObject);
+        //}
     
     }
 }

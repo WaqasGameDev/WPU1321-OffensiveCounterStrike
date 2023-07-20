@@ -527,32 +527,40 @@ public class PlayerWeapons : MonoBehaviour
 
 	public void switchDropGun()
     {
-		if(GameSettings.droppedGunType == 1)
+		if (!playerNetwork.isBot && !playerNetwork.photonView.isMine)
         {
-			for(int i = 0; i < primaryWeapons.Count; i++)
-            {
-				if(i == GameSettings.droppedGunIndex)
-                {
-					selectedPrimary = i;
-					GetWeaponToSelect(GameSettings.droppedGunType, primaryWeapons);
-					playerNetwork.dropGunMech.DestroyIt();
-					return;
-				}
-            }
-        }
-		else if(GameSettings.droppedGunType == 2)
+			SwitchWeapon(totalWeapons[GameSettings.droppedGunIndex].thirdPersonWeapon, false);
+		}
+		else
         {
-			for (int i = 0; i < secondaryWeapons.Count; i++)
+			if (GameSettings.droppedGunType == 1)
 			{
-				if (i == GameSettings.droppedGunIndex)
+				for (int i = 0; i < primaryWeapons.Count; i++)
 				{
-					selectedSecondary = i;
-					GetWeaponToSelect(GameSettings.droppedGunType, secondaryWeapons);
-					playerNetwork.dropGunMech.DestroyIt();
-					return;
+					if (i == GameSettings.droppedGunIndex)
+					{
+						selectedPrimary = i;
+						GetWeaponToSelect(GameSettings.droppedGunType, primaryWeapons);
+						playerNetwork.dropGunMech.DestroyIt();
+						return;
+					}
+				}
+			}
+			else if (GameSettings.droppedGunType == 2)
+			{
+				for (int i = 0; i < secondaryWeapons.Count; i++)
+				{
+					if (i == GameSettings.droppedGunIndex)
+					{
+						selectedSecondary = i;
+						GetWeaponToSelect(GameSettings.droppedGunType, secondaryWeapons);
+						playerNetwork.dropGunMech.DestroyIt();
+						return;
+					}
 				}
 			}
 		}
+		
 		
 	}
 

@@ -85,6 +85,10 @@ public class RoomUIController : MonoBehaviour
 	public GameObject switchPopUp;
 	public RoomUI.ActionButton switchGunBtn;
 	public RoomUI.ActionButton noBtn;
+
+	[HideInInspector]
+	public GameObject tempGunObject;
+
 	float scopeTextureRatio;
 	Sprite scopeTextureTmp;
 

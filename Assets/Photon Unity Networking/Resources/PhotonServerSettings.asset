@@ -59,4 +59,6 @@ MonoBehaviour:
   - WonCT
   - WonT
   - <OnGUI>g__SendChatRemote|55_3
+  - DestroyItem
+  - RPCDestroyItem
   DisableAutoOpenWizard: 1
