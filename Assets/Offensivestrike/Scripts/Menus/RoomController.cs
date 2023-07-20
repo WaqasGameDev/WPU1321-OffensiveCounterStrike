@@ -745,7 +745,7 @@ public class RoomController : Photon.MonoBehaviour
 		if (offlineMode /*&& timeToPurchase > 0*/)
 		{
 			Debug.Log("ZAK98");
-			showBuyMenu = !showBuyMenu;
+			showBuyMenu = false;
 			showScoreBoard = false;
 			showOptions = false;
 			//	bm.buySection = BuyMenu.BuySection.Secondary;
@@ -758,7 +758,7 @@ public class RoomController : Photon.MonoBehaviour
         else
         {
 			//print ("Buy menu key pressed");
-			showBuyMenu = !showBuyMenu;
+			showBuyMenu = false;
 			showScoreBoard = false;
 			showOptions = false;
 			//bm.buySection = BuyMenu.BuySection.Secondary;
