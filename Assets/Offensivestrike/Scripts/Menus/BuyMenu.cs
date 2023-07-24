@@ -218,7 +218,7 @@ public class BuyMenu : MonoBehaviour
 
 				if(GunData[GunBtnIndex].fireType == specialWeaponsTmp[0].fireType)
                 {
-					Buy(specialWeaponsTmp, GunBtnIndex, 4);
+					Buy(specialWeaponsTmp, GunBtnIndex, 3);
 				}
 				else if (GunData[GunBtnIndex].fireType == grenadeTmp[0].fireType)
 				{
@@ -319,14 +319,15 @@ public class BuyMenu : MonoBehaviour
 		else if (weaponList == grenadeTmp)
 		{
 			selectedGrenade = index;
-			rc.ourPlayer.playerWeapons.selectedGrenade = selectedGrenade;
-			PlayerPrefs.SetInt(GameSettings.LastSelectedPrimaryGun, selectedPrimary);
+			rc.ourPlayer.playerWeapons.selectedGrenade = 1;
+			PlayerPrefs.SetInt(GameSettings.LastSelectedSpecialGun, selectedSpecial);
+			//Invoke("ApplySelectedWeaponsGrenades", 0.035f);
 		}
 		else if (weaponList == flashTmp)
 		{
 			selectedFlash = index;
-			rc.ourPlayer.playerWeapons.selectedFlash = selectedFlash;
-			PlayerPrefs.SetInt(GameSettings.LastSelectedPrimaryGun, selectedPrimary);
+			rc.ourPlayer.playerWeapons.selectedFlash = 2;
+			PlayerPrefs.SetInt(GameSettings.LastSelectedSpecialGun, selectedSpecial);
 		}
 
 		lastSelectedWeapon = type;
@@ -464,7 +465,7 @@ public class BuyMenu : MonoBehaviour
     {
 		for(int i = 0; i < wpmList.Count; i++)
         {
-			if(i == selectedIndex || wpmList[i].weaponCost < 1)
+			if(i == selectedIndex && wpmList[i].weaponCost < 1)
             {
 				wpmList[i].obfuscatedPrice = GameSettings.cnst;
 			}
@@ -607,10 +608,14 @@ public class BuyMenu : MonoBehaviour
 
     void Update()
 	{
-		if (rc.ourPlayer) 
-		{
-			selectedSpecial = rc.ourPlayer.playerWeapons.selectedSpecial;
+		if(rc != null)
+        {
+			if (rc.ourPlayer)
+			{
+				selectedSpecial = rc.ourPlayer.playerWeapons.selectedSpecial;
+			}
 		}
+		
 	}
 
 	void BuyMenuWindow (int windowID)

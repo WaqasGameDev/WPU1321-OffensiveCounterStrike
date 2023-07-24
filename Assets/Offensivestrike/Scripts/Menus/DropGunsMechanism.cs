@@ -34,6 +34,21 @@ public class DropGunsMechanism : MonoBehaviour
             DropMechanism(playerweaponController.secondaryWeapons , secondaryGuns, playerweaponController.selectedSecondary);
             ChangeGun();
         }
+        else
+        {
+            if(playerweaponController.selectedPrimary > 0)
+            {
+                DropMechanism(playerweaponController.primaryWeapons, primaryGuns, playerweaponController.selectedPrimary);
+                GameSettings.isPrimaryGun = true;
+                ChangeGun();
+            }
+            else if (playerweaponController.selectedSecondary > 0)
+            {
+                DropMechanism(playerweaponController.secondaryWeapons, secondaryGuns, playerweaponController.selectedSecondary);
+                GameSettings.isSecondaryGun = true;
+                ChangeGun();
+            }
+        }
     }
     GameObject droppedGun;
     void DropMechanism(List<PlayerWeapons.WeaponSet> weaponList , DropableGun[] dropGunArray , int weaponINdex)
@@ -78,7 +93,7 @@ public class DropGunsMechanism : MonoBehaviour
             }
             else
             {
-                playerweaponController.GetWeaponToSelect(2, playerweaponController.primaryWeapons);
+                playerweaponController.GetWeaponToSelect(3, playerweaponController.primaryWeapons);
             }
         }
         else

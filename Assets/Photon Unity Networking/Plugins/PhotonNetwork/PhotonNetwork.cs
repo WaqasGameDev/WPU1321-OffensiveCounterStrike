@@ -1191,6 +1191,7 @@ public static class PhotonNetwork
     /// <param name="gameVersion">This client's version number. Users are separated from each other by gameversion (which allows you to make breaking changes).</param>
     public static bool ConnectUsingSettings(string gameVersion)
     {
+
         if (networkingPeer.PeerState != PeerStateValue.Disconnected)
         {
             Debug.LogWarning("ConnectUsingSettings() failed. Can only connect while in state 'Disconnected'. Current state: " + networkingPeer.PeerState);
@@ -1223,6 +1224,7 @@ public static class PhotonNetwork
         SwitchToProtocol(PhotonServerSettings.Protocol);
         networkingPeer.SetApp(PhotonServerSettings.AppID, gameVersion);
 
+        
         if (PhotonServerSettings.HostType == ServerSettings.HostingOption.OfflineMode)
         {
             offlineMode = true;

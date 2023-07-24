@@ -82,7 +82,7 @@ public class ConnectMenu : Photon.MonoBehaviour
 	string networkVersion = "v2.7.7";
 #else
     //Network version for Desktop
-    string networkVersion = "v1.7.5";
+    string networkVersion = "v1.7.6";
 #endif
 
 
@@ -2119,7 +2119,7 @@ public class ConnectMenu : Photon.MonoBehaviour
 		loadingMap = true;
 
 		print(xml.button43);
-
+	
 		while (!PhotonNetwork.connected)
 		{
 			if (PhotonNetwork.connectionState != ConnectionState.InitializingApplication && PhotonNetwork.connectionState != ConnectionState.Connecting &&

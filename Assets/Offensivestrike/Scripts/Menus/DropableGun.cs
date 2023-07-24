@@ -13,10 +13,14 @@ public class DropableGun : MonoBehaviour
     public GameObject tempObject;
     public Collider childCollider;
 
+    public Transform []childsObjects;
+
     private void Start()
     {
         //gameObject.AddComponent<Rigidbody>();
         StartCoroutine(StopPhysic(gameObject, gameObject.GetComponent<Rigidbody>()));
+
+        childsObjects = gameObject.GetComponentsInChildren<Transform>();
     }
 
     IEnumerator StopPhysic(GameObject go, Rigidbody rb)
@@ -24,7 +28,7 @@ public class DropableGun : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         Collider col = go.GetComponent<BoxCollider>();
         col.enabled = true;
-        rb.isKinematic = true;
+        //rb.isKinematic = true;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -42,6 +46,7 @@ public class DropableGun : MonoBehaviour
             }
 
         }
+     
     }
 
     //private void OnTriggerExit(Collider other)
@@ -76,6 +81,7 @@ public class DropableGun : MonoBehaviour
 
     public void DestroyOnAll()
     {
+        
         if(GameSettings.rc.offlineMode)
         {
             Destroy(this.gameObject);
@@ -84,8 +90,16 @@ public class DropableGun : MonoBehaviour
         {
             if (gameObject.GetComponent<PhotonView>())
             {
-                gameObject.GetComponent<PhotonView>().RPC("RPCDestroyItem", PhotonTargets.AllViaServer);
+                gameObject.GetComponent<PhotonView>().RPC("RPCDestroyItem", PhotonTargets.All);
                 //RPCDestroyItem();
+            }
+        }
+
+        if (childsObjects!=null)
+        {
+            for (int i=0; i< childsObjects.Length;i++)
+            {
+                childsObjects[i].gameObject.SetActive(false);
             }
         }
        
@@ -95,7 +109,7 @@ public class DropableGun : MonoBehaviour
     {
         if (gameObject.GetComponent<PhotonView>().isMine)
         {
-                    PhotonNetwork.Destroy(this.gameObject);
+            PhotonNetwork.Destroy(this.gameObject);
 
         }
     }

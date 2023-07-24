@@ -79,6 +79,7 @@ public class bl_LoginPro : bl_LoginProBase
     {
         remaingAttempts = ULoginSettings.maxLoginAttempts;
 
+        //PhotonNetwork.gameVersion = "12525f";
 
 
 
