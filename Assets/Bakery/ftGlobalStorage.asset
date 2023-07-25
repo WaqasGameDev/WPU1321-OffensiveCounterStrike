@@ -402,7 +402,58 @@ MonoBehaviour:
   - Assets/Bakery/examples/content/floor_lamp.FBX
   - Assets/PickUp Object/Shape_01.fbx
   - Assets/PickUp Object/Fps_Checkpoint.fbx
-  uvOverlapAssetList: 00000000ffffffff0101000001010000
+  - Assets/Butterflyknife/Hand_anim.fbx
+  - Assets/Butterflyknife/Full_anim.fbx
+  - Assets/Animations/Animations/Player/Soldier Animations/Run_Anims/Soldier@RunBackwardsAim.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Walk_Anims/Soldier@WalkBackwardsAim.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Run_Anims/Soldier@RunAim.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Walk_Anims/Soldier@WalkAim.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Run_Anims/Soldier@StrafeRunLeft.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Walk_Anims/Soldier@StrafeWalkLeft.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Walk_Anims/Soldier@RelaxedWalk.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Jump_Anims/new/Soldier@RunJump.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Walk_Anims/Soldier@StrafeWalkRightAim.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Walk_Anims/Soldier@StrafeWalkLeftAim.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Jump_Anims/new/Soldier@StandingJump.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Walk_Anims/Soldier@Walk.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Idle_Standing_Anims/Soldier@Idle.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Idle_Standing_Anims/Soldier@StandingReloadM4.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Run_Anims/Soldier@Run.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Walk_Anims/Soldier@WalkBackwards.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Walk_Anims/Soldier@StrafeWalkRight.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Idle_Standing_Anims/Soldier@StandingFire.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Run_Anims/Soldier@StrafeRunRightAim.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Run_Anims/Soldier@StrafeRunLeftAim.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Idle_Standing_Anims/Soldier@Standing.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Run_Anims/Soldier@StrafeRunRight.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Idle_Standing_Anims/Soldier@StandingAim.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Idle_Standing_Anims/Soldier@StandingFireRPG.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Crouch_Anims/Soldier@CrouchAim.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Run_Anims/Soldier@RunBackwards.FBX
+  - Assets/Animations/Animations/Player/Soldier Animations/Crouch_Anims/Soldier@Crouch.FBX
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/Dodge Anims/StaggerBack.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/CoverAnims/CoverCenterStand.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/Dodge Anims/Dodge_R.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Weapons/M4.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/Dodge Anims/RunLeap.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/GrenadeAnimations/SoldierGrenade.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/CoverAnims/Cover_Idle.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/CoverAnims/StandCover_Enter_Right.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/CoverAnims/CoverRightFire.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/CoverAnims/CoverLeftFire.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/CoverAnims/CoverCenterReturn.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Helmet.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/CoverAnims/CoverRightStand.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/Dodge Anims/Dodge_L.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/CoverAnims/CoverLeftReturn.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/CoverAnims/CoverLeftStand.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/CoverAnims/CoverRightReturn.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/CoverAnims/StandCover_Return_Right.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/Dodge Anims/Vault.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/Soldier.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Soldier/Meshes/Soldier/CoverAnims/StandCover_Lean_Right.fbx
+  - Assets/Tactical Shooter AI/Tactical AI/Art/Head.fbx
+  uvOverlapAssetList: 00000000ffffffff0101000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101000000000000000000000000000000000000000000000000000000000000010100000000000001010000
   xatlasWarningShown: 0
   foundCompatibleSetup: 0
   gpuName: 
