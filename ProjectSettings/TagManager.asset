@@ -32,6 +32,27 @@ TagManager:
   - GasTank
   - ExplosiveBarrel
   - Bot
+  - Action
+  - Weapon
+  - PlayerUI
+  - Ignore Ragdoll
+  - HitBox
+  - Glass
+  - Level Parts
+  - Cover
+  - LookAt
+  - Dirt
+  - Concrete
+  - Enemy
+  - Barrel
+  - Collectable
+  - LadderTrigger
+  - AutoCrouch
+  - Boss
+  - Interactable
+  - CompanionAI
+  - AI Controller
+  - Tactical
   layers:
   - Default
   - TransparentFX

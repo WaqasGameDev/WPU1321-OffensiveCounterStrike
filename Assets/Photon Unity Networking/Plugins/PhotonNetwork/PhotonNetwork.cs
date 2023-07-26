@@ -2925,7 +2925,7 @@ public static class PhotonNetwork
 
         if (room == null)
         {
-            Debug.LogWarning("RPCs can only be sent in rooms. Call of \"" + methodName + "\" gets executed locally only, if at all.");
+           // Debug.LogWarning("RPCs can only be sent in rooms. Call of \"" + methodName + "\" gets executed locally only, if at all.");
             return;
         }
 

@@ -651,6 +651,12 @@ public class FPSWeapon : MonoBehaviour
 					Instantiate(playerWeapons.bloodParticles, hit.point, Quaternion.LookRotation(hit.normal));
 					hit.transform.GetComponent<HealthScript>().ApplyDamage(25f);
 			}
+			if(hit.collider.gameObject.GetComponent<TacticalAI.HitBox>())
+            {
+				Instantiate(playerWeapons.bloodParticles, hit.point, Quaternion.LookRotation(hit.normal));
+				hit.collider.gameObject.GetComponent<TacticalAI.HitBox>().Damage(25f);
+
+			}
 
 			if (hit.transform.CompareTag("Ai") && (int)playerNetwork.photonView.owner.CustomProperties["Team"] == 2)
             {

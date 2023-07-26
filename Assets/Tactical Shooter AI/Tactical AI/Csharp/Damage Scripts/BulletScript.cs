@@ -94,13 +94,13 @@ namespace TacticalAI
             //Produce the appropriate special effect
             if (hit.transform.CompareTag(hitEffectTag) && hitEffect)
             {
-                    GameObject currentHitEffect = (GameObject)(Instantiate(hitEffect, hit.point, myTransform.rotation));
-                    GameObject.Destroy(currentHitEffect, hitEffectDestroyTime);
+                    //GameObject currentHitEffect = (GameObject)(Instantiate(hitEffect, hit.point, myTransform.rotation));
+                    //GameObject.Destroy(currentHitEffect, hitEffectDestroyTime);
             }
             else if (missEffect)
             {
-                GameObject currentMissEffect = (GameObject)(Instantiate(missEffect, hit.point + hit.normal * 0.01f, Quaternion.LookRotation(hit.normal)));
-                GameObject.Destroy(currentMissEffect, missEffectDestroyTime);
+                //GameObject currentMissEffect = (GameObject)(Instantiate(missEffect, hit.point + hit.normal * 0.01f, Quaternion.LookRotation(hit.normal)));
+                //GameObject.Destroy(currentMissEffect, missEffectDestroyTime);
             }
             this.enabled = false;
             yield return null;

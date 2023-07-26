@@ -41,20 +41,27 @@ namespace TacticalAI
             {
                 hit = colliders[i];
                 //Make sure we have line of sight to the collider
-                if (!Physics.Linecast(transform.position, hit.transform.position, layerMask))
+                if (Physics.Linecast(transform.position, hit.transform.position, layerMask))
                 {
                     //Make damage fall off if further away.  Scaling is linear
                     if(scaleDamageByDistance){
                         damageThisTime = damage * Vector3.Distance(transform.position , hit.transform.position) / explosionRadius;
                     }
 
-                    //Uncomment for RFPS
-                    /*
-                    if (hit.GetComponent<Collider>().gameObject.GetComponent<FPSPlayer>())
+                   
+                    if (hit.transform.CompareTag("Player"))
                     {
-                    hit.GetComponent<Collider>().gameObject.GetComponent<FPSPlayer>().ApplyDamage(damage);
+                        int[] values = new int[3];
+                        GameSettings.rc.DoHitDetector((int)values[2]);
+                        var PN = hit.transform.GetComponent<PlayerNetwork>();
+                        PN.rc.currentHP -= 2;
+                        if (PN.rc.currentHP < 1)
+                        {
+                            PN.KillPlayer(0);
+
+                        }
+
                     }
-                    */
 
                     //Ideally, you should use single hitbox damage, but non-paragon AI scripts may not support it.
                     if (shouldDoSingleHitboxDamage)

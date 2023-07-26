@@ -484,7 +484,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 137035866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -61.37, y: -12.53525, z: 17.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3648,7 +3648,13 @@ PrefabInstance:
         type: 3}
       propertyPath: botPrefab
       value: 
-      objectReference: {fileID: 103278, guid: c450efdfc5a66d7488bf6c100851506c, type: 3}
+      objectReference: {fileID: 3273793609437052470, guid: addf08bcbfccf2f45a61c7be8a1961f8,
+        type: 3}
+    - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
+        type: 3}
+      propertyPath: botEnemyCount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 323081674313329116, guid: 74e71b69282188641b4623c821c65602,
         type: 3}
       propertyPath: botSpawnPoint.Array.size

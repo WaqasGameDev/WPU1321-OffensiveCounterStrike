@@ -762,6 +762,8 @@ namespace TacticalAI
                 GameObject.Destroy(animationScript.myAIBodyTransform.gameObject, timeUntilBodyIsDestroyedAfterDeath);
                 GameObject.Destroy(gameObject);
             }
+
+            EnemyManager.instance.RemoveNewEnemies(this.gameObject);
         }
 
 

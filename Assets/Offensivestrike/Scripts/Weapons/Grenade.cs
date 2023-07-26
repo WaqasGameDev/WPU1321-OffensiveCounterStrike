@@ -75,12 +75,22 @@ public class Grenade : MonoBehaviour {
 				if (intoExp.tag == "Player") {
 					AreaOfEffectDamage (intoExp.gameObject);
 				}
+				if(intoExp.gameObject.GetComponent<TacticalAI.HitBox>())
+                {
+					intoExp.gameObject.GetComponent<TacticalAI.HitBox>().ApplyDamage(100f);
+
+				}
 				Destroy(gameObject, 1.68f);
 			}
 
 			foreach (Collider inExp in Arround) {
 				if (inExp.tag == "Player") {
 					AreaOfEffectLongDamage (inExp.gameObject);
+				}
+				if (inExp.gameObject.GetComponent<TacticalAI.HitBox>())
+				{
+					inExp.gameObject.GetComponent<TacticalAI.HitBox>().ApplyDamage(100f);
+
 				}
 				Destroy(gameObject, 1.68f);
 			}

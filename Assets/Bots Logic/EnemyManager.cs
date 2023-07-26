@@ -16,6 +16,8 @@ public class EnemyManager : MonoBehaviour
     private List<GameObject> spawnedBots = new List<GameObject>();
     public bool isPlayerSpawned = false;
 
+    List<GameObject> enemies = new List<GameObject>();
+    int randomSpawningPoint;
     private void Awake()
     {
         if (instance == null)
@@ -27,7 +29,8 @@ public class EnemyManager : MonoBehaviour
     {
        
         initialBotCount = botEnemyCount;
-        StartCoroutine("CheckToSpawnEnemies");
+        //  StartCoroutine("CheckToSpawnEnemies");
+        SpawnNewEnemies();
     }
 
     public void NotifyBotsAboutPlayer()
@@ -88,4 +91,40 @@ public class EnemyManager : MonoBehaviour
         Debug.LogWarning("STOPPING ENEMY SPAWNING");
         StopCoroutine("CheckToSpawnEnemies");
     }
+
+    // UMair Work
+
+    public void SpawnNewEnemies()
+    {
+        randomSpawningPoint = Random.Range(0, botSpawnPoint.Length + 1);
+        if(enemies.Count <= 0)
+        {
+            for(int i = 0; i < botEnemyCount; i++)
+            {
+                var bot = Instantiate(botPrefab, botSpawnPoint[i].position, Quaternion.identity);
+                bot.name += totalBotsSpawnedSoFar;
+                enemies.Add(bot);
+            }
+        }
+        else if (enemies.Count > 0)
+        {
+            for (int i = enemies.Count; i < botEnemyCount; i++)
+            {
+                var bot = Instantiate(botPrefab, botSpawnPoint[randomSpawningPoint].position, Quaternion.identity);
+                bot.name += totalBotsSpawnedSoFar;
+                enemies.Add(bot);
+            }
+
+        }
+        totalBotsSpawnedSoFar++;
+
+    }
+
+    public void RemoveNewEnemies(GameObject bot)
+    {
+        enemies.Remove(bot);
+        SpawnNewEnemies();
+    }
+
+
 }

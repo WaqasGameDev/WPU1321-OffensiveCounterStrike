@@ -118,7 +118,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
 	void Start()
 	{
 		teamWhoSelect = false;
-		//EnemyManager.instance?.NotifyBotsAboutPlayer();
+	//	EnemyManager.instance?.NotifyBotsAboutPlayer();
 	}
 
 	// Use this for initialization
