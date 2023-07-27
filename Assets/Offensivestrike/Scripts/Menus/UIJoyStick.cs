@@ -39,6 +39,13 @@ public class UIJoyStick : MonoBehaviour, IPointerUpHandler, IPointerDownHandler,
         joyStickInput = new Vector2(0, 0);
         joyStick.anchoredPosition = new Vector2(0, 0);
     }
+    private void OnDisable()
+    {
+        SetJoystickColor(normalColor);
+
+        joyStickInput = new Vector2(0, 0);
+        joyStick.anchoredPosition = new Vector2(0, 0);
+    }
     public void OnDrag(PointerEventData eventdata)
     {
 

@@ -84,6 +84,7 @@ public class FPSController : MonoBehaviour
 	float slopeAngle;
 	public bool WhoTeam = false;
 
+	 //float multiSpeed = 200;
 	void Start()
 	{
 		WhoTeam = false;
@@ -347,8 +348,8 @@ public class FPSController : MonoBehaviour
 				inputXSet = 0;
 			}
 
-			inputY = Mathf.Lerp(inputY, inputYSet, Time.deltaTime * 19);
-			inputX = Mathf.Lerp(inputX, inputXSet, Time.deltaTime * 19);
+			inputY = Mathf.Lerp(inputY, inputYSet, Time.deltaTime * 19)*1.05f;
+			inputX = Mathf.Lerp(inputX, inputXSet, Time.deltaTime * 19)*1.05f;
 			// If both horizontal and vertical are used simultaneously, limit speed (if allowed), so the total doesn't exceed normal move speed
 			inputModifyFactor = Mathf.Lerp(inputModifyFactor, (inputYSet != 0 && inputXSet != 0 && limitDiagonalSpeed) ? 0.75f : 1.0f, Time.deltaTime * 19);
 			fallSlowDown = Mathf.Lerp(fallSlowDown, 1, Time.deltaTime * 5);
@@ -536,7 +537,7 @@ public class FPSController : MonoBehaviour
 					if (airControl)
 					{
 						moveDirection.x = inputX * speed * inputModifyFactor;
-						moveDirection.z = inputY * speed * inputModifyFactor;
+						moveDirection.z = inputY * speed * inputModifyFactor ;
 						moveDirection = myTransform.TransformDirection(moveDirection);
 					}
 
