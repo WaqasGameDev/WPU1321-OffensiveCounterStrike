@@ -65,8 +65,14 @@ public class BuyMenu : MonoBehaviour
 			case 2: //Special
 
 				ShowGunData(specialWeaponsTmp, BuySection.Special);
-				ShowGunData(grenadeTmp, BuySection.Special);
-				ShowGunData(flashTmp, BuySection.Special);
+				if (rc.ourPlayer.playerWeapons.selectedGrenade < 1)
+				{
+					ShowGunData(grenadeTmp, BuySection.Special);
+				}
+				if (rc.ourPlayer.playerWeapons.selectedFlash < 1)
+				{
+					ShowGunData(flashTmp, BuySection.Special);
+				}
 				break;
 
 			case 3: //Sniper
@@ -222,15 +228,41 @@ public class BuyMenu : MonoBehaviour
 				}
 				else if (GunData[GunBtnIndex].fireType == grenadeTmp[0].fireType)
 				{
-					Buy(grenadeTmp, GunBtnIndex, 4);
+					if(rc.ourPlayer.playerWeapons.selectedGrenade < 1)
+                    {
+						Buy(grenadeTmp, GunBtnIndex, 4);
+					}
+					
 				}
 				else
 				{
-					Buy(flashTmp, GunBtnIndex, 5);
+					if (rc.ourPlayer.playerWeapons.selectedFlash < 1)
+                    {
+						Buy(flashTmp, GunBtnIndex, 5);
+					}
+						
 				}
+
 				ShowGunData(specialWeaponsTmp, BuySection.Special);
-				ShowGunData(grenadeTmp, BuySection.Special);
-				ShowGunData(flashTmp, BuySection.Special);
+
+				if (rc.ourPlayer.playerWeapons.selectedGrenade < 1)
+                {
+					ShowGunData(grenadeTmp, BuySection.Special);
+				}
+				else
+                {
+					GunData[showGunIndex].equippedTxt.gameObject.SetActive(false);
+				}
+
+				if (rc.ourPlayer.playerWeapons.selectedFlash < 1)
+                {
+					ShowGunData(flashTmp, BuySection.Special);
+				}
+				else
+                {
+					GunData[showGunIndex].equippedTxt.gameObject.SetActive(false);
+				}
+					
 
 				break;
 
