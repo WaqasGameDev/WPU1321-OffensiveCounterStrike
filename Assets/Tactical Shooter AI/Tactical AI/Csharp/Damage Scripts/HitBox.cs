@@ -51,6 +51,21 @@ namespace TacticalAI
             }
         }
 
+        public void Damage(float damage , GameObject KillerName)
+        {
+            if (myScript)
+            {
+                //Use the multiplier to take differing amounts of damage depending on where the AI is hit
+                damage = damage * damageMultiplyer;
+
+                //Store the amount of damage taken for the dismemberment sript
+                StartCoroutine("StoreDamageTakenRecently", damage);
+
+                if (myScript)
+                    myScript.Damage(damage , KillerName);
+            }
+        }
+
         public void Damage(float damage, float force, Vector3 dir)
         {
             if (myScript)

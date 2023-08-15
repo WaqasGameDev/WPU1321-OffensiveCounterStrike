@@ -140,10 +140,15 @@ public class PlayerNetwork : Photon.MonoBehaviour
 		dropGunMech.playerNetwork = this;
 		dropGunMech.playerweaponController = playerWeapons;
 		bm.GunScreen.SetActive(false);
-		if (!GameSettings.rc.offlineMode)
+		if (!GameSettings.rc.offlineMode && !GameSettings.rc.isFakePlayer)
 		{
 			gameObject.name = photonView.owner.NickName;
 			gameObject.layer = 2;
+		}
+		else if (GameSettings.rc.isFakePlayer)
+		{
+			gameObject.name = photonView.owner.NickName;
+			gameObject.layer = 17;
 		}
 		else
 		{
@@ -153,10 +158,15 @@ public class PlayerNetwork : Photon.MonoBehaviour
 
 		thisT = transform;
 
-		if (!GameSettings.rc.offlineMode)
+		if (!GameSettings.rc.offlineMode && !GameSettings.rc.isFakePlayer)
 		{
 			MeName = photonView.owner.NickName;
 			gameObject.layer = 2;
+		}
+		else if (GameSettings.rc.isFakePlayer)
+		{
+			MeName = photonView.owner.NickName;
+			gameObject.layer = 17;
 		}
 		else
 		{
@@ -226,6 +236,11 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			GameSettings.rc.currentHP = 100;
 			GameSettings.MoveOn = true;
 			//GameSettings.rc.ourPlayer.playerWeapons.currentSelectedWeapon = ;
+		}
+		if(GameSettings.rc.isFakePlayer)
+        {
+			rc = FindObjectOfType<RoomController>();
+			GameSettings.rc.currentHP = 100;
 		}
 
 
@@ -852,6 +867,34 @@ public class PlayerNetwork : Photon.MonoBehaviour
 			playerKilled = true;
 		}
 	}
+
+	public void DecreaseHealthOfFakePlayer(int[] values, GameObject killer)
+	{
+		int currentHP = photonView.owner.CustomProperties["PlayerHP"] != null ? (int)photonView.owner.CustomProperties["PlayerHP"] : 100;
+		currentHP -= GetDMG((int)values[0], (int)values[1]);
+		Hashtable setPlayerData = new Hashtable();
+		setPlayerData.Add("PlayerHP", currentHP); //Setup player HP by master client
+		photonView.owner.SetCustomProperties(setPlayerData);
+
+
+		if (currentHP < 1)
+		{
+			KillPlayer(killer.GetComponent<TacticalAI.BaseScript>()._AiDataManager.team_ID);
+			if(killer.GetComponent<TacticalAI.BaseScript>()._AiDataManager.team_ID == 1)
+            {
+				GameSettings.rc.teamAScore++;
+            }
+			else if(killer.GetComponent<TacticalAI.BaseScript>()._AiDataManager.team_ID ==2)
+            {
+				GameSettings.rc.teamBScore++;
+            }
+			killer.GetComponent<TacticalAI.BaseScript>()._AiDataManager.kill_Count++;
+			lastWeaponName = "AUG";
+			string selectedWeaponNameTmp = "               [" + lastWeaponName + "]";
+			GameSettings.rc.PostActivityRemoteWeapons(killer.name, selectedWeaponNameTmp, gameObject.name, killer.GetComponent<TacticalAI.BaseScript>()._AiDataManager.team_ID, (int)PhotonNetwork.player.CustomProperties["Team"]);
+			playerKilled = true;
+		}
+	}
 	[PunRPC]
 	public void DamageRemoteBot(int[] values, string killerName, int team, string WepName)
 	{
@@ -1104,11 +1147,29 @@ public class PlayerNetwork : Photon.MonoBehaviour
 		photonView.owner.SetCustomProperties(setPlayerProperties);
 	}
 
+	
+
 	[PunRPC]
 	public void KillPlayer(int killerID)
 	{
 		playerKilled = true;
 		KillSay = 1;
+		if(GameSettings.rc.isFakePlayer)
+        {
+			GameSettings.rc.PlayerDeathCount++;
+			if((int)PhotonNetwork.player.CustomProperties["Team"] == 1)
+            {
+				GameSettings.rc.FakeTeamA.Remove(this.gameObject);
+
+			}
+			else
+            {
+				GameSettings.rc.FakeTeamB.Remove(this.gameObject);
+			}
+
+			gameObject.layer = 2;
+		}
+
         if (GameSettings.rc.offlineMode)
         {
 			firstPersonView.SetActive(false);

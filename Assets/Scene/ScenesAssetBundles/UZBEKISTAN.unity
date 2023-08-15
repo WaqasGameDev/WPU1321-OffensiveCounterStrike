@@ -473,7 +473,7 @@ MonoBehaviour:
   minDistForDynamicCoverSimilarity: 3
   layerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 7
   usePerformanceMode: 0
   maximumtDistForParkour: 3
 --- !u!4 &137035868

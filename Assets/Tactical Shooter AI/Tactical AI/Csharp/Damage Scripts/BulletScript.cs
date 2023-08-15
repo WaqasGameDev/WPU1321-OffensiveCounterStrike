@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 /*
  * Moves an object until it hits a target, at which time it calls the Damage(float) method on all scripts on the hit object
@@ -42,9 +43,9 @@ namespace TacticalAI
         public float minDistToDetonate = 0.5f;
         private float minDistToDetonateSqr;
 
-        public string friendlyTag;        
-        
+        public string friendlyTag;
 
+        GameObject _killer;
         void Awake()
         {
             myTransform = transform;
@@ -78,17 +79,28 @@ namespace TacticalAI
                     int[] values = new int[3];
                     GameSettings.rc.DoHitDetector((int)values[2]);
                     var PN = hit.transform.GetComponent<PlayerNetwork>();
-                    PN.rc.currentHP -= 2;
-                    if (PN.rc.currentHP < 1)
+                    if(GameSettings.rc.isFakePlayer)
                     {
-                        PN.KillPlayer(0);
-                        //  EnemyManager.instance.StopSpawningEnemies();
+                        PN.DecreaseHealthOfFakePlayer(values, _killer);
+                    }
+                    else
+                    {
+                        PN.rc.currentHP -= 2;
+                        if (PN.rc.currentHP < 1)
+                        {
+                            PN.KillPlayer(0);
+                        }
                     }
                     // hit.transform.GetComponent<PlayerNetwork>().ApplyDamage(values);
                 }
       
 
-                hit.collider.SendMessage(damageMethodName, damage, SendMessageOptions.DontRequireReceiver);
+        //        hit.collider.SendMessage(damageMethodName, damage, SendMessageOptions.DontRequireReceiver);
+            }
+
+            if (hit.collider.GetComponent<HitBox>() /*&& hit.collider.GetComponent<HitBox>().myScript.myTargetScript.myTeamID != Myteamid*/)
+            {
+                hit.collider.gameObject.GetComponent<TacticalAI.HitBox>().Damage(7 , _killer);
             }
 
             //Produce the appropriate special effect
@@ -167,6 +179,11 @@ namespace TacticalAI
         {
             target = t;
             SetDistToDetonate(minDistToDetonate);  
+        }
+
+        public void GetKiller(GameObject killer)
+        {
+            _killer = killer;
         }
     }
 }

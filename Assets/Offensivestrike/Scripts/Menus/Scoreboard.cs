@@ -164,6 +164,12 @@ public class Scoreboard : MonoBehaviour
 				scoreAudioSource.clip = ClickSong;
 				scoreAudioSource.Play ();
 				rc.PrepareRespawn(1, true,false);
+
+				if(rc.isFakePlayer && !rc.isRoomCreator)
+                {
+					rc.PrepareSpawnFakePlayer();
+				}
+				
 				ShowFirst = 1;
 				rc.showScoreBoard = false;
 			}
@@ -174,6 +180,12 @@ public class Scoreboard : MonoBehaviour
 				scoreAudioSource.clip = ClickSong;
 				scoreAudioSource.Play ();
 				rc.PrepareRespawn(2, true,false);
+
+				if (rc.isFakePlayer && !rc.isRoomCreator)
+				{
+					rc.PrepareSpawnFakePlayer();
+				}
+
 				ShowFirst = 1;
 				rc.showScoreBoard = false;
 			}
@@ -223,7 +235,13 @@ public class Scoreboard : MonoBehaviour
             {
 				scoreAudioSource.clip = ClickSong;
 				scoreAudioSource.Play ();
-				rc.PrepareRespawn(1, true,false);
+				rc.PrepareRespawn(1, true, false);
+
+				if (rc.isFakePlayer && !rc.isRoomCreator)
+				{
+					rc.PrepareSpawnFakePlayer();
+				}
+
 			}
 		}
 
@@ -236,9 +254,15 @@ public class Scoreboard : MonoBehaviour
             scoreAudioSource.clip = ClickSong;
             scoreAudioSource.Play();
             rc.PrepareRespawn(0, true, false);
-        }
 
-        GUI.enabled = true;
+			if (rc.isFakePlayer && !rc.isRoomCreator)
+			{
+				rc.PrepareSpawnFakePlayer();
+			}
+
+		}
+
+		GUI.enabled = true;
 
 		if(GUI.Button(new Rect(495, 50, 150, 30), xml.button60))
         {

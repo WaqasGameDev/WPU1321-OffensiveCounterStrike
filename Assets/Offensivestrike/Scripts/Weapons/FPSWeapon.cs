@@ -630,8 +630,8 @@ public class FPSWeapon : MonoBehaviour
 			}
 		}
 	}
-		
 
+	
 
 	void ShootBullet (Vector3 firePoint, Vector3 fireDirection)
     {
@@ -651,10 +651,10 @@ public class FPSWeapon : MonoBehaviour
 					Instantiate(playerWeapons.bloodParticles, hit.point, Quaternion.LookRotation(hit.normal));
 					hit.transform.GetComponent<HealthScript>().ApplyDamage(25f);
 			}
-			if(hit.collider.gameObject.GetComponent<TacticalAI.HitBox>())
+			if(hit.collider.gameObject.GetComponent<TacticalAI.HitBox>() && hit.collider.gameObject.GetComponent<TacticalAI.HitBox>().myScript.myTargetScript.myTeamID != 0)
             {
 				Instantiate(playerWeapons.bloodParticles, hit.point, Quaternion.LookRotation(hit.normal));
-				hit.collider.gameObject.GetComponent<TacticalAI.HitBox>().Damage(25f);
+				hit.collider.gameObject.GetComponent<TacticalAI.HitBox>().Damage(25f , playerNetwork.gameObject);
 
 			}
 

@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using Hashtable = ExitGames.Client.Photon.Hashtable; //Replace default Hashtables with Photon hashtables
+using TacticalAI;
 
 public class RoomController : Photon.MonoBehaviour
 {
@@ -14,10 +15,15 @@ public class RoomController : Photon.MonoBehaviour
 	//This is main script that control in-room logic
 
 	public GameObject playerPrefab;
+	public GameObject CounterAi;
+	public GameObject TerroristAi;
 	public GameObject botAi;
 	public GameObject botAiTr;
+	public GameObject teamA_ragdol, teamB_Ragdol;
 	public Camera welcomeCamera;
 	public bool offlineMode;
+	public bool isFakePlayer;
+	public bool isRoomCreator;
 
 
 
@@ -106,6 +112,8 @@ public class RoomController : Photon.MonoBehaviour
 	//[HideInInspector]
 	public PlayerNetwork ourPlayer;
 	[HideInInspector]
+    public  BaseScript fakePlayer;
+	[HideInInspector]
 	public List<PlayerNetwork> otherPlayers = new List<PlayerNetwork>(); //Keep references of other spawned players
 
 	Transform welcomeCameraTransform;
@@ -191,8 +199,26 @@ public class RoomController : Photon.MonoBehaviour
 	[HideInInspector]
 	public Color currentTotalCashColor;
 
+	[HideInInspector]
+	public List<GameObject> FakeTeamA = new List<GameObject>();
+
+	[HideInInspector]
+	public List<GameObject> FakeTeamB = new List<GameObject>();
+
+	[HideInInspector]
+	public int PLayerKillCount = 0;
+
+	[HideInInspector]
+	public int PlayerDeathCount = 0;
+
+	[HideInInspector]
+	public bool isRespawnAi = false;
+
+	List<TacticalAI.BaseScript> FakeAiRef = new List<BaseScript>();
+
 	int previousGameStatus = 0;
 	bool doneSetup = false;
+	int fakePlayerTemp;
 	int i = 0;
 	int waitBeforeRespawn
 	{
@@ -254,6 +280,7 @@ public class RoomController : Photon.MonoBehaviour
 
 	FPSMouseLook cameraMouseLook;
 	public Scoreboard sb;
+	public FakeScoreboard fakeScoreboardController;
 
 	public BuyMenu bm;
 	MultiplayerChat mtp;
@@ -369,6 +396,11 @@ public class RoomController : Photon.MonoBehaviour
 		sb = GetComponent<Scoreboard>();
 
 		sb.rc = this;
+		if(fakeScoreboardController)
+        {
+			fakeScoreboardController.roomController = this;
+		}
+		
 		bm = GetComponent<BuyMenu>();
 		xml = GetComponent<xmlReader>();
 		mtp = GetComponent<MultiplayerChat>();
@@ -525,6 +557,26 @@ public class RoomController : Photon.MonoBehaviour
 		}
 	}
 
+	void RefreshData()
+    {
+		for (int i = 0; i < FakeTeamA.Count; i++)
+		{
+			if(FakeTeamA[i] != null)
+            {
+				if (FakeTeamA[i].GetComponent<TacticalAI.BaseScript>())
+				{
+					FakeTeamA[i].GetComponent<TacticalAI.BaseScript>()._AiDataManager.kill_Count = 0;
+					FakeTeamA[i].GetComponent<TacticalAI.BaseScript>()._AiDataManager.Death_Count = 0;
+				}
+				else if (FakeTeamA[i].GetComponent<PlayerNetwork>())
+				{
+					PLayerKillCount = 0;
+					PlayerDeathCount = 0;
+				}
+			}
+			
+		}
+	}
 	void RefreshPlayerList()
 	{
 		Debug.Log("h11");
@@ -553,11 +605,13 @@ public class RoomController : Photon.MonoBehaviour
 				if (playerTeamTmp == 1)
 				{
 					teamAPlayers.Add(playerList[i]);
+										
 				}
 				else
 				{
-					teamBPlayers.Add(playerList[i]);
+					teamBPlayers.Add(playerList[i]);	
 				}
+				fakePlayerTemp = playerTeamTmp;
 			}
 		}
 
@@ -608,7 +662,7 @@ public class RoomController : Photon.MonoBehaviour
 		setRoomProperties.Add("WinningPlayer", wp); //Used only for FFA (Fre For All) mode to notify other the winning player
 		PhotonNetwork.room.SetCustomProperties(setRoomProperties);
 	}
-
+	bool isOnce = false;
 	// Update is called once per frame
 	void Update()
 	{
@@ -623,6 +677,19 @@ public class RoomController : Photon.MonoBehaviour
 		//	foreach (GameObject c4box in C4BoxFD)
 		//		GameObject.Destroy(c4box);
 		//}
+		if(currentRoundTime > 120 && PhotonNetwork.playerList.Length <2 && !isOnce)
+        {
+			PhotonNetwork.room.IsOpen = false;
+			PhotonNetwork.room.IsVisible = false;
+			gameObject.layer = 17;
+			isFakePlayer = true;
+			//PhotonNetwork.room.SetCustomProperties(roomProps);
+
+			//PhotonNetwork.cur
+			PrepareSpawnFakePlayer();
+			isOnce = true;
+		}
+
 		if (!doneSetup)
 			return;
 
@@ -711,6 +778,11 @@ public class RoomController : Photon.MonoBehaviour
 
 	public void ShowScoreboard()
 	{
+		if(isFakePlayer)
+        {
+			fakeScoreboardController.gameObject.SetActive(true);
+			return;
+        }
 		showScoreBoard = !showScoreBoard;
 
 		showBuyMenu = false;
@@ -920,8 +992,11 @@ public class RoomController : Photon.MonoBehaviour
 
 					if (currentGameMode == "TDM")
 					{
-
-						GetTeamScores();
+						if(!isFakePlayer)
+                        {
+							GetTeamScores();
+						}
+						
 
 						if (teamAScore > teamBScore)
 						{
@@ -942,6 +1017,10 @@ public class RoomController : Photon.MonoBehaviour
 					{
 						RefreshPlayerList();
 						tmpWinningPlayer = teamAPlayers.Count > 0 ? teamAPlayers[0] : null;
+						if(isFakePlayer)
+                        {
+							RefreshData();
+						}
 					}
 
 					if (currentGameMode != "NORMAL")
@@ -1681,14 +1760,74 @@ public class RoomController : Photon.MonoBehaviour
 		if (!offlineMode)
 		{
 			SpawnPlayer((int)PhotonNetwork.player.CustomProperties["Team"]);
-        }
+			
+		}
         else
         {
 			SpawnPlayer(1);
         }
 		//yield break;
 	}
+	public void PrepareSpawnFakePlayer()
+    {
+		if(currentGameMode != "NORMAL" && !isRespawnAi)
+        {
+			StartCoroutine(RespawnFakePlayer());
+        }
+		else 
+        {
+			isRespawnAi = false;
+			for(int i = 0; i < FakeAiRef.Count; i++)
+            {
+				if (FakeAiRef[i]._AiDataManager.team_ID == (int)PhotonNetwork.player.CustomProperties["Team"])
+				{
+					FakeAiRef[i].PlayerCompanion();
+				}
+				else
+                {
+					FakeAiRef[i].PlayerEnemies();
+				}
+            }
+        }
+		
+    }
 
+	int playerCompanionCount, playerEnemyCount = 0, fakePlayerCount, fakeFFAenemy;
+	string joinedTeamName;
+	public IEnumerator RespawnFakePlayer()
+    {
+		playerCompanionCount = Random.Range(1, 3);
+		playerEnemyCount = Random.Range(1, 4);
+		fakePlayerCount = playerCompanionCount + playerEnemyCount;
+		
+        if (!offlineMode && currentGameMode != "FFA")
+        {
+			for(int i = 0; i < fakePlayerCount; i++)
+            {
+				yield return new WaitForSeconds(5f);
+				if (i <= playerEnemyCount - 1)
+				{
+					SpawnFakePlayer((int)PhotonNetwork.player.CustomProperties["Team"], false, false , i);
+				}
+				yield return new WaitForSeconds(5f);
+				if (i <= playerCompanionCount - 1)
+				{
+					SpawnFakePlayer((int)PhotonNetwork.player.CustomProperties["Team"], true, false , i);
+				}
+			}
+			
+		}
+		else if (currentGameMode == "FFA")
+        {
+			fakeFFAenemy = Random.Range(1, 4);
+			for(int i=0; i<fakeFFAenemy; i++)
+            {
+				yield return new WaitForSeconds(Random.Range(5, 10));
+				SpawnFakePlayer((int)PhotonNetwork.player.CustomProperties["Team"], true, false , i);
+			}
+        }
+
+	}
 	IEnumerator SpawnDelay()
 	{
 		if (ourPlayer)
@@ -1825,10 +1964,25 @@ public class RoomController : Photon.MonoBehaviour
 				}
 			}
 
-			if (!offlineMode)
+			if (!offlineMode && !isFakePlayer)
 			{
 				GameObject ourPlayerTmp = PhotonNetwork.Instantiate(playerPrefab.name, spawnPontTmp.position, spawnPontTmp.rotation, 0);
 				ourPlayer = ourPlayerTmp.GetComponent<PlayerNetwork>();
+
+			}
+			else if(isFakePlayer)
+            {
+				GameObject ourPlayerTmp = PhotonNetwork.Instantiate(playerPrefab.name, spawnPontTmp.position, spawnPontTmp.rotation, 0);
+				ourPlayer = ourPlayerTmp.GetComponent<PlayerNetwork>();
+				ourPlayer.gameObject.layer = LayerMask.NameToLayer("IsFakePlayer");
+				if ((int)PhotonNetwork.player.CustomProperties["Team"] == 1)
+				{
+					FakeTeamA.Add(ourPlayer.gameObject);
+				}
+				else
+				{
+					FakeTeamB.Add(ourPlayer.gameObject);
+				}
 			}
 			else
 			{
@@ -1896,6 +2050,170 @@ public class RoomController : Photon.MonoBehaviour
 
 		currentRespawnTime = -1;
 
+	}
+
+
+	public void SpawnFakePlayer(int team , bool isPlayerCompanion , bool isRespawn , int index)
+    {
+		if (team == 1 || team == 2)
+		{
+			Transform spawnPontTmp = null;
+			// Get Spwanpoints for TDM Match
+			if (currentGameMode == "TDM")
+			{
+				spawnPontTmp = SpawnPointsForTDM(spawnPontTmp, team , isPlayerCompanion);
+			}
+
+			// Get Spwanpoints for FFA Match
+			if (currentGameMode == "FFA")
+			{
+				//For FFA mode with use every available spawn point
+				spawnPontTmp = SpawnPointForFFA(spawnPontTmp);
+			}
+			if(isPlayerCompanion)
+            {
+				if (team == 1)
+				{
+					GetFakePlayer(spawnPontTmp, team);
+					if (currentGameMode == "FFA")
+					{
+						fakePlayer.PlayerEnemiesFFA(index+1);
+					}
+					else
+                    {
+						fakePlayer.PlayerCompanion();
+					}
+					
+
+
+
+				}
+				else if (team == 2)
+				{
+					GetFakePlayer(spawnPontTmp, team);
+					if (currentGameMode == "FFA")
+					{
+						fakePlayer.PlayerEnemiesFFA(index+1);
+					}
+					else
+					{
+						fakePlayer.PlayerCompanion();
+					}
+
+
+				}
+			}
+			else
+            {
+				// Spawn Fake Enemy
+				if (team == 1)
+				{
+					GetFakePlayer(spawnPontTmp, 2);
+				}
+				else if (team == 2)
+				{
+					GetFakePlayer(spawnPontTmp, 1);
+				}
+				
+			}
+			if(!isRespawn)
+            {
+				joinedTeamName = fakePlayer._AiDataManager.team_ID == 1 ? GameSettings.teamAName : GameSettings.teamBName;
+				PostActivityRemote("", fakePlayer.name + xml.button73, joinedTeamName, 0, fakePlayer._AiDataManager.team_ID);
+			}			
+			MakeTeam(fakePlayer.gameObject, fakePlayer);
+			
+		}
+    }
+
+	public void MakeTeam(GameObject fakePlayer , BaseScript fplayer)
+    {
+		if(fplayer._AiDataManager.team_ID == 1)
+        {
+			FakeTeamA.Add(fakePlayer);
+		}
+		else if(fplayer._AiDataManager.team_ID == 2)
+        {
+			FakeTeamB.Add(fakePlayer);
+		}
+    }
+	GameObject ragdoll;
+	public void ResetFakePlayer(BaseScript fplayer)
+    {
+		Transform spawnPontTmp = null;
+		// Get Spwanpoints for TDM Match
+		if (currentGameMode == "TDM")
+		{
+			spawnPontTmp = SpawnPointsForTDM(spawnPontTmp, fplayer._AiDataManager.team_ID, fplayer._AiDataManager.isPlayerCompanion);
+			if(spawnPontTmp == fplayer.transform)
+            {
+				spawnPontTmp = SpawnPointsForTDM(spawnPontTmp, fplayer._AiDataManager.team_ID, fplayer._AiDataManager.isPlayerCompanion);
+			}
+		}
+
+		// Get Spwanpoints for FFA Match
+		else if (currentGameMode == "FFA")
+		{
+			//For FFA mode with use every available spawn point
+			spawnPontTmp = SpawnPointForFFA(spawnPontTmp);
+		}
+		if(fplayer._AiDataManager.team_ID == 1)
+        {
+			ragdoll = Instantiate(GameSettings.rc.teamA_ragdol, fplayer.transform.position, fplayer.transform.rotation);
+		}
+		else
+        {
+			ragdoll = Instantiate(GameSettings.rc.teamB_Ragdol, fplayer.transform.position, fplayer.transform.rotation);
+		}
+		ragdoll.GetComponent<RagdollManager>().ActivateRagdoll();
+		fplayer.RespositionItself(spawnPontTmp);
+		ragdoll.SetActive(true);
+		fplayer.ResetAi = true;
+		StartCoroutine(ragdoll.GetComponent<RagdollManager>().DestroyIt());
+	}
+	GameObject AiTmp;
+	public void GetFakePlayer(Transform spawnPontTmp , int team)
+    {
+		
+		if (team == 1)
+        {
+			AiTmp = PhotonNetwork.Instantiate("CounterAi", spawnPontTmp.position, spawnPontTmp.rotation, 0);
+		}
+		else if(team == 2)
+        {
+			AiTmp = PhotonNetwork.Instantiate("TerroristAi", spawnPontTmp.position, spawnPontTmp.rotation, 0);
+		}
+		
+		fakePlayer = AiTmp.GetComponent<BaseScript>();
+		fakePlayer.name = fakePlayer._AiDataManager.player_Name;
+		fakePlayer._AiDataManager.team_ID = team;
+		FakeAiRef.Add(fakePlayer);
+	}
+	public Transform SpawnPointsForTDM(Transform spawnPontTmp , int team , bool isPLayerCompanion)
+    {
+		if(isPLayerCompanion)
+        {
+			return spawnPontTmp = team == 1 ? teamASpawnPoints[Random.Range(0, teamASpawnPoints.Count - 1)] : teamBSpawnPoints[Random.Range(0, teamBSpawnPoints.Count - 1)];
+		}
+		else
+        {
+			return spawnPontTmp = team == 1 ? teamBSpawnPoints[Random.Range(0, teamBSpawnPoints.Count - 1)] : teamASpawnPoints[Random.Range(0, teamASpawnPoints.Count - 1)];
+		}
+	}
+	  
+
+	public Transform SpawnPointForFFA(Transform SpawnPointTemp)
+    {
+		int rndTmp = Mathf.Abs(Random.Range(-(teamASpawnPoints.Count - 1 + teamBSpawnPoints.Count - 1), teamASpawnPoints.Count - 1 + teamBSpawnPoints.Count - 1));
+		if (rndTmp < teamASpawnPoints.Count)
+		{
+			SpawnPointTemp = teamASpawnPoints[rndTmp];
+		}
+		else
+		{
+			SpawnPointTemp = teamBSpawnPoints[rndTmp - teamASpawnPoints.Count];
+		}
+		return SpawnPointTemp;
 	}
 
 	//public void SpawnBot(Transform points, int team)

@@ -1151,13 +1151,16 @@ public class RoomUI : Photon.MonoBehaviour
 			//fireButton.isActive = false;
 			GameSettings.mobileFiring = false;
 			return;
-			//if(!hitInfo.collider.GetComponent<TacticalAI.HitBox>())
-			//         {
-			//	
-			//}
+			
 
 		}
-
+		if(hitForTactical)
+        {
+			if(hitForTactical.GetComponent<TacticalAI.HitBox>().myScript.myTargetScript.myTeamID == 0)
+            {
+				return;
+            }
+        }
 
 		if (rc.ourPlayer.playerWeapons.selectedGrenade == 1 && rc.ourPlayer.playerWeapons.currentSelectedWeapon.wSettings.fireType == PlayerWeapons.FireType.GRENADE_LAUNCHER)
 		{

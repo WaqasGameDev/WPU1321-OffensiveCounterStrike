@@ -25,10 +25,12 @@ public class HealthScript : MonoBehaviour {
 	public TacticalAI.RotateToAimGunScript rotateToAimGunScript;
 	public Animator animator;
 	
+	
 	public TacticalAI.GunScript gunScript;
 		
 	private bool beenHitYetThisFrame = false;
-
+	
+		string _KillerName;
     //Initiation stuff.
 	void Awake()
 		{
@@ -39,8 +41,8 @@ public class HealthScript : MonoBehaviour {
             }
 			maxShields = shields;
 		}
-	
-	void Update()
+
+        void Update()
 	{
 		currentTimeBeforeShieldRegen -= Time.deltaTime;
         timeTillNextStagger -= Time.deltaTime;
@@ -76,8 +78,55 @@ public class HealthScript : MonoBehaviour {
 					DeathCheck();
 				}	
 		}
-	
-	public IEnumerator SingleHitBoxDamage(float damage)
+
+		public void Damage(float damage , GameObject KillerName)
+		{
+			
+			//Look for the source of the damage.
+			if (myTargetScript)
+				myTargetScript.CheckForLOSAwareness(true);
+
+			ReduceHealthAndShields(damage);
+			myAIBaseScript.CheckToSeeIfWeShouldDodge();
+
+			if (health <= 0)
+			{
+				if(KillerName.GetComponent<PlayerNetwork>())
+                {
+					GameSettings.rc.PLayerKillCount++;
+					if (myAIBaseScript)
+					{
+						myAIBaseScript.killerName = KillerName.name;
+						myAIBaseScript.killerTeam = (int)PhotonNetwork.player.CustomProperties["Team"];
+					}
+				}
+				if(KillerName.GetComponent<TacticalAI.BaseScript>())
+                {
+					KillerName.GetComponent<TacticalAI.BaseScript>()._AiDataManager.kill_Count++;
+					if (myAIBaseScript)
+					{
+						myAIBaseScript.killerName = KillerName.name;
+						myAIBaseScript.killerTeam = KillerName.GetComponent<TacticalAI.BaseScript>()._AiDataManager.team_ID;
+					}
+				}
+				if (myAIBaseScript.killerTeam == 1)
+				{
+					GameSettings.rc.teamAScore++;
+				}
+				else if(myAIBaseScript.killerTeam == 2)
+                {
+					GameSettings.rc.teamBScore++;
+				}
+				DeathCheck();
+			}
+			else
+            {
+				myAIBaseScript.ResetAi = false;
+
+			}
+		}
+
+		public IEnumerator SingleHitBoxDamage(float damage)
 		{
             //Look for the source of the damage.
 			if(myTargetScript)
@@ -163,11 +212,18 @@ public class HealthScript : MonoBehaviour {
     //Check to see if we are dead.
    void DeathCheck()
 		{
-			KillAI();
-		
+			if (!GameSettings.rc.isFakePlayer)
+			{
+				KillAI();
+			}
+					
 			if(myAIBaseScript)
 				myAIBaseScript.KillAI();
-			this.enabled = false;
+			if (!GameSettings.rc.isFakePlayer)
+            {
+				this.enabled = false;
+			}
+				
 		}
 
     public bool useDeathAnimation = false;
@@ -211,5 +267,41 @@ public class HealthScript : MonoBehaviour {
 					this.enabled = false;
 				}
 		}
-}
+        
+  //      private void OnEnable()
+  //      {
+		//	int i;
+
+		//	//Enable the ragdoll
+		//	for (i = 0; i < rigidbodies.Length; i++)
+		//	{
+		//		rigidbodies[i].isKinematic = true;
+		//	}
+		//	for (i = 0; i < collidersToEnable.Length; i++)
+		//	{
+		//		collidersToEnable[i].enabled = true;
+		//	}
+
+
+		//	//Disable scripts
+		//	if (rotateToAimGunScript)
+		//		rotateToAimGunScript.enabled = true;
+
+		//	if (animator && !useDeathAnimation)
+		//	{
+		//		animator.enabled = true;
+		//	}
+		//	else
+		//	{
+		//		gameObject.SendMessage("PlayDeathAnimation", SendMessageOptions.DontRequireReceiver);
+		//	}
+
+		//	if (gunScript)
+		//	{
+		//		gunScript.enabled = true;
+		//	}
+
+		//	this.enabled = true;
+		//}
+    }
 }

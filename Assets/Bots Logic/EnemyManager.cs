@@ -96,7 +96,7 @@ public class EnemyManager : MonoBehaviour
 
     public void SpawnNewEnemies()
     {
-        randomSpawningPoint = Random.Range(0, botSpawnPoint.Length + 1);
+        randomSpawningPoint = Random.Range(0, botSpawnPoint.Length);
         if(enemies.Count <= 0)
         {
             for(int i = 0; i < botEnemyCount; i++)

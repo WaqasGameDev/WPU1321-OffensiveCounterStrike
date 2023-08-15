@@ -2201,6 +2201,7 @@ public static class PhotonNetwork
     /// <returns>Cached RoomInfo[] of last room list sent by the server.</returns>
     public static RoomInfo[] GetRoomList()
     {
+        return new RoomInfo[0];
         if (offlineMode || networkingPeer == null)
         {
             return new RoomInfo[0];

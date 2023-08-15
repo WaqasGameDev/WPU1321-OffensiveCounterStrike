@@ -26,8 +26,8 @@ namespace TacticalAI
         public NavmeshInterface navmeshInterfaceClass = null;
         public NavmeshInterface navI;
         Transform myTransform;
-
-        TacticalAI.TargetScript myTargetScript;
+        [HideInInspector]
+        public TacticalAI.TargetScript myTargetScript;
 
         //Speed and navigation stuff
         public float origAgentStoppingDist;
@@ -109,6 +109,20 @@ namespace TacticalAI
         public bool canSprint = false;
         public float distFromTargetToSprint = 25f;
 
+        [HideInInspector]
+        public Ai_Data _AiDataManager;
+
+        [HideInInspector]
+        public string killerName;
+        [HideInInspector]
+        public int killerTeam;
+
+        [HideInInspector]
+        public bool isPlayerCompanion = false;
+        [HideInInspector]
+        public bool ResetAi = false;
+
+        Transform ragdollTransform;
         public enum AIType
         {
             Berserker = 0, Tactical = 1, Custom = 2, Skirmish = 3,
@@ -173,7 +187,13 @@ namespace TacticalAI
                 return;
             }*/
 
+            _AiDataManager = GetComponent<Ai_Data>();
+            if (_AiDataManager)
+            {
+                _AiDataManager.player_Name = "Gamer" + Random.Range(1, 9999).ToString("0000");
+            }
 
+            
 
             if (idleSpeed > runSpeed)
             {
@@ -185,9 +205,11 @@ namespace TacticalAI
             }
         }
 
+     
         //Start the cycle after everything else is initialized	
         void Start()
         {
+          
             GetDefaultBehaviours();
             if (TacticalAI.ControllerScript.currentController != null)
             {
@@ -206,7 +228,56 @@ namespace TacticalAI
             {
                 StartCoroutine("PerformanceAICycle");
             }
+            
+            if(_AiDataManager.team_ID == 1)
+            {
+                gameObject.layer = LayerMask.NameToLayer("teamA");
+            }
+            else
+            {
+                gameObject.layer = LayerMask.NameToLayer("teamB");
+            }
 
+            //if (isPlayerCompanion)
+            //{
+            //    _AiDataManager.isPlayerCompanion = true;
+            //    PlayerCompanion();
+            //}
+
+        }
+
+        public void PlayerCompanion()
+        {
+            if (!_AiDataManager.isPlayerCompanion)
+            {
+                _AiDataManager.isPlayerCompanion = true;
+            }
+            myTargetScript.SetNewTeam(0);
+            myTargetScript.alliedTeamsIDs[0] = 0;
+            myTargetScript.SetEnemyTeamIDs(1);
+        }
+
+        public void PlayerEnemies()
+        {
+            if(_AiDataManager.isPlayerCompanion)
+            {
+                _AiDataManager.isPlayerCompanion = false;
+            }
+            myTargetScript.SetNewTeam(1);
+            myTargetScript.alliedTeamsIDs[0] = 1;
+            myTargetScript.SetEnemyTeamIDs(0);
+        }
+
+        public void PlayerEnemiesFFA(int index)
+        {
+           
+            myTargetScript.SetNewTeam(index);
+            myTargetScript.alliedTeamsIDs[0] = index;
+            for(int i =0; i<= index; i++)
+            {
+                myTargetScript.enemyTeamsIDs[i] = i;
+            }
+            myTargetScript.SetEnemyTeamIDs(0);
         }
 
         float perfCycleTime = 2;
@@ -741,10 +812,21 @@ namespace TacticalAI
         }
 
         public float timeUntilBodyIsDestroyedAfterDeath = 60;
-
+         string lastWeaponName = "";
+        GameObject ragdoll;
         //Kill AI///////////////////////////////////////////////////////////	
         public void KillAI()
         {
+            if(GameSettings.rc.isFakePlayer && !ResetAi)
+            {
+                GameSettings.rc.ResetFakePlayer(this);
+                
+                lastWeaponName = GameSettings.rc.ourPlayer ? GameSettings.rc.ourPlayer.playerWeapons.currentSelectedWeapon.weaponName : "";
+                string selectedWeaponNameTmp = "               [" + lastWeaponName + "]";
+                GameSettings.rc.PostActivityRemoteWeapons(killerName, selectedWeaponNameTmp, this._AiDataManager.player_Name, killerTeam, this._AiDataManager.team_ID);
+                
+                return;
+            }
             //Check if we can actually do this, to stop errors in wierd edge cases
             if (this.enabled)
             {
@@ -762,11 +844,46 @@ namespace TacticalAI
                 GameObject.Destroy(animationScript.myAIBodyTransform.gameObject, timeUntilBodyIsDestroyedAfterDeath);
                 GameObject.Destroy(gameObject);
             }
+            if(GameSettings.rc.offlineMode)
+            {
+                EnemyManager.instance.RemoveNewEnemies(this.gameObject);
+            }
+            else
+            {
+                _AiDataManager.Death_Count += 1;
+                if(_AiDataManager.team_ID == 1)
+                {
+                    GameSettings.rc.FakeTeamA.Remove(this.gameObject);
+                }
+                else if (_AiDataManager.team_ID == 2)
+                {
+                    GameSettings.rc.FakeTeamB.Remove(this.gameObject);
+                }
+    
+                //Spawn Ai
+                GameSettings.rc.SpawnFakePlayer((int)PhotonNetwork.player.CustomProperties["Team"], _AiDataManager.isPlayerCompanion , true , 0);
+            }
 
-            EnemyManager.instance.RemoveNewEnemies(this.gameObject);
+
         }
 
+        void ResetFakeAi()
+        {
+            Destroy(ragdoll);
+        }
 
+        public void RespositionItself(Transform spawnPoint)
+        {
+            gameObject.GetComponent<HealthScript>().health = 100f;
+            transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+            animationScript.myAIBodyTransform.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        }
+
+        private void OnDisable()
+        {
+            
+            Invoke("ResetFakeAi", timeUntilBodyIsDestroyedAfterDeath);
+        }
         //Setters
         public void SetTargetObj(TacticalAI.TargetScript x)
         {

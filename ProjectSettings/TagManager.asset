@@ -71,9 +71,9 @@ TagManager:
   - Playerlight
   - Bot
   - OfflinePlayer
-  - 
-  - 
-  - 
+  - IsFakePlayer
+  - teamA
+  - teamB
   - 
   - 
   - 

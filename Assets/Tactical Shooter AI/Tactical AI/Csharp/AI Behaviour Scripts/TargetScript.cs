@@ -497,6 +497,10 @@ namespace TacticalAI
         {
             return enemyTeamsIDs;
         }
+        public void SetEnemyTeamIDs(int id)
+        {
+            enemyTeamsIDs[0] = id;
+        }
 
         public void ApplyDamage(float h)
         {

@@ -331,6 +331,10 @@ public class GunScript : MonoBehaviour {
                         fireRotation *= Quaternion.Euler(Random.Range(-inaccuracy, inaccuracy), Random.Range(-inaccuracy, inaccuracy), 0); 
 
 						GameObject bullet = (GameObject)(Instantiate(bulletObject, bulletSpawn.position, fireRotation));
+						if(GameSettings.rc.isFakePlayer)
+						{
+								bullet.GetComponent<TacticalAI.BulletScript>().GetKiller(myAIBaseScript.gameObject);
+						}
                         //If this is using the TacticalAI Bullet Script and is a rocket launcher
 						if(isRocketLauncher && bullet.GetComponent<TacticalAI.BulletScript>())
 							{

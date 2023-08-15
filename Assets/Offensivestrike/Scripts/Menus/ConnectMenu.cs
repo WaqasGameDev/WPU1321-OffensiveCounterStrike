@@ -182,8 +182,8 @@ public class ConnectMenu : Photon.MonoBehaviour
 	// Use this for initialization
 	public xmlReader xml;
 	//public HighScore hg;
-
-
+	public bool isFakeMode, isRoomCreator;
+	int FakeGameMode = 0;
 	public static ConnectMenu Instance { set; get; }
 
 	public Image fadeImage;
@@ -601,6 +601,7 @@ public class ConnectMenu : Photon.MonoBehaviour
 
 	IEnumerator LoadingSc()
 	{
+		isRoomCreator = true;
 		StartCoroutine(JoinCreateRoom(roomName, availableMaps[selectedMap].mapName, playerLimits[selectedPlayerLimit], gameModes[selectedGameMode], specRoom[selectedSpecRoom], (float)roundDurations[selectedGameMode], gameModes[selectedGameMode] == "FFA" ? killLimits[selectedKillLimit] : -1));
 
 		//Remember player settings when creating new room
@@ -724,6 +725,9 @@ public class ConnectMenu : Photon.MonoBehaviour
 		}
 	}
 
+	int randomRoom;
+	int randomPlayerCount;
+	int randomMaxPlayers;
 	public void RoomsLisList()
 	{
 
@@ -747,6 +751,34 @@ public class ConnectMenu : Photon.MonoBehaviour
 				pG.Map.text = (string)availableRooms[i].CustomProperties["MapName"];
 				pG.Pings.text = currentPing.ToString();
 			}
+		}
+		else if(availableRooms.Length == 0)
+        {
+			isFakeMode = true;
+
+			NoRooms.SetActive(false);
+			randomRoom = Random.Range(2, 4);
+			randomPlayerCount = Random.Range(1, 3);
+			randomMaxPlayers = Random.Range(2, 10);
+			for (int i = 0; i < randomRoom; i++)
+            {
+				GameObject poolGameObject = Instantiate(RoomListPrefab);
+				poolGameObject.transform.SetParent(parentTransform, true);
+				RoomListSee pG;
+				pG = poolGameObject.GetComponent<RoomListSee>();
+				pG.RoomName.text = "Room" + Random.Range(0, 1000).ToString("0000");
+				FakeGameMode = Random.Range(1, 3);
+				pG.GameMode.text = gameModes[FakeGameMode];
+				if (randomPlayerCount == randomMaxPlayers)
+				{
+					pG.Players.color = Color.red;
+				}
+				else { pG.Players.color = Color.green; }
+				pG.Players.text = randomPlayerCount + "/" + randomMaxPlayers;
+				pG.Map.text = availableMaps[Random.Range(0 , availableMaps.Length)].mapName;
+				pG.Pings.text = currentPing.ToString();
+			}
+			
 		}
 		else { NoRooms.SetActive(true); }
 	}
@@ -785,10 +817,18 @@ public class ConnectMenu : Photon.MonoBehaviour
 		FailButton4CloseConnecting.gameObject.SetActive(false);
 		FailButton4.gameObject.SetActive(true);
 	}
-
+	
 	public void LoobyNowGame(string newRoomName, string newMapName, string newGameMode)
 	{
-		StartCoroutine(JoinCreateRoom(newRoomName, newMapName, 10, newGameMode, specRoom[0], (float)roundDurations[0], newGameMode == "FFA" ? killLimits[0] : -1));
+		if(isFakeMode)
+        {
+			StartCoroutine(JoinCreateRoom(newRoomName, newMapName, 10, newGameMode, specRoom[0], (float)roundDurations[FakeGameMode], newGameMode == "FFA" ? killLimits[0] : -1));
+		}
+		else
+        {
+			StartCoroutine(JoinCreateRoom(newRoomName, newMapName, 10, newGameMode, specRoom[0], (float)roundDurations[0], newGameMode == "FFA" ? killLimits[0] : -1));
+		}
+		
 		thisAudioSource.clip = ClickSong;
 		thisAudioSource.Play();
 		StartCoroutine(LoobyListNowGameFail());
@@ -2102,6 +2142,7 @@ public class ConnectMenu : Photon.MonoBehaviour
 
 		currentPing = PhotonNetwork.GetPing();
 
+		
 		availableRooms = PhotonNetwork.GetRoomList();
 
 		print(availableRooms.Length.ToString() + " available rooms");
@@ -2160,8 +2201,17 @@ public class ConnectMenu : Photon.MonoBehaviour
 
 			RoomOptions roomOptions = new RoomOptions();
 			roomOptions.CleanupCacheOnLeave = true;
-			roomOptions.IsOpen = true;
-			roomOptions.IsVisible = true;
+			if(isFakeMode)
+            {
+				roomOptions.IsOpen = false;
+				roomOptions.IsVisible = false;
+			}
+			else
+            {
+				roomOptions.IsOpen = true;
+				roomOptions.IsVisible = true;
+			}
+			
 			roomOptions.MaxPlayers = (byte)newMaxPlayers;
 			roomOptions.CustomRoomProperties = roomProperties;
 			roomOptions.CustomRoomPropertiesForLobby = exposedProps;
@@ -2263,6 +2313,8 @@ public class ConnectMenu : Photon.MonoBehaviour
 		Transform welcomeCameraRef = allPoints.Find("WelcomeCamera");
 		GameObject roomControllerObject = Instantiate(roomControllerPrefab, welcomeCameraRef.position, welcomeCameraRef.rotation) as GameObject;
 		RoomController roomController = roomControllerObject.GetComponent<RoomController>();
+		roomController.isFakePlayer = isFakeMode;
+		roomController.isRoomCreator = isRoomCreator;
 		//GameObject miniMaps = Instantiate(Minimap, transform.position, transform.rotation) as GameObject;
 
 		Transform GrenadeSpots = allPoints.Find("Hegrenades");

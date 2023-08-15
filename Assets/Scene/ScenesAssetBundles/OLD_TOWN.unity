@@ -8885,7 +8885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &911146191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13384,7 +13384,7 @@ MonoBehaviour:
   minDistForDynamicCoverSimilarity: 3
   layerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 7
   usePerformanceMode: 0
   maximumtDistForParkour: 3
 --- !u!4 &1376106917
