@@ -188,7 +188,7 @@ namespace TacticalAI
             }*/
 
             _AiDataManager = GetComponent<Ai_Data>();
-            if (_AiDataManager)
+            if (_AiDataManager )
             {
                 _AiDataManager.player_Name = "Gamer" + Random.Range(1, 9999).ToString("0000");
             }
@@ -228,21 +228,14 @@ namespace TacticalAI
             {
                 StartCoroutine("PerformanceAICycle");
             }
-            
-            if(_AiDataManager.team_ID == 1)
+            if (_AiDataManager.team_ID == 1)
             {
                 gameObject.layer = LayerMask.NameToLayer("teamA");
             }
-            else
+            else if(_AiDataManager.team_ID == 2)
             {
                 gameObject.layer = LayerMask.NameToLayer("teamB");
             }
-
-            //if (isPlayerCompanion)
-            //{
-            //    _AiDataManager.isPlayerCompanion = true;
-            //    PlayerCompanion();
-            //}
 
         }
 
@@ -867,10 +860,6 @@ namespace TacticalAI
 
         }
 
-        void ResetFakeAi()
-        {
-            Destroy(ragdoll);
-        }
 
         public void RespositionItself(Transform spawnPoint)
         {
@@ -879,11 +868,7 @@ namespace TacticalAI
             animationScript.myAIBodyTransform.transform.SetPositionAndRotation(transform.position, transform.rotation);
         }
 
-        private void OnDisable()
-        {
-            
-            Invoke("ResetFakeAi", timeUntilBodyIsDestroyedAfterDeath);
-        }
+
         //Setters
         public void SetTargetObj(TacticalAI.TargetScript x)
         {

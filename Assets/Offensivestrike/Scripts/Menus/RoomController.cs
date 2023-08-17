@@ -58,6 +58,8 @@ public class RoomController : Photon.MonoBehaviour
 	public List<Transform> teamASpawnPoints = new List<Transform>();
 	[HideInInspector]
 	public List<Transform> teamBSpawnPoints = new List<Transform>();
+	[HideInInspector]
+	public List<Transform> FakeEnemySpawnPoints;
 
 	//[HideInInspector]
 	public List<PhotonPlayer> teamAPlayers = new List<PhotonPlayer>();
@@ -150,7 +152,8 @@ public class RoomController : Photon.MonoBehaviour
 	public float currentRoundTime;
 	float seconds;
 	float minutes;
-
+	float start_Time;
+	float timeDuration = 120;
 
 	string languagesPrefsName = "SelectedLanguages";
 	string playerNameJoinPrefsName = "JoinPlayerName";
@@ -309,9 +312,11 @@ public class RoomController : Photon.MonoBehaviour
 	{
 		if (PlayerPrefs.GetInt("OfflineMode", 0) == 1)
 		{
+			PhotonNetwork.Disconnect();
 			offlineMode = true;
 			currentGameMode = "FFA";
 			PhotonNetwork.offlineMode = true;
+			MultiplayerChat.showOfflineModePauseButton = true;
 		}
 		else
 		{
@@ -327,7 +332,7 @@ public class RoomController : Photon.MonoBehaviour
 	// Use this for initialization
 	IEnumerator Start()
 	{
-
+		start_Time = Time.time;
 		WFollowCam = 0;
 		HowPlayerBot = 0;
 		PhotonNetwork.isMessageQueueRunning = true;
@@ -544,6 +549,10 @@ public class RoomController : Photon.MonoBehaviour
 		{
 			SpawnPlayer(1);
 		}
+
+		FakeEnemySpawnPoints = new List<Transform>(teamASpawnPoints);
+		FakeEnemySpawnPoints.AddRange(teamBSpawnPoints);
+
 	}
 
 	void GetTeamScores()
@@ -677,11 +686,11 @@ public class RoomController : Photon.MonoBehaviour
 		//	foreach (GameObject c4box in C4BoxFD)
 		//		GameObject.Destroy(c4box);
 		//}
-		if(currentRoundTime > 120 && PhotonNetwork.playerList.Length <2 && !isOnce)
+		if((Time.time - start_Time >= 60) && PhotonNetwork.playerList.Length <2 && !isOnce && isRoomCreator)
         {
 			PhotonNetwork.room.IsOpen = false;
 			PhotonNetwork.room.IsVisible = false;
-			gameObject.layer = 17;
+			ourPlayer.gameObject.layer = 17;
 			isFakePlayer = true;
 			//PhotonNetwork.room.SetCustomProperties(roomProps);
 
@@ -1005,6 +1014,10 @@ public class RoomController : Photon.MonoBehaviour
 						if (teamAScore < teamBScore)
 						{
 							tmpGameState = 2;
+						}
+						if (isFakePlayer)
+						{
+							RefreshData();
 						}
 					}
 
@@ -2061,14 +2074,14 @@ public class RoomController : Photon.MonoBehaviour
 			// Get Spwanpoints for TDM Match
 			if (currentGameMode == "TDM")
 			{
-				spawnPontTmp = SpawnPointsForTDM(spawnPontTmp, team , isPlayerCompanion);
+				spawnPontTmp = SpawnPointsForTDM(spawnPontTmp , team, isPlayerCompanion);
 			}
 
 			// Get Spwanpoints for FFA Match
 			if (currentGameMode == "FFA")
 			{
 				//For FFA mode with use every available spawn point
-				spawnPontTmp = SpawnPointForFFA(spawnPontTmp);
+				spawnPontTmp = CheckForSpawnPoint();
 			}
 			if(isPlayerCompanion)
             {
@@ -2131,10 +2144,12 @@ public class RoomController : Photon.MonoBehaviour
 		if(fplayer._AiDataManager.team_ID == 1)
         {
 			FakeTeamA.Add(fakePlayer);
+			fplayer.gameObject.tag = "Counter";
 		}
 		else if(fplayer._AiDataManager.team_ID == 2)
         {
 			FakeTeamB.Add(fakePlayer);
+			fplayer.gameObject.tag = "Teror";
 		}
     }
 	GameObject ragdoll;
@@ -2155,7 +2170,7 @@ public class RoomController : Photon.MonoBehaviour
 		else if (currentGameMode == "FFA")
 		{
 			//For FFA mode with use every available spawn point
-			spawnPontTmp = SpawnPointForFFA(spawnPontTmp);
+			spawnPontTmp = CheckForSpawnPoint();
 		}
 		if(fplayer._AiDataManager.team_ID == 1)
         {
@@ -2177,11 +2192,11 @@ public class RoomController : Photon.MonoBehaviour
 		
 		if (team == 1)
         {
-			AiTmp = PhotonNetwork.Instantiate("CounterAi", spawnPontTmp.position, spawnPontTmp.rotation, 0);
+			AiTmp = Instantiate(CounterAi, spawnPontTmp.position, spawnPontTmp.rotation);
 		}
 		else if(team == 2)
         {
-			AiTmp = PhotonNetwork.Instantiate("TerroristAi", spawnPontTmp.position, spawnPontTmp.rotation, 0);
+			AiTmp = Instantiate(TerroristAi, spawnPontTmp.position, spawnPontTmp.rotation);
 		}
 		
 		fakePlayer = AiTmp.GetComponent<BaseScript>();
@@ -2197,10 +2212,22 @@ public class RoomController : Photon.MonoBehaviour
 		}
 		else
         {
-			return spawnPontTmp = team == 1 ? teamBSpawnPoints[Random.Range(0, teamBSpawnPoints.Count - 1)] : teamASpawnPoints[Random.Range(0, teamASpawnPoints.Count - 1)];
+			return spawnPontTmp = team == 1 ? teamASpawnPoints[Random.Range(0, teamASpawnPoints.Count - 1)] : teamBSpawnPoints[Random.Range(0, teamBSpawnPoints.Count - 1)];
 		}
+		
 	}
 	  
+	public Transform CheckForSpawnPoint()
+    {
+		for(int i =0; i<FakeEnemySpawnPoints.Count; i++)
+        {
+			if(IsSpawnPointValid(FakeEnemySpawnPoints[i].position))
+            {
+				return FakeEnemySpawnPoints[i];
+            }
+        }
+		return FakeEnemySpawnPoints[Random.Range(0, FakeEnemySpawnPoints.Count)];
+    }
 
 	public Transform SpawnPointForFFA(Transform SpawnPointTemp)
     {
@@ -2216,6 +2243,23 @@ public class RoomController : Photon.MonoBehaviour
 		return SpawnPointTemp;
 	}
 
+	float spawnDistance = 10.0f;
+	private bool IsSpawnPointValid(Vector3 spawnPointPosition)
+	{
+		// Calculate the direction from spawn point to player
+		Vector3 directionToPlayer = ourPlayer.transform.position - spawnPointPosition;
+
+		// Calculate the angle between the player's forward direction and the direction to spawn point
+		float angle = Vector3.Angle(ourPlayer.transform.forward, directionToPlayer);
+
+		// Check if the spawn point is behind the player and far enough away
+		if (angle > 90.0f && directionToPlayer.magnitude > spawnDistance)
+		{
+			return true;
+		}
+
+		return false;
+	}
 	//public void SpawnBot(Transform points, int team)
 	//{
 	//	if (team == 1)

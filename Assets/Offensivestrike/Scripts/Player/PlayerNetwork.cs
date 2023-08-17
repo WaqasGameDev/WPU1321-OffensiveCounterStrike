@@ -249,8 +249,8 @@ public class PlayerNetwork : Photon.MonoBehaviour
 		this.StartCoroutine("MoveON");
 
 
-		if (PhotonNetwork.isMasterClient /*&& !rc.offlineMode*/)
-		{
+		if (PhotonNetwork.isMasterClient && !GameSettings.rc.offlineMode)
+        {
 			//Set player HP
 			Hashtable setPlayerData = new Hashtable();
 			setPlayerData.Add("PlayerHP", (int)100);

@@ -11,6 +11,7 @@ public class RoomListSee : MonoBehaviour
     public Text Players;
     public Text Map;
     public Text Pings;
+    public bool isFakeRoom = false;
 
     public void Roomsİnfo()
     {
@@ -20,6 +21,7 @@ public class RoomListSee : MonoBehaviour
         MenuFind.SelectRoomName.text = RoomName.text;
         MenuFind.GameMode.text = GameMode.text;
         MenuFind.SelectMapName = Map.text;
+        MenuFind.isFakeMode = isFakeRoom;
 
         for (int a = 0; a < MenuFind.availableMaps.Length ; a++)
         {

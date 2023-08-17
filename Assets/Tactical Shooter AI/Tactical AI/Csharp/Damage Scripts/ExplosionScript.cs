@@ -54,12 +54,16 @@ namespace TacticalAI
                         int[] values = new int[3];
                         GameSettings.rc.DoHitDetector((int)values[2]);
                         var PN = hit.transform.GetComponent<PlayerNetwork>();
-                        PN.rc.currentHP -= 2;
-                        if (PN.rc.currentHP < 1)
+                        if(!GameSettings.rc.isFakePlayer)
                         {
-                            PN.KillPlayer(0);
+                            PN.rc.currentHP -= 10;
+                            if (PN.rc.currentHP < 1)
+                            {
+                                PN.KillPlayer(0);
 
+                            }
                         }
+                        
 
                     }
 

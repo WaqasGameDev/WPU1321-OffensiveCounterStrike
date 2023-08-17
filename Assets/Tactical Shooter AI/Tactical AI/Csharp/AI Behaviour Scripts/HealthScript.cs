@@ -89,7 +89,7 @@ public class HealthScript : MonoBehaviour {
 			ReduceHealthAndShields(damage);
 			myAIBaseScript.CheckToSeeIfWeShouldDodge();
 
-			if (health <= 0)
+			if (health <= 0 && KillerName !=null)
 			{
 				if(KillerName.GetComponent<PlayerNetwork>())
                 {

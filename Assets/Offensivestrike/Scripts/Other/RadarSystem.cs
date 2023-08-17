@@ -99,6 +99,7 @@ public class RadarSystem : MonoBehaviour
 				break;
 		}
 
+
 	}
 
 	Vector2 ConvertToNavPosition(Vector3 pos)

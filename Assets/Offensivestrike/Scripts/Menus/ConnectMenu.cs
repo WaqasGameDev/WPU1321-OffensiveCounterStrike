@@ -728,9 +728,10 @@ public class ConnectMenu : Photon.MonoBehaviour
 	int randomRoom;
 	int randomPlayerCount;
 	int randomMaxPlayers;
+	int isRoomFull;
 	public void RoomsLisList()
 	{
-
+		isRoomFull = 0;
 		if (availableRooms.Length > 0)
 		{
 			NoRooms.SetActive(false);
@@ -745,44 +746,50 @@ public class ConnectMenu : Photon.MonoBehaviour
 				if (availableRooms[i].PlayerCount == availableRooms[i].MaxPlayers)
 				{
 					pG.Players.color = Color.red;
+					isRoomFull++;
 				}
 				else { pG.Players.color = Color.green; }
 				pG.Players.text = availableRooms[i].PlayerCount + "/" + availableRooms[i].MaxPlayers;
 				pG.Map.text = (string)availableRooms[i].CustomProperties["MapName"];
 				pG.Pings.text = currentPing.ToString();
+				pG.isFakeRoom = false;
+			}
+			if(availableRooms.Length == 1 || isRoomFull > 1)
+            {
+				CreateFakeRoom();
+				isRoomFull = 0;
 			}
 		}
 		else if(availableRooms.Length == 0)
         {
-			isFakeMode = true;
-
-			NoRooms.SetActive(false);
-			randomRoom = Random.Range(2, 4);
-			randomPlayerCount = Random.Range(1, 3);
-			randomMaxPlayers = Random.Range(2, 10);
-			for (int i = 0; i < randomRoom; i++)
-            {
-				GameObject poolGameObject = Instantiate(RoomListPrefab);
-				poolGameObject.transform.SetParent(parentTransform, true);
-				RoomListSee pG;
-				pG = poolGameObject.GetComponent<RoomListSee>();
-				pG.RoomName.text = "Room" + Random.Range(0, 1000).ToString("0000");
-				FakeGameMode = Random.Range(1, 3);
-				pG.GameMode.text = gameModes[FakeGameMode];
-				if (randomPlayerCount == randomMaxPlayers)
-				{
-					pG.Players.color = Color.red;
-				}
-				else { pG.Players.color = Color.green; }
-				pG.Players.text = randomPlayerCount + "/" + randomMaxPlayers;
-				pG.Map.text = availableMaps[Random.Range(0 , availableMaps.Length)].mapName;
-				pG.Pings.text = currentPing.ToString();
-			}
-			
+			CreateFakeRoom();
 		}
 		else { NoRooms.SetActive(true); }
 	}
 
+	void CreateFakeRoom()
+    {
+		NoRooms.SetActive(false);
+		randomRoom = Random.Range(2, 4);
+		randomPlayerCount = Random.Range(1, 3);
+		randomMaxPlayers = Random.Range(2, 10);
+		for (int i = 0; i < randomRoom; i++)
+		{
+			GameObject poolGameObject = Instantiate(RoomListPrefab);
+			poolGameObject.transform.SetParent(parentTransform, true);
+			RoomListSee pG;
+			pG = poolGameObject.GetComponent<RoomListSee>();
+			pG.RoomName.text = "Room" + Random.Range(0, 1000).ToString("0000");
+			FakeGameMode = Random.Range(1, 3);
+			pG.GameMode.text = gameModes[FakeGameMode];
+			randomPlayerCount = randomPlayerCount == randomMaxPlayers ? Random.Range(1, randomMaxPlayers) : randomPlayerCount;
+			pG.Players.color = Color.green;
+			pG.Players.text = randomPlayerCount + "/" + randomMaxPlayers;
+			pG.Map.text = availableMaps[Random.Range(0, availableMaps.Length)].mapName;
+			pG.Pings.text = " ";
+			pG.isFakeRoom = true;
+		}
+	}
 	IEnumerator PlayNowGame()
 	{
 		yield return new WaitForSeconds(Random.Range(3, 8));
