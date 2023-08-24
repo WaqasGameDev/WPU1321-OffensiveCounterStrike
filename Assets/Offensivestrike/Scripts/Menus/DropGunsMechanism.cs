@@ -86,6 +86,7 @@ public class DropGunsMechanism : MonoBehaviour
         {
             playerweaponController.selectedPrimary = 0;
             playerweaponController.selectedSecondary = PlayerPrefs.GetInt(GameSettings.LastSelectedSecondaryGun);
+            playerweaponController.selectedSpecial = PlayerPrefs.GetInt(GameSettings.LastSelectedSpecialGun);
             playerweaponController.GetWeaponToSelect(1, playerweaponController.primaryWeapons);
             if (playerweaponController.selectedSecondary > 0)
             {
@@ -100,6 +101,7 @@ public class DropGunsMechanism : MonoBehaviour
         {
             playerweaponController.selectedSecondary = 0;
             playerweaponController.selectedPrimary = PlayerPrefs.GetInt(GameSettings.LastSelectedPrimaryGun);
+            playerweaponController.selectedSpecial = PlayerPrefs.GetInt(GameSettings.LastSelectedSpecialGun);
             playerweaponController.GetWeaponToSelect(1, playerweaponController.primaryWeapons);
             if (playerweaponController.selectedPrimary > 0)
             {

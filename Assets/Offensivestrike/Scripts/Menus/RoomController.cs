@@ -1641,6 +1641,7 @@ public class RoomController : Photon.MonoBehaviour
 			//	bm.ResetSelectedWeapons();
 			ourPlayer.playerWeapons.selectedPrimary = PlayerPrefs.GetInt(GameSettings.LastSelectedPrimaryGun);
 			ourPlayer.playerWeapons.selectedSecondary = PlayerPrefs.GetInt(GameSettings.LastSelectedSecondaryGun);
+			ourPlayer.playerWeapons.selectedSpecial = PlayerPrefs.GetInt(GameSettings.LastSelectedSpecialGun);
 			ourPlayer.playerWeapons.GetWeaponToSelect(1, ourPlayer.playerWeapons.primaryWeapons);
 			ourPlayer.playerWeapons.GetWeaponToSelect(2, ourPlayer.playerWeapons.secondaryWeapons);
 			ourPlayer.playerWeapons.GetWeaponToSelect(3, ourPlayer.playerWeapons.primaryWeapons);

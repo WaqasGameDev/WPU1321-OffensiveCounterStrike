@@ -311,6 +311,7 @@ public class PlayerNetwork : Photon.MonoBehaviour
     {
 		playerWeapons.selectedPrimary = PlayerPrefs.GetInt(GameSettings.LastSelectedPrimaryGun, 0);
 		playerWeapons.selectedSecondary = PlayerPrefs.GetInt(GameSettings.LastSelectedSecondaryGun, 1);
+		playerWeapons.selectedSpecial = PlayerPrefs.GetInt(GameSettings.LastSelectedSpecialGun , 0);
 		if (playerWeapons.selectedPrimary <= 0 && playerWeapons.selectedSecondary <= 0 && GameSettings.isRespawned)
 		{
 			playerWeapons.GetWeaponToSelect(1, playerWeapons.primaryWeapons);

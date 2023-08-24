@@ -184,7 +184,10 @@ public class BuyMenu : MonoBehaviour
 		{
 			GunData[showGunIndex].equippedTxt.gameObject.SetActive(true);
 		}
-
+		else if (weaponIndex == PlayerPrefs.GetInt(GameSettings.LastSelectedSpecialGun) && weaponList == specialWeaponsTmp)
+		{
+			GunData[showGunIndex].equippedTxt.gameObject.SetActive(true);
+		}
 
 	}
 
@@ -306,8 +309,8 @@ public class BuyMenu : MonoBehaviour
                 {
 					StoreWeaponSelectedIndex(weaponList, i, type);
 					rc.SubstractCash(type);
-					if(GunData[weaponIndex].tempBuySection != BuySection.Special)
-                    {
+					if(GunData[weaponIndex].fireType != PlayerWeapons.FireType.GRENADE_LAUNCHER && GunData[weaponIndex].fireType != PlayerWeapons.FireType.FlashBang && GunData[weaponIndex].fireType != PlayerWeapons.FireType.C4) //GunData[weaponIndex].tempBuySection != BuySection.Special
+					{
 						PlayerPrefs.SetInt(weaponList[i].firstPersonWeapon.name, 1);
 						PlayerPrefs.Save();
 					}

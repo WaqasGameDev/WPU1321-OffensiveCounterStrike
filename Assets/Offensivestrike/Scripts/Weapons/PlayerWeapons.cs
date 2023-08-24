@@ -620,6 +620,7 @@ public class PlayerWeapons : MonoBehaviour
 		}
 		PlayerPrefs.SetInt(GameSettings.LastSelectedPrimaryGun, selectedPrimary);
 		PlayerPrefs.SetInt(GameSettings.LastSelectedSecondaryGun, selectedSecondary);
+		PlayerPrefs.SetInt(GameSettings.LastSelectedSpecialGun, selectedSpecial);
 	}
 
 	void FixedUpdate ()

@@ -468,6 +468,20 @@ public class RoomUI : Photon.MonoBehaviour
 						Gun3Button.icon.enabled = false;
 					}
 
+					// FOR SPECIAL GUN
+					if (rc.ourPlayer.playerWeapons.specialWeapons[rc.ourPlayer.playerWeapons.selectedSpecial].firstPersonWeapon != null && rc.ourPlayer.playerWeapons.selectedSpecial < 3)
+					{
+						Gun1Button.icon.enabled = true;
+						Gun5 = Resources.Load<Sprite>(rc.ourPlayer.playerWeapons.specialWeapons[rc.ourPlayer.playerWeapons.selectedSpecial].firstPersonWeapon.name);
+						Gun1Button.icon.sprite = Gun5;
+						Gun1Ammo.text = rc.ourPlayer.playerWeapons.specialWeapons[rc.ourPlayer.playerWeapons.selectedSpecial].firstPersonWeapon.wSettings.bulletsPerClip.ToString() + " / " + rc.ourPlayer.playerWeapons.specialWeapons[rc.ourPlayer.playerWeapons.selectedSpecial].firstPersonWeapon.wSettings.reserveBullets.ToString();
+					}
+					else
+					{
+						Gun1Ammo.text = "";
+						Gun1Button.icon.enabled = false;
+					}
+
 				}
 
 				// undo old Functionality
