@@ -729,6 +729,7 @@ public class ConnectMenu : Photon.MonoBehaviour
 	int randomPlayerCount;
 	int randomMaxPlayers;
 	int isRoomFull;
+	int randomPing;
 	public void RoomsLisList()
 	{
 		isRoomFull = 0;
@@ -770,9 +771,11 @@ public class ConnectMenu : Photon.MonoBehaviour
 	void CreateFakeRoom()
     {
 		NoRooms.SetActive(false);
-		randomRoom = Random.Range(2, 4);
+		randomRoom = Random.Range(7, 10);
 		randomPlayerCount = Random.Range(1, 3);
 		randomMaxPlayers = Random.Range(2, 10);
+		randomPing = Random.Range(200, 290);
+
 		for (int i = 0; i < randomRoom; i++)
 		{
 			GameObject poolGameObject = Instantiate(RoomListPrefab);
@@ -786,7 +789,7 @@ public class ConnectMenu : Photon.MonoBehaviour
 			pG.Players.color = Color.green;
 			pG.Players.text = randomPlayerCount + "/" + randomMaxPlayers;
 			pG.Map.text = availableMaps[Random.Range(0, availableMaps.Length)].mapName;
-			pG.Pings.text = " ";
+			pG.Pings.text = Random.Range(200, 290).ToString();
 			pG.isFakeRoom = true;
 		}
 	}
